@@ -88,7 +88,7 @@ export function Header() {
           )}
 
           {isShopPage && (
-            <nav className="flex items-center justify-center gap-0 border-border border-t-0">
+            <nav className="flex justify-center gap-0 border-border border-t-0 flex-row items-center">
               <NavLink
                 href="/shop?category=creams"
                 className="flex-1 text-center py-3 border-b-2 border-transparent hover:border-primary transition-colors"
