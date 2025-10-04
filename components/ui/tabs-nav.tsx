@@ -28,7 +28,7 @@ export function TabsNav({ tabs, baseUrl, paramName = "category" }: TabsNavProps)
                 key={tab.value}
                 href={href}
                 className={cn(
-                  "relative py-4 text-sm font-medium transition-colors hover:text-foreground",
+                  "relative text-sm font-medium transition-colors hover:text-foreground py-2.5",
                   isActive ? "text-foreground" : "text-muted-foreground",
                 )}
               >
