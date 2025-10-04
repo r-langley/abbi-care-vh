@@ -107,7 +107,7 @@ export default function HomePage() {
               Explore our complete range of personalized skincare solutions, from custom-formulated creams to targeted
               treatments and daily essentials
             </BodyText>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
               <Link href="/personalized-creams">
                 <Card className="group overflow-hidden hover:shadow-lg transition-all duration-300">
                   <div className="relative aspect-square">
