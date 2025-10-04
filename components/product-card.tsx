@@ -59,7 +59,7 @@ export function ProductCard({ product }: ProductCardProps) {
             )}
           </div>
         </Link>
-        <CardContent className="p-4">
+        <CardContent className="p-4 px-2.5 py-2.5">
           <Link href={isInLabCream ? "#" : `/product/${product.id}`} onClick={handleCardClick}>
             <CardTitle variant="small" className="hover:text-primary transition-colors line-clamp-2">
               {product.name}
