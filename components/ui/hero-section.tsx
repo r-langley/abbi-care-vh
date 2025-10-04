@@ -17,7 +17,7 @@ export function HeroSection({ title, description, image, imageAlt }: HeroSection
         </div>
 
         {/* Right: Content */}
-        <div className="flex flex-col justify-center items-start px-5 py-5 bg-muted">
+        <div className="flex flex-col justify-center items-start px-5 py-5 bg-secondary">
           <PageTitle variant="hero">{title}</PageTitle>
           {description && <p className="md:text-xl text-muted-foreground leading-relaxed text-sm font-medium">{description}</p>}
         </div>
