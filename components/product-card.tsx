@@ -11,15 +11,14 @@ import { useCart } from "@/lib/cart-context"
 import { Plus } from "lucide-react"
 import { useState } from "react"
 import { SkinAnalysisModal } from "./skin-analysis-modal"
-import { PriceDisplay } from "@/components/ui/typography"
+import { CardTitle, ExtraSmallText, PriceDisplay } from "@/components/ui/typography"
 import { ProductBadge } from "@/components/ui/product-badge"
 
 interface ProductCardProps {
   product: Product
-  showDescription?: boolean
 }
 
-export function ProductCard({ product, showDescription = false }: ProductCardProps) {
+export function ProductCard({ product }: ProductCardProps) {
   const { addItem } = useCart()
   const [showAnalysisModal, setShowAnalysisModal] = useState(false)
 
@@ -44,7 +43,7 @@ export function ProductCard({ product, showDescription = false }: ProductCardPro
 
   return (
     <>
-      <Card className="group overflow-hidden border-border hover:shadow-lg transition-all duration-300 rounded-md shadow-none">
+      <Card className="group overflow-hidden border-border hover:shadow-lg transition-all duration-300 p-0">
         <Link href={isInLabCream ? "#" : `/product/${product.id}`} onClick={handleCardClick}>
           <div className="relative aspect-square overflow-hidden bg-muted">
             <Image
@@ -60,25 +59,18 @@ export function ProductCard({ product, showDescription = false }: ProductCardPro
             )}
           </div>
         </Link>
-        <CardContent className="px-2.5 py-2.5">
+        <CardContent className="p-4">
           <Link href={isInLabCream ? "#" : `/product/${product.id}`} onClick={handleCardClick}>
-            <h3 className="font-medium mb-2 hover:text-primary transition-colors line-clamp-2 text-xl">
+            <CardTitle variant="small" className="hover:text-primary transition-colors line-clamp-2">
               {product.name}
-            </h3>
+            </CardTitle>
           </Link>
-          {showDescription && product.description && (
-            <p className="text-sm text-muted-foreground mb-3 line-clamp-2">{product.description}</p>
-          )}
+          {product.subtitle && <ExtraSmallText className="mb-2">{product.subtitle}</ExtraSmallText>}
           <div className="flex items-center justify-between mt-3">
-            <div className="border-2 border-dashed border-border px-3 py-1">
-              <PriceDisplay amount={product.price} size="default" />
-            </div>
-            <Button
-              size="icon"
-              onClick={handleAddToCart}
-              className="h-12 w-12 rounded-lg bg-muted hover:bg-muted/80 text-foreground"
-            >
-              <Plus className="h-5 w-5" />
+            <PriceDisplay amount={product.price} />
+            <Button size="sm" onClick={handleAddToCart} className="font-mono text-xs">
+              <Plus className="h-4 w-4 mr-1" />
+              {isInLabCream ? "Customize" : "Add"}
             </Button>
           </div>
         </CardContent>
