@@ -88,7 +88,7 @@ export function PriceDisplay({ amount, size = "default", className, ...props }: 
   return (
     <span
       className={cn(
-        "font-mono font-medium text-sm",
+        "font-mono",
         size === "large" && "text-3xl",
         size === "default" && "text-lg",
         size === "small" && "text-base",
