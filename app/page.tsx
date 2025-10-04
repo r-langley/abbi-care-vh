@@ -28,7 +28,7 @@ export default function HomePage() {
               {/* Right: Hero Content */}
               <div className="flex flex-col justify-center items-start px-5 py-5">
                 <PageTitle variant="hero">Your Skin, Our Formula</PageTitle>
-                <p className="text-base md:text-xl text-muted-foreground leading-relaxed mb-4 md:mb-8 font-medium">
+                <p className="text-base md:text-xl text-muted-foreground leading-relaxed mb-4 md:mb-8 font-medium leading-7">
                   Discover the future of personalized care
                 </p>
                 <Link
