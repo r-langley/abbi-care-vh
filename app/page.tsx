@@ -79,7 +79,7 @@ export default function HomePage() {
               Get personalized skincare in three simple steps. Our AI-powered technology makes it easy to discover
               products perfectly matched to your unique skin needs.
             </BodyText>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-2.5">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
               <FeatureCard
                 icon={<Scan className="text-primary w-6 h-6" />}
                 title="1. Scan Your Skin"
