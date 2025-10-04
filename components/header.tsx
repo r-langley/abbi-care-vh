@@ -131,7 +131,7 @@ function MobileNav() {
       <div>
         <button
           onClick={() => setIsTraitExpanded(!isTraitExpanded)}
-          className="text-lg font-mono hover:text-primary transition-colors flex items-center justify-between w-full"
+          className="text-lg hover:text-primary transition-colors flex items-center justify-between w-full font-sans font-medium text-muted-foreground"
         >
           Shop by Trait
           <ChevronDown className={`h-6 w-6 transition-transform ${isTraitExpanded ? "rotate-180" : ""}`} />
