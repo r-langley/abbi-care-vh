@@ -16,7 +16,7 @@ export function TabsNav({ tabs, baseUrl, paramName = "category" }: TabsNavProps)
   const currentValue = searchParams.get(paramName) || tabs[0].value
 
   return (
-    <nav className="border-b border-border">
+    <nav className="border-border border-b-0">
       <div className="container mx-auto px-0">
         <div className="flex items-stretch flex-row gap-0 justify-evenly">
           {tabs.map((tab) => {
