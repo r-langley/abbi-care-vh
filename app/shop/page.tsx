@@ -77,7 +77,7 @@ export default function ShopPage() {
               {groupedCreams.inLab.length > 0 && (
                 <div>
                   <SectionHeading className="mb-6">In-Lab Cream</SectionHeading>
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5">
                     {groupedCreams.inLab.map((product) => (
                       <ProductCard key={product.id} product={product} />
                     ))}
@@ -89,7 +89,7 @@ export default function ShopPage() {
               {groupedCreams.mixAtHome.length > 0 && (
                 <div>
                   <SectionHeading className="mb-6">Mix at Home Cream</SectionHeading>
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5">
                     {groupedCreams.mixAtHome.map((product) => (
                       <ProductCard key={product.id} product={product} />
                     ))}
@@ -101,7 +101,7 @@ export default function ShopPage() {
               {groupedCreams.activeConcentrate.length > 0 && (
                 <div>
                   <SectionHeading className="mb-6">Active Concentrate</SectionHeading>
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5">
                     {groupedCreams.activeConcentrate.map((product) => (
                       <ProductCard key={product.id} product={product} />
                     ))}
