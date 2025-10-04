@@ -6,6 +6,7 @@ import "./globals.css"
 import { CartProvider } from "@/lib/cart-context"
 import { Suspense } from "react"
 import { ScrollToTop } from "@/components/scroll-to-top"
+import { CartFooter } from "@/components/cart-footer"
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -40,7 +41,10 @@ export default function RootLayout({
       <body className="font-sans antialiased">
         <Suspense fallback={null}>
           <ScrollToTop />
-          <CartProvider>{children}</CartProvider>
+          <CartProvider>
+            {children}
+            <CartFooter />
+          </CartProvider>
         </Suspense>
         <Analytics />
       </body>

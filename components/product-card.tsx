@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import type { Product } from "@/lib/products"
 import { useCart } from "@/lib/cart-context"
-import { Plus } from "lucide-react"
+import { Plus, Check } from "lucide-react"
 import { useState } from "react"
 import { SkinAnalysisModal } from "./skin-analysis-modal"
 import { CardTitle, ExtraSmallText, PriceDisplay } from "@/components/ui/typography"
@@ -19,10 +19,11 @@ interface ProductCardProps {
 }
 
 export function ProductCard({ product }: ProductCardProps) {
-  const { addItem } = useCart()
+  const { addItem, items } = useCart()
   const [showAnalysisModal, setShowAnalysisModal] = useState(false)
 
   const isInLabCream = product.category === "In-Lab Cream"
+  const isInCart = items.some((item) => item.id === product.id)
 
   const handleCardClick = (e: React.MouseEvent) => {
     if (isInLabCream) {
@@ -43,7 +44,7 @@ export function ProductCard({ product }: ProductCardProps) {
 
   return (
     <>
-      <Card className="group overflow-hidden border-border hover:shadow-lg transition-all duration-300 p-0">
+      <Card className="group overflow-hidden border-border hover:shadow-lg transition-all duration-300 rounded-md shadow-none p-0">
         <Link href={isInLabCream ? "#" : `/product/${product.id}`} onClick={handleCardClick}>
           <div className="relative aspect-square overflow-hidden bg-muted">
             <Image
@@ -59,18 +60,27 @@ export function ProductCard({ product }: ProductCardProps) {
             )}
           </div>
         </Link>
-        <CardContent className="p-4 px-2.5 py-2.5">
+        <CardContent className="p-4">
           <Link href={isInLabCream ? "#" : `/product/${product.id}`} onClick={handleCardClick}>
             <CardTitle variant="small" className="hover:text-primary transition-colors line-clamp-2">
               {product.name}
             </CardTitle>
           </Link>
           {product.subtitle && <ExtraSmallText className="mb-2">{product.subtitle}</ExtraSmallText>}
-          <div className="flex justify-between mt-3 flex-col items-start gap-2.5">
+          <div className="flex items-center justify-between mt-3">
             <PriceDisplay amount={product.price} />
             <Button size="sm" onClick={handleAddToCart} className="font-mono text-xs">
-              <Plus className="h-4 w-4 mr-1" />
-              {isInLabCream ? "Customize" : "Add"}
+              {isInCart ? (
+                <>
+                  <Check className="h-4 w-4" />
+                  <span className="ml-1 hidden md:inline">{isInLabCream ? "Added" : "Added"}</span>
+                </>
+              ) : (
+                <>
+                  <Plus className="h-4 w-4" />
+                  <span className="ml-1 hidden md:inline">{isInLabCream ? "Customize" : "Add"}</span>
+                </>
+              )}
             </Button>
           </div>
         </CardContent>
