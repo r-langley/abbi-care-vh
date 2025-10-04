@@ -18,7 +18,7 @@ export function TabsNav({ tabs, baseUrl, paramName = "category" }: TabsNavProps)
   return (
     <nav className="border-b border-border">
       <div className="container mx-auto px-0">
-        <div className="flex gap-0 flex-row justify-evenly">
+        <div className="flex gap-0 flex-row items-stretch justify-evenly">
           {tabs.map((tab) => {
             const isActive = currentValue === tab.value
             const href = `${baseUrl}?${paramName}=${tab.value}`
@@ -28,7 +28,7 @@ export function TabsNav({ tabs, baseUrl, paramName = "category" }: TabsNavProps)
                 key={tab.value}
                 href={href}
                 className={cn(
-                  "relative text-sm font-medium transition-colors hover:text-foreground py-2.5",
+                  "relative text-sm font-medium transition-colors hover:text-foreground py-2.5 px-2.5",
                   isActive ? "text-foreground" : "text-muted-foreground",
                 )}
               >
