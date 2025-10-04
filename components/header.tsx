@@ -6,22 +6,22 @@ import { Menu, ShoppingCart, User, Phone, Flag, ChevronDown } from "lucide-react
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { useCart } from "@/lib/cart-context"
-import { usePathname, useRouter } from "next/navigation"
+import { usePathname } from "next/navigation"
 import React from "react"
 import { NavLink } from "@/components/ui/nav-link"
+import { TabsNav } from "@/components/ui/tabs-nav"
 
 export function Header() {
   const { totalItems } = useCart()
   const pathname = usePathname()
-  const router = useRouter()
   const isHomepage = pathname === "/"
-  const isShopPage = pathname === "/shop"
 
-  const currentCategory = pathname.split("=")[1] || "creams"
-
-  const handleCategoryChange = (value: string) => {
-    router.push(`/shop?category=${value}`)
-  }
+  const navItems = [
+    { href: "/skin-analysis", label: "Skin Analysis" },
+    { href: "/shop", label: "Shop" },
+    { href: "/about", label: "About" },
+    { href: "/join", label: "Join" },
+  ]
 
   return (
     <>
@@ -78,46 +78,9 @@ export function Header() {
             </div>
           </div>
 
-          {isHomepage && (
-            <nav className="flex items-center border-border px-2.5 border-t-0 py-2.5 justify-evenly gap-2.5">
-              <NavLink href="/skin-analysis">Skin Analysis</NavLink>
-              <NavLink href="/shop">Shop</NavLink>
-              <NavLink href="/about">About</NavLink>
-              <NavLink href="/join">Join</NavLink>
-            </nav>
-          )}
+          {isHomepage && <TabsNav items={navItems} className="px-2.5 py-0 border-t-0" />}
 
-          {isShopPage && (
-            <nav className="flex justify-center gap-0 border-border border-t-0 flex-row items-center">
-              <NavLink
-                href="/shop?category=creams"
-                className="flex-1 text-center py-3 border-b-2 border-transparent hover:border-primary transition-colors"
-              >
-                Creams
-              </NavLink>
-              <NavLink
-                href="/shop?category=simple-solutions"
-                className="flex-1 text-center py-3 border-b-2 border-transparent hover:border-primary transition-colors"
-              >
-                Simple Solutions
-              </NavLink>
-              <NavLink
-                href="/shop?category=essentials"
-                className="flex-1 text-center py-3 border-b-2 border-transparent hover:border-primary transition-colors"
-              >
-                Essentials
-              </NavLink>
-            </nav>
-          )}
-
-          {!isHomepage && !isShopPage && (
-            <nav className="hidden md:flex items-center justify-center gap-8 py-3 border-t border-border">
-              <NavLink href="/skin-analysis">Skin Analysis</NavLink>
-              <NavLink href="/shop">Shop</NavLink>
-              <NavLink href="/about">About</NavLink>
-              <NavLink href="/join">Join</NavLink>
-            </nav>
-          )}
+          {!isHomepage && <TabsNav items={navItems} className="hidden md:flex px-2.5 py-0" />}
         </div>
       </header>
     </>
