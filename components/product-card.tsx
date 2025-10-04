@@ -43,7 +43,7 @@ export function ProductCard({ product }: ProductCardProps) {
 
   return (
     <>
-      <Card className="group overflow-hidden border-border hover:shadow-lg transition-all duration-300 shadow-none">
+      <Card className="group overflow-hidden border-border hover:shadow-lg transition-all duration-300 shadow-none rounded-lg">
         <Link href={isInLabCream ? "#" : `/product/${product.id}`} onClick={handleCardClick}>
           <div className="relative aspect-square overflow-hidden bg-muted">
             <Image
