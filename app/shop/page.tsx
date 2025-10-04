@@ -111,7 +111,7 @@ export default function ShopPage() {
             </div>
           ) : (
             // Other categories show standard grid
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5">
               {filteredProducts.map((product) => (
                 <ProductCard key={product.id} product={product} />
               ))}
