@@ -3,8 +3,25 @@
 import { useCart } from "@/lib/cart-context"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
+import { cn } from "@/lib/utils"
 
-export function CartFooter() {
+interface CartFooterProps {
+  headingText?: string
+  buttonText?: string
+  className?: string
+  headingClassName?: string
+  buttonClassName?: string
+  containerClassName?: string
+}
+
+export function CartFooter({
+  headingText = "Review your Routine",
+  buttonText = "PAY",
+  className,
+  headingClassName,
+  buttonClassName,
+  containerClassName,
+}: CartFooterProps = {}) {
   const { totalItems, subtotal } = useCart()
 
   if (totalItems === 0) {
@@ -12,16 +29,42 @@ export function CartFooter() {
   }
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-40 bg-primary text-primary-foreground border-t border-border shadow-lg">
-      <div className="container mx-auto px-2.5 py-2.5 bg-secondary">
-        <div className="flex flex-col items-center gap-2.5">
-          <h3 className="font-medium text-center text-base text-foreground">Review your Routine</h3>
+    <div
+      className={cn(
+        "fixed bottom-0 left-0 right-0 z-40 border-t shadow-lg",
+        "bg-[var(--cart-footer-border)]",
+        className,
+      )}
+    >
+      <div
+        className={cn(
+          "container mx-auto bg-[var(--cart-footer-bg)]",
+          "px-[var(--cart-footer-padding)] py-[var(--cart-footer-padding)]",
+          containerClassName,
+        )}
+      >
+        <div className={cn("flex flex-col items-center", "gap-[var(--cart-footer-gap)]")}>
+          <h3
+            className={cn(
+              "font-medium text-center text-[var(--cart-footer-text)]",
+              "text-[length:var(--cart-footer-heading-size)]",
+              headingClassName,
+            )}
+          >
+            {headingText}
+          </h3>
           <Link href="/cart" className="w-full max-w-2xl">
             <Button
               size="lg"
-              className="w-full bg-primary-foreground text-primary hover:bg-primary-foreground/90 text-xl font-medium py-6"
+              className={cn(
+                "w-full font-medium py-6",
+                "bg-[var(--cart-footer-button-bg)] text-[var(--cart-footer-button-text)]",
+                "hover:bg-[var(--cart-footer-button-hover-bg)]/90",
+                "text-[length:var(--cart-footer-button-size)]",
+                buttonClassName,
+              )}
             >
-              PAY ${subtotal}
+              {buttonText} ${subtotal}
             </Button>
           </Link>
         </div>

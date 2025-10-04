@@ -54,6 +54,18 @@
   --text-link-decoration-hover-color: hsl(33 54% 38%);
   --text-link-decoration-thickness: 2px;
   --text-link-underline-offset: 4px;
+
+  /* Added cart footer design tokens for centralized styling */
+  --cart-footer-bg: var(--secondary);
+  --cart-footer-text: var(--foreground);
+  --cart-footer-button-bg: var(--primary);
+  --cart-footer-button-text: var(--primary-foreground);
+  --cart-footer-button-hover-bg: var(--primary);
+  --cart-footer-border: var(--border);
+  --cart-footer-heading-size: 1rem;
+  --cart-footer-button-size: 1.25rem;
+  --cart-footer-padding: 0.625rem;
+  --cart-footer-gap: 0.625rem;
 }
 
 .dark {
@@ -95,6 +107,13 @@
   --text-link-hover-color: var(--foreground);
   --text-link-decoration-color: oklch(0.985 0 0 / 0.4);
   --text-link-decoration-hover-color: oklch(0.985 0 0);
+
+  /* Dark mode cart footer colors */
+  --cart-footer-bg: var(--secondary);
+  --cart-footer-text: var(--foreground);
+  --cart-footer-button-bg: var(--primary);
+  --cart-footer-button-text: var(--primary-foreground);
+  --cart-footer-button-hover-bg: var(--primary);
 }
 
 @theme inline {
@@ -144,6 +163,14 @@
   --color-text-link-hover: var(--text-link-hover-color);
   --color-text-link-decoration: var(--text-link-decoration-color);
   --color-text-link-decoration-hover: var(--text-link-decoration-hover-color);
+
+  /* Expose cart footer design tokens to Tailwind theme */
+  --color-cart-footer-bg: var(--cart-footer-bg);
+  --color-cart-footer-text: var(--cart-footer-text);
+  --color-cart-footer-button-bg: var(--cart-footer-button-bg);
+  --color-cart-footer-button-text: var(--cart-footer-button-text);
+  --color-cart-footer-button-hover-bg: var(--cart-footer-button-hover-bg);
+  --color-cart-footer-border: var(--cart-footer-border);
 }
 
 @layer base {
