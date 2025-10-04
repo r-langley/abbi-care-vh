@@ -12,33 +12,14 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { SlidersHorizontal } from "lucide-react"
 import { products, traits } from "@/lib/products"
-import { BodyText } from "@/components/ui/typography"
-import { HeroSection } from "@/components/ui/hero-section"
+import { PageTitle, BodyText } from "@/components/ui/typography"
 
-const categories = ["In-Lab Cream", "Mix at Home Cream", "Active Concentrate", "Essential", "Simple Solution"]
-
-const categoryHeros = {
-  creams: {
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-LEPlqvKzEkK6J5dqJznJE9V0ClyAgm.png",
-    title: "Creams",
-    description: "Choose Lab Created or Mix-at-Home",
-  },
-  "simple-solutions": {
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-LEPlqvKzEkK6J5dqJznJE9V0ClyAgm.png",
-    title: "Simple Solutions",
-    description: "Complete regimens for targeted concerns",
-  },
-  essentials: {
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-LEPlqvKzEkK6J5dqJznJE9V0ClyAgm.png",
-    title: "Essentials",
-    description: "Core products for every skincare routine",
-  },
-}
+const categories = ["Creams", "Essential", "Simple Solution"]
+const creamSubcategories = ["In-Lab Cream", "Mix at Home Cream", "Active Concentrate"]
 
 export default function ShopPage() {
   const searchParams = useSearchParams()
   const initialTrait = searchParams.get("trait")
-  const categoryParam = searchParams.get("category") || "creams"
 
   const [selectedCategories, setSelectedCategories] = useState<string[]>([])
   const [selectedTraits, setSelectedTraits] = useState<string[]>(initialTrait ? [initialTrait] : [])
@@ -47,20 +28,15 @@ export default function ShopPage() {
   const filteredProducts = useMemo(() => {
     let filtered = [...products]
 
-    // Filter by category tab
-    if (categoryParam === "creams") {
-      filtered = filtered.filter((p) =>
-        ["In-Lab Cream", "Mix at Home Cream", "Active Concentrate"].includes(p.category),
-      )
-    } else if (categoryParam === "simple-solutions") {
-      filtered = filtered.filter((p) => p.category === "Simple Solution")
-    } else if (categoryParam === "essentials") {
-      filtered = filtered.filter((p) => p.category === "Essential")
-    }
-
-    // Filter by category checkboxes
+    // Filter by category
     if (selectedCategories.length > 0) {
-      filtered = filtered.filter((p) => selectedCategories.includes(p.category))
+      filtered = filtered.filter((p) => {
+        // If "Creams" is selected, include all cream subcategories
+        if (selectedCategories.includes("Creams")) {
+          return creamSubcategories.includes(p.category) || selectedCategories.includes(p.category)
+        }
+        return selectedCategories.includes(p.category)
+      })
     }
 
     // Filter by traits
@@ -80,7 +56,20 @@ export default function ShopPage() {
     }
 
     return filtered
-  }, [categoryParam, selectedCategories, selectedTraits, sortBy])
+  }, [selectedCategories, selectedTraits, sortBy])
+
+  const shouldGroupCreams =
+    selectedCategories.includes("Creams") && selectedCategories.length === 1 && selectedTraits.length === 0
+
+  const groupedProducts = useMemo(() => {
+    if (!shouldGroupCreams) return null
+
+    return {
+      "In-Lab Cream": filteredProducts.filter((p) => p.category === "In-Lab Cream"),
+      "Mix at Home Cream": filteredProducts.filter((p) => p.category === "Mix at Home Cream"),
+      "Active Concentrate": filteredProducts.filter((p) => p.category === "Active Concentrate"),
+    }
+  }, [shouldGroupCreams, filteredProducts])
 
   const toggleCategory = (category: string) => {
     setSelectedCategories((prev) =>
@@ -96,8 +85,6 @@ export default function ShopPage() {
     setSelectedCategories([])
     setSelectedTraits([])
   }
-
-  const currentHero = categoryHeros[categoryParam as keyof typeof categoryHeros] || categoryHeros.creams
 
   const FilterContent = () => (
     <div className="space-y-6">
@@ -149,14 +136,13 @@ export default function ShopPage() {
     <>
       <Header />
       <main className="min-h-screen">
-        <HeroSection
-          image={currentHero.image}
-          imageAlt={currentHero.title}
-          title={currentHero.title}
-          description={currentHero.description}
-        />
-
         <div className="container mx-auto px-4 py-8">
+          {/* Header */}
+          <div className="mb-8">
+            <PageTitle className="mb-2">Shop All</PageTitle>
+            <BodyText className="text-muted-foreground">{filteredProducts.length} products</BodyText>
+          </div>
+
           <div className="flex gap-8">
             {/* Desktop Filters */}
             <aside className="hidden lg:block w-64 flex-shrink-0">
@@ -168,14 +154,57 @@ export default function ShopPage() {
             {/* Main Content */}
             <div className="flex-1">
               {/* Mobile Filter + Sort */}
-              
+              <div className="flex items-center justify-between mb-6 lg:justify-end">
+                <Sheet>
+                  <SheetTrigger asChild>
+                    <Button variant="outline" className="lg:hidden font-mono bg-transparent">
+                      <SlidersHorizontal className="h-4 w-4 mr-2" />
+                      Filters
+                    </Button>
+                  </SheetTrigger>
+                  <SheetContent side="left" className="w-[300px]">
+                    <div className="mt-8">
+                      <FilterContent />
+                    </div>
+                  </SheetContent>
+                </Sheet>
 
-              {/* Product Grid */}
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5">
-                {filteredProducts.map((product) => (
-                  <ProductCard key={product.id} product={product} />
-                ))}
+                <Select value={sortBy} onValueChange={setSortBy}>
+                  <SelectTrigger className="w-[180px] font-mono">
+                    <SelectValue placeholder="Sort by" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="featured">Featured</SelectItem>
+                    <SelectItem value="price-low">Price: Low to High</SelectItem>
+                    <SelectItem value="price-high">Price: High to Low</SelectItem>
+                    <SelectItem value="name">Name</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
+
+              {shouldGroupCreams && groupedProducts ? (
+                <div className="space-y-12">
+                  {Object.entries(groupedProducts).map(
+                    ([subcategory, subcategoryProducts]) =>
+                      subcategoryProducts.length > 0 && (
+                        <div key={subcategory}>
+                          <h2 className="font-mono text-lg mb-6">{subcategory}</h2>
+                          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                            {subcategoryProducts.map((product) => (
+                              <ProductCard key={product.id} product={product} />
+                            ))}
+                          </div>
+                        </div>
+                      ),
+                  )}
+                </div>
+              ) : (
+                <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {filteredProducts.map((product) => (
+                    <ProductCard key={product.id} product={product} />
+                  ))}
+                </div>
+              )}
 
               {filteredProducts.length === 0 && (
                 <div className="text-center py-20">
