@@ -1,7 +1,6 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Poppins, Libre_Baskerville } from "next/font/google"
-import { GeistMono } from "geist/font/mono"
+import { Poppins, Libre_Baskerville, JetBrains_Mono } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 import { CartProvider } from "@/lib/cart-context"
@@ -20,6 +19,11 @@ const libreBaskerville = Libre_Baskerville({
   variable: "--font-libre-baskerville",
 })
 
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-geist-mono",
+})
+
 export const metadata: Metadata = {
   title: "ABBI - Personalized Skincare",
   description: "Personalized skincare made for your skin",
@@ -32,7 +36,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${poppins.variable} ${libreBaskerville.variable} ${GeistMono.variable}`}>
+    <html lang="en" className={`${poppins.variable} ${libreBaskerville.variable} ${jetbrainsMono.variable}`}>
       <body className="font-sans antialiased">
         <Suspense fallback={null}>
           <ScrollToTop />
