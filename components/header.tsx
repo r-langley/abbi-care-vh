@@ -15,13 +15,7 @@ export function Header() {
   const { totalItems } = useCart()
   const pathname = usePathname()
   const isHomepage = pathname === "/"
-
-  const navItems = [
-    { href: "/skin-analysis", label: "Skin Analysis" },
-    { href: "/shop", label: "Shop" },
-    { href: "/about", label: "About" },
-    { href: "/join", label: "Join" },
-  ]
+  const isShopPage = pathname === "/shop"
 
   return (
     <>
@@ -78,9 +72,35 @@ export function Header() {
             </div>
           </div>
 
-          {isHomepage && <TabsNav items={navItems} className="px-2.5 py-0 border-t-0" />}
+          {isHomepage && (
+            <nav className="flex items-center justify-center gap-8 border-border px-2.5 py-1.5 border-t">
+              <NavLink href="/skin-analysis">Skin Analysis</NavLink>
+              <NavLink href="/shop">Shop</NavLink>
+              <NavLink href="/about">About</NavLink>
+              <NavLink href="/join">Join</NavLink>
+            </nav>
+          )}
 
-          {!isHomepage && <TabsNav items={navItems} className="hidden md:flex px-2.5 py-0" />}
+          {isShopPage && (
+            <TabsNav
+              tabs={[
+                { label: "Creams", value: "creams" },
+                { label: "Simple Solutions", value: "simple-solutions" },
+                { label: "Essentials", value: "essentials" },
+              ]}
+              baseUrl="/shop"
+              paramName="category"
+            />
+          )}
+
+          {!isHomepage && !isShopPage && (
+            <nav className="hidden md:flex items-center justify-center gap-8 py-3 border-t border-border">
+              <NavLink href="/skin-analysis">Skin Analysis</NavLink>
+              <NavLink href="/shop">Shop</NavLink>
+              <NavLink href="/about">About</NavLink>
+              <NavLink href="/join">Join</NavLink>
+            </nav>
+          )}
         </div>
       </header>
     </>

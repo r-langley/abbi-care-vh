@@ -1,39 +1,46 @@
 "use client"
 
 import Link from "next/link"
-import { usePathname } from "next/navigation"
+import { usePathname, useSearchParams } from "next/navigation"
 import { cn } from "@/lib/utils"
 
 interface TabsNavProps {
-  items: Array<{
-    href: string
-    label: string
-  }>
-  className?: string
+  tabs: { label: string; value: string }[]
+  baseUrl: string
+  paramName?: string
 }
 
-export function TabsNav({ items, className }: TabsNavProps) {
+export function TabsNav({ tabs, baseUrl, paramName = "category" }: TabsNavProps) {
   const pathname = usePathname()
+  const searchParams = useSearchParams()
+  const currentValue = searchParams.get(paramName) || tabs[0].value
 
   return (
-    <nav className={cn("flex items-center justify-center gap-8 border-t border-border", className)}>
-      {items.map((item) => {
-        const isActive = pathname === item.href || pathname.startsWith(item.href + "/")
-        return (
-          <Link
-            key={item.href}
-            href={item.href}
-            className={cn(
-              "relative text-sm py-3 transition-colors font-sans font-medium text-muted-foreground",
-              "hover:text-foreground",
-              isActive ? "text-foreground" : "text-muted-foreground",
-            )}
-          >
-            {item.label}
-            {isActive && <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary" />}
-          </Link>
-        )
-      })}
+    <nav className="border-b border-border">
+      <div className="container mx-auto px-4">
+        <div className="flex gap-8">
+          {tabs.map((tab) => {
+            const isActive = currentValue === tab.value
+            const href = `${baseUrl}?${paramName}=${tab.value}`
+
+            return (
+              <Link
+                key={tab.value}
+                href={href}
+                className={cn(
+                  "relative py-4 text-sm font-medium transition-colors hover:text-foreground",
+                  isActive ? "text-foreground" : "text-muted-foreground",
+                )}
+              >
+                {tab.label}
+                {isActive && (
+                  <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-foreground" aria-hidden="true" />
+                )}
+              </Link>
+            )
+          })}
+        </div>
+      </div>
     </nav>
   )
 }

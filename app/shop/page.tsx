@@ -11,49 +11,49 @@ import { SectionHeading } from "@/components/ui/typography"
 
 export default function ShopPage() {
   const searchParams = useSearchParams()
-  const category = searchParams.get("category") || "Creams"
+  const category = searchParams.get("category") || "creams"
 
   const heroContent = {
-    Creams: {
+    creams: {
+      title: "Creams",
+      description: "Custom formulas for your unique skin needs and goals.",
       image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-LEPlqvKzEkK6J5dqJznJE9V0ClyAgm.png",
-      title: "Personalized Creams",
-      description:
-        "Custom formulations tailored to your unique skin needs, from in-lab creams to mix-at-home solutions and active concentrates.",
+      imageAlt: "Skincare application",
     },
-    "Simple Solutions": {
-      image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-LEPlqvKzEkK6J5dqJznJE9V0ClyAgm.png",
+    "simple-solutions": {
       title: "Simple Solutions",
-      description:
-        "Effective, straightforward skincare essentials designed to address your specific concerns with minimal fuss.",
-    },
-    Essentials: {
+      description: "Targeted treatments for specific concerns, simplified and effective.",
       image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-LEPlqvKzEkK6J5dqJznJE9V0ClyAgm.png",
+      imageAlt: "Simple skincare solutions",
+    },
+    essentials: {
       title: "Essentials",
-      description: "The fundamental products every skincare routine needs for healthy, balanced skin.",
+      description: "Daily basics that complement your personalized routine perfectly.",
+      image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-LEPlqvKzEkK6J5dqJznJE9V0ClyAgm.png",
+      imageAlt: "Skincare essentials",
     },
   }
 
-  const currentHero = heroContent[category as keyof typeof heroContent] || heroContent.Creams
+  const currentHero = heroContent[category as keyof typeof heroContent] || heroContent.creams
 
   const filteredProducts = useMemo(() => {
-    if (category === "Creams") {
-      // Show all cream-related products
+    if (category === "creams") {
       return products.filter((p) => ["In-Lab Cream", "Mix at Home Cream", "Active Concentrate"].includes(p.category))
-    } else if (category === "Simple Solutions") {
+    } else if (category === "simple-solutions") {
       return products.filter((p) => p.category === "Simple Solution")
-    } else if (category === "Essentials") {
+    } else if (category === "essentials") {
       return products.filter((p) => p.category === "Essential")
     }
     return products
   }, [category])
 
-  const groupedCreamProducts = useMemo(() => {
-    if (category !== "Creams") return null
+  const groupedCreams = useMemo(() => {
+    if (category !== "creams") return null
 
     return {
-      "In-Lab Cream": filteredProducts.filter((p) => p.category === "In-Lab Cream"),
-      "Mix at Home Cream": filteredProducts.filter((p) => p.category === "Mix at Home Cream"),
-      "Active Concentrate": filteredProducts.filter((p) => p.category === "Active Concentrate"),
+      inLab: filteredProducts.filter((p) => p.category === "In-Lab Cream"),
+      mixAtHome: filteredProducts.filter((p) => p.category === "Mix at Home Cream"),
+      activeConcentrate: filteredProducts.filter((p) => p.category === "Active Concentrate"),
     }
   }, [category, filteredProducts])
 
@@ -61,29 +61,57 @@ export default function ShopPage() {
     <>
       <Header />
       <main className="min-h-screen">
-        <HeroSection
-          image={currentHero.image}
-          title={currentHero.title}
-          description={currentHero.description}
-          imageAlt={currentHero.title}
-        />
+        <div className="mb-12">
+          <HeroSection
+            title={currentHero.title}
+            description={currentHero.description}
+            image={currentHero.image}
+            imageAlt={currentHero.imageAlt}
+          />
+        </div>
 
-        <div className="container mx-auto px-4 pb-12">
-          {category === "Creams" && groupedCreamProducts ? (
+        <div className="container mx-auto px-4 pb-16">
+          {category === "creams" && groupedCreams ? (
             <div className="space-y-12">
-              {Object.entries(groupedCreamProducts).map(([subcategory, products]) => (
-                <div key={subcategory}>
-                  <SectionHeading className="mb-6">{subcategory}</SectionHeading>
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-                    {products.map((product) => (
+              {/* In-Lab Cream */}
+              {groupedCreams.inLab.length > 0 && (
+                <div>
+                  <SectionHeading className="mb-6">In-Lab Cream</SectionHeading>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    {groupedCreams.inLab.map((product) => (
                       <ProductCard key={product.id} product={product} />
                     ))}
                   </div>
                 </div>
-              ))}
+              )}
+
+              {/* Mix at Home Cream */}
+              {groupedCreams.mixAtHome.length > 0 && (
+                <div>
+                  <SectionHeading className="mb-6">Mix at Home Cream</SectionHeading>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    {groupedCreams.mixAtHome.map((product) => (
+                      <ProductCard key={product.id} product={product} />
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Active Concentrate */}
+              {groupedCreams.activeConcentrate.length > 0 && (
+                <div>
+                  <SectionHeading className="mb-6">Active Concentrate</SectionHeading>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    {groupedCreams.activeConcentrate.map((product) => (
+                      <ProductCard key={product.id} product={product} />
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           ) : (
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+            // Other categories show standard grid
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               {filteredProducts.map((product) => (
                 <ProductCard key={product.id} product={product} />
               ))}
