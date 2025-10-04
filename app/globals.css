@@ -66,6 +66,46 @@
   --cart-footer-button-size: 1.25rem;
   --cart-footer-padding: 0.625rem;
   --cart-footer-gap: 0.625rem;
+
+  /* Added button design tokens for centralized styling */
+  --button-default-bg: var(--primary);
+  --button-default-text: var(--primary-foreground);
+  --button-default-hover-bg: var(--primary);
+  --button-default-hover-opacity: 0.9;
+
+  --button-secondary-bg: var(--secondary);
+  --button-secondary-text: var(--secondary-foreground);
+  --button-secondary-hover-opacity: 0.8;
+
+  --button-outline-bg: var(--background);
+  --button-outline-text: var(--foreground);
+  --button-outline-border: var(--border);
+  --button-outline-hover-bg: var(--accent);
+  --button-outline-hover-text: var(--accent-foreground);
+
+  --button-ghost-hover-bg: var(--accent);
+  --button-ghost-hover-text: var(--accent-foreground);
+
+  --button-destructive-bg: var(--destructive);
+  --button-destructive-text: #ffffff;
+  --button-destructive-hover-opacity: 0.9;
+
+  --button-border-radius: 0.375rem;
+  --button-font-size: 0.875rem;
+  --button-font-weight: 500;
+  --button-transition: all 0.2s;
+
+  --button-height-default: 2.25rem;
+  --button-height-sm: 2rem;
+  --button-height-lg: 2.5rem;
+  --button-height-icon: 2.25rem;
+  --button-height-icon-sm: 2rem;
+  --button-height-icon-lg: 2.5rem;
+
+  --button-padding-x-default: 1rem;
+  --button-padding-x-sm: 0.75rem;
+  --button-padding-x-lg: 1.5rem;
+  --button-padding-y: 0.5rem;
 }
 
 .dark {
@@ -114,6 +154,16 @@
   --cart-footer-button-bg: var(--primary);
   --cart-footer-button-text: var(--primary-foreground);
   --cart-footer-button-hover-bg: var(--primary);
+
+  /* Dark mode button colors */
+  --button-default-bg: var(--primary);
+  --button-default-text: var(--primary-foreground);
+  --button-secondary-bg: var(--secondary);
+  --button-secondary-text: var(--secondary-foreground);
+  --button-outline-bg: var(--background);
+  --button-outline-hover-bg: var(--accent);
+  --button-ghost-hover-bg: var(--accent);
+  --button-destructive-bg: var(--destructive);
 }
 
 @theme inline {
@@ -171,6 +221,22 @@
   --color-cart-footer-button-text: var(--cart-footer-button-text);
   --color-cart-footer-button-hover-bg: var(--cart-footer-button-hover-bg);
   --color-cart-footer-border: var(--cart-footer-border);
+
+  /* Expose button design tokens to Tailwind theme */
+  --color-button-default-bg: var(--button-default-bg);
+  --color-button-default-text: var(--button-default-text);
+  --color-button-default-hover-bg: var(--button-default-hover-bg);
+  --color-button-secondary-bg: var(--button-secondary-bg);
+  --color-button-secondary-text: var(--button-secondary-text);
+  --color-button-outline-bg: var(--button-outline-bg);
+  --color-button-outline-text: var(--button-outline-text);
+  --color-button-outline-border: var(--button-outline-border);
+  --color-button-outline-hover-bg: var(--button-outline-hover-bg);
+  --color-button-outline-hover-text: var(--button-outline-hover-text);
+  --color-button-ghost-hover-bg: var(--button-ghost-hover-bg);
+  --color-button-ghost-hover-text: var(--button-ghost-hover-text);
+  --color-button-destructive-bg: var(--button-destructive-bg);
+  --color-button-destructive-text: var(--button-destructive-text);
 }
 
 @layer base {
