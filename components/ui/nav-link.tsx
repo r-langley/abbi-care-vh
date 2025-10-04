@@ -10,7 +10,7 @@ export function NavLink({ className, variant = "header", ...props }: NavLinkProp
   return (
     <Link
       className={cn(
-        "transition-colors font-medium tracking-normal text-xs text-left",
+        "transition-colors font-medium tracking-normal text-xs text-left font-sans",
         variant === "header" && "font-mono text-sm hover:text-primary",
         variant === "footer" && "text-sm text-muted-foreground hover:text-foreground",
         variant === "mobile" && "text-lg font-mono hover:text-primary",

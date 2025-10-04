@@ -79,7 +79,7 @@ export function Header() {
           </div>
 
           {isHomepage && (
-            <nav className="flex items-center gap-8 border-border px-2.5 border-t-0 py-2.5 justify-evenly">
+            <nav className="flex items-center border-border px-2.5 border-t-0 py-2.5 justify-evenly gap-2.5">
               <NavLink href="/skin-analysis">Skin Analysis</NavLink>
               <NavLink href="/shop">Shop</NavLink>
               <NavLink href="/about">About</NavLink>
