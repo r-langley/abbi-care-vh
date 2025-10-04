@@ -17,8 +17,8 @@ export function TabsNav({ tabs, baseUrl, paramName = "category" }: TabsNavProps)
 
   return (
     <nav className="border-b border-border">
-      <div className="container mx-auto px-4">
-        <div className="flex gap-8">
+      <div className="container mx-auto px-0">
+        <div className="flex gap-0 flex-row justify-evenly">
           {tabs.map((tab) => {
             const isActive = currentValue === tab.value
             const href = `${baseUrl}?${paramName}=${tab.value}`
