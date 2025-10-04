@@ -66,7 +66,7 @@ export function ProductCard({ product }: ProductCardProps) {
             </CardTitle>
           </Link>
           {product.subtitle && <ExtraSmallText className="mb-2">{product.subtitle}</ExtraSmallText>}
-          <div className="flex items-center justify-between mt-3">
+          <div className="flex justify-between mt-3 flex-col items-start gap-2.5">
             <PriceDisplay amount={product.price} />
             <Button size="sm" onClick={handleAddToCart} className="font-mono text-xs">
               <Plus className="h-4 w-4 mr-1" />
