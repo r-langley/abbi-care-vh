@@ -55,7 +55,7 @@ export function CardTitle({ className, variant = "default", ...props }: CardTitl
   return (
     <h3
       className={cn(
-        "font-medium text-lg",
+        "font-medium text-xl",
         variant === "default" && "text-xl mb-2",
         variant === "small" && "text-base mb-1",
         className,
