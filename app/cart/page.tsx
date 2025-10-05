@@ -117,8 +117,8 @@ export default function CartPage() {
                     <span>Total</span>
                     <span className="font-mono">${subtotal}</span>
                   </div>
-                  <Button size="lg" className="w-full font-mono">
-                    Proceed to Checkout
+                  <Button asChild size="lg" className="w-full font-mono">
+                    <Link href="/checkout">Proceed to Checkout</Link>
                   </Button>
                   <Button asChild size="lg" variant="outline" className="w-full font-mono bg-transparent">
                     <Link href="/shop">Continue Shopping</Link>
