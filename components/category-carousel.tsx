@@ -48,9 +48,9 @@ export function CategoryCarousel({ title, description, products, shopLink }: Cat
           ))}
 
           {/* Shop Category Card */}
-          <Link href={shopLink} className="flex-none w-[280px] snap-start">
+          <Link href={shopLink} className="flex-none w-[280px] snap-start border-none border-0">
             <Card className="group overflow-hidden hover:shadow-lg transition-all duration-300 h-full bg-primary/5 hover:bg-primary/10 border-2 border-dashed border-primary/20 hover:border-primary/40">
-              <div className="flex flex-col items-center justify-center h-full p-8 text-center">
+              <div className="flex flex-col items-center justify-center h-full p-8 text-center border-none">
                 <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
                   <ArrowRight className="w-8 h-8 text-primary" />
                 </div>
