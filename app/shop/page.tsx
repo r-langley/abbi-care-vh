@@ -21,19 +21,19 @@ export default function ShopPage() {
     creams: {
       title: "Creams",
       description: "Choose Lab Created or Mix-at-Home",
-      image: "/placeholder.svg?height=160&width=400",
+      image: "/placeholder.svg?height=160&width=400&creamJar=true",
       imagePosition: "left" as const,
     },
     "simple-solutions": {
       title: "Simple Solutions",
       description: "Targeted treatments for specific concerns",
-      image: "/placeholder.svg?height=160&width=400",
+      image: "/placeholder.svg?height=160&width=400&serumBottle=true",
       imagePosition: "right" as const,
     },
     essentials: {
       title: "Essentials",
       description: "Daily basics for your routine",
-      image: "/placeholder.svg?height=160&width=400",
+      image: "/placeholder.svg?height=160&width=400&pumpBottle=true",
       imagePosition: "left" as const,
     },
   }
