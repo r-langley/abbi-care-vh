@@ -33,7 +33,7 @@ export default function ShopPage() {
     essentials: {
       title: "Essentials",
       description: "Daily basics for your routine",
-      image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-LEPlqvKzEkK6J5dqJznJE9V0ClyAgm.png",
+      image: "/images/essentials-hero.jpg",
       imagePosition: "left" as const,
     },
   }
