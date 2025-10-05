@@ -2,7 +2,7 @@ import { NavLink } from "@/components/ui/nav-link"
 
 export function Footer() {
   return (
-    <footer className="bg-background border-t border-border mt-20">
+    <footer className="bg-background border-t border-border">
       <div className="container mx-auto px-4 py-12 bg-muted">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
@@ -30,7 +30,7 @@ export function Footer() {
               </li>
             </ul>
           </div>
-          
+
           <div>
             <h3 className="font-mono text-sm mb-4">Support</h3>
             <ul className="space-y-2">
@@ -56,7 +56,6 @@ export function Footer() {
               </li>
             </ul>
           </div>
-          
         </div>
         <div className="mt-12 pt-8 border-t border-border text-center text-sm text-muted-foreground">
           <p>© 2025 ABBI. All rights reserved.</p>

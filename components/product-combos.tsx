@@ -1,15 +1,14 @@
 "use client"
 
 import { PlusIcon } from "@heroicons/react/24/solid"
+import Image from "next/image"
 
 export function ProductCombos() {
   return (
     <div className="bg-[#f5f6f5] flex flex-col gap-[20px] p-[20px] rounded-[10px]">
       <div className="flex flex-col gap-[23px]">
         <div className="flex flex-col gap-[10px] text-[#586158] leading-[1.35]">
-          <h2 className="font-semibold text-[24px] tracking-[-0.48px]">
-            Make it a Combo & Save!
-          </h2>
+          <h2 className="font-semibold text-[24px] tracking-[-0.48px] text-foreground">Make it a Combo & Save!</h2>
           <p className="font-medium text-[16px] tracking-[-0.32px]">
             Complete your routine. Add a Cleanser and Serum to your Cream and save!
           </p>
@@ -17,23 +16,23 @@ export function ProductCombos() {
 
         <div className="grid grid-cols-2 gap-[10px]">
           {/* Duo Pack */}
-          <div className="bg-white rounded-[10px] border-2 border-[#c6ccc6] overflow-hidden">
-            <div className="flex flex-col">
+          <div className="bg-white rounded-[10px] border-2 border-[#c6ccc6] overflow-hidden h-full">
+            <div className="flex flex-col h-full">
               {/* Image */}
-              <div className="h-[160px] bg-[#f5f6f5] flex items-center justify-center">
-                <div className="relative w-full h-full flex items-center justify-center">
-                  {/* Placeholder for product images */}
-                  <div className="text-[#586158] text-sm">Duo Pack Image</div>
-                </div>
+              <div className="relative h-[160px] overflow-hidden">
+                <Image
+                  src="/minimalist-cosmetic-pump-bottle-product-photograph.jpg"
+                  alt="Duo Pack"
+                  fill
+                  className="object-cover"
+                />
               </div>
 
               {/* Details */}
               <div className="bg-[#f5f6f5] p-[10px] pb-[20px] flex flex-col justify-between gap-[10px] flex-1">
                 <div className="flex flex-col gap-[10px]">
                   <div className="flex flex-col gap-[5px]">
-                    <p className="font-semibold text-[18px] leading-[1.15] text-[#586158] tracking-normal">
-                      Duo Pack
-                    </p>
+                    <p className="font-semibold text-[18px] leading-[1.15] text-[#586158] tracking-normal">Duo Pack</p>
                     <p className="font-medium text-[14px] tracking-[-0.28px] text-[#586158] leading-[1.15]">
                       Aloe Vera Cleanser
                     </p>
@@ -42,8 +41,7 @@ export function ProductCombos() {
                     className="font-medium text-[13px] tracking-[-0.26px] text-[#586158] leading-[1.15]"
                     style={{ fontFamily: "var(--font-geist-mono)", fontVariationSettings: "'wdth' 100" }}
                   >
-                    <span className="line-through opacity-60">$24.00</span>{" "}
-                    <span>$19.00</span>
+                    <span className="line-through opacity-60">$24.00</span> <span>$19.00</span>
                   </p>
                 </div>
 
@@ -55,23 +53,23 @@ export function ProductCombos() {
           </div>
 
           {/* Trio Pack */}
-          <div className="bg-white rounded-[10px] border-2 border-[#c6ccc6] overflow-hidden">
-            <div className="flex flex-col">
+          <div className="bg-white rounded-[10px] border-2 border-[#c6ccc6] overflow-hidden h-full">
+            <div className="flex flex-col h-full">
               {/* Image */}
-              <div className="h-[160px] bg-[#f5f6f5] flex items-center justify-center">
-                <div className="relative w-full h-full flex items-center justify-center">
-                  {/* Placeholder for product images */}
-                  <div className="text-[#586158] text-sm">Trio Pack Image</div>
-                </div>
+              <div className="relative h-[160px] overflow-hidden">
+                <Image
+                  src="/minimalist-cosmetic-pump-bottle-product-photograph.jpg"
+                  alt="Trio Pack"
+                  fill
+                  className="object-cover"
+                />
               </div>
 
               {/* Details */}
               <div className="bg-[#f5f6f5] p-[10px] pb-[20px] flex flex-col justify-between gap-[10px] flex-1">
                 <div className="flex flex-col gap-[10px]">
                   <div className="flex flex-col gap-[5px]">
-                    <p className="font-semibold text-[18px] leading-[1.15] text-[#586158] tracking-normal">
-                      Trio Pack
-                    </p>
+                    <p className="font-semibold text-[18px] leading-[1.15] text-[#586158] tracking-normal">Trio Pack</p>
                     <p className="font-medium text-[14px] tracking-[-0.28px] text-[#586158] leading-[1.15]">
                       Aloe Vera Cleanser and Collagen Serum
                     </p>
@@ -80,8 +78,7 @@ export function ProductCombos() {
                     className="font-medium text-[13px] tracking-[-0.26px] text-[#586158] leading-[1.15]"
                     style={{ fontFamily: "var(--font-geist-mono)", fontVariationSettings: "'wdth' 100" }}
                   >
-                    <span className="line-through opacity-60">$24.00</span>{" "}
-                    <span>$19.00</span>
+                    <span className="line-through opacity-60">$24.00</span> <span>$19.00</span>
                   </p>
                 </div>
 

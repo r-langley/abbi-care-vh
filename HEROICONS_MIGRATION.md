@@ -310,7 +310,7 @@ If issues arise:
 3. ⬜ Update Header component (highest priority)
 4. ⬜ Update Product Card component
 5. ⬜ Update remaining components
-6. ⬜ Test all pages
+6. ��� Test all pages
 7. ⬜ Remove `lucide-react`
 8. ⬜ Commit and push
 

@@ -16,7 +16,7 @@ const faqs = [
 
 export function FaqSection() {
   return (
-    <div className="bg-white py-10 px-5 pb-10">
+    <div className="py-10 px-5 pb-10 bg-primary-foreground">
       <h2 className="font-semibold text-[24px] tracking-[-1px] text-[#292824] mb-5">
         FAQ
       </h2>

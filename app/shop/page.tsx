@@ -10,8 +10,8 @@ import { HeroSection } from "@/components/ui/hero-section"
 import { PRODUCT_CATEGORIES, SHOP_CATEGORIES } from "@/lib/constants"
 import { TraitFilter } from "@/components/trait-filter"
 import { CartFooter } from "@/components/cart-footer"
-import { ScanCTA } from "@/components/scan-cta"
 import { ProductCombos } from "@/components/product-combos"
+import { ScanCTA } from "@/components/scan-cta" // Import ScanCTA component
 
 export default function ShopPage() {
   const searchParams = useSearchParams()
@@ -48,7 +48,7 @@ export default function ShopPage() {
       "/images/simple-solutions-hero.png",
       "/images/essentials-hero.jpg",
     ]
-    
+
     preloadImages.forEach((src) => {
       const link = document.createElement("link")
       link.rel = "preload"
@@ -179,9 +179,6 @@ export default function ShopPage() {
                   </div>
                 </div>
               )}
-
-              {/* Product Combos */}
-              <ProductCombos />
             </div>
           ) : (
             // Other categories show standard grid
@@ -192,6 +189,8 @@ export default function ShopPage() {
             </div>
           )}
         </div>
+
+        {category === "creams" && <ProductCombos />}
       </main>
       <CartFooter headingText="Review your Routine" buttonText="CHECKOUT" />
       <Footer />
