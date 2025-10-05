@@ -6,9 +6,10 @@ interface IngredientCardProps {
   number: number
   name: string
   description: string
+  hideDescription?: boolean
 }
 
-export function IngredientCard({ id, number, name, description }: IngredientCardProps) {
+export function IngredientCard({ id, number, name, description, hideDescription = false }: IngredientCardProps) {
   return (
     <Link href={`/ingredient/${id}`} className="block h-full">
       <div className="bg-white rounded-[10px] border-2 border-[#f5f6f5] overflow-hidden relative flex flex-col h-full hover:border-[#586158] transition-colors">
@@ -25,9 +26,11 @@ export function IngredientCard({ id, number, name, description }: IngredientCard
             <p className="font-semibold text-[16px] leading-[1.15] text-[#586158] tracking-[-0.32px]">
               {name}
             </p>
-            <p className="font-medium text-[14px] tracking-[-0.28px] text-[#586158] leading-[1.15]">
-              {description}
-            </p>
+            {!hideDescription && (
+              <p className="font-medium text-[14px] tracking-[-0.28px] text-[#586158] leading-[1.15]">
+                {description}
+              </p>
+            )}
           </div>
           <p
             className="font-medium text-[13px] tracking-[-0.26px] text-[#586158] leading-[1.15]"

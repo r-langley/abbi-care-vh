@@ -14,11 +14,11 @@ import { ProductCombos } from "@/components/product-combos"
 import { ScanCTA } from "@/components/scan-cta"
 import { MySkinResults } from "@/components/my-skin-results"
 import { useAuth } from "@/lib/auth-context"
-import { getActiveIngredientsByTraits } from "@/lib/active-ingredients"
+import { getIngredientsByTraits } from "@/lib/ingredients-data"
 import Link from "next/link"
 import Image from "next/image"
 import { ChevronRightIcon, PlusIcon, CheckIcon } from "@heroicons/react/24/outline"
-import { ActiveIngredientCard } from "@/components/active-ingredient-card"
+import { IngredientCard } from "@/components/ingredient-card"
 import { RecommendedBadge } from "@/components/recommended-badge"
 
 export default function ShopPage() {
@@ -125,7 +125,7 @@ export default function ShopPage() {
   const recommendedActiveIngredients = useMemo(() => {
     if (!scanResults && !isLoggedIn) return []
     const traits = ["Wrinkles", "Radiance", "Imperfections"]
-    return getActiveIngredientsByTraits(traits).slice(0, 3)
+    return getIngredientsByTraits(traits).slice(0, 3)
   }, [scanResults, isLoggedIn])
 
   const recommendedCreamBase = useMemo(() => {
@@ -233,12 +233,13 @@ export default function ShopPage() {
 
                     <div className="grid grid-cols-3 gap-[10px]">
                       {recommendedActiveIngredients.map((ingredient) => (
-                        <ActiveIngredientCard
+                        <IngredientCard
                           key={ingredient.id}
                           id={ingredient.id}
                           number={ingredient.number}
                           name={ingredient.name}
-                          image={ingredient.image}
+                          description={ingredient.description}
+                          hideDescription={true}
                         />
                       ))}
                     </div>
