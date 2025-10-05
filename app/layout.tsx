@@ -1,12 +1,12 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Poppins, Libre_Baskerville } from "next/font/google"
-import { GeistMono } from "geist/font/mono"
+import { Poppins, Libre_Baskerville, JetBrains_Mono } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 import { CartProvider } from "@/lib/cart-context"
 import { Suspense } from "react"
 import { ScrollToTop } from "@/components/scroll-to-top"
+import { CartFooter } from "@/components/cart-footer"
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -18,6 +18,11 @@ const libreBaskerville = Libre_Baskerville({
   subsets: ["latin"],
   weight: ["400", "700"],
   variable: "--font-libre-baskerville",
+})
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-geist-mono",
 })
 
 export const metadata: Metadata = {
@@ -32,11 +37,14 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${poppins.variable} ${libreBaskerville.variable} ${GeistMono.variable}`}>
+    <html lang="en" className={`${poppins.variable} ${libreBaskerville.variable} ${jetbrainsMono.variable}`}>
       <body className="font-sans antialiased">
         <Suspense fallback={null}>
           <ScrollToTop />
-          <CartProvider>{children}</CartProvider>
+          <CartProvider>
+            {children}
+            <CartFooter />
+          </CartProvider>
         </Suspense>
         <Analytics />
       </body>

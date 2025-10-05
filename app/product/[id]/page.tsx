@@ -64,7 +64,7 @@ export default function ProductPage() {
             <div className="space-y-4">
               <div className="relative aspect-square rounded-lg overflow-hidden bg-muted">
                 <Image
-                  src={product.image || "/placeholder.svg"}
+                  src="/minimalist-cosmetic-pump-bottle-product-photograph.jpg"
                   alt={product.name}
                   fill
                   className="object-cover"

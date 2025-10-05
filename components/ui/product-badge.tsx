@@ -11,7 +11,7 @@ export function ProductBadge({ badgeType = "trait", className, ...props }: Produ
     <Badge
       variant={badgeType === "recommended" ? "default" : badgeType === "category" ? "secondary" : "outline"}
       className={cn(
-        "font-mono text-xs",
+        "font-mono text-xs rounded-xs",
         badgeType === "recommended" && "bg-primary text-primary-foreground",
         className,
       )}

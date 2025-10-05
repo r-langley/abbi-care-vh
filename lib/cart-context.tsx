@@ -1,8 +1,9 @@
 "use client"
 
 import type React from "react"
-import { createContext, useContext, useState, useEffect } from "react"
+import { createContext, useContext, useState, useEffect, useMemo, useCallback } from "react"
 import type { Product } from "@/lib/products"
+import { STORAGE_KEYS } from "@/lib/constants"
 
 interface CartItem extends Product {
   quantity: number
@@ -25,18 +26,22 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   // Load cart from localStorage on mount
   useEffect(() => {
-    const savedCart = localStorage.getItem("abbi-cart")
+    const savedCart = localStorage.getItem(STORAGE_KEYS.CART)
     if (savedCart) {
       setItems(JSON.parse(savedCart))
     }
   }, [])
 
-  // Save cart to localStorage whenever it changes
+  // Save cart to localStorage with debounce to avoid blocking main thread
   useEffect(() => {
-    localStorage.setItem("abbi-cart", JSON.stringify(items))
+    const timeoutId = setTimeout(() => {
+      localStorage.setItem(STORAGE_KEYS.CART, JSON.stringify(items))
+    }, 300)
+
+    return () => clearTimeout(timeoutId)
   }, [items])
 
-  const addItem = (product: Product, quantity = 1) => {
+  const addItem = useCallback((product: Product, quantity = 1) => {
     setItems((currentItems) => {
       const existingItem = currentItems.find((item) => item.id === product.id)
       if (existingItem) {
@@ -46,26 +51,26 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       }
       return [...currentItems, { ...product, quantity }]
     })
-  }
+  }, [])
 
-  const removeItem = (productId: string) => {
+  const removeItem = useCallback((productId: string) => {
     setItems((currentItems) => currentItems.filter((item) => item.id !== productId))
-  }
+  }, [])
 
-  const updateQuantity = (productId: string, quantity: number) => {
+  const updateQuantity = useCallback((productId: string, quantity: number) => {
     if (quantity <= 0) {
       removeItem(productId)
       return
     }
     setItems((currentItems) => currentItems.map((item) => (item.id === productId ? { ...item, quantity } : item)))
-  }
+  }, [removeItem])
 
-  const clearCart = () => {
+  const clearCart = useCallback(() => {
     setItems([])
-  }
+  }, [])
 
-  const totalItems = items.reduce((sum, item) => sum + item.quantity, 0)
-  const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0)
+  const totalItems = useMemo(() => items.reduce((sum, item) => sum + item.quantity, 0), [items])
+  const subtotal = useMemo(() => items.reduce((sum, item) => sum + item.price * item.quantity, 0), [items])
 
   return (
     <CartContext.Provider

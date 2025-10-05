@@ -1,194 +1,177 @@
 "use client"
 
-import { useState, useMemo } from "react"
+import { useMemo } from "react"
 import { useSearchParams } from "next/navigation"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { ProductCard } from "@/components/product-card"
-import { Button } from "@/components/ui/button"
-import { Checkbox } from "@/components/ui/checkbox"
-import { Label } from "@/components/ui/label"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { SlidersHorizontal } from "lucide-react"
-import { products, traits } from "@/lib/products"
-import { BodyText } from "@/components/ui/typography"
+import { products } from "@/lib/products"
 import { HeroSection } from "@/components/ui/hero-section"
-
-const categories = ["In-Lab Cream", "Mix at Home Cream", "Active Concentrate", "Essential", "Simple Solution"]
-
-const categoryHeros = {
-  creams: {
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-LEPlqvKzEkK6J5dqJznJE9V0ClyAgm.png",
-    title: "Creams",
-    description: "Choose Lab Created or Mix-at-Home",
-  },
-  "simple-solutions": {
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-LEPlqvKzEkK6J5dqJznJE9V0ClyAgm.png",
-    title: "Simple Solutions",
-    description: "Complete regimens for targeted concerns",
-  },
-  essentials: {
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-LEPlqvKzEkK6J5dqJznJE9V0ClyAgm.png",
-    title: "Essentials",
-    description: "Core products for every skincare routine",
-  },
-}
+import { PRODUCT_CATEGORIES, SHOP_CATEGORIES } from "@/lib/constants"
+import { TraitFilter } from "@/components/trait-filter"
+import { CartFooter } from "@/components/cart-footer"
+import { ScanCTA } from "@/components/scan-cta"
 
 export default function ShopPage() {
   const searchParams = useSearchParams()
-  const initialTrait = searchParams.get("trait")
-  const categoryParam = searchParams.get("category") || "creams"
+  const category = searchParams.get("category") || "creams"
+  const selectedTraits = searchParams.get("traits")?.split(",").filter(Boolean) || []
 
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([])
-  const [selectedTraits, setSelectedTraits] = useState<string[]>(initialTrait ? [initialTrait] : [])
-  const [sortBy, setSortBy] = useState("featured")
+  const heroContent = {
+    creams: {
+      title: "Creams",
+      description: "Choose Lab Created or Mix-at-Home",
+      image: "/images/creams-hero.png",
+      imagePosition: "left" as const,
+    },
+    "simple-solutions": {
+      title: "Simple Solutions",
+      description: "Targeted treatments for specific concerns",
+      image: "/images/simple-solutions-hero.png",
+      imagePosition: "right" as const,
+    },
+    essentials: {
+      title: "Essentials",
+      description: "Daily basics for your routine",
+      image: "/images/essentials-hero.jpg",
+      imagePosition: "left" as const,
+    },
+  }
 
-  const filteredProducts = useMemo(() => {
-    let filtered = [...products]
+  const currentHero = heroContent[category as keyof typeof heroContent] || heroContent.creams
 
-    // Filter by category tab
-    if (categoryParam === "creams") {
-      filtered = filtered.filter((p) =>
-        ["In-Lab Cream", "Mix at Home Cream", "Active Concentrate"].includes(p.category),
-      )
-    } else if (categoryParam === "simple-solutions") {
-      filtered = filtered.filter((p) => p.category === "Simple Solution")
-    } else if (categoryParam === "essentials") {
-      filtered = filtered.filter((p) => p.category === "Essential")
+  // Optimized: Single memoized computation for both filtering and grouping
+  const { filteredProducts, groupedCreams } = useMemo(() => {
+    let filtered: typeof products
+
+    if (category === SHOP_CATEGORIES.CREAMS) {
+      const creamCategories = [
+        PRODUCT_CATEGORIES.IN_LAB_CREAM,
+        PRODUCT_CATEGORIES.MIX_AT_HOME_CREAM,
+        PRODUCT_CATEGORIES.ACTIVE_CONCENTRATE,
+      ] as const
+      filtered = products.filter((p) => (creamCategories as readonly string[]).includes(p.category))
+
+      // Apply trait filters if selected
+      if (selectedTraits.length > 0) {
+        filtered = filtered.filter((p) =>
+          selectedTraits.some((trait) => p.traits.some((t) => t.toLowerCase() === trait.toLowerCase())),
+        )
+      }
+
+      return {
+        filteredProducts: filtered,
+        groupedCreams: {
+          inLab: filtered.filter((p) => p.category === PRODUCT_CATEGORIES.IN_LAB_CREAM),
+          mixAtHome: filtered.filter((p) => p.category === PRODUCT_CATEGORIES.MIX_AT_HOME_CREAM),
+          activeConcentrate: filtered.filter((p) => p.category === PRODUCT_CATEGORIES.ACTIVE_CONCENTRATE),
+        },
+      }
+    } else if (category === SHOP_CATEGORIES.SIMPLE_SOLUTIONS) {
+      filtered = products.filter((p) => p.category === PRODUCT_CATEGORIES.SIMPLE_SOLUTION)
+    } else if (category === SHOP_CATEGORIES.ESSENTIALS) {
+      filtered = products.filter((p) => p.category === PRODUCT_CATEGORIES.ESSENTIAL)
+    } else {
+      filtered = products
     }
 
-    // Filter by category checkboxes
-    if (selectedCategories.length > 0) {
-      filtered = filtered.filter((p) => selectedCategories.includes(p.category))
-    }
-
-    // Filter by traits
+    // Apply trait filters for non-cream categories
     if (selectedTraits.length > 0) {
       filtered = filtered.filter((p) =>
         selectedTraits.some((trait) => p.traits.some((t) => t.toLowerCase() === trait.toLowerCase())),
       )
     }
 
-    // Sort
-    if (sortBy === "price-low") {
-      filtered.sort((a, b) => a.price - b.price)
-    } else if (sortBy === "price-high") {
-      filtered.sort((a, b) => b.price - a.price)
-    } else if (sortBy === "name") {
-      filtered.sort((a, b) => a.name.localeCompare(b.name))
-    }
-
-    return filtered
-  }, [categoryParam, selectedCategories, selectedTraits, sortBy])
-
-  const toggleCategory = (category: string) => {
-    setSelectedCategories((prev) =>
-      prev.includes(category) ? prev.filter((c) => c !== category) : [...prev, category],
-    )
-  }
-
-  const toggleTrait = (trait: string) => {
-    setSelectedTraits((prev) => (prev.includes(trait) ? prev.filter((t) => t !== trait) : [...prev, trait]))
-  }
-
-  const clearFilters = () => {
-    setSelectedCategories([])
-    setSelectedTraits([])
-  }
-
-  const currentHero = categoryHeros[categoryParam as keyof typeof categoryHeros] || categoryHeros.creams
-
-  const FilterContent = () => (
-    <div className="space-y-6">
-      <div>
-        <h3 className="font-mono text-sm mb-4">Category</h3>
-        <div className="space-y-3">
-          {categories.map((category) => (
-            <div key={category} className="flex items-center space-x-2">
-              <Checkbox
-                id={`category-${category}`}
-                checked={selectedCategories.includes(category)}
-                onCheckedChange={() => toggleCategory(category)}
-              />
-              <Label htmlFor={`category-${category}`} className="text-sm cursor-pointer">
-                {category}
-              </Label>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <div className="border-t border-border pt-6">
-        <h3 className="font-mono text-sm mb-4">Skin Trait</h3>
-        <div className="space-y-3">
-          {traits.map((trait) => (
-            <div key={trait.id} className="flex items-center space-x-2">
-              <Checkbox
-                id={`trait-${trait.id}`}
-                checked={selectedTraits.includes(trait.id)}
-                onCheckedChange={() => toggleTrait(trait.id)}
-              />
-              <Label htmlFor={`trait-${trait.id}`} className="text-sm cursor-pointer">
-                {trait.name}
-              </Label>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {(selectedCategories.length > 0 || selectedTraits.length > 0) && (
-        <Button variant="outline" onClick={clearFilters} className="w-full font-mono bg-transparent">
-          Clear Filters
-        </Button>
-      )}
-    </div>
-  )
+    return { filteredProducts: filtered, groupedCreams: null }
+  }, [category, selectedTraits])
 
   return (
     <>
       <Header />
-      <main className="min-h-screen">
+      <main className="min-h-screen pb-0">
         <HeroSection
-          image={currentHero.image}
-          imageAlt={currentHero.title}
           title={currentHero.title}
           description={currentHero.description}
+          image={currentHero.image}
+          imagePosition={currentHero.imagePosition}
         />
 
-        <div className="container mx-auto px-4 py-8">
-          <div className="flex gap-8">
-            {/* Desktop Filters */}
-            <aside className="hidden lg:block w-64 flex-shrink-0">
-              <div className="sticky top-24">
-                <FilterContent />
-              </div>
-            </aside>
+        <TraitFilter />
 
-            {/* Main Content */}
-            <div className="flex-1">
-              {/* Mobile Filter + Sort */}
-              
+        <div className="py-5 px-5">
+          {category === "creams" && groupedCreams ? (
+            <div className="space-y-10">
+              {/* In Lab */}
+              {groupedCreams.inLab.length > 0 && (
+                <div className="flex flex-col gap-[20px]">
+                  {/* Show scan CTA if no traits are selected */}
+                  {selectedTraits.length === 0 && <ScanCTA />}
 
-              {/* Product Grid */}
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5">
-                {filteredProducts.map((product) => (
-                  <ProductCard key={product.id} product={product} />
-                ))}
-              </div>
+                  <div className="flex flex-col gap-[10px]">
+                    <h2 className="font-semibold text-[#586158] leading-[1.35] text-foreground tracking-tight text-2xl">
+                      In Lab
+                    </h2>
+                    <p className="font-medium text-[16px] tracking-[-0.32px] text-[#586158] leading-[1.35]">
+                      Made-to-order in our French lab — just for you.
+                    </p>
+                  </div>
+                  <div className="grid grid-cols-2 gap-[10px]">
+                    {groupedCreams.inLab.map((product) => (
+                      <ProductCard key={product.id} product={product} showRecommended={selectedTraits.length > 0} />
+                    ))}
+                  </div>
+                </div>
+              )}
 
-              {filteredProducts.length === 0 && (
-                <div className="text-center py-20">
-                  <BodyText className="text-muted-foreground mb-4">No products found matching your filters.</BodyText>
-                  <Button onClick={clearFilters} variant="outline" className="font-mono bg-transparent">
-                    Clear Filters
-                  </Button>
+              {/* Mix at Home */}
+              {groupedCreams.mixAtHome.length > 0 && (
+                <div className="flex flex-col gap-[20px]">
+                  <div className="flex flex-col gap-[5px]">
+                    <h2 className="font-semibold text-[#586158] text-foreground tracking-tight text-2xl">
+                      Mix at Home
+                    </h2>
+                    <p className="font-medium text-[14px] tracking-[-0.28px] text-[#586158]">
+                      Create your own routines. Mix a specific base and active concentrates.
+                    </p>
+                  </div>
+                  <div className="grid grid-cols-2 gap-[10px]">
+                    {groupedCreams.mixAtHome.map((product) => (
+                      <ProductCard key={product.id} product={product} showRecommended={selectedTraits.length > 0} />
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Active Concentrates */}
+              {groupedCreams.activeConcentrate.length > 0 && (
+                <div className="flex flex-col gap-[20px]">
+                  <div className="flex flex-col gap-[5px]">
+                    <h2 className="font-semibold text-[#586158] text-foreground text-2xl tracking-tight">
+                      Active Concentrates
+                    </h2>
+                    <p className="font-medium text-[14px] tracking-[-0.28px] text-[#586158]">
+                      Targeted treatments to address specific skin concerns
+                    </p>
+                  </div>
+                  <div className="grid grid-cols-2 gap-[10px]">
+                    {groupedCreams.activeConcentrate.map((product) => (
+                      <ProductCard key={product.id} product={product} showRecommended={selectedTraits.length > 0} />
+                    ))}
+                  </div>
                 </div>
               )}
             </div>
-          </div>
+          ) : (
+            // Other categories show standard grid
+            <div className="grid grid-cols-2 gap-[10px]">
+              {filteredProducts.map((product) => (
+                <ProductCard key={product.id} product={product} showRecommended={selectedTraits.length > 0} />
+              ))}
+            </div>
+          )}
         </div>
       </main>
+      <CartFooter headingText="Review your Routine" buttonText="CHECKOUT" />
       <Footer />
     </>
   )

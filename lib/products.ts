@@ -1,7 +1,9 @@
+import type { ProductCategory } from "./constants"
+
 export interface Product {
   id: string
   name: string
-  category: string
+  category: ProductCategory
   price: number
   description: string
   traits: string[]
@@ -23,6 +25,63 @@ export const traits = [
 ]
 
 export const products: Product[] = [
+  // In-Lab Creams
+  {
+    id: "inlab-aloe-vera",
+    name: "Aloe Vera Base",
+    category: "In-Lab Cream",
+    price: 24,
+    description: "Soothing aloe vera base cream made-to-order in our French lab, personalized for your unique skin needs.",
+    traits: ["Hydration", "Sensitivity"],
+    image: "/placeholder.svg?height=400&width=400",
+    inStock: true,
+    recommended: true,
+  },
+  {
+    id: "inlab-apple-stem-cells",
+    name: "Apple Stem Cells Base",
+    category: "In-Lab Cream",
+    price: 24,
+    description: "Advanced apple stem cell formula that promotes skin renewal and fights signs of aging.",
+    traits: ["Wrinkles", "Radiance"],
+    image: "/placeholder.svg?height=400&width=400",
+    inStock: true,
+    recommended: true,
+  },
+  {
+    id: "inlab-honey-shea",
+    name: "Honey & Shea Butter Base",
+    category: "In-Lab Cream",
+    price: 24,
+    description: "Rich honey and shea butter blend that deeply nourishes and protects dry, sensitive skin.",
+    traits: ["Hydration", "Sensitivity"],
+    image: "/placeholder.svg?height=400&width=400",
+    inStock: true,
+    recommended: false,
+  },
+  {
+    id: "inlab-selenium-vitamin-c",
+    name: "Selenium & Vitamin C Base",
+    category: "In-Lab Cream",
+    price: 24,
+    description: "Brightening formula with selenium and vitamin C to even skin tone and boost radiance.",
+    traits: ["Radiance", "Spots"],
+    image: "/placeholder.svg?height=400&width=400",
+    inStock: true,
+    recommended: true,
+  },
+  {
+    id: "inlab-peptide-complex",
+    name: "Peptide Complex Base",
+    category: "In-Lab Cream",
+    price: 24,
+    description: "Advanced peptide formula that firms and smooths skin while reducing fine lines and wrinkles.",
+    traits: ["Wrinkles", "Texture"],
+    image: "/placeholder.svg?height=400&width=400",
+    inStock: true,
+    recommended: false,
+  },
+
   // Mix at Home Creams
   {
     id: "cream-velvety",

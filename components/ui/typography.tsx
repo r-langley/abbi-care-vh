@@ -10,7 +10,7 @@ export function PageTitle({ className, variant = "default", ...props }: PageTitl
   return (
     <h1
       className={cn(
-        "text-balance text-foreground font-medium",
+        "text-balance text-foreground font-semibold leading-7",
         variant === "default" && "text-3xl md:text-4xl mb-4",
         variant === "hero" && "text-2xl md:text-5xl lg:text-6xl mb-2 md:mb-4",
         className,
@@ -30,7 +30,7 @@ export function SectionHeading({ className, align = "center", spacing = "default
   return (
     <h2
       className={cn(
-        "text-2xl md:text-3xl font-medium",
+        "text-2xl md:text-3xl leading-7 font-semibold",
         align === "center" && "text-center",
         spacing === "default" && "mb-12 md:mb-16",
         spacing === "tight" && "mb-4 md:mb-6",
@@ -55,7 +55,7 @@ export function CardTitle({ className, variant = "default", ...props }: CardTitl
   return (
     <h3
       className={cn(
-        "font-medium text-lg",
+        "font-medium text-xl",
         variant === "default" && "text-xl mb-2",
         variant === "small" && "text-base mb-1",
         className,
@@ -67,7 +67,7 @@ export function CardTitle({ className, variant = "default", ...props }: CardTitl
 
 // Body Text Variants
 export function BodyText({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
-  return null
+  return <p className={cn("text-base text-foreground leading-relaxed", className)} {...props} />
 }
 
 export function SmallText({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
@@ -88,7 +88,7 @@ export function PriceDisplay({ amount, size = "default", className, ...props }: 
   return (
     <span
       className={cn(
-        "font-mono",
+        "font-mono text-sm font-medium",
         size === "large" && "text-3xl",
         size === "default" && "text-lg",
         size === "small" && "text-base",

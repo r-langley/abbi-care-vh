@@ -1,32 +1,25 @@
 import Image from "next/image"
-import { PageTitle, BodyText } from "@/components/ui/typography"
-import { cn } from "@/lib/utils"
 
 interface HeroSectionProps {
   image: string
-  imageAlt: string
   title: string
   description?: string
-  className?: string
+  imagePosition?: "left" | "right"
 }
 
-export function HeroSection({ image, imageAlt, title, description, className }: HeroSectionProps) {
+export function HeroSection({ image, title, description, imagePosition = "left" }: HeroSectionProps) {
   return (
-    <section className={cn("relative bg-background", className)}>
-      <div className="container mx-auto px-0">
-        <div className="grid grid-cols-2 items-center gap-0 bg-primary-foreground">
-          {/* Left: Hero Image */}
-          <div className="relative aspect-[4/3] overflow-hidden">
-            <Image src={image || "/placeholder.svg"} alt={imageAlt} fill className="object-cover" priority />
-          </div>
-
-          {/* Right: Hero Content */}
-          <div className="flex flex-col justify-center items-start px-5 py-8 md:py-12">
-            <PageTitle className="text-2xl md:text-4xl lg:text-5xl mb-2 md:mb-4">{title}</PageTitle>
-            {description && <BodyText className="text-sm md:text-lg text-muted-foreground">{description}</BodyText>}
-          </div>
-        </div>
+    <div className={`flex h-[160px] ${imagePosition === "right" ? "flex-row-reverse" : ""}`}>
+      {/* Image */}
+      <div className="flex-1 bg-[#f5f6f5] flex items-center justify-center overflow-hidden relative">
+        <Image src={image || "/placeholder.svg"} alt={title} fill className="object-cover" priority />
       </div>
-    </section>
+
+      {/* Content */}
+      <div className="flex-1 bg-[#f5f6f5] flex flex-col items-center justify-center gap-[10px] px-[20px] py-[20px] text-center text-[#586158] leading-[1.35] text-foreground bg-muted">
+        <p className="font-semibold text-[24px] w-full tracking-normal">{title}</p>
+        {description && <p className="font-medium text-[16px] tracking-[-0.32px] w-full text-muted-foreground">{description}</p>}
+      </div>
+    </div>
   )
 }

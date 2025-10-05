@@ -6,22 +6,16 @@ import { Menu, ShoppingCart, User, Phone, Flag, ChevronDown } from "lucide-react
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { useCart } from "@/lib/cart-context"
-import { usePathname, useRouter } from "next/navigation"
+import { usePathname } from "next/navigation"
 import React from "react"
 import { NavLink } from "@/components/ui/nav-link"
+import { TabsNav } from "@/components/ui/tabs-nav"
 
 export function Header() {
   const { totalItems } = useCart()
   const pathname = usePathname()
-  const router = useRouter()
   const isHomepage = pathname === "/"
   const isShopPage = pathname === "/shop"
-
-  const currentCategory = pathname.split("=")[1] || "creams"
-
-  const handleCategoryChange = (value: string) => {
-    router.push(`/shop?category=${value}`)
-  }
 
   return (
     <>
@@ -39,7 +33,7 @@ export function Header() {
               <Sheet>
                 <SheetTrigger asChild>
                   <Button variant="ghost" size="icon" className="md:hidden">
-                    <Menu className="h-6 w-6" />
+                    <Menu className="h-[30px] w-[30px]" />
                   </Button>
                 </SheetTrigger>
                 <SheetContent side="left" className="px-5 py-5 w-fit">
@@ -48,8 +42,8 @@ export function Header() {
               </Sheet>
 
               <div className="hidden md:flex items-center gap-2">
-                <Flag className="h-6 w-6 text-muted-foreground" />
-                <Phone className="h-6 w-6 text-muted-foreground" />
+                <Flag className="h-[30px] w-[30px] text-muted-foreground" />
+                <Phone className="h-[30px] w-[30px] text-muted-foreground" />
               </div>
             </div>
 
@@ -64,7 +58,7 @@ export function Header() {
             <div className="flex items-center gap-2 justify-end">
               <Link href="/cart">
                 <Button variant="ghost" size="icon" className="relative">
-                  <ShoppingCart className="h-6 w-6" />
+                  <ShoppingCart className="h-[30px] w-[30px]" />
                   {totalItems > 0 && (
                     <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-xs font-mono rounded-full h-5 w-5 flex items-center justify-center">
                       {totalItems}
@@ -73,13 +67,13 @@ export function Header() {
                 </Button>
               </Link>
               <Button variant="ghost" size="icon">
-                <User className="h-6 w-6" />
+                <User className="h-[30px] w-[30px]" />
               </Button>
             </div>
           </div>
 
           {isHomepage && (
-            <nav className="flex items-center justify-center gap-8 border-border px-2.5 border-t-0 py-2.5">
+            <nav className="flex items-center justify-center gap-8 border-border px-2.5 py-2.5 border-t-0">
               <NavLink href="/skin-analysis">Skin Analysis</NavLink>
               <NavLink href="/shop">Shop</NavLink>
               <NavLink href="/about">About</NavLink>
@@ -88,26 +82,15 @@ export function Header() {
           )}
 
           {isShopPage && (
-            <nav className="flex items-center justify-center gap-0 border-border border-t-0">
-              <NavLink
-                href="/shop?category=creams"
-                className="flex-1 text-center py-3 border-b-2 border-transparent hover:border-primary transition-colors"
-              >
-                Creams
-              </NavLink>
-              <NavLink
-                href="/shop?category=simple-solutions"
-                className="flex-1 text-center py-3 border-b-2 border-transparent hover:border-primary transition-colors"
-              >
-                Simple Solutions
-              </NavLink>
-              <NavLink
-                href="/shop?category=essentials"
-                className="flex-1 text-center py-3 border-b-2 border-transparent hover:border-primary transition-colors"
-              >
-                Essentials
-              </NavLink>
-            </nav>
+            <TabsNav
+              tabs={[
+                { label: "Creams", value: "creams" },
+                { label: "Simple Solutions", value: "simple-solutions" },
+                { label: "Essentials", value: "essentials" },
+              ]}
+              baseUrl="/shop"
+              paramName="category"
+            />
           )}
 
           {!isHomepage && !isShopPage && (
@@ -148,35 +131,35 @@ function MobileNav() {
       <div>
         <button
           onClick={() => setIsTraitExpanded(!isTraitExpanded)}
-          className="text-lg font-mono hover:text-primary transition-colors flex items-center justify-between w-full"
+          className="text-lg hover:text-primary transition-colors flex items-center justify-between w-full font-sans font-medium text-muted-foreground"
         >
           Shop by Trait
-          <ChevronDown className={`h-6 w-6 transition-transform ${isTraitExpanded ? "rotate-180" : ""}`} />
+          <ChevronDown className={`h-[30px] w-[30px] transition-transform ${isTraitExpanded ? "rotate-180" : ""}`} />
         </button>
         {isTraitExpanded && (
           <div className="flex flex-col gap-3 pl-4 mt-3">
-            <NavLink href="/shop?trait=wrinkles" variant="footer">
+            <NavLink href="/shop?category=creams&traits=wrinkles" variant="footer">
               Wrinkles
             </NavLink>
-            <NavLink href="/shop?trait=radiance" variant="footer">
+            <NavLink href="/shop?category=creams&traits=radiance" variant="footer">
               Radiance
             </NavLink>
-            <NavLink href="/shop?trait=imperfections" variant="footer">
+            <NavLink href="/shop?category=creams&traits=imperfections" variant="footer">
               Imperfections
             </NavLink>
-            <NavLink href="/shop?trait=spots" variant="footer">
+            <NavLink href="/shop?category=creams&traits=spots" variant="footer">
               Spots
             </NavLink>
-            <NavLink href="/shop?trait=hydration" variant="footer">
+            <NavLink href="/shop?category=creams&traits=hydration" variant="footer">
               Hydration
             </NavLink>
-            <NavLink href="/shop?trait=sensitivity" variant="footer">
+            <NavLink href="/shop?category=creams&traits=sensitivity" variant="footer">
               Sensitivity
             </NavLink>
-            <NavLink href="/shop?trait=shine" variant="footer">
+            <NavLink href="/shop?category=creams&traits=shine" variant="footer">
               Shine
             </NavLink>
-            <NavLink href="/shop?trait=texture" variant="footer">
+            <NavLink href="/shop?category=creams&traits=texture" variant="footer">
               Texture
             </NavLink>
           </div>
