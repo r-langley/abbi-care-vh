@@ -11,7 +11,7 @@ import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import { Minus, Plus, Heart, ChevronRight } from "lucide-react"
+import { MinusIcon, PlusIcon, HeartIcon, ChevronRightIcon } from "@heroicons/react/24/solid"
 import { getProductById } from "@/lib/products"
 import { useCart } from "@/lib/cart-context"
 
@@ -50,11 +50,11 @@ export default function ProductPage() {
             <Link href="/" className="hover:text-foreground">
               Home
             </Link>
-            <ChevronRight className="h-4 w-4" />
+            <ChevronRightIcon className="h-4 w-4" />
             <Link href="/shop" className="hover:text-foreground">
               Shop
             </Link>
-            <ChevronRight className="h-4 w-4" />
+            <ChevronRightIcon className="h-4 w-4" />
             <span className="text-foreground">{product.name}</span>
           </div>
 
@@ -117,11 +117,11 @@ export default function ProductPage() {
                       onClick={() => setQuantity(Math.max(1, quantity - 1))}
                       disabled={quantity <= 1}
                     >
-                      <Minus className="h-4 w-4" />
+                      <MinusIcon className="h-4 w-4" />
                     </Button>
                     <span className="w-12 text-center font-mono">{quantity}</span>
                     <Button variant="ghost" size="icon" onClick={() => setQuantity(quantity + 1)}>
-                      <Plus className="h-4 w-4" />
+                      <PlusIcon className="h-4 w-4" />
                     </Button>
                   </div>
                 </div>
@@ -133,7 +133,7 @@ export default function ProductPage() {
                   Add to Cart
                 </Button>
                 <Button size="lg" variant="outline" className="w-full font-mono bg-transparent">
-                  <Heart className="h-4 w-4 mr-2" />
+                  <HeartIcon className="h-4 w-4 mr-2" />
                   Add to Wishlist
                 </Button>
               </div>

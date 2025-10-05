@@ -4,7 +4,7 @@ import { useState } from "react"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Sparkles, Smartphone } from "lucide-react"
+import { SparklesIcon, DevicePhoneMobileIcon } from "@heroicons/react/24/solid"
 import { traits } from "@/lib/products"
 import { useRouter } from "next/navigation"
 
@@ -59,7 +59,7 @@ export function SkinAnalysisModal({ open, onOpenChange }: SkinAnalysisModalProps
           <div className="border border-border rounded-lg p-6 bg-muted/30">
             <div className="flex items-start gap-4">
               <div className="p-3 bg-primary/10 rounded-lg">
-                <Smartphone className="h-6 w-6 text-primary" />
+                <DevicePhoneMobileIcon className="h-6 w-6 text-primary" />
               </div>
               <div className="flex-1">
                 <h3 className="font-semibold mb-2">AI Skin Analysis</h3>
@@ -68,7 +68,7 @@ export function SkinAnalysisModal({ open, onOpenChange }: SkinAnalysisModalProps
                   top 3 priorities.
                 </p>
                 <Button onClick={handleScan} className="font-mono">
-                  <Smartphone className="h-4 w-4 mr-2" />
+                  <DevicePhoneMobileIcon className="h-4 w-4 mr-2" />
                   Start Skin Scan
                 </Button>
               </div>
@@ -79,7 +79,7 @@ export function SkinAnalysisModal({ open, onOpenChange }: SkinAnalysisModalProps
           <div className="border border-border rounded-lg p-6">
             <div className="flex items-start gap-4 mb-4">
               <div className="p-3 bg-primary/10 rounded-lg">
-                <Sparkles className="h-6 w-6 text-primary" />
+                <SparklesIcon className="h-6 w-6 text-primary" />
               </div>
               <div className="flex-1">
                 <h3 className="font-semibold mb-2">Select Your Top 3 Skin Traits</h3>

@@ -6,7 +6,7 @@ import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { Minus, Plus, X } from "lucide-react"
+import { MinusIcon, PlusIcon, XMarkIcon } from "@heroicons/react/24/solid"
 import { useCart } from "@/lib/cart-context"
 
 export default function CartPage() {
@@ -66,7 +66,7 @@ export default function CartPage() {
                             onClick={() => removeItem(item.id)}
                             className="flex-shrink-0"
                           >
-                            <X className="h-4 w-4" />
+                            <XMarkIcon className="h-4 w-4" />
                           </Button>
                         </div>
                         <div className="flex items-center justify-between">
@@ -77,7 +77,7 @@ export default function CartPage() {
                               className="h-8 w-8"
                               onClick={() => updateQuantity(item.id, item.quantity - 1)}
                             >
-                              <Minus className="h-3 w-3" />
+                              <MinusIcon className="h-3 w-3" />
                             </Button>
                             <span className="w-10 text-center font-mono text-sm">{item.quantity}</span>
                             <Button
@@ -86,7 +86,7 @@ export default function CartPage() {
                               className="h-8 w-8"
                               onClick={() => updateQuantity(item.id, item.quantity + 1)}
                             >
-                              <Plus className="h-3 w-3" />
+                              <PlusIcon className="h-3 w-3" />
                             </Button>
                           </div>
                           <p className="font-mono text-lg">${item.price * item.quantity}</p>

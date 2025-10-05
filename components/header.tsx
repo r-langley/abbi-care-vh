@@ -2,9 +2,9 @@
 
 import Link from "next/link"
 import Image from "next/image"
-import { Menu, ShoppingCart, User, Phone, Flag, ChevronDown } from "lucide-react"
+import { Bars3Icon, ShoppingCartIcon, UserCircleIcon, PhoneIcon, FlagIcon, ChevronDownIcon } from "@heroicons/react/24/solid"
 import { Button } from "@/components/ui/button"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet"
 import { useCart } from "@/lib/cart-context"
 import { usePathname } from "next/navigation"
 import React from "react"
@@ -32,18 +32,19 @@ export function Header() {
             <div className="flex items-center gap-3 justify-start">
               <Sheet>
                 <SheetTrigger asChild>
-                  <Button variant="ghost" size="icon" className="md:hidden">
-                    <Menu className="h-[30px] w-[30px]" />
-                  </Button>
+                  <button className="md:hidden p-2 hover:bg-[#f5f6f5] rounded-[8px] transition-colors">
+                    <Bars3Icon className="w-6 h-6 md:w-7 md:h-7" />
+                  </button>
                 </SheetTrigger>
                 <SheetContent side="left" className="px-5 py-5 w-fit">
+                  <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
                   <MobileNav />
                 </SheetContent>
               </Sheet>
 
               <div className="hidden md:flex items-center gap-2">
-                <Flag className="h-[30px] w-[30px] text-muted-foreground" />
-                <Phone className="h-[30px] w-[30px] text-muted-foreground" />
+                <FlagIcon className="w-6 h-6 md:w-7 md:h-7 text-muted-foreground" />
+                <PhoneIcon className="w-6 h-6 md:w-7 md:h-7 text-muted-foreground" />
               </div>
             </div>
 
@@ -56,19 +57,17 @@ export function Header() {
 
             {/* Right: Cart + Account */}
             <div className="flex items-center gap-2 justify-end">
-              <Link href="/cart">
-                <Button variant="ghost" size="icon" className="relative">
-                  <ShoppingCart className="h-[30px] w-[30px]" />
-                  {totalItems > 0 && (
-                    <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-xs font-mono rounded-full h-5 w-5 flex items-center justify-center">
-                      {totalItems}
-                    </span>
-                  )}
-                </Button>
+              <Link href="/cart" className="relative p-2 hover:bg-[#f5f6f5] rounded-[8px] transition-colors">
+                <ShoppingCartIcon className="w-6 h-6 md:w-7 md:h-7" />
+                {totalItems > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-xs font-mono rounded-full h-5 w-5 flex items-center justify-center">
+                    {totalItems}
+                  </span>
+                )}
               </Link>
-              <Button variant="ghost" size="icon">
-                <User className="h-[30px] w-[30px]" />
-              </Button>
+              <button className="p-2 hover:bg-[#f5f6f5] rounded-[8px] transition-colors">
+                <UserCircleIcon className="w-6 h-6 md:w-7 md:h-7" />
+              </button>
             </div>
           </div>
 
@@ -134,7 +133,7 @@ function MobileNav() {
           className="text-lg hover:text-primary transition-colors flex items-center justify-between w-full font-sans font-medium text-muted-foreground"
         >
           Shop by Trait
-          <ChevronDown className={`h-[30px] w-[30px] transition-transform ${isTraitExpanded ? "rotate-180" : ""}`} />
+          <ChevronDownIcon className={`h-6 w-6 transition-transform ${isTraitExpanded ? "rotate-180" : ""}`} />
         </button>
         {isTraitExpanded && (
           <div className="flex flex-col gap-3 pl-4 mt-3">

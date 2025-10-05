@@ -9,7 +9,7 @@ import { PageTitle, SectionHeading, SectionOverline, BodyText, SmallText } from 
 import { SectionContainer } from "@/components/ui/section-container"
 import { ParallaxImage } from "@/components/parallax-image"
 import { CategoryCarousel } from "@/components/category-carousel"
-import { Clock, Sparkles, Target, Search, Droplet, Flower2, Sun, Grid3x3 } from "lucide-react"
+import { ClockIcon, SparklesIcon, ArrowsPointingInIcon, MagnifyingGlassIcon, BeakerIcon, SunIcon, Squares2X2Icon } from "@heroicons/react/24/solid"
 import type React from "react"
 
 export default function HomePage() {
@@ -136,14 +136,14 @@ export default function HomePage() {
 function getTraitIcon(traitId: string): React.JSX.Element {
   const iconClass = "w-6 h-6 md:w-7 md:h-7 text-primary"
   const icons: Record<string, React.JSX.Element> = {
-    wrinkles: <Clock className={iconClass} />,
-    radiance: <Sparkles className={iconClass} />,
-    imperfections: <Target className={iconClass} />,
-    spots: <Search className={iconClass} />,
-    hydration: <Droplet className={iconClass} />,
-    sensitivity: <Flower2 className={iconClass} />,
-    shine: <Sun className={iconClass} />,
-    texture: <Grid3x3 className={iconClass} />,
+    wrinkles: <ClockIcon className={iconClass} />,
+    radiance: <SparklesIcon className={iconClass} />,
+    imperfections: <ArrowsPointingInIcon className={iconClass} />,
+    spots: <MagnifyingGlassIcon className={iconClass} />,
+    hydration: <BeakerIcon className={iconClass} />,
+    sensitivity: <SparklesIcon className={iconClass} />,
+    shine: <SunIcon className={iconClass} />,
+    texture: <Squares2X2Icon className={iconClass} />,
   }
   return icons[traitId] || <span>•</span>
 }

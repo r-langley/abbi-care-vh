@@ -2,7 +2,7 @@ import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { Smartphone, Sparkles, Target } from "lucide-react"
+import { DevicePhoneMobileIcon, SparklesIcon, ArrowsPointingInIcon } from "@heroicons/react/24/solid"
 import { PageTitle, SectionHeading, CardTitle, BodyText } from "@/components/ui/typography"
 import Link from "next/link"
 
@@ -16,7 +16,7 @@ export default function SkinAnalysisPage() {
           <div className="container mx-auto px-4 text-center">
             <div className="flex justify-center mb-6">
               <div className="bg-primary/10 p-6 rounded-full">
-                <Smartphone className="h-12 w-12 text-primary" />
+                <DevicePhoneMobileIcon className="h-12 w-12 text-primary" />
               </div>
             </div>
             <PageTitle className="mb-6">AI-Powered Skin Analysis</PageTitle>
@@ -38,7 +38,7 @@ export default function SkinAnalysisPage() {
                 <CardContent className="px-8 text-center">
                   <div className="flex justify-center mb-6">
                     <div className="bg-primary/10 p-4 rounded-full">
-                      <Smartphone className="h-8 w-8 text-primary" />
+                      <DevicePhoneMobileIcon className="h-8 w-8 text-primary" />
                     </div>
                   </div>
                   <CardTitle className="mb-3">1. Take a Selfie</CardTitle>
@@ -51,7 +51,7 @@ export default function SkinAnalysisPage() {
                 <CardContent className="px-8 text-center">
                   <div className="flex justify-center mb-6">
                     <div className="bg-primary/10 p-4 rounded-full">
-                      <Target className="h-8 w-8 text-primary" />
+                      <ArrowsPointingInIcon className="h-8 w-8 text-primary" />
                     </div>
                   </div>
                   <CardTitle className="mb-3">2. AI Analysis</CardTitle>
@@ -64,7 +64,7 @@ export default function SkinAnalysisPage() {
                 <CardContent className="px-8 text-center">
                   <div className="flex justify-center mb-6">
                     <div className="bg-primary/10 p-4 rounded-full">
-                      <Sparkles className="h-8 w-8 text-primary" />
+                      <SparklesIcon className="h-8 w-8 text-primary" />
                     </div>
                   </div>
                   <CardTitle className="mb-3">3. Get Recommendations</CardTitle>

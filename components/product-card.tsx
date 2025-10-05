@@ -6,7 +6,7 @@ import Link from "next/link"
 import Image from "next/image"
 import type { Product } from "@/lib/products"
 import { useCart } from "@/lib/cart-context"
-import { Plus, Check } from "lucide-react"
+import { PlusIcon, CheckIcon } from "@heroicons/react/24/solid"
 import { useState } from "react"
 import { SkinAnalysisModal } from "./skin-analysis-modal"
 import { ProductBadge } from "@/components/ui/product-badge"
@@ -69,7 +69,7 @@ export function ProductCard({ product, showRecommended = false }: ProductCardPro
               onClick={handleAddToCart}
               className="bg-[#586158] rounded-full size-[32px] flex items-center justify-center shrink-0 hover:opacity-90 transition-opacity"
             >
-              {isInCart ? <Check className="h-5 w-5 text-[#f5f6f5]" /> : <Plus className="h-5 w-5 text-[#f5f6f5]" />}
+              {isInCart ? <CheckIcon className="h-5 w-5 text-[#f5f6f5]" /> : <PlusIcon className="h-5 w-5 text-[#f5f6f5]" />}
             </button>
           </div>
         </div>
