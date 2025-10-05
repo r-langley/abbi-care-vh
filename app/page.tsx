@@ -67,7 +67,7 @@ export default function HomePage() {
 
         {/* What Our Scan Evaluates */}
         <SectionContainer variant="muted">
-          <div className="container mx-auto px-4">
+          <div className="container mx-auto px-5">
             <SectionHeading spacing="tight">What Our Scan Evaluates</SectionHeading>
             <BodyText className="text-center text-base md:text-lg mb-8 md:mb-12 max-w-3xl mx-auto text-muted-foreground">
               Our AI analyzes 8 key traits with 97% accuracy to create your personalized formula.
