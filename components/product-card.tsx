@@ -47,7 +47,7 @@ export function ProductCard({ product, showRecommended = false }: ProductCardPro
         <div className="bg-white rounded-[10px] border-2 border-[#f5f6f5] overflow-hidden relative flex flex-col h-full">
           <div className="relative h-[160px] overflow-hidden">
             <Image
-              src={`/placeholder.svg?height=160&width=300&category=${product.category}`}
+              src="/minimalist-cosmetic-pump-bottle-product-photograph.jpg"
               alt={product.name}
               fill
               className="object-cover"
