@@ -108,7 +108,7 @@ export default function ShopPage() {
                   {selectedTraits.length === 0 && <ScanCTA />}
 
                   <div className="flex flex-col gap-[10px]">
-                    <h2 className="font-semibold text-[24px] tracking-[-0.48px] text-[#586158] leading-[1.35] text-foreground">
+                    <h2 className="font-semibold text-[#586158] leading-[1.35] text-foreground tracking-tight text-2xl">
                       In Lab
                     </h2>
                     <p className="font-medium text-[16px] tracking-[-0.32px] text-[#586158] leading-[1.35]">
@@ -127,7 +127,7 @@ export default function ShopPage() {
               {groupedCreams.mixAtHome.length > 0 && (
                 <div className="flex flex-col gap-[20px]">
                   <div className="flex flex-col gap-[5px]">
-                    <h2 className="font-semibold text-[20px] tracking-[-0.4px] text-[#586158] text-foreground">Mix at Home</h2>
+                    <h2 className="font-semibold text-[#586158] text-foreground tracking-tight text-2xl">Mix at Home</h2>
                     <p className="font-medium text-[14px] tracking-[-0.28px] text-[#586158]">
                       Create your own routines. Mix a specific base and active concentrates.
                     </p>
@@ -144,7 +144,7 @@ export default function ShopPage() {
               {groupedCreams.activeConcentrate.length > 0 && (
                 <div className="flex flex-col gap-[20px]">
                   <div className="flex flex-col gap-[5px]">
-                    <h2 className="font-semibold text-[20px] tracking-[-0.4px] text-[#586158] text-foreground">Active Concentrates</h2>
+                    <h2 className="font-semibold text-[#586158] text-foreground text-2xl tracking-tight">Active Concentrates</h2>
                     <p className="font-medium text-[14px] tracking-[-0.28px] text-[#586158]">
                       Targeted treatments to address specific skin concerns
                     </p>
