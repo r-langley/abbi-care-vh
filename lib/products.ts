@@ -31,7 +31,8 @@ export const products: Product[] = [
     name: "Aloe Vera Base",
     category: "In-Lab Cream",
     price: 24,
-    description: "Soothing aloe vera base cream made-to-order in our French lab, personalized for your unique skin needs.",
+    description:
+      "Soothing aloe vera base cream made-to-order in our French lab, personalized for your unique skin needs.",
     traits: ["Hydration", "Sensitivity"],
     image: "/placeholder.svg?height=400&width=400",
     inStock: true,
@@ -398,20 +399,6 @@ export const products: Product[] = [
     image: "/placeholder.svg?height=400&width=400",
     inStock: true,
     recommended: false,
-  },
-
-  // In-Lab Cream products
-  {
-    id: "cream-inlab-custom",
-    name: "Custom In-Lab Cream",
-    category: "In-Lab Cream",
-    price: 150,
-    description:
-      "Your personalized formula, custom-mixed in our French laboratory based on your unique skin analysis. Combines 3 active ingredients optimized for your top skin priorities.",
-    traits: ["Wrinkles", "Hydration", "Radiance", "Imperfections", "Spots", "Sensitivity", "Shine", "Texture"],
-    image: "/placeholder.svg?height=400&width=400",
-    inStock: true,
-    recommended: true,
   },
 ]
 
