@@ -9,7 +9,7 @@ import { PageTitle, SectionHeading, SectionOverline, BodyText, SmallText } from 
 import { SectionContainer } from "@/components/ui/section-container"
 import { ParallaxImage } from "@/components/parallax-image"
 import { CategoryCarousel } from "@/components/category-carousel"
-import { Clock, Sparkles, Target, Search, Droplet, Flower2, Sun, Grid3x3 } from "lucide-react"
+import { Time, Sparkle, Target, Search, Humidity, Flower, Sun, Grid } from "@carbon/icons-react"
 import type React from "react"
 
 export default function HomePage() {
@@ -136,14 +136,14 @@ export default function HomePage() {
 function getTraitIcon(traitId: string): React.JSX.Element {
   const iconClass = "w-6 h-6 md:w-7 md:h-7 text-primary"
   const icons: Record<string, React.JSX.Element> = {
-    wrinkles: <Clock className={iconClass} />,
-    radiance: <Sparkles className={iconClass} />,
+    wrinkles: <Time className={iconClass} />,
+    radiance: <Sparkle className={iconClass} />,
     imperfections: <Target className={iconClass} />,
     spots: <Search className={iconClass} />,
-    hydration: <Droplet className={iconClass} />,
-    sensitivity: <Flower2 className={iconClass} />,
+    hydration: <Humidity className={iconClass} />,
+    sensitivity: <Flower className={iconClass} />,
     shine: <Sun className={iconClass} />,
-    texture: <Grid3x3 className={iconClass} />,
+    texture: <Grid className={iconClass} />,
   }
   return icons[traitId] || <span>•</span>
 }

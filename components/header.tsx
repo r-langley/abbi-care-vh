@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import Image from "next/image"
-import { Menu, ShoppingCart, User, Phone, Flag, ChevronDown } from "lucide-react"
+import { Menu, ShoppingCart, UserAvatar, Phone, Flag, ChevronDown } from "@carbon/icons-react"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { useCart } from "@/lib/cart-context"
@@ -33,7 +33,7 @@ export function Header() {
               <Sheet>
                 <SheetTrigger asChild>
                   <Button variant="ghost" size="icon" className="md:hidden">
-                    <Menu className="h-[30px] w-[30px]" />
+                    <Menu size={30} />
                   </Button>
                 </SheetTrigger>
                 <SheetContent side="left" className="px-5 py-5 w-fit">
@@ -42,8 +42,8 @@ export function Header() {
               </Sheet>
 
               <div className="hidden md:flex items-center gap-2">
-                <Flag className="h-[30px] w-[30px] text-muted-foreground" />
-                <Phone className="h-[30px] w-[30px] text-muted-foreground" />
+                <Flag size={30} className="text-muted-foreground" />
+                <Phone size={30} className="text-muted-foreground" />
               </div>
             </div>
 
@@ -58,7 +58,7 @@ export function Header() {
             <div className="flex items-center gap-2 justify-end">
               <Link href="/cart">
                 <Button variant="ghost" size="icon" className="relative">
-                  <ShoppingCart className="h-[30px] w-[30px]" />
+                  <ShoppingCart size={30} />
                   {totalItems > 0 && (
                     <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-xs font-mono rounded-full h-5 w-5 flex items-center justify-center">
                       {totalItems}
@@ -67,7 +67,7 @@ export function Header() {
                 </Button>
               </Link>
               <Button variant="ghost" size="icon">
-                <User className="h-[30px] w-[30px]" />
+                <UserAvatar size={30} />
               </Button>
             </div>
           </div>
