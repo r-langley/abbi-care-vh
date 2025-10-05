@@ -1,6 +1,6 @@
 "use client"
 
-import { useMemo } from "react"
+import { useMemo, useEffect } from "react"
 import { useSearchParams } from "next/navigation"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
@@ -39,6 +39,23 @@ export default function ShopPage() {
   }
 
   const currentHero = heroContent[category as keyof typeof heroContent] || heroContent.creams
+
+  // Preload hero images on mount to prevent flashing
+  useEffect(() => {
+    const preloadImages = [
+      "/images/creams-hero.png",
+      "/images/simple-solutions-hero.png",
+      "/images/essentials-hero.jpg",
+    ]
+    
+    preloadImages.forEach((src) => {
+      const link = document.createElement("link")
+      link.rel = "preload"
+      link.as = "image"
+      link.href = src
+      document.head.appendChild(link)
+    })
+  }, [])
 
   // Optimized: Single memoized computation for both filtering and grouping
   const { filteredProducts, groupedCreams } = useMemo(() => {
@@ -90,6 +107,7 @@ export default function ShopPage() {
       <Header />
       <main className="min-h-screen pb-0">
         <HeroSection
+          key={category}
           title={currentHero.title}
           description={currentHero.description}
           image={currentHero.image}

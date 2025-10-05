@@ -12,7 +12,15 @@ export function HeroSection({ image, title, description, imagePosition = "left" 
     <div className={`flex h-[160px] ${imagePosition === "right" ? "flex-row-reverse" : ""}`}>
       {/* Image */}
       <div className="flex-1 bg-[#f5f6f5] flex items-center justify-center overflow-hidden relative">
-        <Image src={image || "/placeholder.svg"} alt={title} fill className="object-cover" priority />
+        <Image 
+          src={image || "/placeholder.svg"} 
+          alt={title} 
+          fill 
+          className="object-cover" 
+          priority={false}
+          loading="eager"
+          sizes="(max-width: 768px) 50vw, 50vw"
+        />
       </div>
 
       {/* Content */}
