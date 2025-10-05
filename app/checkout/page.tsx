@@ -59,8 +59,16 @@ export default function CheckoutPage() {
   }, [email, firstName, lastName, address, city, state, zipCode, cardNumber, expiryDate, cvv])
 
   const handleSubmit = async () => {
-    if (!isFormComplete) return
+    console.log("[v0] Checkout handleSubmit called")
+    console.log("[v0] isFormComplete:", isFormComplete)
+    console.log("[v0] missingFields:", missingFields)
 
+    if (!isFormComplete) {
+      console.log("[v0] Form incomplete, aborting")
+      return
+    }
+
+    console.log("[v0] Form complete, processing payment...")
     setIsProcessing(true)
 
     // Simulate payment processing
@@ -68,9 +76,14 @@ export default function CheckoutPage() {
 
     // Generate order number
     const orderNumber = `ABBI-${Date.now().toString().slice(-8)}`
+    const orderTotal = total.toFixed(2)
+
+    console.log("[v0] Payment processed successfully")
+    console.log("[v0] Order number:", orderNumber)
+    console.log("[v0] Navigating to order confirmation...")
 
     // Navigate to order confirmation
-    router.push(`/order-confirmation?orderNumber=${orderNumber}&total=${total.toFixed(2)}`)
+    router.push(`/order-confirmation?orderNumber=${orderNumber}&total=${orderTotal}`)
   }
 
   if (items.length === 0) {

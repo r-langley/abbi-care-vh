@@ -35,6 +35,13 @@ export function CheckoutFooter({
     return "Please fill in all required fields"
   }
 
+  const handleClick = () => {
+    console.log("[v0] Checkout footer button clicked")
+    console.log("[v0] isFormComplete:", isFormComplete)
+    console.log("[v0] isProcessing:", isProcessing)
+    onSubmit()
+  }
+
   return (
     <div
       className={cn(
@@ -59,7 +66,7 @@ export function CheckoutFooter({
             {getHeadingText()}
           </h3>
           <Button
-            onClick={onSubmit}
+            onClick={handleClick}
             disabled={isProcessing || !isFormComplete}
             size="lg"
             className={cn(
