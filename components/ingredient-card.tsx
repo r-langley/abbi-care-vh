@@ -14,7 +14,7 @@ export function IngredientCard({ id, number, name, description }: IngredientCard
       <div className="bg-white rounded-[10px] border-2 border-[#f5f6f5] overflow-hidden relative flex flex-col h-full hover:border-[#586158] transition-colors">
         <div className="relative h-[100px] overflow-hidden">
           <Image
-            src="/minimalist-cosmetic-pump-bottle-product-photograph.jpg"
+            src="/ingredient-placeholder.jpg"
             alt={name}
             fill
             className="object-cover"

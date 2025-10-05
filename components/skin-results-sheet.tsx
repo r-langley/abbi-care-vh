@@ -2,12 +2,13 @@
 
 import { useState } from "react"
 import { XMarkIcon, ChevronRightIcon, PlusIcon } from "@heroicons/react/24/solid"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet"
 import Image from "next/image"
 import Link from "next/link"
 import { CategoryCarousel } from "@/components/category-carousel"
 import { products } from "@/lib/products"
 import { RecommendedBadge } from "@/components/recommended-badge"
+import { SpiderChart } from "@/components/spider-chart"
 
 interface SkinResultsSheetProps {
   userName?: string
@@ -38,6 +39,8 @@ export function SkinResultsSheet({ userName = "Alya", currentTrait = "wrinkles" 
         </button>
       </SheetTrigger>
       <SheetContent side="bottom" className="h-[90vh] overflow-y-auto rounded-t-[10px] p-0 max-w-[800px] mx-auto">
+        <SheetTitle className="sr-only">{userName}'s Skin Analysis Results</SheetTitle>
+        
         {/* Header */}
         <div className="sticky top-0 backdrop-blur-sm bg-white/95 px-5 py-2.5 flex items-center justify-between border-b border-[#e7e7e7] z-10">
           <div className="flex items-center gap-3">
@@ -59,26 +62,16 @@ export function SkinResultsSheet({ userName = "Alya", currentTrait = "wrinkles" 
         </div>
 
         {/* Spider Chart Section */}
-        <div className="bg-[#f5f6f5] px-[71px] py-[50px] flex flex-col items-center justify-center">
-          <div className="relative w-full max-w-[250px] aspect-square">
-            {/* Placeholder for spider chart */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="text-[#586158] text-sm text-center">
-                <p className="font-bold mb-2">Spider Chart</p>
-                <p className="text-xs opacity-50">8 Skin Traits Visualization</p>
-              </div>
-            </div>
-            {/* Trait labels around the chart */}
-            <div className="absolute -top-8 left-1/2 -translate-x-1/2 text-center">
-              <button
-                onClick={() => setSelectedTrait("wrinkles")}
-                className={`font-bold text-[12px] tracking-[-0.24px] ${
-                  selectedTrait === "wrinkles" ? "text-[#586158]" : "text-[#586158] opacity-50"
-                }`}
-              >
-                Wrinkles
-              </button>
-            </div>
+        <div className="bg-[#f5f6f5] px-5 py-[50px] flex flex-col items-center justify-center">
+          <div className="w-full max-w-[300px]">
+            <SpiderChart
+              data={traits.map((t) => ({
+                trait: t.name,
+                score: t.score,
+                active: t.id === selectedTrait,
+              }))}
+              size={300}
+            />
           </div>
         </div>
 
