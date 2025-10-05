@@ -7,10 +7,34 @@ interface CheckoutFooterProps {
   onSubmit: () => void
   total: number
   isProcessing?: boolean
+  isFormComplete?: boolean
+  missingFields?: string[]
   className?: string
 }
 
-export function CheckoutFooter({ onSubmit, total, isProcessing = false, className }: CheckoutFooterProps) {
+export function CheckoutFooter({
+  onSubmit,
+  total,
+  isProcessing = false,
+  isFormComplete = false,
+  missingFields = [],
+  className,
+}: CheckoutFooterProps) {
+  const getButtonText = () => {
+    if (isProcessing) return "PROCESSING..."
+    if (isFormComplete) return `PAY $${total.toFixed(2)}`
+    return "COMPLETE REQUIRED FIELDS"
+  }
+
+  const getHeadingText = () => {
+    if (isFormComplete) return "Ready to complete your order?"
+    if (missingFields.length > 0) {
+      const fieldNames = missingFields.join(", ")
+      return `Please complete: ${fieldNames}`
+    }
+    return "Please fill in all required fields"
+  }
+
   return (
     <div
       className={cn(
@@ -32,11 +56,11 @@ export function CheckoutFooter({ onSubmit, total, isProcessing = false, classNam
               "text-[length:var(--cart-footer-heading-size)]",
             )}
           >
-            Ready to complete your order?
+            {getHeadingText()}
           </h3>
           <Button
             onClick={onSubmit}
-            disabled={isProcessing}
+            disabled={isProcessing || !isFormComplete}
             size="lg"
             className={cn(
               "w-full max-w-2xl font-medium font-mono py-6",
@@ -46,7 +70,7 @@ export function CheckoutFooter({ onSubmit, total, isProcessing = false, classNam
               "disabled:opacity-50 disabled:cursor-not-allowed",
             )}
           >
-            {isProcessing ? "PROCESSING..." : `PLACE ORDER $${total.toFixed(2)}`}
+            {getButtonText()}
           </Button>
         </div>
       </div>

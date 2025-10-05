@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react"
+import { useState, useMemo } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { Header } from "@/components/header"
@@ -34,7 +34,33 @@ export default function CheckoutPage() {
   const subscriptionDiscount = subscribeAndSave ? subtotal * 0.15 : 0 // 15% off for subscription
   const total = subtotal + shipping - discount - subscriptionDiscount
 
+  const isFormComplete = useMemo(() => {
+    return (
+      email.trim() !== "" &&
+      firstName.trim() !== "" &&
+      lastName.trim() !== "" &&
+      address.trim() !== "" &&
+      city.trim() !== "" &&
+      state.trim() !== "" &&
+      zipCode.trim() !== "" &&
+      cardNumber.trim() !== "" &&
+      expiryDate.trim() !== "" &&
+      cvv.trim() !== ""
+    )
+  }, [email, firstName, lastName, address, city, state, zipCode, cardNumber, expiryDate, cvv])
+
+  const missingFields = useMemo(() => {
+    const fields = []
+    if (!email.trim()) fields.push("email")
+    if (!firstName.trim() || !lastName.trim()) fields.push("name")
+    if (!address.trim() || !city.trim() || !state.trim() || !zipCode.trim()) fields.push("address")
+    if (!cardNumber.trim() || !expiryDate.trim() || !cvv.trim()) fields.push("payment")
+    return fields
+  }, [email, firstName, lastName, address, city, state, zipCode, cardNumber, expiryDate, cvv])
+
   const handleSubmit = async () => {
+    if (!isFormComplete) return
+
     setIsProcessing(true)
 
     // Simulate payment processing
@@ -247,7 +273,13 @@ export default function CheckoutPage() {
           </div>
         </div>
       </main>
-      <CheckoutFooter onSubmit={handleSubmit} total={total} isProcessing={isProcessing} />
+      <CheckoutFooter
+        onSubmit={handleSubmit}
+        total={total}
+        isProcessing={isProcessing}
+        isFormComplete={isFormComplete}
+        missingFields={missingFields}
+      />
     </>
   )
 }
