@@ -23,7 +23,7 @@ export function IngredientCard({ id, number, name, description, hideDescription 
         </div>
         <div className="bg-[#f5f6f5] p-[10px] pb-[20px] flex flex-col gap-[10px] flex-1">
           <div className="flex flex-col gap-[5px]">
-            <p className="font-semibold text-[16px] leading-[1.15] text-[#586158] tracking-[-0.32px]">
+            <p className="font-semibold leading-[1.15] text-[#586158] tracking-[-0.32px] text-sm">
               {name}
             </p>
             {!hideDescription && (

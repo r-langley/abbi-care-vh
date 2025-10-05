@@ -13,9 +13,9 @@ export default function IngredientsPage() {
       <main className="min-h-screen">
         {/* Hero Section */}
         <div className="bg-[#f5f6f5] flex items-center h-[160px]">
-          <div className="container mx-auto px-5 grid grid-cols-2 gap-5 h-full">
-            <div className="flex flex-col items-center justify-center">
-              <h1 className="font-semibold text-[24px] tracking-[-0.48px] text-[#586158] leading-[1.35] text-center">
+          <div className="container mx-auto grid grid-cols-2 h-full gap-0 px-0">
+            <div className="flex flex-col items-center justify-center bg-muted">
+              <h1 className="font-semibold text-[24px] tracking-[-0.48px] text-[#586158] leading-[1.35] text-center text-foreground">
                 Active Ingredients
               </h1>
             </div>
