@@ -102,7 +102,7 @@ export function SpiderChart({ data, size = 250 }: SpiderChartProps) {
           y={label.y}
           textAnchor="middle"
           dominantBaseline="middle"
-          className={`text-[12px] tracking-[-0.24px] ${
+          className={`tracking-normal text-xs font-semibold ${
             label.active 
               ? 'font-bold fill-[#586158]' 
               : 'font-medium fill-[#586158] opacity-50'

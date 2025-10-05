@@ -62,7 +62,7 @@ export function SkinResultsSheet({ userName = "Alya", currentTrait = "wrinkles" 
         </div>
 
         {/* Spider Chart Section */}
-        <div className="bg-[#f5f6f5] px-5 py-[50px] flex flex-col items-center justify-center">
+        <div className="bg-[#f5f6f5] px-5 flex flex-col items-center justify-center py-5">
           <div className="w-full max-w-[300px]">
             <SpiderChart
               data={traits.map((t) => ({
@@ -76,7 +76,7 @@ export function SkinResultsSheet({ userName = "Alya", currentTrait = "wrinkles" 
         </div>
 
         {/* Trait Carousel - Horizontal Scroll */}
-        <div className="px-5 py-5">
+        <div className="px-5 py-2.5">
           <div className="flex gap-[5px] overflow-x-auto pb-2 -mx-5 px-5">
             {traits.map((t) => (
               <button
