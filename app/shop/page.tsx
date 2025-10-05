@@ -21,19 +21,19 @@ export default function ShopPage() {
     creams: {
       title: "Creams",
       description: "Choose Lab Created or Mix-at-Home",
-      image: "/images/creams-hero.png",
+      image: "/placeholder.svg?height=160&width=400",
       imagePosition: "left" as const,
     },
     "simple-solutions": {
       title: "Simple Solutions",
       description: "Targeted treatments for specific concerns",
-      image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-LEPlqvKzEkK6J5dqJznJE9V0ClyAgm.png",
+      image: "/placeholder.svg?height=160&width=400",
       imagePosition: "right" as const,
     },
     essentials: {
       title: "Essentials",
       description: "Daily basics for your routine",
-      image: "/images/essentials-hero.jpg",
+      image: "/placeholder.svg?height=160&width=400",
       imagePosition: "left" as const,
     },
   }
