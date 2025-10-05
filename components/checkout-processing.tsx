@@ -4,18 +4,26 @@ import { useEffect, useState } from "react"
 
 export function CheckoutProcessing() {
   const [dots, setDots] = useState("")
+  const [step, setStep] = useState(1)
 
   useEffect(() => {
-    const interval = setInterval(() => {
+    const dotsInterval = setInterval(() => {
       setDots((prev) => (prev.length >= 3 ? "" : prev + "."))
     }, 500)
 
-    return () => clearInterval(interval)
+    const stepInterval = setInterval(() => {
+      setStep((prev) => (prev < 3 ? prev + 1 : prev))
+    }, 1000)
+
+    return () => {
+      clearInterval(dotsInterval)
+      clearInterval(stepInterval)
+    }
   }, [])
 
   return (
     <div className="fixed inset-0 bg-background z-50 flex items-center justify-center">
-      <div className="text-center space-y-6">
+      <div className="text-center space-y-6 px-4">
         {/* Animated Spinner */}
         <div className="relative w-24 h-24 mx-auto">
           <div className="absolute inset-0 border-4 border-muted rounded-full"></div>
@@ -31,20 +39,34 @@ export function CheckoutProcessing() {
         {/* Progress Steps */}
         <div className="max-w-md mx-auto space-y-3 pt-8">
           <div className="flex items-center gap-3 text-sm">
-            <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-mono text-xs">
-              ✓
+            <div
+              className={`w-6 h-6 rounded-full flex items-center justify-center font-mono text-xs ${
+                step >= 1 ? "bg-primary text-primary-foreground" : "border-2 border-muted"
+              }`}
+            >
+              {step >= 1 && "✓"}
             </div>
-            <span className="text-muted-foreground">Validating payment information</span>
+            <span className={step >= 1 ? "font-medium" : "text-muted-foreground"}>Validating payment information</span>
           </div>
           <div className="flex items-center gap-3 text-sm">
-            <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center">
-              <div className="w-2 h-2 rounded-full bg-primary-foreground animate-pulse"></div>
+            <div
+              className={`w-6 h-6 rounded-full flex items-center justify-center ${
+                step >= 2 ? "bg-primary" : "border-2 border-muted"
+              }`}
+            >
+              {step >= 2 && <div className="w-2 h-2 rounded-full bg-primary-foreground animate-pulse"></div>}
             </div>
-            <span className="font-medium">Processing payment</span>
+            <span className={step >= 2 ? "font-medium" : "text-muted-foreground"}>Processing payment</span>
           </div>
           <div className="flex items-center gap-3 text-sm">
-            <div className="w-6 h-6 rounded-full border-2 border-muted"></div>
-            <span className="text-muted-foreground">Confirming order</span>
+            <div
+              className={`w-6 h-6 rounded-full flex items-center justify-center ${
+                step >= 3 ? "bg-primary" : "border-2 border-muted"
+              }`}
+            >
+              {step >= 3 && <div className="w-2 h-2 rounded-full bg-primary-foreground animate-pulse"></div>}
+            </div>
+            <span className={step >= 3 ? "font-medium" : "text-muted-foreground"}>Confirming order</span>
           </div>
         </div>
       </div>

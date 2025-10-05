@@ -59,28 +59,29 @@ export default function CheckoutPage() {
   }, [email, firstName, lastName, address, city, state, zipCode, cardNumber, expiryDate, cvv])
 
   const handlePayment = async () => {
-    console.log("[v0] === PAYMENT FLOW STARTED ===")
-    console.log("[v0] isFormComplete:", isFormComplete)
+    console.log("[v0] PAY button clicked - Starting payment flow")
+    console.log("[v0] Form complete:", isFormComplete)
 
     if (!isFormComplete) {
-      console.log("[v0] Form incomplete, aborting payment")
+      console.log("[v0] Payment blocked - form incomplete")
       return
     }
 
-    console.log("[v0] Starting payment processing...")
+    console.log("[v0] Setting processing state to TRUE")
     setIsProcessing(true)
 
     // Simulate payment processing
+    console.log("[v0] Simulating 3-second payment processing...")
     await new Promise((resolve) => setTimeout(resolve, 3000))
 
     // Generate order number
     const orderNumber = `ABBI-${Date.now().toString().slice(-8)}`
     const orderTotal = total.toFixed(2)
 
-    console.log("[v0] Payment SUCCESS!")
-    console.log("[v0] Order Number:", orderNumber)
-    console.log("[v0] Order Total:", orderTotal)
-    console.log("[v0] Navigating to: /order-confirmation")
+    console.log("[v0] Payment complete!")
+    console.log("[v0] Order #:", orderNumber)
+    console.log("[v0] Total:", orderTotal)
+    console.log("[v0] Navigating to order confirmation page...")
 
     // Navigate to order confirmation
     router.push(`/order-confirmation?orderNumber=${orderNumber}&total=${orderTotal}`)
