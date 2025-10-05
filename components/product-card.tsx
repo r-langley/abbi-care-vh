@@ -43,8 +43,8 @@ export function ProductCard({ product, showRecommended = false }: ProductCardPro
 
   return (
     <>
-      <Link href={isInLabCream ? "#" : `/product/${product.id}`} onClick={handleCardClick} className="block">
-        <div className="bg-white rounded-[10px] border-2 border-[#f5f6f5] overflow-hidden relative flex flex-col">
+      <Link href={isInLabCream ? "#" : `/product/${product.id}`} onClick={handleCardClick} className="block h-full">
+        <div className="bg-white rounded-[10px] border-2 border-[#f5f6f5] overflow-hidden relative flex flex-col h-full">
           <div className="relative h-[160px] overflow-hidden">
             <Image
               src="/minimalist-cosmetic-pump-bottle-product-photograph.jpg"
@@ -58,7 +58,7 @@ export function ProductCard({ product, showRecommended = false }: ProductCardPro
               </ProductBadge>
             )}
           </div>
-          <div className="bg-[#f5f6f5] p-[10px] pb-[20px] flex flex-col justify-between gap-[10px] flex-1 min-h-0">
+          <div className="bg-[#f5f6f5] p-[10px] pb-[20px] flex flex-col justify-between gap-[10px] flex-1">
             <div className="flex flex-col gap-[10px]">
               <div className="flex flex-col gap-[5px]">
                 <p className="font-semibold text-[18px] leading-[1.15] text-[#586158] tracking-normal">
