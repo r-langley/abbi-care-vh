@@ -1,8 +1,8 @@
 "use client"
 
 import { ChevronRightIcon } from "@heroicons/react/24/solid"
-import Link from "next/link"
 import { SkinScoreCard } from "@/components/ui/skin-score-card"
+import { SkinResultsSheet } from "@/components/skin-results-sheet"
 
 interface SkinResultsProps {
   userName: string
@@ -27,13 +27,7 @@ export function MySkinResults({ userName, wrinkles, radiance, imperfections }: S
                 {userName}'s <span className="italic font-serif">Skin</span>
               </h2>
             </div>
-            <Link
-              href="/skin-analysis/results"
-              className="text-white flex items-center gap-1 hover:opacity-80 transition-opacity"
-            >
-              <span className="text-base">See full results</span>
-              <ChevronRightIcon className="size-5" />
-            </Link>
+            <SkinResultsSheet userName={userName} />
           </div>
 
           <div className="flex gap-[5px]">

@@ -9,7 +9,7 @@ import { useCart } from "@/lib/cart-context"
 import { PlusIcon, CheckIcon } from "@heroicons/react/24/solid"
 import { useState } from "react"
 import { SkinAnalysisModal } from "./skin-analysis-modal"
-import { ProductBadge } from "@/components/ui/product-badge"
+import { RecommendedBadge } from "@/components/recommended-badge"
 import { PRODUCT_CATEGORIES } from "@/lib/constants"
 
 interface ProductCardProps {
@@ -46,9 +46,7 @@ export function ProductCard({ product, showRecommended = false }: ProductCardPro
               className="object-cover"
             />
             {showRecommended && product.recommended && (
-              <ProductBadge badgeType="recommended" className="absolute top-3 left-3">
-                Recommended
-              </ProductBadge>
+              <RecommendedBadge className="absolute top-3 left-3" />
             )}
           </div>
           <div className="bg-[#f5f6f5] p-[10px] pb-[20px] flex flex-col justify-between gap-[10px] flex-1">

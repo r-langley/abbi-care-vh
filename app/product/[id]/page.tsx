@@ -12,8 +12,13 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { MinusIcon, PlusIcon, HeartIcon, ChevronRightIcon } from "@heroicons/react/24/solid"
-import { getProductById } from "@/lib/products"
+import { getProductById, products } from "@/lib/products"
 import { useCart } from "@/lib/cart-context"
+import { ActiveIngredientCard } from "@/components/active-ingredient-card"
+import { PRODUCT_CATEGORIES } from "@/lib/constants"
+import { RecommendedBadge } from "@/components/recommended-badge"
+import { getIngredientsByTraits } from "@/lib/ingredients-data"
+import { IngredientCard } from "@/components/ingredient-card"
 
 export default function ProductPage() {
   const params = useParams()
@@ -39,6 +44,15 @@ export default function ProductPage() {
   const handleAddToCart = () => {
     addItem(product, quantity)
   }
+
+  const isInLabCream = product.category === PRODUCT_CATEGORIES.IN_LAB_CREAM
+  const isMixAtHomeCream = product.category === "Mix at Home Cream"
+  
+  // Active Ingredients for Custom Creams (In-Lab) - based on product traits
+  const activeIngredients = getIngredientsByTraits(product.traits).slice(0, 3)
+  
+  // Active Concentrates for Mix at Home Creams
+  const activeConcentrates = products.filter((p) => p.category === "Active Concentrate").slice(0, 3)
 
   return (
     <>
@@ -71,9 +85,7 @@ export default function ProductPage() {
                   priority
                 />
                 {product.recommended && (
-                  <Badge className="absolute top-4 left-4 bg-primary text-primary-foreground font-mono">
-                    Recommended
-                  </Badge>
+                  <RecommendedBadge className="absolute top-4 left-4" />
                 )}
               </div>
             </div>
@@ -138,15 +150,63 @@ export default function ProductPage() {
                 </Button>
               </div>
 
+              {/* Active Ingredients for Custom Creams (In-Lab) */}
+              {isInLabCream && (
+                <div className="space-y-4 pt-4 border-t border-border">
+                  <div>
+                    <h3 className="font-semibold text-lg mb-2">Active Ingredients</h3>
+                    <p className="text-sm text-muted-foreground">
+                      Based on your skin analysis, these ingredients are automatically included
+                    </p>
+                  </div>
+                  <div className="grid grid-cols-3 gap-[10px]">
+                    {activeIngredients.map((ingredient) => (
+                      <IngredientCard
+                        key={ingredient.id}
+                        id={ingredient.id}
+                        number={ingredient.number}
+                        name={ingredient.name}
+                        description={ingredient.description}
+                      />
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Active Concentrates for Mix at Home Creams */}
+              {isMixAtHomeCream && (
+                <div className="space-y-4 pt-4 border-t border-border">
+                  <div>
+                    <h3 className="font-semibold text-lg mb-2">Add Active Concentrates</h3>
+                    <p className="text-sm text-muted-foreground">
+                      Enhance your cream with up to 3 active concentrates for targeted treatment
+                    </p>
+                  </div>
+                  <div className="grid grid-cols-3 gap-[10px]">
+                    {activeConcentrates.map((concentrate) => (
+                      <ActiveIngredientCard
+                        key={concentrate.id}
+                        id={concentrate.id}
+                        number={parseInt(concentrate.name.match(/\d+/)?.[0] || "0")}
+                        name={concentrate.name.replace(/^No\.\s*\d+\s*/, "")}
+                        image="/minimalist-cosmetic-pump-bottle-product-photograph.jpg"
+                      />
+                    ))}
+                  </div>
+                </div>
+              )}
+
               {/* Accordion Details */}
               <Accordion type="single" collapsible className="w-full">
-                <AccordionItem value="ingredients">
-                  <AccordionTrigger className="font-mono text-sm">Key Ingredients</AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground">
-                    Our carefully selected ingredients work synergistically to deliver optimal results for your skin
-                    type and concerns.
-                  </AccordionContent>
-                </AccordionItem>
+                {!isInLabCream && (
+                  <AccordionItem value="ingredients">
+                    <AccordionTrigger className="font-mono text-sm">Key Ingredients</AccordionTrigger>
+                    <AccordionContent className="text-muted-foreground">
+                      Our carefully selected ingredients work synergistically to deliver optimal results for your skin
+                      type and concerns.
+                    </AccordionContent>
+                  </AccordionItem>
+                )}
                 <AccordionItem value="how-to-use">
                   <AccordionTrigger className="font-mono text-sm">How to Use</AccordionTrigger>
                   <AccordionContent className="text-muted-foreground">

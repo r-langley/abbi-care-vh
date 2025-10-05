@@ -18,7 +18,8 @@ import { getActiveIngredientsByTraits } from "@/lib/active-ingredients"
 import Link from "next/link"
 import Image from "next/image"
 import { ChevronRightIcon, PlusIcon, CheckIcon } from "@heroicons/react/24/outline"
-import { ProductBadge } from "@/components/ui/product-badge"
+import { ActiveIngredientCard } from "@/components/active-ingredient-card"
+import { RecommendedBadge } from "@/components/recommended-badge"
 
 export default function ShopPage() {
   const searchParams = useSearchParams()
@@ -178,7 +179,7 @@ export default function ShopPage() {
                     </Link>
                   </div>
 
-                  <div className="bg-white rounded-[10px] border-2 border-[#f5f6f5] overflow-hidden flex flex-col">
+                  <Link href={`/product/${recommendedCreamBase.id}`} className="bg-white rounded-[10px] border-2 border-[#f5f6f5] overflow-hidden flex flex-col hover:border-[#586158] transition-colors">
                     <div className="relative h-[200px] overflow-hidden">
                       <Image
                         src="/minimalist-cosmetic-pump-bottle-product-photograph.jpg"
@@ -186,9 +187,7 @@ export default function ShopPage() {
                         fill
                         className="object-cover"
                       />
-                      <ProductBadge badgeType="recommended" className="absolute top-3 left-3">
-                        Recommended
-                      </ProductBadge>
+                      <RecommendedBadge className="absolute top-3 left-3" />
                     </div>
                     <div className="bg-[#f5f6f5] p-[10px] pb-[20px] flex flex-row items-end justify-between gap-[10px]">
                       <div className="flex flex-col gap-[10px]">
@@ -207,11 +206,14 @@ export default function ShopPage() {
                           ${recommendedCreamBase.price.toFixed(2)}
                         </p>
                       </div>
-                      <button className="bg-[#586158] rounded-full size-[32px] flex items-center justify-center shrink-0 hover:opacity-90 transition-opacity">
+                      <button 
+                        onClick={(e) => e.preventDefault()}
+                        className="bg-[#586158] rounded-full size-[32px] flex items-center justify-center shrink-0 hover:opacity-90 transition-opacity"
+                      >
                         <PlusIcon className="h-5 w-5 text-[#f5f6f5]" />
                       </button>
                     </div>
-                  </div>
+                  </Link>
 
                   <div className="flex flex-col gap-[15px]">
                     <p className="text-center text-[#586158] text-xl font-normal">
@@ -231,31 +233,13 @@ export default function ShopPage() {
 
                     <div className="grid grid-cols-3 gap-[10px]">
                       {recommendedActiveIngredients.map((ingredient) => (
-                        <Link
+                        <ActiveIngredientCard
                           key={ingredient.id}
-                          href={`/active-ingredient/${ingredient.id}`}
-                          className="block bg-white rounded-[10px] border-2 border-[#f5f6f5] overflow-hidden hover:opacity-80 transition-opacity"
-                        >
-                          <div className="relative h-[120px] overflow-hidden">
-                            <Image
-                              src={ingredient.image || "/placeholder.svg"}
-                              alt={ingredient.name}
-                              fill
-                              className="object-cover"
-                            />
-                          </div>
-                          <div className="bg-[#f5f6f5] p-[10px]">
-                            <p
-                              className="font-medium text-[12px] tracking-[-0.24px] text-[#586158] leading-[1.15] mb-1"
-                              style={{ fontFamily: "var(--font-geist-mono)", fontVariationSettings: "'wdth' 100" }}
-                            >
-                              No.{ingredient.number}
-                            </p>
-                            <p className="font-semibold text-[14px] leading-[1.15] text-[#586158] tracking-normal">
-                              {ingredient.name}
-                            </p>
-                          </div>
-                        </Link>
+                          id={ingredient.id}
+                          number={ingredient.number}
+                          name={ingredient.name}
+                          image={ingredient.image}
+                        />
                       ))}
                     </div>
                   </div>

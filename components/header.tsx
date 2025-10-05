@@ -44,7 +44,7 @@ export function Header() {
                     <Bars3Icon className="w-6 h-6 md:w-7 md:h-7" />
                   </button>
                 </SheetTrigger>
-                <SheetContent side="left" className="px-5 py-5 w-fit">
+                <SheetContent side="left" className="px-5 py-5 w-[50vw]">
                   <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
                   <MobileNav />
                 </SheetContent>
@@ -143,6 +143,9 @@ function MobileNav() {
       </NavLink>
       <NavLink href="/shop?category=simple-solutions" variant="mobile">
         Simple Solutions
+      </NavLink>
+      <NavLink href="/ingredients" variant="mobile">
+        Ingredients
       </NavLink>
 
       <div>
