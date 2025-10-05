@@ -31,12 +31,11 @@ export default function HomePage() {
                 <p className="text-base md:text-xl text-muted-foreground leading-relaxed mb-4 md:mb-8 font-medium leading-7">
                   Discover the future of personalized care
                 </p>
-                <Link
-                  href="/skin-analysis"
-                  className="font-mono text-sm md:text-base text-foreground underline decoration-2 decoration-primary/40 hover:decoration-primary underline-offset-4 transition-colors font-medium"
-                >
-                  Start My Journey
-                </Link>
+                <Button asChild variant="textLink" className="font-mono">
+                  <Link href="/skin-analysis">
+                    Start My Journey
+                  </Link>
+                </Button>
               </div>
             </div>
           </div>
@@ -51,7 +50,7 @@ export default function HomePage() {
               Our advanced AI analyzes 8 key skin traits with 97% dermatologist-level accuracy to create your perfect
               formula
             </BodyText>
-            <Button asChild size="lg" className="font-mono rounded-lg">
+            <Button asChild size="lg" className="font-mono">
               <Link href="/skin-analysis">Analyze My Skin</Link>
             </Button>
 
@@ -170,7 +169,7 @@ export default function HomePage() {
             </BodyText>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {traits.map((trait) => (
-                <Link key={trait.id} href={`/shop?trait=${trait.id}`}>
+                <Link key={trait.id} href={`/shop?category=creams&traits=${trait.id}`}>
                   <Card className="group hover:shadow-lg transition-all duration-300 hover:border-primary">
                     <CardContent className="px-6 text-center">
                       <div className="h-12 flex items-center justify-center mb-3">

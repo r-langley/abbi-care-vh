@@ -1,6 +1,6 @@
 "use client"
 
-import { useMemo } from "react"
+import { useMemo, useState } from "react"
 import { useSearchParams } from "next/navigation"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
@@ -8,102 +8,139 @@ import { ProductCard } from "@/components/product-card"
 import { products } from "@/lib/products"
 import { HeroSection } from "@/components/ui/hero-section"
 import { SectionHeading } from "@/components/ui/typography"
+import { PRODUCT_CATEGORIES, SHOP_CATEGORIES } from "@/lib/constants"
+import { TraitFilter } from "@/components/trait-filter"
+import { CartFooter } from "@/components/cart-footer"
+import { ScanCTA } from "@/components/scan-cta"
 
 export default function ShopPage() {
   const searchParams = useSearchParams()
   const category = searchParams.get("category") || "creams"
+  const selectedTraits = searchParams.get("traits")?.split(",").filter(Boolean) || []
 
   const heroContent = {
     creams: {
       title: "Creams",
-      description: "Custom formulas for your unique skin needs and goals.",
+      description: "Choose Lab Created or Mix-at-Home",
       image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-LEPlqvKzEkK6J5dqJznJE9V0ClyAgm.png",
-      imageAlt: "Skincare application",
     },
     "simple-solutions": {
       title: "Simple Solutions",
-      description: "Targeted treatments for specific concerns, simplified and effective.",
+      description: "Targeted treatments for specific concerns",
       image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-LEPlqvKzEkK6J5dqJznJE9V0ClyAgm.png",
-      imageAlt: "Simple skincare solutions",
     },
     essentials: {
       title: "Essentials",
-      description: "Daily basics that complement your personalized routine perfectly.",
+      description: "Daily basics for your routine",
       image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-LEPlqvKzEkK6J5dqJznJE9V0ClyAgm.png",
-      imageAlt: "Skincare essentials",
     },
   }
 
   const currentHero = heroContent[category as keyof typeof heroContent] || heroContent.creams
 
-  const filteredProducts = useMemo(() => {
-    if (category === "creams") {
-      return products.filter((p) => ["In-Lab Cream", "Mix at Home Cream", "Active Concentrate"].includes(p.category))
-    } else if (category === "simple-solutions") {
-      return products.filter((p) => p.category === "Simple Solution")
-    } else if (category === "essentials") {
-      return products.filter((p) => p.category === "Essential")
+  // Optimized: Single memoized computation for both filtering and grouping
+  const { filteredProducts, groupedCreams } = useMemo(() => {
+    let filtered: typeof products
+    
+    if (category === SHOP_CATEGORIES.CREAMS) {
+      const creamCategories = [PRODUCT_CATEGORIES.IN_LAB_CREAM, PRODUCT_CATEGORIES.MIX_AT_HOME_CREAM, PRODUCT_CATEGORIES.ACTIVE_CONCENTRATE] as const
+      filtered = products.filter((p) => (creamCategories as readonly string[]).includes(p.category))
+      
+      // Apply trait filters if selected
+      if (selectedTraits.length > 0) {
+        filtered = filtered.filter((p) => 
+          selectedTraits.some(trait => 
+            p.traits.some(t => t.toLowerCase() === trait.toLowerCase())
+          )
+        )
+      }
+      
+      return {
+        filteredProducts: filtered,
+        groupedCreams: {
+          inLab: filtered.filter((p) => p.category === PRODUCT_CATEGORIES.IN_LAB_CREAM),
+          mixAtHome: filtered.filter((p) => p.category === PRODUCT_CATEGORIES.MIX_AT_HOME_CREAM),
+          activeConcentrate: filtered.filter((p) => p.category === PRODUCT_CATEGORIES.ACTIVE_CONCENTRATE),
+        },
+      }
+    } else if (category === SHOP_CATEGORIES.SIMPLE_SOLUTIONS) {
+      filtered = products.filter((p) => p.category === PRODUCT_CATEGORIES.SIMPLE_SOLUTION)
+    } else if (category === SHOP_CATEGORIES.ESSENTIALS) {
+      filtered = products.filter((p) => p.category === PRODUCT_CATEGORIES.ESSENTIAL)
+    } else {
+      filtered = products
     }
-    return products
-  }, [category])
-
-  const groupedCreams = useMemo(() => {
-    if (category !== "creams") return null
-
-    return {
-      inLab: filteredProducts.filter((p) => p.category === "In-Lab Cream"),
-      mixAtHome: filteredProducts.filter((p) => p.category === "Mix at Home Cream"),
-      activeConcentrate: filteredProducts.filter((p) => p.category === "Active Concentrate"),
+    
+    // Apply trait filters for non-cream categories
+    if (selectedTraits.length > 0) {
+      filtered = filtered.filter((p) => 
+        selectedTraits.some(trait => 
+          p.traits.some(t => t.toLowerCase() === trait.toLowerCase())
+        )
+      )
     }
-  }, [category, filteredProducts])
+    
+    return { filteredProducts: filtered, groupedCreams: null }
+  }, [category, selectedTraits])
 
   return (
     <>
       <Header />
-      <main className="min-h-screen">
-        <div className="mb-12">
-          <HeroSection
-            title={currentHero.title}
-            description={currentHero.description}
-            image={currentHero.image}
-            imageAlt={currentHero.imageAlt}
-          />
-        </div>
+      <main className="min-h-screen pb-24">
+        <HeroSection
+          title={currentHero.title}
+          description={currentHero.description}
+          image={currentHero.image}
+        />
+        
+        <TraitFilter />
 
-        <div className="container mx-auto px-4 pb-16">
+        <div className="px-[10px] pt-[20px] pb-16">
           {category === "creams" && groupedCreams ? (
-            <div className="space-y-12">
-              {/* In-Lab Cream */}
+            <div className="space-y-[30px]">
+              {/* In Lab */}
               {groupedCreams.inLab.length > 0 && (
                 <div>
-                  <SectionHeading className="mb-6">In-Lab Cream</SectionHeading>
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5">
+                  {/* Show scan CTA if no traits are selected */}
+                  {selectedTraits.length === 0 && <ScanCTA />}
+                  
+                  <div className="mb-[10px] px-[10px] mt-[20px]">
+                    <h2 className="font-semibold text-[24px] tracking-[-0.48px] text-[#586158] leading-[1.35]">In Lab</h2>
+                    <p className="font-medium text-[16px] tracking-[-0.32px] text-[#586158] mt-[10px] leading-[1.35]">Made-to-order in our French lab — just for you.</p>
+                  </div>
+                  <div className="grid grid-cols-2 gap-[10px]">
                     {groupedCreams.inLab.map((product) => (
-                      <ProductCard key={product.id} product={product} />
+                      <ProductCard key={product.id} product={product} showRecommended={selectedTraits.length > 0} />
                     ))}
                   </div>
                 </div>
               )}
 
-              {/* Mix at Home Cream */}
+              {/* Mix at Home */}
               {groupedCreams.mixAtHome.length > 0 && (
                 <div>
-                  <SectionHeading className="mb-6">Mix at Home Cream</SectionHeading>
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5">
+                  <div className="mb-[10px] px-[10px]">
+                    <h2 className="font-semibold text-[20px] tracking-[-0.4px] text-[#586158]">Mix at Home</h2>
+                    <p className="font-medium text-[14px] tracking-[-0.28px] text-[#586158] mt-[5px]">Create your own routines. Mix a specific base and active concentrates.</p>
+                  </div>
+                  <div className="grid grid-cols-2 gap-[10px]">
                     {groupedCreams.mixAtHome.map((product) => (
-                      <ProductCard key={product.id} product={product} />
+                      <ProductCard key={product.id} product={product} showRecommended={selectedTraits.length > 0} />
                     ))}
                   </div>
                 </div>
               )}
 
-              {/* Active Concentrate */}
+              {/* Active Concentrates */}
               {groupedCreams.activeConcentrate.length > 0 && (
                 <div>
-                  <SectionHeading className="mb-6">Active Concentrate</SectionHeading>
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5">
+                  <div className="mb-[10px] px-[10px]">
+                    <h2 className="font-semibold text-[20px] tracking-[-0.4px] text-[#586158]">Active Concentrates</h2>
+                    <p className="font-medium text-[14px] tracking-[-0.28px] text-[#586158] mt-[5px]">Targeted treatments to address specific skin concerns</p>
+                  </div>
+                  <div className="grid grid-cols-2 gap-[10px]">
                     {groupedCreams.activeConcentrate.map((product) => (
-                      <ProductCard key={product.id} product={product} />
+                      <ProductCard key={product.id} product={product} showRecommended={selectedTraits.length > 0} />
                     ))}
                   </div>
                 </div>
@@ -111,14 +148,18 @@ export default function ShopPage() {
             </div>
           ) : (
             // Other categories show standard grid
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5">
+            <div className="grid grid-cols-2 gap-[10px]">
               {filteredProducts.map((product) => (
-                <ProductCard key={product.id} product={product} />
+                <ProductCard key={product.id} product={product} showRecommended={selectedTraits.length > 0} />
               ))}
             </div>
           )}
         </div>
       </main>
+      <CartFooter 
+        headingText="Review your Routine" 
+        buttonText="CHECKOUT" 
+      />
       <Footer />
     </>
   )

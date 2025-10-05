@@ -138,28 +138,28 @@ function MobileNav() {
         </button>
         {isTraitExpanded && (
           <div className="flex flex-col gap-3 pl-4 mt-3">
-            <NavLink href="/shop?trait=wrinkles" variant="footer">
+            <NavLink href="/shop?category=creams&traits=wrinkles" variant="footer">
               Wrinkles
             </NavLink>
-            <NavLink href="/shop?trait=radiance" variant="footer">
+            <NavLink href="/shop?category=creams&traits=radiance" variant="footer">
               Radiance
             </NavLink>
-            <NavLink href="/shop?trait=imperfections" variant="footer">
+            <NavLink href="/shop?category=creams&traits=imperfections" variant="footer">
               Imperfections
             </NavLink>
-            <NavLink href="/shop?trait=spots" variant="footer">
+            <NavLink href="/shop?category=creams&traits=spots" variant="footer">
               Spots
             </NavLink>
-            <NavLink href="/shop?trait=hydration" variant="footer">
+            <NavLink href="/shop?category=creams&traits=hydration" variant="footer">
               Hydration
             </NavLink>
-            <NavLink href="/shop?trait=sensitivity" variant="footer">
+            <NavLink href="/shop?category=creams&traits=sensitivity" variant="footer">
               Sensitivity
             </NavLink>
-            <NavLink href="/shop?trait=shine" variant="footer">
+            <NavLink href="/shop?category=creams&traits=shine" variant="footer">
               Shine
             </NavLink>
-            <NavLink href="/shop?trait=texture" variant="footer">
+            <NavLink href="/shop?category=creams&traits=texture" variant="footer">
               Texture
             </NavLink>
           </div>

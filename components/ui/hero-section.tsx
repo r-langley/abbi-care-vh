@@ -9,17 +9,23 @@ interface HeroSectionProps {
 
 export function HeroSection({ image, title, description }: HeroSectionProps) {
   return (
-    <div className="grid grid-cols-2 h-[160px]">
+    <div className="flex h-[160px]">
       {/* Left: Image */}
-      <div className="relative overflow-hidden">
-        <Image src={image || "/placeholder.svg"} alt={title} fill className="object-cover" priority />
+      <div className="flex-1 bg-[#f5f6f5] flex items-center justify-center overflow-hidden relative">
+        <Image 
+          src={image || "/placeholder.svg"} 
+          alt={title} 
+          fill 
+          className="object-contain" 
+          priority 
+        />
       </div>
 
       {/* Right: Content */}
-      <div className="flex flex-col justify-center items-start px-5 py-5 bg-secondary">
-        <PageTitle variant="hero">{title}</PageTitle>
+      <div className="flex-1 bg-[#f5f6f5] flex flex-col items-center justify-center gap-[10px] px-[20px] py-[20px] text-center text-[#586158] leading-[1.35]">
+        <p className="font-semibold text-[24px] tracking-[-0.48px] w-full">{title}</p>
         {description && (
-          <p className="text-sm md:text-base text-muted-foreground leading-relaxed font-medium">{description}</p>
+          <p className="font-medium text-[16px] tracking-[-0.32px] w-full">{description}</p>
         )}
       </div>
     </div>

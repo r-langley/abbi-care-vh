@@ -5,32 +5,38 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive transition-colors",
   {
     variants: {
       variant: {
         default:
-          "bg-[var(--button-default-bg)] text-[var(--button-default-text)] hover:opacity-[var(--button-default-hover-opacity)] transition-[var(--button-transition)]",
+          "bg-[#586158] text-[#f5f6f5] hover:opacity-90 rounded-[8px] font-semibold",
         destructive:
-          "bg-[var(--button-destructive-bg)] text-[var(--button-destructive-text)] hover:opacity-[var(--button-destructive-hover-opacity)] focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60 transition-[var(--button-transition)]",
+          "bg-[var(--button-destructive-bg)] text-[var(--button-destructive-text)] hover:opacity-90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60 rounded-[8px]",
         outline:
-          "border bg-[var(--button-outline-bg)] shadow-xs hover:bg-[var(--button-outline-hover-bg)] hover:text-[var(--button-outline-hover-text)] dark:bg-input/30 dark:border-input dark:hover:bg-input/50 transition-[var(--button-transition)]",
+          "border border-[#586158] bg-transparent text-[#586158] hover:bg-[#586158] hover:text-[#f5f6f5] rounded-[8px] font-semibold",
         secondary:
-          "bg-[var(--button-secondary-bg)] text-[var(--button-secondary-text)] hover:opacity-[var(--button-secondary-hover-opacity)] transition-[var(--button-transition)]",
+          "bg-[#f5f6f5] text-[#586158] hover:opacity-80 rounded-[8px] font-semibold",
         ghost:
-          "hover:bg-[var(--button-ghost-hover-bg)] hover:text-[var(--button-ghost-hover-text)] dark:hover:bg-accent/50 transition-[var(--button-transition)]",
-        link: "text-primary underline-offset-4 hover:underline",
+          "hover:bg-[#f5f6f5] hover:text-[#586158] rounded-[8px]",
+        link: 
+          "text-[#586158] underline-offset-4 hover:underline font-medium",
         textLink:
-          "inline font-mono text-foreground underline underline-offset-4 decoration-1 decoration-foreground/40 hover:decoration-foreground transition-colors px-0 py-0 h-auto rounded-none justify-start",
+          "inline font-large text-[#586158] underline underline-offset-4 decoration-2 decoration-[#586158]/40 hover:decoration-[#586158] transition-colors px-0 py-0 h-auto rounded-none justify-start",
       },
       size: {
         default:
-          "h-[var(--button-height-default)] px-[var(--button-padding-x-default)] py-[var(--button-padding-y)] has-[>svg]:px-3 rounded-[var(--button-border-radius)]",
-        sm: "h-[var(--button-height-sm)] px-[var(--button-padding-x-sm)] gap-1.5 has-[>svg]:px-2.5 rounded-[var(--button-border-radius)]",
-        lg: "h-[var(--button-height-lg)] px-[var(--button-padding-x-lg)] has-[>svg]:px-4 rounded-[var(--button-border-radius)]",
-        icon: "size-[var(--button-height-icon)] rounded-[var(--button-border-radius)]",
-        "icon-sm": "size-[var(--button-height-icon-sm)] rounded-[var(--button-border-radius)]",
-        "icon-lg": "size-[var(--button-height-icon-lg)] rounded-[var(--button-border-radius)]",
+          "h-[40px] px-[16px] py-[8px] text-[12px]",
+        sm: 
+          "h-[32px] px-[12px] py-[6px] text-[12px]",
+        lg: 
+          "h-[40px] px-[20px] py-[10px] text-[14px]",
+        icon: 
+          "size-[40px] rounded-[8px]",
+        "icon-sm": 
+          "size-[32px] rounded-[8px]",
+        "icon-lg": 
+          "size-[48px] rounded-[8px]",
       },
     },
     defaultVariants: {
