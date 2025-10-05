@@ -1,9 +1,10 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Poppins, Libre_Baskerville, JetBrains_Mono } from "next/font/google"
+import { Poppins, Instrument_Serif, JetBrains_Mono } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 import { CartProvider } from "@/lib/cart-context"
+import { AuthProvider } from "@/lib/auth-context"
 import { Suspense } from "react"
 import { ScrollToTop } from "@/components/scroll-to-top"
 import { CartFooter } from "@/components/cart-footer"
@@ -14,10 +15,11 @@ const poppins = Poppins({
   variable: "--font-poppins",
 })
 
-const libreBaskerville = Libre_Baskerville({
+const instrumentSerif = Instrument_Serif({
   subsets: ["latin"],
-  weight: ["400", "700"],
-  variable: "--font-libre-baskerville",
+  weight: ["400"],
+  style: ["normal", "italic"],
+  variable: "--font-instrument-serif",
 })
 
 const jetbrainsMono = JetBrains_Mono({
@@ -28,7 +30,7 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "ABBI - Personalized Skincare",
   description: "Personalized skincare made for your skin",
-    generator: 'v0.app'
+  generator: "v0.app",
 }
 
 export default function RootLayout({
@@ -37,14 +39,16 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${poppins.variable} ${libreBaskerville.variable} ${jetbrainsMono.variable}`}>
+    <html lang="en" className={`${poppins.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable}`}>
       <body className="font-sans antialiased">
         <Suspense fallback={null}>
           <ScrollToTop />
-          <CartProvider>
-            {children}
-            <CartFooter />
-          </CartProvider>
+          <AuthProvider>
+            <CartProvider>
+              {children}
+              <CartFooter />
+            </CartProvider>
+          </AuthProvider>
         </Suspense>
         <Analytics />
       </body>

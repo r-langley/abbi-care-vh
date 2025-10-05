@@ -12,6 +12,7 @@ import {
 } from "@heroicons/react/24/solid"
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet"
 import { useCart } from "@/lib/cart-context"
+import { useAuth } from "@/lib/auth-context"
 import { usePathname } from "next/navigation"
 import React from "react"
 import { NavLink } from "@/components/ui/nav-link"
@@ -19,6 +20,7 @@ import { TabsNav } from "@/components/ui/tabs-nav"
 
 export function Header() {
   const { totalItems } = useCart()
+  const { isLoggedIn, login, logout } = useAuth()
   const pathname = usePathname()
   const isHomepage = pathname === "/"
   const isShopPage = pathname === "/shop"
@@ -71,8 +73,18 @@ export function Header() {
                   </span>
                 )}
               </Link>
-              <button className="p-2 hover:bg-[#f5f6f5] rounded-[8px] transition-colors">
-                <UserCircleIcon className="w-6 h-6 md:w-7 md:h-7" />
+              <button
+                onClick={isLoggedIn ? logout : login}
+                className="p-2 hover:bg-[#f5f6f5] rounded-[8px] transition-colors relative group"
+                title={isLoggedIn ? "Log Out (Prototype)" : "Log In (Prototype)"}
+              >
+                <UserCircleIcon
+                  className={`w-6 h-6 md:w-7 md:h-7 ${isLoggedIn ? "text-[#586158]" : "text-muted-foreground"}`}
+                />
+                {/* Tooltip */}
+                <span className="absolute -bottom-8 right-0 bg-[#586158] text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+                  {isLoggedIn ? "Log Out" : "Log In"}
+                </span>
               </button>
             </div>
           </div>

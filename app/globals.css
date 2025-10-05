@@ -106,6 +106,22 @@
   --button-padding-x-sm: 0.75rem;
   --button-padding-x-lg: 1.5rem;
   --button-padding-y: 0.5rem;
+
+  /* Added skin score card design tokens for centralized styling */
+  --skin-score-bg: #ffffff;
+  --skin-score-number-color: var(--sea-slate);
+  --skin-score-label-color: var(--sea-slate);
+  --skin-score-number-size: 1.5rem;
+  --skin-score-label-size: 0.875rem;
+  --skin-score-padding-x: 0.625rem;
+  --skin-score-padding-y: 0.625rem;
+  --skin-score-gap: 0.375rem;
+  --skin-score-radius: 0.5rem;
+  --skin-score-bar-height: 0.25rem;
+  --skin-score-bar-bg: #e5e7eb;
+  --skin-score-low: #ef4444;
+  --skin-score-medium: #f97316;
+  --skin-score-high: #22c55e;
 }
 
 .dark {
@@ -168,7 +184,8 @@
 
 @theme inline {
   --font-sans: "Poppins", var(--font-geist-sans);
-  --font-serif: "Libre Baskerville", serif;
+  /* Updated to use Instrument Serif for design system serif family */
+  --font-serif: "Instrument Serif", serif;
   /* Simplified to directly reference the Geist Mono variable set by GeistMono.variable */
   --font-mono: var(--font-geist-mono);
   --color-background: var(--background);
@@ -237,6 +254,22 @@
   --color-button-ghost-hover-text: var(--button-ghost-hover-text);
   --color-button-destructive-bg: var(--button-destructive-bg);
   --color-button-destructive-text: var(--button-destructive-text);
+
+  /* Expose skin score card design tokens to Tailwind theme */
+  --color-skin-score-bg: var(--skin-score-bg);
+  --color-skin-score-number-color: var(--skin-score-number-color);
+  --color-skin-score-label-color: var(--skin-score-label-color);
+  --color-skin-score-number-size: var(--skin-score-number-size);
+  --color-skin-score-label-size: var(--skin-score-label-size);
+  --color-skin-score-padding-x: var(--skin-score-padding-x);
+  --color-skin-score-padding-y: var(--skin-score-padding-y);
+  --color-skin-score-gap: var(--skin-score-gap);
+  --color-skin-score-radius: var(--skin-score-radius);
+  --color-skin-score-bar-height: var(--skin-score-bar-height);
+  --color-skin-score-bar-bg: var(--skin-score-bar-bg);
+  --color-skin-score-low: var(--skin-score-low);
+  --color-skin-score-medium: var(--skin-score-medium);
+  --color-skin-score-high: var(--skin-score-high);
 }
 
 @layer base {
@@ -258,7 +291,7 @@
   .font-mono {
     font-family: var(--font-mono);
   }
-  
+
   /* Hide scrollbar for trait filter */
   .scrollbar-hide {
     -ms-overflow-style: none;

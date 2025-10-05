@@ -71,7 +71,7 @@ export function BodyText({ className, ...props }: React.HTMLAttributes<HTMLParag
 }
 
 export function SmallText({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
-  return <p className={cn("text-base text-foreground", className)} {...props} />
+  return null
 }
 
 export function ExtraSmallText({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {

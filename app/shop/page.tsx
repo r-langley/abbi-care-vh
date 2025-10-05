@@ -1,6 +1,6 @@
 "use client"
 
-import { useMemo, useEffect } from "react"
+import { useMemo, useEffect, useState } from "react"
 import { useSearchParams } from "next/navigation"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
@@ -11,12 +11,34 @@ import { PRODUCT_CATEGORIES, SHOP_CATEGORIES } from "@/lib/constants"
 import { TraitFilter } from "@/components/trait-filter"
 import { CartFooter } from "@/components/cart-footer"
 import { ProductCombos } from "@/components/product-combos"
-import { ScanCTA } from "@/components/scan-cta" // Import ScanCTA component
+import { ScanCTA } from "@/components/scan-cta"
+import { MySkinResults } from "@/components/my-skin-results"
+import { useAuth } from "@/lib/auth-context"
+import { getActiveIngredientsByTraits } from "@/lib/active-ingredients"
+import Link from "next/link"
+import Image from "next/image"
+import { ChevronRightIcon, PlusIcon, CheckIcon } from "@heroicons/react/24/outline"
+import { ProductBadge } from "@/components/ui/product-badge"
 
 export default function ShopPage() {
   const searchParams = useSearchParams()
   const category = searchParams.get("category") || "creams"
   const selectedTraits = searchParams.get("traits")?.split(",").filter(Boolean) || []
+  const { isLoggedIn } = useAuth()
+
+  const [scanResults, setScanResults] = useState<{
+    userName: string
+    wrinkles: number
+    radiance: number
+    imperfections: number
+  } | null>(null)
+
+  useEffect(() => {
+    const results = localStorage.getItem("skinScanResults")
+    if (results) {
+      setScanResults(JSON.parse(results))
+    }
+  }, [])
 
   const heroContent = {
     creams: {
@@ -41,7 +63,6 @@ export default function ShopPage() {
 
   const currentHero = heroContent[category as keyof typeof heroContent] || heroContent.creams
 
-  // Preload hero images on mount to prevent flashing
   useEffect(() => {
     const preloadImages = [
       "/images/creams-hero.png",
@@ -58,7 +79,6 @@ export default function ShopPage() {
     })
   }, [])
 
-  // Optimized: Single memoized computation for both filtering and grouping
   const { filteredProducts, groupedCreams } = useMemo(() => {
     let filtered: typeof products
 
@@ -70,7 +90,6 @@ export default function ShopPage() {
       ] as const
       filtered = products.filter((p) => (creamCategories as readonly string[]).includes(p.category))
 
-      // Apply trait filters if selected
       if (selectedTraits.length > 0) {
         filtered = filtered.filter((p) =>
           selectedTraits.some((trait) => p.traits.some((t) => t.toLowerCase() === trait.toLowerCase())),
@@ -93,7 +112,6 @@ export default function ShopPage() {
       filtered = products
     }
 
-    // Apply trait filters for non-cream categories
     if (selectedTraits.length > 0) {
       filtered = filtered.filter((p) =>
         selectedTraits.some((trait) => p.traits.some((t) => t.toLowerCase() === trait.toLowerCase())),
@@ -103,50 +121,172 @@ export default function ShopPage() {
     return { filteredProducts: filtered, groupedCreams: null }
   }, [category, selectedTraits])
 
+  const recommendedActiveIngredients = useMemo(() => {
+    if (!scanResults && !isLoggedIn) return []
+    const traits = ["Wrinkles", "Radiance", "Imperfections"]
+    return getActiveIngredientsByTraits(traits).slice(0, 3)
+  }, [scanResults, isLoggedIn])
+
+  const recommendedCreamBase = useMemo(() => {
+    if ((!scanResults && !isLoggedIn) || !groupedCreams) return null
+    return groupedCreams.inLab.find((p) => p.id === "inlab-aloe-vera") || groupedCreams.inLab[0]
+  }, [scanResults, isLoggedIn, groupedCreams])
+
+  const showScanResults = (scanResults || isLoggedIn) && category === "creams"
+
   return (
     <>
       <Header />
       <main className="min-h-screen pb-0">
-        <HeroSection
-          key={category}
-          title={currentHero.title}
-          description={currentHero.description}
-          image={currentHero.image}
-          imagePosition={currentHero.imagePosition}
-        />
-
-        <TraitFilter />
+        {showScanResults ? (
+          <MySkinResults
+            userName={scanResults?.userName || "User"}
+            wrinkles={scanResults?.wrinkles || 25}
+            radiance={scanResults?.radiance || 67}
+            imperfections={scanResults?.imperfections || 55}
+          />
+        ) : (
+          <>
+            <HeroSection
+              key={category}
+              title={currentHero.title}
+              description={currentHero.description}
+              image={currentHero.image}
+              imagePosition={currentHero.imagePosition}
+            />
+            <TraitFilter />
+          </>
+        )}
 
         <div className="py-5 px-5">
           {category === "creams" && groupedCreams ? (
             <div className="space-y-10">
-              {/* In Lab */}
-              {groupedCreams.inLab.length > 0 && (
+              {showScanResults && recommendedCreamBase ? (
                 <div className="flex flex-col gap-[20px]">
-                  {/* Show scan CTA if no traits are selected */}
-                  {selectedTraits.length === 0 && <ScanCTA />}
-
-                  <div className="flex flex-col gap-[10px]">
-                    <h2 className="font-semibold text-[#586158] leading-[1.35] text-foreground tracking-tight text-2xl">
-                      In Lab
-                    </h2>
-                    <p className="font-medium text-[16px] tracking-[-0.32px] text-[#586158] leading-[1.35]">
-                      Made-to-order in our French lab — just for you.
-                    </p>
+                  <div className="flex items-center justify-between">
+                    <div className="flex flex-col gap-[10px]">
+                      <h2 className="font-semibold text-[#586158] leading-[1.35] text-foreground tracking-tight text-2xl">
+                        Personalized <span className="font-serif italic font-medium">Cream</span>
+                      </h2>
+                    </div>
+                    <Link
+                      href="/shop?category=creams"
+                      className="flex items-center gap-1 text-[16px] font-medium text-[#586158] hover:opacity-70 transition-opacity"
+                    >
+                      Change
+                      <ChevronRightIcon className="h-5 w-5" />
+                    </Link>
                   </div>
-                  <div className="grid grid-cols-2 gap-[10px]">
-                    {groupedCreams.inLab.map((product) => (
-                      <ProductCard key={product.id} product={product} showRecommended={selectedTraits.length > 0} />
-                    ))}
+
+                  <div className="bg-white rounded-[10px] border-2 border-[#f5f6f5] overflow-hidden flex flex-col">
+                    <div className="relative h-[200px] overflow-hidden">
+                      <Image
+                        src="/minimalist-cosmetic-pump-bottle-product-photograph.jpg"
+                        alt={recommendedCreamBase.name}
+                        fill
+                        className="object-cover"
+                      />
+                      <ProductBadge badgeType="recommended" className="absolute top-3 left-3">
+                        Recommended
+                      </ProductBadge>
+                    </div>
+                    <div className="bg-[#f5f6f5] p-[10px] pb-[20px] flex flex-row items-end justify-between gap-[10px]">
+                      <div className="flex flex-col gap-[10px]">
+                        <div className="flex flex-col gap-[5px]">
+                          <p className="font-semibold text-[18px] leading-[1.15] text-[#586158] tracking-normal">
+                            {recommendedCreamBase.name}
+                          </p>
+                          <p className="font-medium text-[14px] tracking-[-0.28px] text-[#586158] leading-[1.15]">
+                            Cream Base
+                          </p>
+                        </div>
+                        <p
+                          className="font-medium text-[13px] tracking-[-0.26px] text-[#586158] leading-[1.15]"
+                          style={{ fontFamily: "var(--font-geist-mono)", fontVariationSettings: "'wdth' 100" }}
+                        >
+                          ${recommendedCreamBase.price.toFixed(2)}
+                        </p>
+                      </div>
+                      <button className="bg-[#586158] rounded-full size-[32px] flex items-center justify-center shrink-0 hover:opacity-90 transition-opacity">
+                        <PlusIcon className="h-5 w-5 text-[#f5f6f5]" />
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col gap-[15px]">
+                    <p className="text-center text-[#586158] text-xl font-normal">
+                      <span className="font-medium">with </span>
+                      <span className="font-serif italic font-medium text-2xl">Actives</span>
+                      <span className="font-medium"> for</span>
+                    </p>
+
+                    <div className="flex items-center justify-center gap-6">
+                      {["Wrinkles", "Radiance", "Imperfections"].map((trait) => (
+                        <div key={trait} className="flex items-center gap-1">
+                          <CheckIcon className="text-[#586158] w-4 h-4" />
+                          <span className="font-medium text-[#586158] text-sm">{trait}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="grid grid-cols-3 gap-[10px]">
+                      {recommendedActiveIngredients.map((ingredient) => (
+                        <Link
+                          key={ingredient.id}
+                          href={`/active-ingredient/${ingredient.id}`}
+                          className="block bg-white rounded-[10px] border-2 border-[#f5f6f5] overflow-hidden hover:opacity-80 transition-opacity"
+                        >
+                          <div className="relative h-[120px] overflow-hidden">
+                            <Image
+                              src={ingredient.image || "/placeholder.svg"}
+                              alt={ingredient.name}
+                              fill
+                              className="object-cover"
+                            />
+                          </div>
+                          <div className="bg-[#f5f6f5] p-[10px]">
+                            <p
+                              className="font-medium text-[12px] tracking-[-0.24px] text-[#586158] leading-[1.15] mb-1"
+                              style={{ fontFamily: "var(--font-geist-mono)", fontVariationSettings: "'wdth' 100" }}
+                            >
+                              No.{ingredient.number}
+                            </p>
+                            <p className="font-semibold text-[14px] leading-[1.15] text-[#586158] tracking-normal">
+                              {ingredient.name}
+                            </p>
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
                   </div>
                 </div>
+              ) : (
+                groupedCreams.inLab.length > 0 && (
+                  <div className="flex flex-col gap-[20px]">
+                    {!showScanResults && selectedTraits.length === 0 && <ScanCTA />}
+
+                    <div className="flex flex-col gap-[10px]">
+                      <h2 className="font-semibold text-[#586158] leading-[1.35] text-foreground tracking-tight text-2xl">
+                        In Lab
+                      </h2>
+                      <p className="font-medium text-[16px] tracking-[-0.32px] text-[#586158] leading-[1.35]">
+                        Made-to-order in our French lab — just for you.
+                      </p>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-[10px]">
+                      {groupedCreams.inLab.map((product) => (
+                        <ProductCard key={product.id} product={product} showRecommended={selectedTraits.length > 0} />
+                      ))}
+                    </div>
+                  </div>
+                )
               )}
 
-              {/* Mix at Home */}
               {groupedCreams.mixAtHome.length > 0 && (
                 <div className="flex flex-col gap-[20px]">
                   <div className="flex flex-col gap-[5px]">
-                    <h2 className="font-semibold text-[#586158] text-foreground tracking-tight text-2xl">
+                    <h2 className="font-semibold text-[#586158] text-foreground text-2xl tracking-tight">
                       Mix at Home
                     </h2>
                     <p className="font-medium text-[14px] tracking-[-0.28px] text-[#586158]">
@@ -161,7 +301,6 @@ export default function ShopPage() {
                 </div>
               )}
 
-              {/* Active Concentrates */}
               {groupedCreams.activeConcentrate.length > 0 && (
                 <div className="flex flex-col gap-[20px]">
                   <div className="flex flex-col gap-[5px]">
@@ -181,7 +320,6 @@ export default function ShopPage() {
               )}
             </div>
           ) : (
-            // Other categories show standard grid
             <div className="grid grid-cols-2 gap-[10px]">
               {filteredProducts.map((product) => (
                 <ProductCard key={product.id} product={product} showRecommended={selectedTraits.length > 0} />

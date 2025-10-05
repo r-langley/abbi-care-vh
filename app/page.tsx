@@ -71,7 +71,7 @@ export default function HomePage() {
           <div className="container mx-auto px-5">
             <SectionHeading spacing="tight">What Our Scan Evaluates</SectionHeading>
             <BodyText className="text-center text-base md:text-lg mb-8 md:mb-12 max-w-3xl mx-auto text-muted-foreground">
-              Our AI analyzes 8 key traits with 97% accuracy to create your personalized formula.
+              97% accurate when compared to a dermatological exam.
             </BodyText>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5">
               {traits.map((trait) => (
