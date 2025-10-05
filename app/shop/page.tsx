@@ -27,7 +27,7 @@ export default function ShopPage() {
     "simple-solutions": {
       title: "Simple Solutions",
       description: "Targeted treatments for specific concerns",
-      image: "/placeholder.svg?height=160&width=400",
+      image: "/images/simple-solutions-hero.png",
       imagePosition: "right" as const,
     },
     essentials: {
