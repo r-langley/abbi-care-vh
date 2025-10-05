@@ -57,18 +57,18 @@ Successfully migrated from Lucide React to Hero Icons (solid/filled variant) acr
 ## Import Pattern Changes
 
 ### Before (Lucide)
-```tsx
+\`\`\`tsx
 import { Menu, ShoppingCart, User } from "lucide-react"
 
 <Menu className="h-6 w-6" />
-```
+\`\`\`
 
 ### After (Hero Icons)
-```tsx
+\`\`\`tsx
 import { Bars3Icon, ShoppingCartIcon, UserIcon } from "@heroicons/react/24/outline"
 
 <Bars3Icon className="h-6 w-6" />
-```
+\`\`\`
 
 ---
 
@@ -96,9 +96,9 @@ import { Bars3Icon, ShoppingCartIcon, UserIcon } from "@heroicons/react/24/outli
 
 ### Solid (24x24) - All Icons
 Used for: All icons across the application for a bold, modern look
-```tsx
+\`\`\`tsx
 import { UserIcon, SparklesIcon, ShoppingCartIcon } from "@heroicons/react/24/solid"
-```
+\`\`\`
 
 **Why Solid?**
 - ✅ More visual weight and presence

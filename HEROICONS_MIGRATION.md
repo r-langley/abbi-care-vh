@@ -67,15 +67,15 @@ Replacing Lucide React icons with Hero Icons (duotone variant) for a more modern
 ## Import Patterns
 
 ### Lucide React (Before)
-```tsx
+\`\`\`tsx
 import { Menu, ShoppingCart, User } from "lucide-react"
 
 <Menu className="h-6 w-6" />
 <ShoppingCart className="h-6 w-6" />
-```
+\`\`\`
 
 ### Hero Icons (After)
-```tsx
+\`\`\`tsx
 // Outline (24x24)
 import { Bars3Icon, ShoppingCartIcon, UserIcon } from "@heroicons/react/24/outline"
 
@@ -91,7 +91,7 @@ import { SparklesIcon } from "@heroicons/react/24/solid"
 import { PlusIcon } from "@heroicons/react/20/solid"
 
 <PlusIcon className="h-5 w-5" />
-```
+\`\`\`
 
 ---
 
@@ -164,7 +164,7 @@ Some Lucide icons don't have direct Hero Icons equivalents:
 ## Code Examples
 
 ### Header Component
-```tsx
+\`\`\`tsx
 // Before
 import { Menu, ShoppingCart, User, Phone, Flag, ChevronDown } from "lucide-react"
 
@@ -181,10 +181,10 @@ import {
 // Usage
 <Bars3Icon className="h-6 w-6" />
 <ShoppingCartIcon className="h-6 w-6" />
-```
+\`\`\`
 
 ### Product Card
-```tsx
+\`\`\`tsx
 // Before
 import { Plus, Check } from "lucide-react"
 
@@ -194,10 +194,10 @@ import { PlusIcon, CheckIcon } from "@heroicons/react/24/outline"
 // Usage
 <PlusIcon className="h-5 w-5 text-[#f5f6f5]" />
 <CheckIcon className="h-5 w-5 text-[#f5f6f5]" />
-```
+\`\`\`
 
 ### Scan CTA
-```tsx
+\`\`\`tsx
 // Before
 import { Sparkles } from "lucide-react"
 
@@ -206,7 +206,7 @@ import { SparklesIcon } from "@heroicons/react/24/solid"
 
 // Usage (solid for emphasis)
 <SparklesIcon className="size-[20px] text-[#586158]" />
-```
+\`\`\`
 
 ---
 
@@ -215,38 +215,38 @@ import { SparklesIcon } from "@heroicons/react/24/solid"
 Hero Icons come in 3 sizes:
 
 ### 24x24 (Standard)
-```tsx
+\`\`\`tsx
 import { UserIcon } from "@heroicons/react/24/outline"
 <UserIcon className="h-6 w-6" />
-```
+\`\`\`
 
 ### 20x20 (Mini)
-```tsx
+\`\`\`tsx
 import { UserIcon } from "@heroicons/react/20/solid"
 <UserIcon className="h-5 w-5" />
-```
+\`\`\`
 
 ### 16x16 (Micro)
-```tsx
+\`\`\`tsx
 import { UserIcon } from "@heroicons/react/16/solid"
 <UserIcon className="h-4 w-4" />
-```
+\`\`\`
 
 ---
 
 ## Style Variants
 
 ### Outline (Default)
-```tsx
+\`\`\`tsx
 import { HeartIcon } from "@heroicons/react/24/outline"
 <HeartIcon className="h-6 w-6" />
-```
+\`\`\`
 
 ### Solid (Filled)
-```tsx
+\`\`\`tsx
 import { HeartIcon } from "@heroicons/react/24/solid"
 <HeartIcon className="h-6 w-6" />
-```
+\`\`\`
 
 ---
 
@@ -276,19 +276,19 @@ import { HeartIcon } from "@heroicons/react/24/solid"
 ## Bundle Size Impact
 
 ### Before (Lucide React)
-```
+\`\`\`
 lucide-react: ~500KB
 Icons used: ~15 icons
 Actual bundle: ~75KB (tree-shaken)
-```
+\`\`\`
 
 ### After (Hero Icons)
-```
+\`\`\`
 @heroicons/react: ~300KB
 Icons used: ~15 icons
 Actual bundle: ~45KB (tree-shaken)
 Expected savings: ~30KB (40% reduction)
-```
+\`\`\`
 
 ---
 

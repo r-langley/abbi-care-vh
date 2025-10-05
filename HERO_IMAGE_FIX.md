@@ -35,7 +35,7 @@ In production, the shop hero images were glitchy - users would initially see the
 ### 1. **Removed Priority Flag**
 **File**: `components/ui/hero-section.tsx`
 
-```tsx
+\`\`\`tsx
 // Before
 <Image src={image} alt={title} fill className="object-cover" priority />
 
@@ -49,7 +49,7 @@ In production, the shop hero images were glitchy - users would initially see the
   loading="eager"
   sizes="(max-width: 768px) 50vw, 50vw"
 />
-```
+\`\`\`
 
 **Why**:
 - `priority={false}` prevents race conditions
@@ -61,7 +61,7 @@ In production, the shop hero images were glitchy - users would initially see the
 ### 2. **Added Key Prop to Force Remounting**
 **File**: `app/shop/page.tsx`
 
-```tsx
+\`\`\`tsx
 // Before
 <HeroSection
   title={currentHero.title}
@@ -78,7 +78,7 @@ In production, the shop hero images were glitchy - users would initially see the
   image={currentHero.image}
   imagePosition={currentHero.imagePosition}
 />
-```
+\`\`\`
 
 **Why**:
 - React treats it as a new component when key changes
@@ -90,7 +90,7 @@ In production, the shop hero images were glitchy - users would initially see the
 ### 3. **Preload All Hero Images on Mount**
 **File**: `app/shop/page.tsx`
 
-```tsx
+\`\`\`tsx
 useEffect(() => {
   const preloadImages = [
     "/images/creams-hero.png",
@@ -106,7 +106,7 @@ useEffect(() => {
     document.head.appendChild(link)
   })
 }, [])
-```
+\`\`\`
 
 **Why**:
 - All hero images load in background on page mount
@@ -119,14 +119,14 @@ useEffect(() => {
 ### 4. **Enhanced Next.js Image Config**
 **File**: `next.config.mjs`
 
-```js
+\`\`\`js
 images: {
   unoptimized: true,
   formats: ['image/avif', 'image/webp'],
   deviceSizes: [640, 750, 828, 1080, 1200, 1920],
   imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
 }
-```
+\`\`\`
 
 **Why**:
 - Supports modern formats (AVIF, WebP) for faster loading
@@ -160,20 +160,20 @@ images: {
 ### React Key Prop Behavior
 
 **Without Key**:
-```tsx
+\`\`\`tsx
 // Category changes from "creams" to "simple-solutions"
 // React reuses same component instance
 // Image src changes but component doesn't remount
 // Causes brief flash of old image
-```
+\`\`\`
 
 **With Key**:
-```tsx
+\`\`\`tsx
 // Category changes from "creams" to "simple-solutions"
 // key changes from "creams" to "simple-solutions"
 // React unmounts old component, mounts new one
 // Clean transition, no image artifacts
-```
+\`\`\`
 
 ---
 
@@ -247,13 +247,13 @@ images: {
 ## Future Enhancements
 
 ### 1. Progressive Image Loading
-```tsx
+\`\`\`tsx
 <Image
   src={image}
   placeholder="blur"
   blurDataURL={blurDataURL}
 />
-```
+\`\`\`
 
 ### 2. Image Sprite Sheet
 - Combine all hero images into single sprite
