@@ -2,10 +2,10 @@ import { notFound } from "next/navigation"
 import Image from "next/image"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
-import { getActiveIngredientById } from "@/lib/active-ingredients"
+import { getIngredientById } from "@/lib/ingredients-data"
 
 export default function ActiveIngredientPage({ params }: { params: { id: string } }) {
-  const ingredient = getActiveIngredientById(params.id)
+  const ingredient = getIngredientById(params.id)
 
   if (!ingredient) {
     notFound()
@@ -18,7 +18,7 @@ export default function ActiveIngredientPage({ params }: { params: { id: string 
         <div className="max-w-2xl mx-auto px-5 py-10">
           <div className="bg-white rounded-[10px] border-2 border-[#f5f6f5] overflow-hidden">
             <div className="relative h-[300px] overflow-hidden">
-              <Image src={ingredient.image || "/placeholder.svg"} alt={ingredient.name} fill className="object-cover" />
+              <Image src="/ingredient-placeholder.jpg" alt={ingredient.name} fill className="object-cover" />
             </div>
             <div className="p-6">
               <p
