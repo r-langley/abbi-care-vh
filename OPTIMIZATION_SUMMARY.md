@@ -70,13 +70,13 @@
 **File**: `lib/constants.ts` (NEW)
 
 **Structure Created**:
-```typescript
+\`\`\`typescript
 - PRODUCT_CATEGORIES (with ProductCategory type)
 - SKIN_TRAITS (with SkinTrait type)
 - STORAGE_KEYS (localStorage keys)
 - SHOP_CATEGORIES (URL param values)
 - ROUTES (application routes with type-safe helpers)
-```
+\`\`\`
 
 **Maintainability Impact**:
 - Single source of truth for all constants
@@ -99,20 +99,20 @@
 ## Code Quality Improvements
 
 ### Before:
-```typescript
+\`\`\`typescript
 // Magic strings everywhere
 if (product.category === "In-Lab Cream") { ... }
 localStorage.getItem("abbi-cart")
 const totalItems = items.reduce(...) // Runs every render
-```
+\`\`\`
 
 ### After:
-```typescript
+\`\`\`typescript
 // Type-safe constants
 if (product.category === PRODUCT_CATEGORIES.IN_LAB_CREAM) { ... }
 localStorage.getItem(STORAGE_KEYS.CART)
 const totalItems = useMemo(() => items.reduce(...), [items])
-```
+\`\`\`
 
 ---
 

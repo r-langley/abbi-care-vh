@@ -10,7 +10,7 @@ export function PageTitle({ className, variant = "default", ...props }: PageTitl
   return (
     <h1
       className={cn(
-        "text-balance text-foreground font-medium",
+        "text-balance text-foreground font-semibold leading-7",
         variant === "default" && "text-3xl md:text-4xl mb-4",
         variant === "hero" && "text-2xl md:text-5xl lg:text-6xl mb-2 md:mb-4",
         className,
@@ -30,7 +30,7 @@ export function SectionHeading({ className, align = "center", spacing = "default
   return (
     <h2
       className={cn(
-        "text-2xl md:text-3xl font-medium",
+        "text-2xl md:text-3xl leading-7 font-semibold",
         align === "center" && "text-center",
         spacing === "default" && "mb-12 md:mb-16",
         spacing === "tight" && "mb-4 md:mb-6",

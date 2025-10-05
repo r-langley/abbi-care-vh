@@ -8,10 +8,10 @@ Consistent button styling system using monospace typography and harmonized varia
 ## Design Tokens
 
 ### Colors
-```css
+\`\`\`css
 --sea-slate: #586158
 --sage: #f5f6f5
-```
+\`\`\`
 
 ### Typography
 - **Font**: Geist Mono (monospace)
@@ -30,10 +30,10 @@ Consistent button styling system using monospace typography and harmonized varia
 ### 1. Default (Filled)
 **Primary action button**
 
-```tsx
+\`\`\`tsx
 <Button>Click Me</Button>
 <Button size="lg" className="font-mono">Analyze My Skin</Button>
-```
+\`\`\`
 
 **Styling**:
 - Background: `#586158` (Sea Slate)
@@ -55,11 +55,11 @@ Consistent button styling system using monospace typography and harmonized varia
 ### 2. Text Link
 **Inline text link with underline**
 
-```tsx
+\`\`\`tsx
 <Button variant="textLink" className="font-mono">
   <Link href="/skin-analysis">Start My Journey</Link>
 </Button>
-```
+\`\`\`
 
 **Styling**:
 - Text: `#586158` (Sea Slate)
@@ -82,9 +82,9 @@ Consistent button styling system using monospace typography and harmonized varia
 ### 3. Outline
 **Secondary action with border**
 
-```tsx
+\`\`\`tsx
 <Button variant="outline">Learn More</Button>
-```
+\`\`\`
 
 **Styling**:
 - Border: 1px solid `#586158`
@@ -104,9 +104,9 @@ Consistent button styling system using monospace typography and harmonized varia
 ### 4. Secondary
 **Subtle filled button**
 
-```tsx
+\`\`\`tsx
 <Button variant="secondary">View Details</Button>
-```
+\`\`\`
 
 **Styling**:
 - Background: `#f5f6f5` (Sage)
@@ -125,9 +125,9 @@ Consistent button styling system using monospace typography and harmonized varia
 ### 5. Ghost
 **Minimal hover-only background**
 
-```tsx
+\`\`\`tsx
 <Button variant="ghost">Cancel</Button>
-```
+\`\`\`
 
 **Styling**:
 - Background: Transparent
@@ -145,9 +145,9 @@ Consistent button styling system using monospace typography and harmonized varia
 ### 6. Link
 **Simple underline link**
 
-```tsx
+\`\`\`tsx
 <Button variant="link">Read More</Button>
-```
+\`\`\`
 
 **Styling**:
 - Text: `#586158`
@@ -165,25 +165,25 @@ Consistent button styling system using monospace typography and harmonized varia
 ## Size Variants
 
 ### Small
-```tsx
+\`\`\`tsx
 <Button size="sm">Small Button</Button>
-```
+\`\`\`
 - Height: 32px
 - Padding: 12px/6px
 - Font size: 14px
 
 ### Default
-```tsx
+\`\`\`tsx
 <Button>Default Button</Button>
-```
+\`\`\`
 - Height: 40px
 - Padding: 16px/8px
 - Font size: 16px
 
 ### Large
-```tsx
+\`\`\`tsx
 <Button size="lg">Large Button</Button>
-```
+\`\`\`
 - Height: 48px
 - Padding: 20px/12px
 - Font size: 18px
@@ -193,11 +193,11 @@ Consistent button styling system using monospace typography and harmonized varia
 ## Icon Buttons
 
 ### Icon Only
-```tsx
+\`\`\`tsx
 <Button size="icon">
   <Plus className="h-5 w-5" />
 </Button>
-```
+\`\`\`
 
 **Sizes**:
 - `icon-sm`: 32x32px
@@ -209,46 +209,46 @@ Consistent button styling system using monospace typography and harmonized varia
 ## Usage Examples
 
 ### Homepage Hero
-```tsx
+\`\`\`tsx
 // Text link variant
 <Button asChild variant="textLink" className="font-mono">
   <Link href="/skin-analysis">
     Start My Journey
   </Link>
 </Button>
-```
+\`\`\`
 
 ### AI Skin Analysis CTA
-```tsx
+\`\`\`tsx
 // Large filled button
 <Button asChild size="lg" className="font-mono">
   <Link href="/skin-analysis">Analyze My Skin</Link>
 </Button>
-```
+\`\`\`
 
 ### Scan CTA Component
-```tsx
+\`\`\`tsx
 <Button asChild size="lg" className="font-mono">
   <Link href="/skin-analysis">
     Create My Formula
   </Link>
 </Button>
-```
+\`\`\`
 
 ### Product Card Add Button
-```tsx
+\`\`\`tsx
 // Custom circular button (special case)
 <button className="bg-[#586158] rounded-full size-[32px]">
   <Plus className="h-5 w-5 text-[#f5f6f5]" />
 </button>
-```
+\`\`\`
 
 ### Cart Footer
-```tsx
+\`\`\`tsx
 <Button size="lg" className="w-full font-mono">
   CHECKOUT $178
 </Button>
-```
+\`\`\`
 
 ---
 
@@ -292,7 +292,7 @@ Consistent button styling system using monospace typography and harmonized varia
 
 ## Component Props
 
-```tsx
+\`\`\`tsx
 interface ButtonProps {
   variant?: 
     | "default"      // Filled primary button
@@ -315,14 +315,14 @@ interface ButtonProps {
   disabled?: boolean
   className?: string
 }
-```
+\`\`\`
 
 ---
 
 ## Migration Guide
 
 ### Before (Old Styles)
-```tsx
+\`\`\`tsx
 // Inconsistent custom styling
 <Link className="font-mono text-sm text-foreground underline...">
   Start My Journey
@@ -331,10 +331,10 @@ interface ButtonProps {
 <Button className="font-mono rounded-lg">
   Analyze My Skin
 </Button>
-```
+\`\`\`
 
 ### After (New System)
-```tsx
+\`\`\`tsx
 // Consistent button variants
 <Button asChild variant="textLink" className="font-mono">
   <Link href="/skin-analysis">Start My Journey</Link>
@@ -343,7 +343,7 @@ interface ButtonProps {
 <Button asChild size="lg" className="font-mono">
   <Link href="/skin-analysis">Analyze My Skin</Link>
 </Button>
-```
+\`\`\`
 
 ---
 

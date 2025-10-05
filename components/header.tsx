@@ -33,7 +33,7 @@ export function Header() {
               <Sheet>
                 <SheetTrigger asChild>
                   <Button variant="ghost" size="icon" className="md:hidden">
-                    <Menu className="h-6 w-6" />
+                    <Menu className="h-[30px] w-[30px]" />
                   </Button>
                 </SheetTrigger>
                 <SheetContent side="left" className="px-5 py-5 w-fit">
@@ -42,8 +42,8 @@ export function Header() {
               </Sheet>
 
               <div className="hidden md:flex items-center gap-2">
-                <Flag className="h-6 w-6 text-muted-foreground" />
-                <Phone className="h-6 w-6 text-muted-foreground" />
+                <Flag className="h-[30px] w-[30px] text-muted-foreground" />
+                <Phone className="h-[30px] w-[30px] text-muted-foreground" />
               </div>
             </div>
 
@@ -58,7 +58,7 @@ export function Header() {
             <div className="flex items-center gap-2 justify-end">
               <Link href="/cart">
                 <Button variant="ghost" size="icon" className="relative">
-                  <ShoppingCart className="h-6 w-6" />
+                  <ShoppingCart className="h-[30px] w-[30px]" />
                   {totalItems > 0 && (
                     <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-xs font-mono rounded-full h-5 w-5 flex items-center justify-center">
                       {totalItems}
@@ -67,7 +67,7 @@ export function Header() {
                 </Button>
               </Link>
               <Button variant="ghost" size="icon">
-                <User className="h-6 w-6" />
+                <User className="h-[30px] w-[30px]" />
               </Button>
             </div>
           </div>
@@ -134,7 +134,7 @@ function MobileNav() {
           className="text-lg hover:text-primary transition-colors flex items-center justify-between w-full font-sans font-medium text-muted-foreground"
         >
           Shop by Trait
-          <ChevronDown className={`h-6 w-6 transition-transform ${isTraitExpanded ? "rotate-180" : ""}`} />
+          <ChevronDown className={`h-[30px] w-[30px] transition-transform ${isTraitExpanded ? "rotate-180" : ""}`} />
         </button>
         {isTraitExpanded && (
           <div className="flex flex-col gap-3 pl-4 mt-3">

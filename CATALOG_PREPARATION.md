@@ -23,17 +23,17 @@ This guide outlines the implementation plan for enhancing product list and detai
 **Priority**: High
 
 **Components to Create**:
-```typescript
+\`\`\`typescript
 // components/product-filters.tsx
 - Price range slider
 - Trait multi-select
 - Category filter
 - In-stock toggle
 - Sort dropdown (price, name, recommended)
-```
+\`\`\`
 
 **Implementation**:
-```typescript
+\`\`\`typescript
 interface FilterState {
   priceRange: [number, number]
   selectedTraits: string[]
@@ -41,7 +41,7 @@ interface FilterState {
   inStockOnly: boolean
   sortBy: 'price-asc' | 'price-desc' | 'name' | 'recommended'
 }
-```
+\`\`\`
 
 **Files to Modify**:
 - `app/shop/page.tsx` - Add filter state and logic
@@ -65,7 +65,7 @@ interface FilterState {
    - Add "Load More" button fallback
 
 **Implementation**:
-```typescript
+\`\`\`typescript
 // lib/hooks/use-pagination.ts
 export function usePagination(items: Product[], itemsPerPage = 12) {
   const [page, setPage] = useState(1)
@@ -74,7 +74,7 @@ export function usePagination(items: Product[], itemsPerPage = 12) {
   
   return { paginatedItems, page, setPage, totalPages }
 }
-```
+\`\`\`
 
 ---
 
@@ -82,7 +82,7 @@ export function usePagination(items: Product[], itemsPerPage = 12) {
 **Priority**: Medium
 
 **Components to Create**:
-```typescript
+\`\`\`typescript
 // components/product-card-skeleton.tsx
 export function ProductCardSkeleton() {
   return (
@@ -95,10 +95,10 @@ export function ProductCardSkeleton() {
     </Card>
   )
 }
-```
+\`\`\`
 
 **Usage**:
-```typescript
+\`\`\`typescript
 // In shop page
 {isLoading ? (
   <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5">
@@ -109,7 +109,7 @@ export function ProductCardSkeleton() {
 ) : (
   // Actual products
 )}
-```
+\`\`\`
 
 ---
 
@@ -117,17 +117,17 @@ export function ProductCardSkeleton() {
 **Priority**: High
 
 **Implement React.memo**:
-```typescript
+\`\`\`typescript
 // components/product-card.tsx
 export const ProductCard = React.memo(function ProductCard({ product }: ProductCardProps) {
   // ... existing code
 }, (prevProps, nextProps) => {
   return prevProps.product.id === nextProps.product.id
 })
-```
+\`\`\`
 
 **Virtual Scrolling** (for 100+ products):
-```typescript
+\`\`\`typescript
 // Use react-window or react-virtual
 import { FixedSizeGrid } from 'react-window'
 
@@ -145,7 +145,7 @@ import { FixedSizeGrid } from 'react-window'
     </div>
   )}
 </FixedSizeGrid>
-```
+\`\`\`
 
 ---
 
@@ -157,7 +157,7 @@ import { FixedSizeGrid } from 'react-window'
 **Create**: `app/product/[id]/page.tsx`
 
 **Layout Structure**:
-```typescript
+\`\`\`typescript
 export default function ProductDetailPage({ params }: { params: { id: string } }) {
   const product = products.find(p => p.id === params.id)
   
@@ -184,7 +184,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
     </div>
   )
 }
-```
+\`\`\`
 
 ---
 
@@ -201,7 +201,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
 - Lightbox modal
 
 **Implementation**:
-```typescript
+\`\`\`typescript
 export function ProductImageGallery({ images }: { images: string[] }) {
   const [selectedIndex, setSelectedIndex] = useState(0)
   const [isZoomed, setIsZoomed] = useState(false)
@@ -248,7 +248,7 @@ export function ProductImageGallery({ images }: { images: string[] }) {
     </div>
   )
 }
-```
+\`\`\`
 
 ---
 
@@ -265,7 +265,7 @@ export function ProductImageGallery({ images }: { images: string[] }) {
 - Share button
 
 **Implementation**:
-```typescript
+\`\`\`typescript
 export function ProductActions({ product }: { product: Product }) {
   const [quantity, setQuantity] = useState(1)
   const { addItem } = useCart()
@@ -320,7 +320,7 @@ export function ProductActions({ product }: { product: Product }) {
     </div>
   )
 }
-```
+\`\`\`
 
 ---
 
@@ -330,7 +330,7 @@ export function ProductActions({ product }: { product: Product }) {
 **Create**: `components/related-products.tsx`
 
 **Logic**:
-```typescript
+\`\`\`typescript
 export function RelatedProducts({ category, currentId }: RelatedProductsProps) {
   const relatedProducts = useMemo(() => {
     return products
@@ -349,7 +349,7 @@ export function RelatedProducts({ category, currentId }: RelatedProductsProps) {
     </section>
   )
 }
-```
+\`\`\`
 
 ---
 
@@ -357,7 +357,7 @@ export function RelatedProducts({ category, currentId }: RelatedProductsProps) {
 **Priority**: Low
 
 **Data Structure**:
-```typescript
+\`\`\`typescript
 interface Review {
   id: string
   productId: string
@@ -370,10 +370,10 @@ interface Review {
   helpful: number
   createdAt: Date
 }
-```
+\`\`\`
 
 **Component**:
-```typescript
+\`\`\`typescript
 // components/product-reviews.tsx
 export function ProductReviews({ productId }: { productId: string }) {
   // Fetch reviews from API/database
@@ -381,7 +381,7 @@ export function ProductReviews({ productId }: { productId: string }) {
   // Show individual reviews
   // Add review form
 }
-```
+\`\`\`
 
 ---
 
@@ -390,7 +390,7 @@ export function ProductReviews({ productId }: { productId: string }) {
 ### 3.1 Extend Product Interface
 **File**: `lib/products.ts`
 
-```typescript
+\`\`\`typescript
 export interface Product {
   id: string
   name: string
@@ -415,7 +415,7 @@ export interface Product {
   rating?: number
   reviewCount?: number
 }
-```
+\`\`\`
 
 ---
 
@@ -423,10 +423,10 @@ export interface Product {
 **Options**:
 
 1. **JSON File** (Simple)
-   ```typescript
+   \`\`\`typescript
    // data/products.json
    import products from '@/data/products.json'
-   ```
+   \`\`\`
 
 2. **CMS Integration** (Scalable)
    - Contentful, Sanity, or Strapi
@@ -443,7 +443,7 @@ export interface Product {
 ## Phase 4: Performance Optimizations
 
 ### 4.1 Image Optimization
-```typescript
+\`\`\`typescript
 // next.config.mjs
 export default {
   images: {
@@ -452,10 +452,10 @@ export default {
     deviceSizes: [640, 750, 828, 1080, 1200],
   },
 }
-```
+\`\`\`
 
 ### 4.2 Route Optimization
-```typescript
+\`\`\`typescript
 // app/product/[id]/page.tsx
 export async function generateStaticParams() {
   return products.map((product) => ({
@@ -464,14 +464,14 @@ export async function generateStaticParams() {
 }
 
 export const dynamic = 'force-static'
-```
+\`\`\`
 
 ### 4.3 Code Splitting
-```typescript
+\`\`\`typescript
 // Lazy load heavy components
 const ProductImageGallery = dynamic(() => import('@/components/product-image-gallery'))
 const ProductReviews = dynamic(() => import('@/components/product-reviews'))
-```
+\`\`\`
 
 ---
 
@@ -512,7 +512,7 @@ const ProductReviews = dynamic(() => import('@/components/product-reviews'))
 
 ## Recommended Component Structure
 
-```
+\`\`\`
 components/
 ├── product/
 │   ├── product-card.tsx (existing)
@@ -529,7 +529,7 @@ components/
 │   └── cart-footer.tsx (existing)
 └── ui/
     └── ... (existing)
-```
+\`\`\`
 
 ---
 

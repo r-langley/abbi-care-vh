@@ -1,13 +1,12 @@
 "use client"
 
-import { useMemo, useState } from "react"
+import { useMemo } from "react"
 import { useSearchParams } from "next/navigation"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { ProductCard } from "@/components/product-card"
 import { products } from "@/lib/products"
 import { HeroSection } from "@/components/ui/hero-section"
-import { SectionHeading } from "@/components/ui/typography"
 import { PRODUCT_CATEGORIES, SHOP_CATEGORIES } from "@/lib/constants"
 import { TraitFilter } from "@/components/trait-filter"
 import { CartFooter } from "@/components/cart-footer"
@@ -23,16 +22,19 @@ export default function ShopPage() {
       title: "Creams",
       description: "Choose Lab Created or Mix-at-Home",
       image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-LEPlqvKzEkK6J5dqJznJE9V0ClyAgm.png",
+      imagePosition: "left" as const,
     },
     "simple-solutions": {
       title: "Simple Solutions",
       description: "Targeted treatments for specific concerns",
       image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-LEPlqvKzEkK6J5dqJznJE9V0ClyAgm.png",
+      imagePosition: "right" as const,
     },
     essentials: {
       title: "Essentials",
       description: "Daily basics for your routine",
       image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-LEPlqvKzEkK6J5dqJznJE9V0ClyAgm.png",
+      imagePosition: "left" as const,
     },
   }
 
@@ -41,20 +43,22 @@ export default function ShopPage() {
   // Optimized: Single memoized computation for both filtering and grouping
   const { filteredProducts, groupedCreams } = useMemo(() => {
     let filtered: typeof products
-    
+
     if (category === SHOP_CATEGORIES.CREAMS) {
-      const creamCategories = [PRODUCT_CATEGORIES.IN_LAB_CREAM, PRODUCT_CATEGORIES.MIX_AT_HOME_CREAM, PRODUCT_CATEGORIES.ACTIVE_CONCENTRATE] as const
+      const creamCategories = [
+        PRODUCT_CATEGORIES.IN_LAB_CREAM,
+        PRODUCT_CATEGORIES.MIX_AT_HOME_CREAM,
+        PRODUCT_CATEGORIES.ACTIVE_CONCENTRATE,
+      ] as const
       filtered = products.filter((p) => (creamCategories as readonly string[]).includes(p.category))
-      
+
       // Apply trait filters if selected
       if (selectedTraits.length > 0) {
-        filtered = filtered.filter((p) => 
-          selectedTraits.some(trait => 
-            p.traits.some(t => t.toLowerCase() === trait.toLowerCase())
-          )
+        filtered = filtered.filter((p) =>
+          selectedTraits.some((trait) => p.traits.some((t) => t.toLowerCase() === trait.toLowerCase())),
         )
       }
-      
+
       return {
         filteredProducts: filtered,
         groupedCreams: {
@@ -70,43 +74,46 @@ export default function ShopPage() {
     } else {
       filtered = products
     }
-    
+
     // Apply trait filters for non-cream categories
     if (selectedTraits.length > 0) {
-      filtered = filtered.filter((p) => 
-        selectedTraits.some(trait => 
-          p.traits.some(t => t.toLowerCase() === trait.toLowerCase())
-        )
+      filtered = filtered.filter((p) =>
+        selectedTraits.some((trait) => p.traits.some((t) => t.toLowerCase() === trait.toLowerCase())),
       )
     }
-    
+
     return { filteredProducts: filtered, groupedCreams: null }
   }, [category, selectedTraits])
 
   return (
     <>
       <Header />
-      <main className="min-h-screen pb-24">
+      <main className="min-h-screen pb-0">
         <HeroSection
           title={currentHero.title}
           description={currentHero.description}
           image={currentHero.image}
+          imagePosition={currentHero.imagePosition}
         />
-        
+
         <TraitFilter />
 
-        <div className="px-[10px] pt-[20px] pb-16">
+        <div className="py-5 px-5">
           {category === "creams" && groupedCreams ? (
-            <div className="space-y-[30px]">
+            <div className="space-y-10">
               {/* In Lab */}
               {groupedCreams.inLab.length > 0 && (
-                <div>
+                <div className="flex flex-col gap-[20px]">
                   {/* Show scan CTA if no traits are selected */}
                   {selectedTraits.length === 0 && <ScanCTA />}
-                  
-                  <div className="mb-[10px] px-[10px] mt-[20px]">
-                    <h2 className="font-semibold text-[24px] tracking-[-0.48px] text-[#586158] leading-[1.35]">In Lab</h2>
-                    <p className="font-medium text-[16px] tracking-[-0.32px] text-[#586158] mt-[10px] leading-[1.35]">Made-to-order in our French lab — just for you.</p>
+
+                  <div className="flex flex-col gap-[10px]">
+                    <h2 className="font-semibold text-[24px] tracking-[-0.48px] text-[#586158] leading-[1.35] text-foreground">
+                      In Lab
+                    </h2>
+                    <p className="font-medium text-[16px] tracking-[-0.32px] text-[#586158] leading-[1.35]">
+                      Made-to-order in our French lab — just for you.
+                    </p>
                   </div>
                   <div className="grid grid-cols-2 gap-[10px]">
                     {groupedCreams.inLab.map((product) => (
@@ -118,10 +125,12 @@ export default function ShopPage() {
 
               {/* Mix at Home */}
               {groupedCreams.mixAtHome.length > 0 && (
-                <div>
-                  <div className="mb-[10px] px-[10px]">
-                    <h2 className="font-semibold text-[20px] tracking-[-0.4px] text-[#586158]">Mix at Home</h2>
-                    <p className="font-medium text-[14px] tracking-[-0.28px] text-[#586158] mt-[5px]">Create your own routines. Mix a specific base and active concentrates.</p>
+                <div className="flex flex-col gap-[20px]">
+                  <div className="flex flex-col gap-[5px]">
+                    <h2 className="font-semibold text-[20px] tracking-[-0.4px] text-[#586158] text-foreground">Mix at Home</h2>
+                    <p className="font-medium text-[14px] tracking-[-0.28px] text-[#586158]">
+                      Create your own routines. Mix a specific base and active concentrates.
+                    </p>
                   </div>
                   <div className="grid grid-cols-2 gap-[10px]">
                     {groupedCreams.mixAtHome.map((product) => (
@@ -133,10 +142,12 @@ export default function ShopPage() {
 
               {/* Active Concentrates */}
               {groupedCreams.activeConcentrate.length > 0 && (
-                <div>
-                  <div className="mb-[10px] px-[10px]">
-                    <h2 className="font-semibold text-[20px] tracking-[-0.4px] text-[#586158]">Active Concentrates</h2>
-                    <p className="font-medium text-[14px] tracking-[-0.28px] text-[#586158] mt-[5px]">Targeted treatments to address specific skin concerns</p>
+                <div className="flex flex-col gap-[20px]">
+                  <div className="flex flex-col gap-[5px]">
+                    <h2 className="font-semibold text-[20px] tracking-[-0.4px] text-[#586158] text-foreground">Active Concentrates</h2>
+                    <p className="font-medium text-[14px] tracking-[-0.28px] text-[#586158]">
+                      Targeted treatments to address specific skin concerns
+                    </p>
                   </div>
                   <div className="grid grid-cols-2 gap-[10px]">
                     {groupedCreams.activeConcentrate.map((product) => (
@@ -156,10 +167,7 @@ export default function ShopPage() {
           )}
         </div>
       </main>
-      <CartFooter 
-        headingText="Review your Routine" 
-        buttonText="CHECKOUT" 
-      />
+      <CartFooter headingText="Review your Routine" buttonText="CHECKOUT" />
       <Footer />
     </>
   )

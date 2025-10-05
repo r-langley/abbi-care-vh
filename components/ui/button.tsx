@@ -9,34 +9,24 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default:
-          "bg-[#586158] text-[#f5f6f5] hover:opacity-90 rounded-[8px] font-semibold",
+        default: "bg-[#586158] text-[#f5f6f5] hover:opacity-90 rounded-[8px] font-semibold",
         destructive:
           "bg-[var(--button-destructive-bg)] text-[var(--button-destructive-text)] hover:opacity-90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60 rounded-[8px]",
         outline:
           "border border-[#586158] bg-transparent text-[#586158] hover:bg-[#586158] hover:text-[#f5f6f5] rounded-[8px] font-semibold",
-        secondary:
-          "bg-[#f5f6f5] text-[#586158] hover:opacity-80 rounded-[8px] font-semibold",
-        ghost:
-          "hover:bg-[#f5f6f5] hover:text-[#586158] rounded-[8px]",
-        link: 
-          "text-[#586158] underline-offset-4 hover:underline font-medium",
+        secondary: "bg-[#f5f6f5] text-[#586158] hover:opacity-80 rounded-[8px] font-semibold",
+        ghost: "hover:bg-[#f5f6f5] hover:text-[#586158] rounded-[8px]",
+        link: "text-[#586158] underline-offset-4 hover:underline font-medium px-0 py-0 h-auto rounded-none",
         textLink:
           "inline font-large text-[#586158] underline underline-offset-4 decoration-2 decoration-[#586158]/40 hover:decoration-[#586158] transition-colors px-0 py-0 h-auto rounded-none justify-start",
       },
       size: {
-        default:
-          "h-[40px] px-[16px] py-[8px] text-[12px]",
-        sm: 
-          "h-[32px] px-[12px] py-[6px] text-[12px]",
-        lg: 
-          "h-[40px] px-[20px] py-[10px] text-[14px]",
-        icon: 
-          "size-[40px] rounded-[8px]",
-        "icon-sm": 
-          "size-[32px] rounded-[8px]",
-        "icon-lg": 
-          "size-[48px] rounded-[8px]",
+        default: "h-[40px] px-[16px] py-[8px] text-[12px]",
+        sm: "h-[32px] px-[12px] py-[6px] text-[12px]",
+        lg: "h-[40px] px-[20px] py-[10px] text-[14px]",
+        icon: "size-[40px] rounded-[8px]",
+        "icon-sm": "size-[32px] rounded-[8px]",
+        "icon-lg": "size-[48px] rounded-[8px]",
       },
     },
     defaultVariants: {

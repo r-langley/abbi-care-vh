@@ -18,7 +18,7 @@ export function TabsNav({ tabs, baseUrl, paramName = "category" }: TabsNavProps)
   return (
     <nav className="border-border border-b-0">
       <div className="container mx-auto px-0">
-        <div className="flex items-stretch flex-row gap-0 justify-evenly">
+        <div className="grid grid-cols-3 gap-0">
           {tabs.map((tab) => {
             const isActive = currentValue === tab.value
             const href = `${baseUrl}?${paramName}=${tab.value}`
@@ -28,14 +28,12 @@ export function TabsNav({ tabs, baseUrl, paramName = "category" }: TabsNavProps)
                 key={tab.value}
                 href={href}
                 className={cn(
-                  "relative text-sm font-medium transition-colors hover:text-foreground py-2.5 px-2.5",
+                  "relative text-sm font-medium transition-colors hover:text-foreground py-2.5 text-center px-0",
                   isActive ? "text-foreground" : "text-muted-foreground",
                 )}
               >
                 {tab.label}
-                {isActive && (
-                  <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary" aria-hidden="true" />
-                )}
+                {isActive && <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary" aria-hidden="true" />}
               </Link>
             )
           })}

@@ -8,9 +8,9 @@ URL-based trait filtering system that allows users to filter products by one or 
 ## How It Works
 
 ### URL Structure
-```
+\`\`\`
 /shop?category=creams&traits=wrinkles,radiance,hydration
-```
+\`\`\`
 
 **Parameters**:
 - `category`: Product category (creams, simple-solutions, essentials)
@@ -21,12 +21,12 @@ URL-based trait filtering system that allows users to filter products by one or 
 ## User Flows
 
 ### 1. From Homepage "Shop by Trait"
-```tsx
+\`\`\`tsx
 // User clicks a trait card
 <Link href="/shop?category=creams&traits=wrinkles">
   Wrinkles
 </Link>
-```
+\`\`\`
 
 **Result**: 
 - Navigates to shop page
@@ -38,12 +38,12 @@ URL-based trait filtering system that allows users to filter products by one or 
 ---
 
 ### 2. From Side Menu
-```tsx
+\`\`\`tsx
 // Mobile navigation
 <NavLink href="/shop?category=creams&traits=radiance">
   Radiance
 </NavLink>
-```
+\`\`\`
 
 **Result**:
 - Same as homepage flow
@@ -53,10 +53,10 @@ URL-based trait filtering system that allows users to filter products by one or 
 ---
 
 ### 3. From Shop Page Trait Filter
-```tsx
+\`\`\`tsx
 // User clicks trait chips
 <TraitFilter />
-```
+\`\`\`
 
 **Behavior**:
 - Click to toggle trait on/off
@@ -68,13 +68,13 @@ URL-based trait filtering system that allows users to filter products by one or 
 ---
 
 ### 4. Multiple Trait Selection
-```
+\`\`\`
 Initial: /shop?category=creams
 Click "Wrinkles": /shop?category=creams&traits=wrinkles
 Click "Radiance": /shop?category=creams&traits=wrinkles,radiance
 Click "Wrinkles" again: /shop?category=creams&traits=radiance
 Click "All": /shop?category=creams
-```
+\`\`\`
 
 ---
 
@@ -91,7 +91,7 @@ Click "All": /shop?category=creams
 - Shows active state for selected traits
 
 **Key Functions**:
-```tsx
+\`\`\`tsx
 const selectedTraits = searchParams.get("traits")?.split(",").filter(Boolean) || []
 
 const toggleTrait = (traitId: string) => {
@@ -102,7 +102,7 @@ const toggleTrait = (traitId: string) => {
 const clearTraits = () => {
   // Remove all traits from URL
 }
-```
+\`\`\`
 
 ---
 
@@ -110,7 +110,7 @@ const clearTraits = () => {
 **File**: `app/shop/page.tsx`
 
 **Filtering Logic**:
-```tsx
+\`\`\`tsx
 const selectedTraits = searchParams.get("traits")?.split(",").filter(Boolean) || []
 
 // Filter products by selected traits
@@ -121,16 +121,16 @@ if (selectedTraits.length > 0) {
     )
   )
 }
-```
+\`\`\`
 
 **Conditional Rendering**:
-```tsx
+\`\`\`tsx
 // Show scan CTA only when no traits selected
 {selectedTraits.length === 0 && <ScanCTA />}
 
 // Show recommended badges only when traits selected
 <ProductCard showRecommended={selectedTraits.length > 0} />
-```
+\`\`\`
 
 ---
 
@@ -139,7 +139,7 @@ if (selectedTraits.length > 0) {
 ### 1. Homepage Trait Cards
 **Location**: `app/page.tsx` - "Shop by Trait" section
 
-```tsx
+\`\`\`tsx
 {traits.map((trait) => (
   <Link href={`/shop?category=creams&traits=${trait.id}`}>
     <Card>
@@ -147,7 +147,7 @@ if (selectedTraits.length > 0) {
     </Card>
   </Link>
 ))}
-```
+\`\`\`
 
 **Traits Available**:
 - Wrinkles
@@ -164,11 +164,11 @@ if (selectedTraits.length > 0) {
 ### 2. Mobile Side Menu
 **Location**: `components/header.tsx` - MobileNav component
 
-```tsx
+\`\`\`tsx
 <NavLink href="/shop?category=creams&traits=wrinkles">
   Wrinkles
 </NavLink>
-```
+\`\`\`
 
 **Expandable Section**:
 - "Shop by Trait" dropdown
@@ -191,16 +191,16 @@ if (selectedTraits.length > 0) {
 ## Filtering Behavior
 
 ### Single Trait
-```
+\`\`\`
 URL: /shop?category=creams&traits=wrinkles
 Result: Shows products that have "Wrinkles" in their traits array
-```
+\`\`\`
 
 ### Multiple Traits (OR Logic)
-```
+\`\`\`
 URL: /shop?category=creams&traits=wrinkles,radiance
 Result: Shows products that have EITHER "Wrinkles" OR "Radiance"
-```
+\`\`\`
 
 **Note**: Uses OR logic, not AND. Products matching ANY selected trait are shown.
 
@@ -230,7 +230,7 @@ Result: Shows products that have EITHER "Wrinkles" OR "Radiance"
 ## Product Filtering Logic
 
 ### In Lab Creams
-```tsx
+\`\`\`tsx
 if (selectedTraits.length > 0) {
   filtered = filtered.filter((p) => 
     selectedTraits.some(trait => 
@@ -238,16 +238,16 @@ if (selectedTraits.length > 0) {
     )
   )
 }
-```
+\`\`\`
 
 ### Grouping After Filtering
-```tsx
+\`\`\`tsx
 groupedCreams: {
   inLab: filtered.filter((p) => p.category === "In-Lab Cream"),
   mixAtHome: filtered.filter((p) => p.category === "Mix at Home Cream"),
   activeConcentrate: filtered.filter((p) => p.category === "Active Concentrate"),
 }
-```
+\`\`\`
 
 **Result**: Each section only shows products matching selected traits
 
@@ -256,13 +256,13 @@ groupedCreams: {
 ## URL State Management
 
 ### Reading State
-```tsx
+\`\`\`tsx
 const searchParams = useSearchParams()
 const selectedTraits = searchParams.get("traits")?.split(",").filter(Boolean) || []
-```
+\`\`\`
 
 ### Updating State
-```tsx
+\`\`\`tsx
 const params = new URLSearchParams(searchParams.toString())
 
 // Add trait
@@ -276,18 +276,18 @@ params.set("traits", newTraits.join(","))
 params.delete("traits")
 
 router.push(`/shop?${params.toString()}`)
-```
+\`\`\`
 
 ---
 
 ## Performance Optimizations
 
 ### Memoized Filtering
-```tsx
+\`\`\`tsx
 const { filteredProducts, groupedCreams } = useMemo(() => {
   // Filtering logic
 }, [category, selectedTraits])
-```
+\`\`\`
 
 **Benefits**:
 - Only re-filters when category or traits change
@@ -324,29 +324,29 @@ const { filteredProducts, groupedCreams } = useMemo(() => {
 
 ### Skin Analysis Page
 **Future Enhancement**:
-```tsx
+\`\`\`tsx
 // After AI scan completes
 const detectedTraits = ["wrinkles", "spots", "hydration"]
 router.push(`/shop?category=creams&traits=${detectedTraits.join(",")}`)
-```
+\`\`\`
 
 ### Product Recommendations
 **Current**:
-```tsx
+\`\`\`tsx
 // Products marked as recommended
 {
   id: "inlab-aloe-vera",
   recommended: true,
   traits: ["Hydration", "Sensitivity"]
 }
-```
+\`\`\`
 
 **Display Logic**:
-```tsx
+\`\`\`tsx
 {showRecommended && product.recommended && (
   <ProductBadge>Recommended</ProductBadge>
 )}
-```
+\`\`\`
 
 ---
 
@@ -374,35 +374,35 @@ router.push(`/shop?category=creams&traits=${detectedTraits.join(",")}`)
 ## Future Enhancements
 
 ### 1. AND Logic Option
-```tsx
+\`\`\`tsx
 // Show products matching ALL selected traits
 filtered = filtered.filter((p) => 
   selectedTraits.every(trait => 
     p.traits.some(t => t.toLowerCase() === trait.toLowerCase())
   )
 )
-```
+\`\`\`
 
 ### 2. Trait Count Badges
-```tsx
+\`\`\`tsx
 <button>
   Wrinkles
   <span className="badge">12</span> {/* 12 products */}
 </button>
-```
+\`\`\`
 
 ### 3. Filter Persistence
-```tsx
+\`\`\`tsx
 // Save to localStorage
 localStorage.setItem("lastTraitFilter", selectedTraits.join(","))
-```
+\`\`\`
 
 ### 4. AI-Powered Recommendations
-```tsx
+\`\`\`tsx
 // After skin scan
 const aiRecommendedTraits = await analyzeSkin(image)
 router.push(`/shop?traits=${aiRecommendedTraits.join(",")}`)
-```
+\`\`\`
 
 ---
 
@@ -410,21 +410,21 @@ router.push(`/shop?traits=${aiRecommendedTraits.join(",")}`)
 
 ### Adding a New Trait
 1. Add to `lib/products.ts`:
-```tsx
+\`\`\`tsx
 export const traits = [
   // ...existing traits
   { id: "firmness", name: "Firmness" },
 ]
-```
+\`\`\`
 
 2. Update products with new trait:
-```tsx
+\`\`\`tsx
 {
   id: "product-1",
   traits: ["Wrinkles", "Firmness"],
   // ...
 }
-```
+\`\`\`
 
 3. Trait automatically appears in:
    - Homepage trait cards
@@ -434,7 +434,7 @@ export const traits = [
 ### Customizing Filter Logic
 **File**: `app/shop/page.tsx`
 
-```tsx
+\`\`\`tsx
 // Change from OR to AND logic
 if (selectedTraits.length > 0) {
   filtered = filtered.filter((p) => 
@@ -443,7 +443,7 @@ if (selectedTraits.length > 0) {
     )
   )
 }
-```
+\`\`\`
 
 ---
 

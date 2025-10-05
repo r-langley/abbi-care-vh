@@ -20,11 +20,11 @@ This review analyzes the ABBI skincare e-commerce application's design system, i
 **Location**: `app/globals.css` lines 169-240
 
 **Issue**: Duplicate token mapping in `@theme inline` block
-```css
+\`\`\`css
 /* Redundant mappings */
 --color-background: var(--background);
 --color-foreground: var(--foreground);
-```
+\`\`\`
 
 **Impact**: 
 - Increases CSS bundle size (~2KB)
@@ -39,9 +39,9 @@ This review analyzes the ABBI skincare e-commerce application's design system, i
 **Location**: `components/ui/button.tsx` lines 7-41
 
 **Issue**: Using CSS custom properties for every variant property creates verbose class strings
-```tsx
+\`\`\`tsx
 bg-[var(--button-default-bg)] text-[var(--button-default-text)]
-```
+\`\`\`
 
 **Impact**:
 - Larger DOM strings
@@ -56,11 +56,11 @@ bg-[var(--button-default-bg)] text-[var(--button-default-text)]
 **Location**: `components/ui/typography.tsx` line 70
 
 **Issue**: `BodyText` component returns `null`
-```tsx
+\`\`\`tsx
 export function BodyText({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
   return null
 }
-```
+\`\`\`
 
 **Impact**: Dead code, potential confusion
 
@@ -74,10 +74,10 @@ export function BodyText({ className, ...props }: React.HTMLAttributes<HTMLParag
 **Location**: `lib/cart-context.tsx`
 
 **Issue**: Cart calculations run on every render
-```tsx
+\`\`\`tsx
 const totalItems = items.reduce((sum, item) => sum + item.quantity, 0)
 const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0)
-```
+\`\`\`
 
 **Impact**: Unnecessary computations when context consumers re-render
 
@@ -89,10 +89,10 @@ const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0
 **Location**: `app/shop/page.tsx` lines 39-58
 
 **Issue**: Multiple `useMemo` hooks with overlapping dependencies
-```tsx
+\`\`\`tsx
 const filteredProducts = useMemo(() => { ... }, [category])
 const groupedCreams = useMemo(() => { ... }, [category, filteredProducts])
-```
+\`\`\`
 
 **Impact**: Cascading re-computations
 
@@ -104,11 +104,11 @@ const groupedCreams = useMemo(() => { ... }, [category, filteredProducts])
 **Location**: `lib/cart-context.tsx` lines 34-37
 
 **Issue**: Saves to localStorage on every cart change
-```tsx
+\`\`\`tsx
 useEffect(() => {
   localStorage.setItem("abbi-cart", JSON.stringify(items))
 }, [items])
-```
+\`\`\`
 
 **Impact**: 
 - Blocks main thread on every update
@@ -122,9 +122,9 @@ useEffect(() => {
 **Location**: Multiple files (e.g., `components/product-card.tsx`)
 
 **Issue**: No explicit image sizing or priority hints
-```tsx
+\`\`\`tsx
 <Image src={product.image} alt={product.name} fill />
-```
+\`\`\`
 
 **Impact**: Potential layout shift, slower LCP
 
@@ -153,13 +153,13 @@ useEffect(() => {
 **Location**: `components/cart-footer.tsx` lines 8-15
 
 **Issue**: All props optional with defaults, but some should be required
-```tsx
+\`\`\`tsx
 interface CartFooterProps {
   headingText?: string
   buttonText?: string
   // ... all optional
 }
-```
+\`\`\`
 
 **Recommendation**: Make semantic distinction between customizable and structural props
 
@@ -169,10 +169,10 @@ interface CartFooterProps {
 **Location**: Multiple files
 
 **Issue**: Hardcoded strings scattered throughout
-```tsx
+\`\`\`tsx
 if (product.category === "In-Lab Cream") // shop/page.tsx
 localStorage.getItem("abbi-cart") // cart-context.tsx
-```
+\`\`\`
 
 **Recommendation**: Create constants file for categories, storage keys, etc.
 
@@ -184,7 +184,7 @@ localStorage.getItem("abbi-cart") // cart-context.tsx
 **Current**: 25+ CSS variables for buttons
 **Recommendation**: Reduce to 8 semantic tokens
 
-```css
+\`\`\`css
 /* Before: 25 variables */
 --button-default-bg
 --button-default-text
@@ -201,7 +201,7 @@ localStorage.getItem("abbi-cart") // cart-context.tsx
 --button-radius
 --button-transition
 --button-height-base
-```
+\`\`\`
 
 ---
 
@@ -209,13 +209,13 @@ localStorage.getItem("abbi-cart") // cart-context.tsx
 **Current**: 8 variables
 **Recommendation**: Consolidate to 4
 
-```css
+\`\`\`css
 /* Consolidate these */
 --cart-footer-bg → use --secondary
 --cart-footer-text → use --foreground
 --cart-footer-button-bg → use --primary
 --cart-footer-button-text → use --primary-foreground
-```
+\`\`\`
 
 ---
 
@@ -225,12 +225,12 @@ localStorage.getItem("abbi-cart") // cart-context.tsx
 **Location**: `lib/products.ts`
 
 **Issue**: String literals without type constraints
-```tsx
+\`\`\`tsx
 category: string // Should be union type
-```
+\`\`\`
 
 **Recommendation**: 
-```tsx
+\`\`\`tsx
 type ProductCategory = 
   | "In-Lab Cream" 
   | "Mix at Home Cream" 
@@ -242,7 +242,7 @@ export interface Product {
   category: ProductCategory
   // ...
 }
-```
+\`\`\`
 
 ---
 
@@ -250,7 +250,7 @@ export interface Product {
 **Issue**: No TypeScript types for CSS custom properties
 
 **Recommendation**: Create design token types
-```tsx
+\`\`\`tsx
 type DesignToken = {
   colors: {
     primary: string
@@ -261,7 +261,7 @@ type DesignToken = {
     // ...
   }
 }
-```
+\`\`\`
 
 ---
 

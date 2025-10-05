@@ -98,11 +98,11 @@ Pixel-perfect implementation of the Shop-Creams page based on Figma design (node
 ## Design Tokens Used
 
 ### Colors
-```css
+\`\`\`css
 --sea-slate: #586158
 --sage: #f5f6f5
 --border: #ced1ce
-```
+\`\`\`
 
 ### Typography
 - **Figtree**: SemiBold, Medium (body text)
