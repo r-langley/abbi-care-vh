@@ -58,17 +58,16 @@ export default function CheckoutPage() {
     return fields
   }, [email, firstName, lastName, address, city, state, zipCode, cardNumber, expiryDate, cvv])
 
-  const handleSubmit = async () => {
-    console.log("[v0] Checkout handleSubmit called")
+  const handlePayment = async () => {
+    console.log("[v0] === PAYMENT FLOW STARTED ===")
     console.log("[v0] isFormComplete:", isFormComplete)
-    console.log("[v0] missingFields:", missingFields)
 
     if (!isFormComplete) {
-      console.log("[v0] Form incomplete, aborting")
+      console.log("[v0] Form incomplete, aborting payment")
       return
     }
 
-    console.log("[v0] Form complete, processing payment...")
+    console.log("[v0] Starting payment processing...")
     setIsProcessing(true)
 
     // Simulate payment processing
@@ -78,9 +77,10 @@ export default function CheckoutPage() {
     const orderNumber = `ABBI-${Date.now().toString().slice(-8)}`
     const orderTotal = total.toFixed(2)
 
-    console.log("[v0] Payment processed successfully")
-    console.log("[v0] Order number:", orderNumber)
-    console.log("[v0] Navigating to order confirmation...")
+    console.log("[v0] Payment SUCCESS!")
+    console.log("[v0] Order Number:", orderNumber)
+    console.log("[v0] Order Total:", orderTotal)
+    console.log("[v0] Navigating to: /order-confirmation")
 
     // Navigate to order confirmation
     router.push(`/order-confirmation?orderNumber=${orderNumber}&total=${orderTotal}`)
@@ -287,7 +287,7 @@ export default function CheckoutPage() {
         </div>
       </main>
       <CheckoutFooter
-        onSubmit={handleSubmit}
+        onAction={handlePayment}
         total={total}
         isProcessing={isProcessing}
         isFormComplete={isFormComplete}

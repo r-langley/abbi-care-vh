@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
 interface CheckoutFooterProps {
-  onSubmit: () => void
+  onAction: () => void
   total: number
   isProcessing?: boolean
   isFormComplete?: boolean
@@ -13,7 +13,7 @@ interface CheckoutFooterProps {
 }
 
 export function CheckoutFooter({
-  onSubmit,
+  onAction,
   total,
   isProcessing = false,
   isFormComplete = false,
@@ -36,10 +36,9 @@ export function CheckoutFooter({
   }
 
   const handleClick = () => {
-    console.log("[v0] Checkout footer button clicked")
-    console.log("[v0] isFormComplete:", isFormComplete)
-    console.log("[v0] isProcessing:", isProcessing)
-    onSubmit()
+    console.log("[v0] CheckoutFooter button clicked")
+    console.log("[v0] Calling onAction...")
+    onAction()
   }
 
   return (
