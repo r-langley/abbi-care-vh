@@ -1,123 +1,84 @@
-import { Header } from "@/components/header"
-import { Footer } from "@/components/footer"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { DevicePhoneMobileIcon, SparklesIcon, ArrowsPointingInIcon } from "@heroicons/react/24/solid"
-import { PageTitle, SectionHeading, CardTitle, BodyText } from "@/components/ui/typography"
+"use client"
+
+import Image from "next/image"
 import Link from "next/link"
+import { DevicePhoneMobileIcon, XMarkIcon, ChevronRightIcon } from "@heroicons/react/24/solid"
 
 export default function SkinAnalysisPage() {
   return (
-    <>
-      <Header />
-      <main className="min-h-screen">
-        {/* Hero */}
-        <section className="bg-gradient-to-b from-muted/30 to-background py-20">
-          <div className="container mx-auto px-4 text-center">
-            <div className="flex justify-center mb-6">
-              <div className="bg-primary/10 p-6 rounded-full">
-                <DevicePhoneMobileIcon className="h-12 w-12 text-primary" />
-              </div>
-            </div>
-            <PageTitle className="mb-6">AI-Powered Skin Analysis</PageTitle>
-            <BodyText className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Get personalized skincare recommendations with 97% dermatologist-level accuracy
-            </BodyText>
-            <Button size="lg" className="font-mono">
-              Start Your Analysis
-            </Button>
+    <div className="bg-white min-h-screen flex flex-col">
+      {/* Header */}
+      <div className="backdrop-blur-sm bg-white/75 p-5 flex items-end justify-between">
+        <div className="flex items-center justify-between w-full">
+          <div className="w-[32px]" />
+          <div className="flex items-center justify-center">
+            <Image src="/images/logo.png" alt="ABBI" width={80} height={25} className="h-[25px] w-auto" />
           </div>
-        </section>
+          <Link href="/" className="w-[32px] flex justify-end">
+            <XMarkIcon className="size-6 text-[#1e1e1e]" />
+          </Link>
+        </div>
+      </div>
 
-        {/* How It Works */}
-        <section className="py-20">
-          <div className="container mx-auto px-4">
-            <SectionHeading>How It Works</SectionHeading>
-            <div className="grid grid-cols-1 md:grid-cols-3 max-w-5xl mx-auto gap-2.5">
-              <Card className="shadow-none">
-                <CardContent className="px-8 text-center">
-                  <div className="flex justify-center mb-6">
-                    <div className="bg-primary/10 p-4 rounded-full">
-                      <DevicePhoneMobileIcon className="h-8 w-8 text-primary" />
-                    </div>
-                  </div>
-                  <CardTitle className="mb-3">1. Take a Selfie</CardTitle>
-                  <BodyText className="text-muted-foreground">
-                    Upload a clear photo of your face in good lighting
-                  </BodyText>
-                </CardContent>
-              </Card>
-              <Card className="shadow-none">
-                <CardContent className="px-8 text-center">
-                  <div className="flex justify-center mb-6">
-                    <div className="bg-primary/10 p-4 rounded-full">
-                      <ArrowsPointingInIcon className="h-8 w-8 text-primary" />
-                    </div>
-                  </div>
-                  <CardTitle className="mb-3">2. AI Analysis</CardTitle>
-                  <BodyText className="text-muted-foreground">
-                    Our AI analyzes 8 key skin traits with precision
-                  </BodyText>
-                </CardContent>
-              </Card>
-              <Card className="shadow-none">
-                <CardContent className="px-8 text-center">
-                  <div className="flex justify-center mb-6">
-                    <div className="bg-primary/10 p-4 rounded-full">
-                      <SparklesIcon className="h-8 w-8 text-primary" />
-                    </div>
-                  </div>
-                  <CardTitle className="mb-3">3. Get Recommendations</CardTitle>
-                  <BodyText className="text-muted-foreground">Receive personalized product suggestions</BodyText>
-                </CardContent>
-              </Card>
-            </div>
+      {/* Main Content */}
+      <div className="flex-1 flex flex-col items-center px-5 pt-6">
+        {/* Image Preview */}
+        <div className="w-full max-w-[354px] h-[354px] rounded-[40px] overflow-hidden mb-6">
+          <div className="w-full h-full bg-[#f5f6f5] flex items-center justify-center">
+            <div className="text-[#586158] text-sm">Preview Image</div>
           </div>
-        </section>
+        </div>
 
-        {/* 8 Skin Traits */}
-        <section className="bg-muted/30 py-10">
-          <div className="container mx-auto px-4">
-            <SectionHeading spacing="tight">8 Skin Traits We Analyze</SectionHeading>
-            <BodyText className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
-              Our AI evaluates your skin across multiple dimensions to create a complete profile
-            </BodyText>
-            <div className="grid grid-cols-2 md:grid-cols-4 max-w-4xl mx-auto gap-2.5">
-              {["Wrinkles", "Radiance", "Imperfections", "Spots", "Hydration", "Sensitivity", "Shine", "Texture"].map(
-                (trait) => (
-                  <Link
-                    key={trait}
-                    href={`/shop?trait=${trait.toLowerCase()}`}
-                    className="block transition-transform hover:scale-105"
-                  >
-                    <Card className="text-center shadow-none rounded-lg cursor-pointer hover:shadow-md transition-shadow">
-                      <CardContent className="px-6">
-                        <p className="font-mono">{trait}</p>
-                      </CardContent>
-                    </Card>
-                  </Link>
-                ),
-              )}
-            </div>
-          </div>
-        </section>
+        {/* Start Button */}
+        <button className="bg-[#586158] text-white w-full max-w-[353px] rounded-lg px-4 py-3 flex items-center justify-center gap-2 mb-5 hover:opacity-90 transition-opacity">
+          <DevicePhoneMobileIcon className="size-[22px]" />
+          <span className="font-semibold text-[20px]">Start my analysis</span>
+        </button>
 
-        {/* CTA */}
-        <section className="py-20">
-          <div className="container mx-auto px-4 text-center">
-            <div className="max-w-2xl mx-auto">
-              <SectionHeading className="mb-6">Ready to Discover Your Perfect Formula?</SectionHeading>
-              <BodyText className="text-muted-foreground mb-8">
-                Start your free skin analysis now and unlock personalized skincare recommendations
-              </BodyText>
-              <Button size="lg" className="font-mono">
-                Start Free Analysis
-              </Button>
+        {/* Steps */}
+        <div className="w-full max-w-[353px] grid grid-cols-3 gap-[5px] mb-5">
+          {/* Step 1 */}
+          <div className="bg-[#f5f6f5] rounded-[10px] p-[10px] flex flex-col gap-6">
+            <p className="font-medium text-[40px] leading-[1.15] text-[#586158] tracking-[-0.8px]">1</p>
+            <div className="flex flex-col gap-[5px] text-[#586158] leading-[1.15]">
+              <p className="font-semibold text-[16px] tracking-[-0.32px]">Lighting</p>
+              <p className="font-medium text-[12px] opacity-75">
+                Stand somewhere with strong balanced lighting
+              </p>
             </div>
           </div>
-        </section>
-      </main>
-      <Footer />
-    </>
+
+          {/* Step 2 */}
+          <div className="bg-[#f5f6f5] rounded-[10px] p-[10px] flex flex-col gap-6">
+            <p className="font-medium text-[40px] leading-[1.15] text-[#586158] tracking-[-0.8px]">2</p>
+            <div className="flex flex-col gap-[5px] text-[#586158] leading-[1.15]">
+              <p className="font-semibold text-[16px] tracking-[-0.32px]">Framing</p>
+              <p className="font-medium text-[12px] tracking-[-0.24px] opacity-75">
+                Remove glasses and ensure your face is clear
+              </p>
+            </div>
+          </div>
+
+          {/* Step 3 */}
+          <div className="bg-[#f5f6f5] rounded-[10px] p-[10px] flex flex-col gap-6">
+            <p className="font-medium text-[40px] leading-[1.15] text-[#586158] tracking-[-0.8px]">3</p>
+            <div className="flex flex-col gap-[5px] text-[#586158] leading-[1.15]">
+              <p className="font-semibold text-[16px] tracking-[-0.32px]">Distance</p>
+              <p className="font-medium text-[12px] tracking-[-0.24px] opacity-75">
+                Get close and steady for optimal results
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* How it works link */}
+        <div className="flex items-center gap-[5px]">
+          <p className="font-medium text-[16px] tracking-[-0.32px] text-[#586158] leading-[1.35]">
+            How it works
+          </p>
+          <ChevronRightIcon className="size-4 text-[#586158]" />
+        </div>
+      </div>
+    </div>
   )
 }

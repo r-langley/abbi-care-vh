@@ -117,13 +117,13 @@ function MobileNav() {
       <NavLink href="/shop" variant="mobile">
         Shop All
       </NavLink>
-      <NavLink href="/personalized-creams" variant="mobile">
-        Personalized Creams
+      <NavLink href="/shop?category=creams" variant="mobile">
+        Creams
       </NavLink>
-      <NavLink href="/essentials" variant="mobile">
+      <NavLink href="/shop?category=essentials" variant="mobile">
         Essentials
       </NavLink>
-      <NavLink href="/simple-solutions" variant="mobile">
+      <NavLink href="/shop?category=simple-solutions" variant="mobile">
         Simple Solutions
       </NavLink>
 

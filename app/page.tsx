@@ -9,6 +9,7 @@ import { PageTitle, SectionHeading, SectionOverline, BodyText, SmallText } from 
 import { SectionContainer } from "@/components/ui/section-container"
 import { ParallaxImage } from "@/components/parallax-image"
 import { CategoryCarousel } from "@/components/category-carousel"
+import { FaqSection } from "@/components/faq-section"
 import { ClockIcon, SparklesIcon, ArrowsPointingInIcon, MagnifyingGlassIcon, BeakerIcon, SunIcon, Squares2X2Icon } from "@heroicons/react/24/solid"
 import type React from "react"
 
@@ -127,6 +128,9 @@ export default function HomePage() {
             </div>
           </div>
         </SectionContainer>
+
+        {/* FAQ Section */}
+        <FaqSection />
       </main>
       <Footer />
     </>

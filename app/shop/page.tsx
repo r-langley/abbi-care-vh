@@ -11,6 +11,7 @@ import { PRODUCT_CATEGORIES, SHOP_CATEGORIES } from "@/lib/constants"
 import { TraitFilter } from "@/components/trait-filter"
 import { CartFooter } from "@/components/cart-footer"
 import { ScanCTA } from "@/components/scan-cta"
+import { ProductCombos } from "@/components/product-combos"
 
 export default function ShopPage() {
   const searchParams = useSearchParams()
@@ -178,6 +179,9 @@ export default function ShopPage() {
                   </div>
                 </div>
               )}
+
+              {/* Product Combos */}
+              <ProductCombos />
             </div>
           ) : (
             // Other categories show standard grid
