@@ -2,8 +2,14 @@
 
 import Link from "next/link"
 import Image from "next/image"
-import { Bars3Icon, ShoppingCartIcon, UserCircleIcon, PhoneIcon, FlagIcon, ChevronDownIcon } from "@heroicons/react/24/solid"
-import { Button } from "@/components/ui/button"
+import {
+  Bars3Icon,
+  ShoppingBagIcon,
+  UserCircleIcon,
+  PhoneIcon,
+  FlagIcon,
+  ChevronDownIcon,
+} from "@heroicons/react/24/solid"
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet"
 import { useCart } from "@/lib/cart-context"
 import { usePathname } from "next/navigation"
@@ -56,9 +62,9 @@ export function Header() {
             </div>
 
             {/* Right: Cart + Account */}
-            <div className="flex items-center gap-2 justify-end">
+            <div className="flex items-center justify-end gap-0">
               <Link href="/cart" className="relative p-2 hover:bg-[#f5f6f5] rounded-[8px] transition-colors">
-                <ShoppingCartIcon className="w-6 h-6 md:w-7 md:h-7" />
+                <ShoppingBagIcon className="w-6 h-6 md:w-7 md:h-7" />
                 {totalItems > 0 && (
                   <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-xs font-mono rounded-full h-5 w-5 flex items-center justify-center">
                     {totalItems}
