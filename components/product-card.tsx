@@ -46,7 +46,12 @@ export function ProductCard({ product, showRecommended = false }: ProductCardPro
       <Link href={isInLabCream ? "#" : `/product/${product.id}`} onClick={handleCardClick} className="block h-full">
         <div className="bg-white rounded-[10px] border-2 border-[#f5f6f5] overflow-hidden relative flex flex-col h-full">
           <div className="relative h-[160px] overflow-hidden">
-            <Image src="/placeholder.svg?height=160&width=300" alt={product.name} fill className="object-cover" />
+            <Image
+              src={`/placeholder.svg?height=160&width=300&category=${product.category}`}
+              alt={product.name}
+              fill
+              className="object-cover"
+            />
             {showRecommended && product.recommended && (
               <ProductBadge badgeType="recommended" className="absolute top-3 left-3">
                 Recommended
