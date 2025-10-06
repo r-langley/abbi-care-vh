@@ -40,7 +40,7 @@ export function PersonalizeModal({ open, onOpenChange, onComplete }: Personalize
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-xl max-h-[90vh] overflow-y-auto p-8">
+      <DialogContent className="max-w-xl max-h-[90vh] overflow-y-auto p-8 m-4">
         <DialogHeader>
           <DialogTitle className="text-3xl font-medium text-foreground">Personalize Your Cream</DialogTitle>
         </DialogHeader>
