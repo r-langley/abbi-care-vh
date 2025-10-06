@@ -28,7 +28,7 @@ export default function HomePage() {
       <main>
         {/* Hero Section */}
         <section className="relative bg-background">
-          <div className="grid grid-cols-2 items-center gap-0 bg-muted">
+          <div className="grid grid-cols-2 items-center gap-0 bg-primary-foreground">
             {/* Left: Hero Image */}
             <div className="relative aspect-[2/3] md:aspect-[4/3]">
               <Image src="/images/design-mode/image.png" alt="ABBI Skincare" fill className="object-cover" priority />
