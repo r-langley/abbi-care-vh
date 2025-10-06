@@ -323,14 +323,14 @@ export default function ShopPage() {
                 </div>
               ) : (
                 groupedCreams.inLab.length > 0 && (
-                  <div className="flex flex-col gap-5">
+                  <div className="flex flex-col justify-start gap-0">
                     {!showScanResults && selectedTraits.length === 0 && (
                       <div className="md:hidden">
                         <ScanCTA />
                       </div>
                     )}
 
-                    <div className="flex flex-col gap-[10px]">
+                    <div className="flex flex-col gap-[10px] pb-5">
                       <h2 className="text-[#586158] leading-[1.35] text-foreground tracking-tight text-2xl font-medium">
                         In Lab
                       </h2>
