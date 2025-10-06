@@ -82,7 +82,7 @@ export function PersonalizeModal({ open, onOpenChange, onComplete }: Personalize
                         : "bg-muted text-muted-foreground hover:bg-primary/10",
                   )}
                 >
-                  <span className="text-[14px] whitespace-nowrap font-medium">{trait.name}</span>
+                  <span className="text-[14px] whitespace-nowrap font-medium text-foreground">{trait.name}</span>
                 </button>
               )
             })}
