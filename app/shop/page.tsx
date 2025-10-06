@@ -6,7 +6,7 @@ import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { ProductCard } from "@/components/product-card"
 import { products } from "@/lib/products"
-import { HeroSection } from "@/components/ui/hero-section"
+import { HeroSection } from "@/components/ui/hero-section" // Import HeroSection component
 import { PRODUCT_CATEGORIES, SHOP_CATEGORIES } from "@/lib/constants"
 import { TraitFilter } from "@/components/trait-filter"
 import { ProductCombos } from "@/components/product-combos"
@@ -311,6 +311,10 @@ export default function ShopPage() {
                     </h2>
                     <p className="text-[16px] tracking-[-0.32px] text-[#586158] leading-[1.35] text-foreground font-normal">
                       Create your own routines. Mix a specific base and active concentrates.
+                    </p>
+                    <p className="text-[18px] tracking-tight leading-[1.2] mt-2">
+                      <span className="font-serif italic font-normal text-muted-foreground">Mix-at-Home</span>{" "}
+                      <span className="font-sans font-bold text-foreground">Base Creams</span>
                     </p>
                   </div>
                   <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[10px]">
