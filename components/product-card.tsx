@@ -57,7 +57,7 @@ export function ProductCard({ product, showRecommended = false }: ProductCardPro
                 </p>
               </div>
               <p
-                className="font-medium text-[13px] tracking-[-0.26px] text-[#586158] leading-[1.15]"
+                className="font-medium text-[13px] tracking-[-0.26px] text-[#586158] leading-[1.15] text-accent"
                 style={{ fontFamily: "var(--font-geist-mono)", fontVariationSettings: "'wdth' 100" }}
               >
                 ${product.price.toFixed(2)}
@@ -65,7 +65,7 @@ export function ProductCard({ product, showRecommended = false }: ProductCardPro
             </div>
             <button
               onClick={handleAddToCart}
-              className="bg-[#586158] rounded-full size-[32px] flex items-center justify-center shrink-0 hover:opacity-90 transition-opacity"
+              className="bg-[#586158] rounded-full size-[32px] flex items-center justify-center shrink-0 hover:opacity-90 transition-opacity bg-primary"
             >
               {isInCart ? (
                 <CheckIcon className="h-5 w-5 text-[#f5f6f5]" />
