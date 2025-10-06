@@ -121,7 +121,7 @@ export default function HomePage() {
                 </Link>
               ))}
             </div>
-            <div className="text-center mt-8 md:mt-12">
+            <div className="mt-8 md:mt-12 text-left">
               <Button asChild size="lg" className="font-mono">
                 <Link href="/skin-analysis">Get Your Skin Analysis</Link>
               </Button>
