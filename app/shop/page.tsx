@@ -299,10 +299,10 @@ export default function ShopPage() {
                     )}
 
                     <div className="flex flex-col gap-[10px]">
-                      <h2 className="font-semibold text-[#586158] leading-[1.35] text-foreground tracking-tight text-2xl">
+                      <h2 className="text-[#586158] leading-[1.35] text-foreground tracking-tight text-2xl font-medium">
                         In Lab
                       </h2>
-                      <p className="text-[16px] tracking-[-0.32px] text-[#586158] leading-[1.35] text-foreground font-normal">
+                      <p className="tracking-[-0.32px] text-[#586158] leading-[1.35] text-foreground font-normal text-sm">
                         Made-to-order in our French lab — just for you.
                       </p>
                     </div>
@@ -322,7 +322,7 @@ export default function ShopPage() {
                     <h2 className="text-[#586158] text-foreground text-2xl tracking-tight font-medium">
                       Mix at Home
                     </h2>
-                    <p className="text-[16px] tracking-[-0.32px] text-[#586158] leading-[1.35] text-foreground font-normal">
+                    <p className="tracking-[-0.32px] text-[#586158] leading-[1.35] text-foreground font-normal text-sm">
                       Create your own routines. Mix a specific base and active concentrates.
                     </p>
                     <p className="text-[18px] tracking-tight leading-[1.2] mt-2 text-center">

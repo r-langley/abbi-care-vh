@@ -9,7 +9,7 @@ export function ProductCombos() {
       <div className="flex flex-col gap-[23px]">
         <div className="flex flex-col gap-[10px] text-[#586158] leading-[1.35]">
           <h2 className="text-foreground font-medium tracking-tight text-2xl">Make it a Combo & Save!</h2>
-          <p className="text-[16px] tracking-[-0.32px] text-foreground font-normal">
+          <p className="tracking-[-0.32px] text-foreground font-normal text-sm">
             Complete your routine. Add a Cleanser and Serum to your Cream and save!
           </p>
         </div>
