@@ -40,7 +40,7 @@ export function TraitFilter() {
   }, [searchParams, router])
   
   return (
-    <div className="bg-white flex gap-[5px] items-start overflow-x-auto px-[10px] py-[10px] scrollbar-hide">
+    <div className="bg-white flex gap-[5px] items-start overflow-x-auto px-[10px] py-[10px] scrollbar-hide justify-center">
       <button
         onClick={clearTraits}
         className={cn(
