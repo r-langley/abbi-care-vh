@@ -356,8 +356,13 @@ export default function ShopPage() {
                       <h2 className="text-[#586158] leading-[1.35] text-foreground tracking-tight text-2xl font-medium">
                         In Lab
                       </h2>
-                      <p className="tracking-[-0.32px] text-[#586158] leading-[1.35] text-foreground font-normal text-sm">
+                      <p className="md:hidden tracking-[-0.32px] text-[#586158] leading-[1.35] text-foreground font-normal text-sm">
                         Made-to-order in our French lab — just for you.
+                      </p>
+                      <p className="hidden md:block tracking-[-0.32px] text-[#586158] leading-[1.5] text-foreground font-normal text-sm">
+                        Each In Lab cream is custom-formulated and made-to-order in our French laboratory, crafted
+                        specifically for your unique skin needs. Select your personalized base and pair it with targeted
+                        active concentrates to create a truly bespoke skincare routine that evolves with you.
                       </p>
                     </div>
 
