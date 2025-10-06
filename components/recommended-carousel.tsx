@@ -26,7 +26,7 @@ export function RecommendedCarousel({ products }: RecommendedCarouselProps) {
         <div className="flex overflow-x-auto snap-x snap-mandatory pb-4 gap-2.5 scrollbar-hide">
           {products.map((product) => (
             <Link key={product.id} href={`/product/${product.id}`} className="flex-none snap-start w-[280px]">
-              <div className="bg-white rounded-[10px] overflow-hidden h-full border-2 border-transparent hover:border-accent transition-colors">
+              <div className="bg-white rounded-[10px] overflow-hidden h-full border-transparent hover:border-accent transition-colors border-0">
                 <div className="flex flex-col h-full">
                   {/* Image */}
                   <div className="relative h-[200px] overflow-hidden">
