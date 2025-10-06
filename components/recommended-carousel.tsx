@@ -11,7 +11,7 @@ interface RecommendedCarouselProps {
 
 export function RecommendedCarousel({ products }: RecommendedCarouselProps) {
   return (
-    <div className="bg-muted flex flex-col gap-[20px] p-[20px] rounded-none">
+    <div className="flex flex-col gap-[20px] p-[20px] rounded-none bg-card">
       <div className="flex flex-col gap-[10px]">
         <h2 className="font-serif text-[32px] md:text-[40px] leading-[1.2] text-foreground font-normal italic">
           Recommended
