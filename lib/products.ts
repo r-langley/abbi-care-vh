@@ -34,7 +34,7 @@ export const products: Product[] = [
     description:
       "Soothing aloe vera base cream made-to-order in our French lab, personalized for your unique skin needs.",
     traits: ["Hydration", "Sensitivity"],
-    image: "/minimalist-cosmetic-pump-bottle-product-photograph.jpg",
+    image: "/images/products/alya-aloe-vera-base.png",
     inStock: true,
     recommended: true,
   },
