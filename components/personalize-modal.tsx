@@ -45,9 +45,9 @@ export function PersonalizeModal({ open, onOpenChange, onComplete }: Personalize
         className="w-full max-w-xl max-h-[90vh] overflow-y-auto p-0 mx-4 sm:mx-6 md:mx-auto my-4"
         showCloseButton={false}
       >
-        <div className="sticky top-0 backdrop-blur-sm bg-white/95 px-5 py-2.5 flex items-center justify-between border-b border-border z-10">
+        <div className="sticky top-0 backdrop-blur-sm bg-white/95 px-5 py-2.5 flex justify-between border-b border-border z-10 flex-row items-center">
           <div className="flex-1" />
-          <p className="font-medium text-[24px] tracking-[-0.48px] text-foreground leading-[1.15] flex-1 text-center">
+          <p className="font-medium text-[24px] tracking-[-0.48px] text-foreground leading-[1.15] flex-1 text-left">
             Personalize Your Cream
           </p>
           <div className="flex-1 flex justify-end">
@@ -94,7 +94,7 @@ export function PersonalizeModal({ open, onOpenChange, onComplete }: Personalize
           <select
             value={age}
             onChange={(e) => setAge(Number(e.target.value))}
-            className="w-full px-6 py-4 rounded-[10px] border-2 border-muted text-base text-primary bg-background focus:outline-none focus:border-primary transition-colors"
+            className="w-full rounded-[10px] border-2 border-muted text-base bg-background focus:outline-none focus:border-primary transition-colors px-2.5 py-2.5 text-foreground"
           >
             {Array.from({ length: 63 }, (_, i) => i + 18).map((ageOption) => (
               <option key={ageOption} value={ageOption}>
