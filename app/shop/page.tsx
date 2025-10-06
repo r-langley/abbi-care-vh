@@ -360,9 +360,7 @@ export default function ShopPage() {
                         Made-to-order in our French lab — just for you.
                       </p>
                       <p className="hidden md:block tracking-[-0.32px] text-[#586158] leading-[1.5] text-foreground font-normal text-sm">
-                        Each In Lab cream is custom-formulated and made-to-order in our French laboratory, crafted
-                        specifically for your unique skin needs. Select your personalized base and pair it with targeted
-                        active concentrates to create a truly bespoke skincare routine that evolves with you.
+                        Each In Lab cream is custom-formulated and made-to-order in our French laboratory, crafted specifically for your unique skin needs. 
                       </p>
                     </div>
 
