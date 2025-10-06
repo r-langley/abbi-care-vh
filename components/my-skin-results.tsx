@@ -13,7 +13,7 @@ export function MySkinResults({ userName, wrinkles, radiance, imperfections }: S
   return (
     <div className="bg-[#586158] px-2.5 py-2.5 bg-primary">
       <div className="flex justify-center">
-        <div className="w-full max-w-[800px]">
+        <div className="max-w-[800px] w-8/12">
           {/* Header */}
           <div className="flex items-center justify-between mb-2.5">
             <div className="flex items-center gap-[5px]">
