@@ -41,7 +41,10 @@ export function PersonalizeModal({ open, onOpenChange, onComplete }: Personalize
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-xl max-h-[90vh] overflow-y-auto p-0 m-4" showCloseButton={false}>
+      <DialogContent
+        className="w-full max-w-xl max-h-[90vh] overflow-y-auto p-0 mx-4 sm:mx-6 md:mx-auto my-4"
+        showCloseButton={false}
+      >
         <div className="sticky top-0 backdrop-blur-sm bg-white/95 px-5 py-2.5 flex items-center justify-between border-b border-border z-10">
           <div className="flex-1" />
           <p className="font-medium text-[24px] tracking-[-0.48px] text-foreground leading-[1.15] flex-1 text-center">
