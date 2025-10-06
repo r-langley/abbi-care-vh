@@ -47,16 +47,26 @@ export default function ShopPage() {
   const [showPersonalizeModal, setShowPersonalizeModal] = useState(false)
 
   useEffect(() => {
+    if (!isLoggedIn) {
+      localStorage.removeItem("personalizeData")
+      setPersonalizeData(null)
+      console.log("[v0] Cleared personalizeData for logged-out user")
+    }
+  }, [isLoggedIn])
+
+  useEffect(() => {
     const results = localStorage.getItem("skinScanResults")
     if (results) {
       setScanResults(JSON.parse(results))
     }
 
-    const personalizeResults = localStorage.getItem("personalizeData")
-    if (personalizeResults) {
-      setPersonalizeData(JSON.parse(personalizeResults))
+    if (isLoggedIn) {
+      const personalizeResults = localStorage.getItem("personalizeData")
+      if (personalizeResults) {
+        setPersonalizeData(JSON.parse(personalizeResults))
+      }
     }
-  }, [])
+  }, [isLoggedIn])
 
   console.log("[v0] personalizeData:", personalizeData)
 
