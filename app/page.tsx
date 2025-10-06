@@ -5,7 +5,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { traits, products } from "@/lib/products"
-import { PageTitle, SectionHeading, SectionOverline, BodyText, SmallText } from "@/components/ui/typography"
+import { PageTitle, SectionHeading, SectionOverline, BodyText, SmallText, Section } from "@/components/ui/typography"
 import { SectionContainer } from "@/components/ui/section-container"
 import { ParallaxImage } from "@/components/parallax-image"
 import { CategoryCarousel } from "@/components/category-carousel"
@@ -65,9 +65,12 @@ export default function HomePage() {
                   recommending personalized formulas tailored specifically to your needs. Get professional-grade
                   insights without leaving home.
                 </BodyText>
-                <Button asChild size="lg" className="font-mono">
-                  <Link href="/skin-analysis">Analyze My Skin</Link>
-                </Button>
+                <div className="flex justify-center md:justify-start">
+                  <Button asChild size="lg" className="font-mono">
+                    <Link href="/skin-analysis">Analyze My Skin</Link>
+                  </Button>
+                </div>
+                {/* </CHANGE> */}
                 <SmallText className="mt-4 md:mt-6">97% accurate when compared to a dermatological exam.</SmallText>
               </div>
 
@@ -93,10 +96,14 @@ export default function HomePage() {
         {/* What Our Scan Evaluates */}
         <SectionContainer variant="muted">
           <div className="container mx-auto px-5">
-            <SectionHeading spacing="tight">What Our Scan Evaluates</SectionHeading>
-            <BodyText className="text-center text-[16px] font-medium tracking-[-0.32px] mb-8 md:mb-12 max-w-3xl mx-auto text-muted-foreground leading-[1.35]">
-              97% accurate when compared to a dermatological exam.
-            </BodyText>
+            <Section
+              heading="What Our Scan Evaluates"
+              body="97% accurate when compared to a dermatological exam."
+              align="left"
+              spacing="tight"
+              className="mb-8 md:mb-12"
+            />
+            {/* </CHANGE> */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5">
               {traits.map((trait) => (
                 <Link key={trait.id} href={`/shop?category=creams&traits=${trait.id}`}>
@@ -114,7 +121,7 @@ export default function HomePage() {
                 </Link>
               ))}
             </div>
-            <div className="text-center mt-8 md:mt-12">
+            <div className="mt-8 md:mt-12 text-left">
               <Button asChild size="lg" className="font-mono">
                 <Link href="/skin-analysis">Get Your Skin Analysis</Link>
               </Button>
@@ -124,7 +131,7 @@ export default function HomePage() {
 
         {/* Product Categories */}
         <SectionContainer>
-          <div className="container mx-auto px-4">
+          <div className="container mx-auto">
             <div className="space-y-5">
               {/* Personalized Creams Carousel */}
               <CategoryCarousel

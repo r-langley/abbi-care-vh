@@ -279,7 +279,11 @@ export default function ShopPage() {
               ) : (
                 groupedCreams.inLab.length > 0 && (
                   <div className="flex flex-col gap-[20px]">
-                    {!showScanResults && selectedTraits.length === 0 && <ScanCTA />}
+                    {!showScanResults && selectedTraits.length === 0 && (
+                      <div className="md:hidden">
+                        <ScanCTA />
+                      </div>
+                    )}
 
                     <div className="flex flex-col gap-[10px]">
                       <h2 className="font-semibold text-[#586158] leading-[1.35] text-foreground tracking-tight text-2xl">
@@ -290,7 +294,7 @@ export default function ShopPage() {
                       </p>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-[10px]">
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[10px]">
                       {groupedCreams.inLab.map((product) => (
                         <ProductCard key={product.id} product={product} showRecommended={selectedTraits.length > 0} />
                       ))}
@@ -309,7 +313,7 @@ export default function ShopPage() {
                       Create your own routines. Mix a specific base and active concentrates.
                     </p>
                   </div>
-                  <div className="grid grid-cols-2 gap-[10px]">
+                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[10px]">
                     {sortedMixAtHome.map((product) => (
                       <ProductCard
                         key={product.id}
@@ -331,7 +335,7 @@ export default function ShopPage() {
                       Targeted treatments to address specific skin concerns
                     </p>
                   </div>
-                  <div className="grid grid-cols-2 gap-[10px]">
+                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[10px]">
                     {sortedActiveConcentrates.map((product) => (
                       <ProductCard
                         key={product.id}
@@ -344,7 +348,7 @@ export default function ShopPage() {
               )}
             </div>
           ) : (
-            <div className="grid grid-cols-2 gap-[10px]">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[10px]">
               {filteredProducts.map((product) => (
                 <ProductCard key={product.id} product={product} showRecommended={selectedTraits.length > 0} />
               ))}
