@@ -15,7 +15,7 @@ export function RecommendedCarousel({ products }: RecommendedCarouselProps) {
       <div className="flex justify-center gap-0">
         <div className="w-full max-w-[900px]">
           <div className="flex flex-col pb-5 gap-5">
-            <h2 className="md:text-[40px] leading-[1.2] text-foreground font-sans tracking-tight font-medium text-2xl">
+            <h2 className="md:text-[40px] leading-[1.2] text-foreground font-sans tracking-tight font-medium text-xl">
               Recommended
             </h2>
             <p className="text-[16px] tracking-[-0.32px] text-foreground font-normal leading-[1.35]">
