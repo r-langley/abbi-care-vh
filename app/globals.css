@@ -14,7 +14,7 @@
 
   /* Semantic tokens */
   --background: hsl(0 0% 100%);
-  --foreground: hsl(25 20% 15%);
+  --foreground: rgb(66, 56, 94);
   --card: hsl(0 0% 100%);
   --card-foreground: oklch(0.145 0 0);
   --popover: hsl(0 0% 100%);
