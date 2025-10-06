@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 
 export function ScanCTA() {
   return (
-    <div className="bg-[#f5f6f5] flex flex-col gap-[20px] items-center justify-center p-[20px] rounded-[10px] w-full bg-sidebar text-muted">
+    <div className="hidden md:flex bg-[#f5f6f5] flex-col gap-[20px] items-center justify-center p-[20px] rounded-[10px] w-full bg-sidebar text-muted">
       <div className="flex flex-col gap-[10px] items-center w-full">
         <div className="flex items-center justify-center size-[24px]">
           <SparklesIcon className="size-[20px] text-[#586158]" />
