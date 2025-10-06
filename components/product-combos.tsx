@@ -29,7 +29,7 @@ export function ProductCombos() {
               </div>
 
               {/* Details */}
-              <div className="bg-[#f5f6f5] p-[10px] pb-[20px] flex flex-col justify-between gap-[10px] flex-1 bg-accent">
+              <div className="bg-[#f5f6f5] p-[10px] pb-[20px] flex flex-col justify-between gap-[10px] flex-1 bg-secondary">
                 <div className="flex flex-col gap-[10px]">
                   <div className="flex flex-col gap-[5px]">
                     <p className="font-semibold text-[18px] leading-[1.15] text-[#586158] tracking-normal text-foreground">Duo Pack</p>
@@ -45,7 +45,7 @@ export function ProductCombos() {
                   </p>
                 </div>
 
-                <button className="bg-[#586158] rounded-full size-[32px] flex items-center justify-center hover:opacity-90 transition-opacity bg-ring">
+                <button className="bg-[#586158] rounded-full size-[32px] flex items-center justify-center hover:opacity-90 transition-opacity bg-accent">
                   <PlusIcon className="size-[20px] text-[#f5f6f5]" />
                 </button>
               </div>
@@ -66,7 +66,7 @@ export function ProductCombos() {
               </div>
 
               {/* Details */}
-              <div className="bg-[#f5f6f5] p-[10px] pb-[20px] flex flex-col justify-between gap-[10px] flex-1 bg-accent">
+              <div className="bg-[#f5f6f5] p-[10px] pb-[20px] flex flex-col justify-between gap-[10px] flex-1 bg-secondary">
                 <div className="flex flex-col gap-[10px]">
                   <div className="flex flex-col gap-[5px]">
                     <p className="font-semibold text-[18px] leading-[1.15] text-[#586158] tracking-normal text-foreground">Trio Pack</p>
@@ -82,7 +82,7 @@ export function ProductCombos() {
                   </p>
                 </div>
 
-                <button className="bg-[#586158] rounded-full size-[32px] flex items-center justify-center hover:opacity-90 transition-opacity bg-ring">
+                <button className="bg-[#586158] rounded-full size-[32px] flex items-center justify-center hover:opacity-90 transition-opacity bg-accent">
                   <PlusIcon className="size-[20px] text-[#f5f6f5]" />
                 </button>
               </div>
