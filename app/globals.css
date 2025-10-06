@@ -21,7 +21,7 @@
   --popover-foreground: oklch(0.145 0 0);
   --primary: rgb(192, 169, 255);
   --primary-foreground: oklch(0.985 0 0);
-  --secondary: hsl(30 12% 92%);
+  --secondary: rgb(229, 226, 243);
   --secondary-foreground: oklch(0.205 0 0);
   --muted: rgb(244, 243, 253);
   --muted-foreground: oklch(0.556 0 0);

@@ -9,7 +9,7 @@ export function ProductCombos() {
       <div className="flex flex-col gap-[23px]">
         <div className="flex flex-col gap-[10px] text-[#586158] leading-[1.35]">
           <h2 className="font-semibold text-[24px] tracking-[-0.48px] text-foreground">Make it a Combo & Save!</h2>
-          <p className="font-medium text-[16px] tracking-[-0.32px]">
+          <p className="text-[16px] tracking-[-0.32px] text-foreground font-normal">
             Complete your routine. Add a Cleanser and Serum to your Cream and save!
           </p>
         </div>
@@ -41,7 +41,7 @@ export function ProductCombos() {
                     className="font-medium text-[13px] tracking-[-0.26px] text-[#586158] leading-[1.15]"
                     style={{ fontFamily: "var(--font-geist-mono)", fontVariationSettings: "'wdth' 100" }}
                   >
-                    <span className="line-through opacity-60">$24.00</span> <span className="text-ring font-semibold">$19.00</span>
+                    <span className="line-through opacity-60">$24.00</span> <span className="font-semibold text-accent">$19.00</span>
                   </p>
                 </div>
 
@@ -78,7 +78,7 @@ export function ProductCombos() {
                     className="font-medium text-[13px] tracking-[-0.26px] text-[#586158] leading-[1.15]"
                     style={{ fontFamily: "var(--font-geist-mono)", fontVariationSettings: "'wdth' 100" }}
                   >
-                    <span className="line-through opacity-60">$24.00</span> <span className="text-ring font-semibold">$19.00</span>
+                    <span className="line-through opacity-60">$24.00</span> <span className="font-semibold text-accent">$19.00</span>
                   </p>
                 </div>
 
