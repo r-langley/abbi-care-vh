@@ -171,7 +171,7 @@
 ### CSS Variables (Preferred)
 Always use CSS variables for colors instead of hardcoded hex values:
 
-```tsx
+\`\`\`tsx
 // ✅ CORRECT - Use semantic tokens
 className="bg-primary text-primary-foreground"
 className="border-muted hover:border-primary"
@@ -180,7 +180,7 @@ className="bg-muted text-primary"
 // ❌ WRONG - Don't hardcode colors
 className="bg-[#586158] text-white"
 className="border-[#f5f6f5] hover:border-[#586158]"
-```
+\`\`\`
 
 ### Available Semantic Tokens
 - `--primary`: Sea Slate (#586158)
@@ -195,9 +195,9 @@ className="border-[#f5f6f5] hover:border-[#586158]"
 ### TypeScript Constants
 Import from `@/lib/design-tokens` for programmatic use:
 
-```tsx
+\`\`\`tsx
 import { COLORS, SPACING, CARD, CSS_VARS } from '@/lib/design-tokens'
-```
+\`\`\`
 
 ## Best Practices
 

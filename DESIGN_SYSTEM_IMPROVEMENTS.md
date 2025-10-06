@@ -29,17 +29,17 @@ Comprehensive design system optimization focused on consistency, maintainability
 - Aligned semantic tokens with ABBI brand
 
 **Before:**
-```css
+\`\`\`css
 --primary: rgb(192, 169, 255); /* Generic purple */
 --accent: #8a6efa;
-```
+\`\`\`
 
 **After:**
-```css
+\`\`\`css
 --primary: var(--sea-slate); /* ABBI Sea Slate */
 --accent: var(--sea-slate);
 --muted: var(--sage);
-```
+\`\`\`
 
 ### 3. Fixed Broken Components ✅
 
@@ -69,14 +69,14 @@ Comprehensive design system optimization focused on consistency, maintainability
 - ✅ `ui/user-avatar.tsx` - 2 instances
 
 **Before:**
-```tsx
+\`\`\`tsx
 className="bg-[#586158] text-white border-[#f5f6f5]"
-```
+\`\`\`
 
 **After:**
-```tsx
+\`\`\`tsx
 className="bg-primary text-primary-foreground border-muted"
-```
+\`\`\`
 
 ### 5. Created Reusable Card Components ✅
 **Created:** `components/ui/base-card.tsx`
@@ -98,14 +98,14 @@ className="bg-primary text-primary-foreground border-muted"
 **Replaced inline font styles with Tailwind classes:**
 
 **Before:**
-```tsx
+\`\`\`tsx
 style={{ fontFamily: "var(--font-geist-mono)" }}
-```
+\`\`\`
 
 **After:**
-```tsx
+\`\`\`tsx
 className="font-mono"
-```
+\`\`\`
 
 **Benefits:**
 - Cleaner code
@@ -172,17 +172,17 @@ className="font-mono"
 ## Migration Guide for Remaining Files
 
 ### For Hardcoded Colors
-```tsx
+\`\`\`tsx
 // Find and replace patterns:
 "#586158" → "primary" (Tailwind class) or "var(--sea-slate)" (CSS var)
 "#f5f6f5" → "muted" (Tailwind class) or "var(--sage)" (CSS var)
 "#3e463e" → "var(--evergreen)"
 "#ffffff" → "white" or "background"
 "#000000" → "black" or "foreground"
-```
+\`\`\`
 
 ### For Card Components
-```tsx
+\`\`\`tsx
 // Instead of duplicating card markup:
 <div className="bg-white rounded-[10px] border-2 border-[#f5f6f5]...">
 
@@ -195,16 +195,16 @@ import { CardWrapper, CardImage, CardDetails } from '@/components/ui/base-card'
     {/* content */}
   </CardDetails>
 </CardWrapper>
-```
+\`\`\`
 
 ### For Font Styles
-```tsx
+\`\`\`tsx
 // Instead of:
 style={{ fontFamily: "var(--font-geist-mono)" }}
 
 // Use:
 className="font-mono"
-```
+\`\`\`
 
 ## Testing Checklist
 

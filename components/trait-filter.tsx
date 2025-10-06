@@ -62,7 +62,7 @@ export function TraitFilter() {
             selectedTraits.includes(trait.id) ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground",
           )}
         >
-          <span className="text-[14px] whitespace-nowrap text-foreground font-medium">{trait.name}</span>
+          <span className="text-[14px] whitespace-nowrap font-medium">{trait.name}</span>
         </button>
       ))}
     </div>
