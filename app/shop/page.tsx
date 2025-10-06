@@ -334,13 +334,9 @@ export default function ShopPage() {
               {sortedActiveConcentrates.length > 0 && (
                 <div className="flex flex-col gap-[20px]">
                   <div className="flex flex-col gap-2.5">
-                    <h2 className="font-semibold text-[#586158] text-foreground text-2xl tracking-tight">
-                      Active Concentrates
-                    </h2>
-                    <p className="text-[16px] tracking-[-0.32px] text-[#586158] leading-[1.35] text-foreground font-normal">
-                      Targeted treatments to address specific skin concerns
-                    </p>
-                    <p className="text-[18px] tracking-tight leading-[1.2] mt-2 text-center">
+                    
+                    
+                    <p className="text-[18px] tracking-tight leading-[1.2] text-center mt-0">
                       <span className="font-serif italic text-foreground font-normal tracking-tight text-xl">
                         Mix-at-Home
                       </span>{" "}
