@@ -25,8 +25,9 @@
   --secondary-foreground: oklch(0.205 0 0);
   --muted: rgb(244, 243, 253);
   --muted-foreground: oklch(0.556 0 0);
-  --accent: hsl(30 25% 85%);
-  --accent-foreground: oklch(0.205 0 0);
+  /* Updated accent color to vibrant purple #8A6EFA */
+  --accent: #8a6efa;
+  --accent-foreground: #ffffff;
   --destructive: hsl(0 84.2% 60.2%);
   --destructive-foreground: oklch(0.577 0.245 27.325);
   --border: hsl(30 15% 88%);
