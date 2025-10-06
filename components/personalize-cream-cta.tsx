@@ -15,15 +15,15 @@ export function PersonalizeCreamCTA({ onClick }: PersonalizeCreamCTAProps) {
     >
       <div className="relative h-[200px] overflow-hidden bg-muted">
         <Image
-          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-fVRx6Njvj3iKacJHFcu6nR37p9FOoK.png"
+          src="/images/design-mode/image(1).png"
           alt="Personalize your cream"
           fill
-          className="object-cover"
+          className="object-cover bg-card"
           loading="lazy"
           sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
         />
       </div>
-      <div className="bg-[#e5e2f3] p-6 flex flex-col items-center justify-center gap-4 min-h-[140px] px-5 py-5">
+      <div className="bg-[#e5e2f3] p-6 flex flex-col items-center justify-center gap-4 min-h-[140px] px-2.5 py-2.5">
         <p className="font-medium text-[18px] leading-[1.2] text-foreground text-center">Personalize your cream</p>
         <Button
           variant="default"
