@@ -45,8 +45,8 @@ export function PersonalizeModal({ open, onOpenChange, onComplete }: Personalize
           <DialogTitle className="text-3xl font-medium text-foreground">Personalize Your Cream</DialogTitle>
         </DialogHeader>
 
-        <div className="space-y-6 py-4">
-          <p className="text-base text-muted-foreground leading-relaxed">
+        <div className="space-y-5 py-0">
+          <p className="leading-relaxed text-sm text-foreground">
             To craft the best Custom Base for you, we recommend telling us your skin's top 3 priorities and your age.
           </p>
 
@@ -69,7 +69,7 @@ export function PersonalizeModal({ open, onOpenChange, onComplete }: Personalize
                         : "bg-muted text-muted-foreground hover:bg-primary/10",
                   )}
                 >
-                  <span className="text-[14px] whitespace-nowrap font-medium">{trait.name}</span>
+                  <span className="text-[14px] whitespace-nowrap font-medium text-foreground">{trait.name}</span>
                 </button>
               )
             })}
