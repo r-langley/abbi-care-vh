@@ -42,22 +42,19 @@ export function PersonalizeModal({ open, onOpenChange, onComplete }: Personalize
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent
-        className="w-full max-w-xl max-h-[90vh] overflow-y-auto p-0 mx-4 sm:mx-6 md:mx-auto my-4"
+        className="w-[calc(100%-2rem)] sm:w-[calc(100%-3rem)] md:w-full md:max-w-xl max-h-[90vh] overflow-y-auto p-0"
         showCloseButton={false}
       >
-        <div className="sticky top-0 backdrop-blur-sm bg-white/95 px-5 py-2.5 flex justify-between border-b border-border z-10 flex-row items-center">
-          <div className="flex-1" />
-          <p className="font-medium text-[24px] tracking-[-0.48px] text-foreground leading-[1.15] flex-1 text-left">
+        <div className="sticky top-0 backdrop-blur-sm bg-white/95 px-5 py-4 flex items-center justify-between border-b border-border z-10">
+          <h2 className="font-medium text-[24px] tracking-[-0.48px] text-foreground leading-[1.15]">
             Personalize Your Cream
-          </p>
-          <div className="flex-1 flex justify-end">
-            <div className="bg-muted rounded-full size-8 flex items-center justify-center">
-              <DialogClose asChild>
-                <button>
-                  <XMarkIcon className="size-5 text-muted-foreground" />
-                </button>
-              </DialogClose>
-            </div>
+          </h2>
+          <div className="bg-muted rounded-full size-8 flex items-center justify-center shrink-0 ml-4">
+            <DialogClose asChild>
+              <button aria-label="Close">
+                <XMarkIcon className="size-5 text-muted-foreground" />
+              </button>
+            </DialogClose>
           </div>
         </div>
 
@@ -85,7 +82,7 @@ export function PersonalizeModal({ open, onOpenChange, onComplete }: Personalize
                         : "bg-muted text-muted-foreground hover:bg-primary/10",
                   )}
                 >
-                  <span className="text-[14px] whitespace-nowrap font-medium text-foreground">{trait.name}</span>
+                  <span className="text-[14px] whitespace-nowrap font-medium">{trait.name}</span>
                 </button>
               )
             })}
@@ -94,7 +91,7 @@ export function PersonalizeModal({ open, onOpenChange, onComplete }: Personalize
           <select
             value={age}
             onChange={(e) => setAge(Number(e.target.value))}
-            className="w-full rounded-[10px] border-2 border-muted text-base bg-background focus:outline-none focus:border-primary transition-colors px-2.5 py-2.5 text-foreground"
+            className="w-full rounded-[10px] border-2 border-muted text-base bg-background focus:outline-none focus:border-primary transition-colors px-4 py-3 text-foreground"
           >
             {Array.from({ length: 63 }, (_, i) => i + 18).map((ageOption) => (
               <option key={ageOption} value={ageOption}>
@@ -103,7 +100,6 @@ export function PersonalizeModal({ open, onOpenChange, onComplete }: Personalize
             ))}
           </select>
 
-          {/* Continue Button */}
           <Button
             onClick={handleContinue}
             disabled={selectedTraits.length !== 3}
