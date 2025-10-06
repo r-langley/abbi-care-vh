@@ -11,7 +11,7 @@ export function PersonalizeCreamCTA({ onClick }: PersonalizeCreamCTAProps) {
   return (
     <button
       onClick={onClick}
-      className="bg-white rounded-[10px] border-2 border-border overflow-hidden flex flex-col hover:border-primary transition-colors w-full"
+      className="bg-white rounded-[10px] border-2 border-border overflow-hidden flex flex-col hover:border-primary transition-colors w-full border-none"
     >
       <div className="relative h-[200px] overflow-hidden bg-muted">
         <Image
