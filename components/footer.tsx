@@ -8,7 +8,7 @@ export function Footer() {
           <div>
             <h3 className="font-mono text-sm mb-4 font-medium text-accent">Shop</h3>
             <ul className="space-y-2">
-              <li>
+              <li className="">
                 <NavLink href="/shop" variant="footer">
                   All Products
                 </NavLink>
