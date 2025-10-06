@@ -20,6 +20,8 @@ import { ChevronRightIcon, PlusIcon, CheckIcon } from "@heroicons/react/24/outli
 import { IngredientCarousel } from "@/components/ingredient-carousel"
 import { RecommendedBadge } from "@/components/recommended-badge"
 import { RecommendedCarousel } from "@/components/recommended-carousel"
+import { PersonalizeCreamCTA } from "@/components/personalize-cream-cta"
+import { PersonalizeModal } from "@/components/personalize-modal"
 
 export default function ShopPage() {
   console.log("[v0] ShopPage component rendering")
@@ -38,51 +40,28 @@ export default function ShopPage() {
     imperfections: number
   } | null>(null)
 
+  const [personalizeData, setPersonalizeData] = useState<{
+    traits: string[]
+    age: number
+  } | null>(null)
+  const [showPersonalizeModal, setShowPersonalizeModal] = useState(false)
+
   useEffect(() => {
     const results = localStorage.getItem("skinScanResults")
     if (results) {
       setScanResults(JSON.parse(results))
     }
+
+    const personalizeResults = localStorage.getItem("personalizeData")
+    if (personalizeResults) {
+      setPersonalizeData(JSON.parse(personalizeResults))
+    }
   }, [])
 
-  const heroContent = {
-    creams: {
-      title: "Creams",
-      description: "Choose Lab Created or Mix-at-Home",
-      image: "/images/creams-hero.png",
-      imagePosition: "left" as const,
-    },
-    "simple-solutions": {
-      title: "Simple Solutions",
-      description: "Targeted treatments for specific concerns",
-      image: "/images/simple-solutions-hero.png",
-      imagePosition: "right" as const,
-    },
-    essentials: {
-      title: "Essentials",
-      description: "Daily basics for your routine",
-      image: "/images/essentials-hero.jpg",
-      imagePosition: "left" as const,
-    },
+  const handlePersonalizeComplete = (data: { traits: string[]; age: number }) => {
+    localStorage.setItem("personalizeData", JSON.stringify(data))
+    setPersonalizeData(data)
   }
-
-  const currentHero = heroContent[category as keyof typeof heroContent] || heroContent.creams
-
-  useEffect(() => {
-    const preloadImages = [
-      "/images/creams-hero.png",
-      "/images/simple-solutions-hero.png",
-      "/images/essentials-hero.jpg",
-    ]
-
-    preloadImages.forEach((src) => {
-      const link = document.createElement("link")
-      link.rel = "preload"
-      link.as = "image"
-      link.href = src
-      document.head.appendChild(link)
-    })
-  }, [])
 
   const { filteredProducts, groupedCreams } = useMemo(() => {
     let filtered: typeof products
@@ -127,17 +106,32 @@ export default function ShopPage() {
   }, [category, selectedTraits])
 
   const recommendedActiveIngredients = useMemo(() => {
-    if (!scanResults && !isLoggedIn) return []
-    const traits = ["Wrinkles", "Radiance", "Imperfections"]
+    if (!scanResults && !isLoggedIn && !personalizeData) return []
+
+    const traits = personalizeData?.traits || ["Wrinkles", "Radiance", "Imperfections"]
     const ingredients = getIngredientsByTraits(traits).slice(0, 3)
     console.log("[v0] Recommended active ingredients:", ingredients)
     return ingredients
-  }, [scanResults, isLoggedIn])
+  }, [scanResults, isLoggedIn, personalizeData])
 
   const recommendedCreamBase = useMemo(() => {
-    if ((!scanResults && !isLoggedIn) || !groupedCreams) return null
+    if ((!scanResults && !isLoggedIn && !personalizeData) || !groupedCreams) return null
+
+    if (personalizeData && groupedCreams) {
+      const userTraits = personalizeData.traits.map((t) => t.toLowerCase())
+
+      // Find cream that matches the most traits
+      const creamWithScores = groupedCreams.inLab.map((cream) => ({
+        cream,
+        score: cream.traits.filter((t) => userTraits.includes(t.toLowerCase())).length,
+      }))
+
+      const bestMatch = creamWithScores.sort((a, b) => b.score - a.score)[0]
+      return bestMatch?.cream || groupedCreams.inLab[0]
+    }
+
     return groupedCreams.inLab.find((p) => p.id === "inlab-aloe-vera") || groupedCreams.inLab[0]
-  }, [scanResults, isLoggedIn, groupedCreams])
+  }, [scanResults, isLoggedIn, personalizeData, groupedCreams])
 
   const sortedMixAtHome = useMemo(() => {
     if (!groupedCreams || category !== "creams") return groupedCreams?.mixAtHome || []
@@ -170,20 +164,58 @@ export default function ShopPage() {
   }, [groupedCreams, category])
 
   const recommendedProducts = useMemo(() => {
-    if (!scanResults && !isLoggedIn) return []
+    if (!scanResults && !isLoggedIn && !personalizeData) return []
 
-    // Filter for Essentials and Simple Solutions
     const essentialsAndSolutions = products.filter(
       (p) => p.category === PRODUCT_CATEGORIES.ESSENTIAL || p.category === PRODUCT_CATEGORIES.SIMPLE_SOLUTION,
     )
 
-    // Return top 6 products
     return essentialsAndSolutions.slice(0, 6)
-  }, [scanResults, isLoggedIn])
+  }, [scanResults, isLoggedIn, personalizeData])
 
   const showScanResults = (scanResults || isLoggedIn) && category === "creams"
+  const showPersonalizedCream = (scanResults || isLoggedIn || personalizeData) && category === "creams"
 
   console.log("[v0] Show scan results:", showScanResults, "Recommended cream base:", recommendedCreamBase)
+
+  const heroContent = {
+    creams: {
+      title: "Creams",
+      description: "Choose Lab Created or Mix-at-Home",
+      image: "/images/creams-hero.png",
+      imagePosition: "left" as const,
+    },
+    "simple-solutions": {
+      title: "Simple Solutions",
+      description: "Targeted treatments for specific concerns",
+      image: "/images/simple-solutions-hero.png",
+      imagePosition: "right" as const,
+    },
+    essentials: {
+      title: "Essentials",
+      description: "Daily basics for your routine",
+      image: "/images/essentials-hero.jpg",
+      imagePosition: "left" as const,
+    },
+  }
+
+  const currentHero = heroContent[category as keyof typeof heroContent] || heroContent.creams
+
+  useEffect(() => {
+    const preloadImages = [
+      "/images/creams-hero.png",
+      "/images/simple-solutions-hero.png",
+      "/images/essentials-hero.jpg",
+    ]
+
+    preloadImages.forEach((src) => {
+      const link = document.createElement("link")
+      link.rel = "preload"
+      link.as = "image"
+      link.href = src
+      document.head.appendChild(link)
+    })
+  }, [])
 
   return (
     <>
@@ -212,7 +244,7 @@ export default function ShopPage() {
         <div className="py-5 px-5">
           {category === "creams" && groupedCreams ? (
             <div className="space-y-10">
-              {showScanResults && recommendedCreamBase ? (
+              {showPersonalizedCream && recommendedCreamBase ? (
                 <div className="flex flex-col gap-[20px]">
                   <div className="flex items-center justify-between">
                     <div className="flex flex-col gap-[10px]">
@@ -255,7 +287,7 @@ export default function ShopPage() {
                           </p>
                         </div>
                         <p
-                          className="font-medium text-[13px] tracking-[-0.26px] text-[#586158] leading-[1.15] text-accent"
+                          className="font-medium text-[13px] tracking-[-0.26px] leading-[1.15] text-primary"
                           style={{ fontFamily: "var(--font-geist-mono)", fontVariationSettings: "'wdth' 100" }}
                         >
                           ${recommendedCreamBase.price.toFixed(2)}
@@ -278,10 +310,10 @@ export default function ShopPage() {
                     </p>
 
                     <div className="flex items-center justify-center gap-5">
-                      {["Wrinkles", "Radiance", "Imperfections"].map((trait) => (
+                      {(personalizeData?.traits || ["Wrinkles", "Radiance", "Imperfections"]).map((trait) => (
                         <div key={trait} className="flex items-center gap-1">
                           <CheckIcon className="text-[#586158] w-4 h-4 text-foreground" />
-                          <span className="font-medium text-[#586158] text-sm text-foreground">{trait}</span>
+                          <span className="font-medium text-[#586158] text-sm text-foreground capitalize">{trait}</span>
                         </div>
                       ))}
                     </div>
@@ -307,11 +339,17 @@ export default function ShopPage() {
                       </p>
                     </div>
 
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[10px]">
-                      {groupedCreams.inLab.map((product) => (
-                        <ProductCard key={product.id} product={product} showRecommended={selectedTraits.length > 0} />
-                      ))}
-                    </div>
+                    {!personalizeData && !scanResults && !isLoggedIn && selectedTraits.length === 0 ? (
+                      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[10px]">
+                        <PersonalizeCreamCTA onClick={() => setShowPersonalizeModal(true)} />
+                      </div>
+                    ) : (
+                      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[10px]">
+                        {groupedCreams.inLab.map((product) => (
+                          <ProductCard key={product.id} product={product} showRecommended={selectedTraits.length > 0} />
+                        ))}
+                      </div>
+                    )}
                   </div>
                 )
               )}
@@ -319,9 +357,7 @@ export default function ShopPage() {
               {sortedMixAtHome.length > 0 && (
                 <div className="flex flex-col gap-[20px]">
                   <div className="flex flex-col gap-2.5">
-                    <h2 className="text-[#586158] text-foreground text-2xl tracking-tight font-medium">
-                      Mix at Home
-                    </h2>
+                    <h2 className="text-[#586158] text-foreground text-2xl tracking-tight font-medium">Mix at Home</h2>
                     <p className="tracking-[-0.32px] text-[#586158] leading-[1.35] text-foreground font-normal text-sm">
                       Create your own routines. Mix a specific base and active concentrates.
                     </p>
@@ -347,9 +383,13 @@ export default function ShopPage() {
               {sortedActiveConcentrates.length > 0 && (
                 <div className="flex flex-col gap-[20px]">
                   <div className="flex flex-col gap-2.5">
-                    
-                    
-                    <p className="text-[18px] tracking-tight leading-[1.2] text-center mt-0">
+                    <h2 className="text-[#586158] text-foreground text-2xl tracking-tight font-medium">
+                      Active Concentrates
+                    </h2>
+                    <p className="tracking-[-0.32px] text-[#586158] leading-[1.35] text-foreground font-normal text-sm">
+                      Concentrated solutions for your skincare needs.
+                    </p>
+                    <p className="text-[18px] tracking-tight leading-[1.2] mt-2 text-center">
                       <span className="font-serif italic text-foreground font-normal tracking-tight text-xl">
                         Mix-at-Home
                       </span>{" "}
@@ -384,6 +424,12 @@ export default function ShopPage() {
         )}
       </main>
       <Footer />
+
+      <PersonalizeModal
+        open={showPersonalizeModal}
+        onOpenChange={setShowPersonalizeModal}
+        onComplete={handlePersonalizeComplete}
+      />
     </>
   )
 }
