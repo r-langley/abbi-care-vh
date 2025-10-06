@@ -278,8 +278,8 @@ export default function ShopPage() {
                     </div>
                     <div className="bg-[#f5f6f5] p-[10px] pb-[20px] flex flex-row items-end justify-between gap-[10px] bg-muted">
                       <div className="flex flex-col gap-[10px]">
-                        <div className="flex flex-col gap-[5px]">
-                          <p className="font-semibold text-[18px] leading-[1.15] text-[#586158] tracking-normal text-foreground">
+                        <div className="flex flex-col gap-2.5">
+                          <p className="text-[18px] leading-[1.15] text-[#586158] tracking-normal text-foreground font-medium">
                             {recommendedCreamBase.name}
                           </p>
                           <p className="font-medium text-[14px] tracking-[-0.28px] text-[#586158] leading-[1.15] text-foreground">
