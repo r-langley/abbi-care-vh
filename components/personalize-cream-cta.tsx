@@ -15,7 +15,7 @@ export function PersonalizeCreamCTA({ onClick }: PersonalizeCreamCTAProps) {
     >
       <div className="relative h-[200px] overflow-hidden bg-muted">
         <Image
-          src="/minimalist-cosmetic-cream-bottle-product.jpg"
+          src="/images/design-mode/image(1).png"
           alt="Personalize your cream"
           fill
           className="object-cover"
