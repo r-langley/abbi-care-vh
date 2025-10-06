@@ -15,7 +15,7 @@ export function PersonalizeCreamCTA({ onClick }: PersonalizeCreamCTAProps) {
     >
       <div className="relative h-[200px] overflow-hidden bg-muted">
         <Image
-          src="/images/design-mode/image(1).png"
+          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-fVRx6Njvj3iKacJHFcu6nR37p9FOoK.png"
           alt="Personalize your cream"
           fill
           className="object-cover"
