@@ -7,7 +7,6 @@ import {
   ShoppingBagIcon,
   UserCircleIcon,
   ChatBubbleLeftRightIcon,
-  FlagIcon,
   ChevronDownIcon,
 } from "@heroicons/react/24/solid"
 import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetDescription } from "@/components/ui/sheet"
@@ -31,43 +30,45 @@ export function Header() {
     <>
       {/* Top Banner */}
       <div className="bg-[#586158] text-white text-center py-2 px-4">
-        <p className="text-xs md:text-sm font-mono tracking-wide font-medium">ENJOY 10% OFF YOUR FIRST ORDER</p>
+        <p className="text-xs font-mono tracking-wide font-medium md:text-xs">ENJOY 10% OFF YOUR FIRST ORDER</p>
       </div>
 
       {/* Main Header */}
       <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-md">
         <div className="container mx-auto px-0">
-          <div className="grid grid-cols-3 items-center px-2.5 h-14">
-            {/* Left: Menu + Country + Contact */}
-            <div className="flex items-center gap-3 justify-start">
+          <div className="flex items-center justify-between px-2.5 h-14">
+            {/* Left: Hamburger + Desktop Nav Links */}
+            <div className="flex items-center gap-3">
               <Sheet open={open} onOpenChange={setOpen}>
                 <SheetTrigger asChild>
-                  <button className="md:hidden p-2 hover:bg-[#f5f6f5] rounded-[8px] transition-colors">
+                  <button className="p-2 hover:bg-[#f5f6f5] rounded-[8px] transition-colors">
                     <Bars3Icon className="w-6 h-6 md:w-7 md:h-7" />
                   </button>
                 </SheetTrigger>
-                <SheetContent side="left" className="px-5 py-5 w-full">
+                <SheetContent side="left" className="px-5 py-5 w-full md:w-1/2">
                   <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
                   <SheetDescription className="sr-only">Browse site navigation and shop by skin trait</SheetDescription>
                   <MobileNav closeMenu={() => setOpen(false)} />
                 </SheetContent>
               </Sheet>
 
-              <div className="hidden md:flex items-center gap-2">
-                <FlagIcon className="w-6 h-6 md:w-7 md:h-7 text-muted-foreground" />
-                <ChatBubbleLeftRightIcon className="w-6 h-6 md:w-7 md:h-7 text-muted-foreground" />
-              </div>
+              <nav className="hidden md:flex items-center gap-6">
+                <NavLink href="/skin-analysis">Skin Analysis</NavLink>
+                <NavLink href="/shop">Shop</NavLink>
+                <NavLink href="/about">About</NavLink>
+                <NavLink href="/join">Join</NavLink>
+              </nav>
             </div>
 
             {/* Center: Logo */}
-            <div className="flex items-center justify-center">
+            <div className="flex items-center justify-center absolute left-1/2 -translate-x-1/2">
               <Link href="/" className="flex items-center">
                 <Image src="/images/logo.png" alt="ABBI" width={120} height={40} className="w-auto h-5" priority />
               </Link>
             </div>
 
             {/* Right: Cart + Account */}
-            <div className="flex items-center justify-end gap-0">
+            <div className="flex items-center gap-0">
               <Link href="/cart" className="relative p-2 hover:bg-[#f5f6f5] rounded-[8px] transition-colors">
                 <ShoppingBagIcon className="w-6 h-6 md:w-7 md:h-7" />
                 {totalItems > 0 && (
@@ -94,15 +95,6 @@ export function Header() {
             </div>
           </div>
 
-          {isHomepage && (
-            <nav className="flex items-center justify-center gap-8 border-border px-2.5 py-2.5 border-t-0">
-              <NavLink href="/skin-analysis">Skin Analysis</NavLink>
-              <NavLink href="/shop">Shop</NavLink>
-              <NavLink href="/about">About</NavLink>
-              <NavLink href="/join">Join</NavLink>
-            </nav>
-          )}
-
           {isShopPage && (
             <TabsNav
               tabs={[
@@ -113,15 +105,6 @@ export function Header() {
               baseUrl="/shop"
               paramName="category"
             />
-          )}
-
-          {!isHomepage && !isShopPage && (
-            <nav className="hidden md:flex items-center justify-center gap-8 py-3 border-t border-border">
-              <NavLink href="/skin-analysis">Skin Analysis</NavLink>
-              <NavLink href="/shop">Shop</NavLink>
-              <NavLink href="/about">About</NavLink>
-              <NavLink href="/join">Join</NavLink>
-            </nav>
           )}
         </div>
       </header>

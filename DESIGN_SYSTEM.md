@@ -86,6 +86,14 @@
 - Icon size: 20px
 - Hover: opacity-90
 
+#### Button Variants
+- **default**: Standard button with background and padding
+- **outline**: Border button with hover fill
+- **secondary**: Light background button
+- **ghost**: Transparent with hover background
+- **link**: Simple underlined link with padding removed
+- **textLink**: Truly inline text link with no padding, flows with text content
+
 ### Carousels
 - Horizontal scroll
 - Gap: 5px between items

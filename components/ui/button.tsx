@@ -18,7 +18,7 @@ const buttonVariants = cva(
         ghost: "hover:bg-[#f5f6f5] hover:text-[#586158] rounded-[8px]",
         link: "text-[#586158] underline-offset-4 hover:underline font-medium px-0 py-0 h-auto rounded-none",
         textLink:
-          "inline font-large text-[#586158] underline underline-offset-4 decoration-2 decoration-[#586158]/40 hover:decoration-[#586158] transition-colors px-0 py-0 h-auto rounded-none justify-start",
+          "!inline text-[#586158] underline underline-offset-4 decoration-2 decoration-[#586158]/40 hover:decoration-[#586158] transition-colors !p-0 !h-auto rounded-none",
       },
       size: {
         default: "h-[40px] px-[16px] py-[8px] text-[12px]",

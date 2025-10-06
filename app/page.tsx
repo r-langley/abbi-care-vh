@@ -28,52 +28,67 @@ export default function HomePage() {
       <main>
         {/* Hero Section */}
         <section className="relative bg-background">
-          <div className="container mx-auto px-0">
-            <div className="grid grid-cols-2 items-center gap-0 bg-primary-foreground">
-              {/* Left: Hero Image */}
-              <div className="relative aspect-[2/3] md:aspect-square">
-                <Image src="/images/design-mode/image.png" alt="ABBI Skincare" fill className="object-cover" priority />
-              </div>
+          <div className="grid grid-cols-2 items-center gap-0 bg-primary-foreground">
+            {/* Left: Hero Image */}
+            <div className="relative aspect-[2/3] md:aspect-[4/3]">
+              <Image src="/images/design-mode/image.png" alt="ABBI Skincare" fill className="object-cover" priority />
+            </div>
 
-              {/* Right: Hero Content */}
-              <div className="flex flex-col justify-center items-start px-5 py-5">
-                <PageTitle variant="hero">Your Skin, Our Formula</PageTitle>
-                <p className="text-[16px] font-medium tracking-[-0.32px] text-muted-foreground leading-[1.35] mb-4 md:mb-8">
-                  Personalized skincare, perfected
-                </p>
-                <Button asChild variant="textLink" className="font-mono">
-                  <Link href="/skin-analysis">Start My Journey</Link>
-                </Button>
-              </div>
+            {/* Right: Hero Content */}
+            <div className="flex flex-col justify-center items-start px-5 py-5 md:py-8">
+              <PageTitle variant="hero">
+                <span className="font-serif italic font-medium">Your</span> Skin, Our{" "}
+                <span className="font-serif italic font-medium">Formula</span>
+              </PageTitle>
+              {/* </CHANGE> */}
+              <p className="text-[16px] font-medium tracking-[-0.32px] text-muted-foreground leading-[1.35] mb-4">
+                Personalized skincare, perfected
+              </p>
+              <Button asChild variant="textLink" className="font-mono">
+                <Link href="/skin-analysis">Start My Journey</Link>
+              </Button>
             </div>
           </div>
+          {/* </CHANGE> */}
         </section>
 
         {/* AI Skin Analysis Section */}
-        <SectionContainer spacing="tight" className="md:py-20">
-          <div className="container mx-auto text-center px-5">
-            <SectionOverline>AI SKIN ANALYSIS</SectionOverline>
-            <SectionHeading spacing="tight">Personalized care for your unique skin</SectionHeading>
-            <Button asChild size="lg" className="font-mono">
-              <Link href="/skin-analysis">Analyze My Skin</Link>
-            </Button>
-
-            <div className="mt-8 md:mt-12 max-w-md mx-auto">
-              <div className="relative rounded-2xl overflow-hidden flex justify-center">
-                <ParallaxImage
-                  src="/images/skin-analysis.png"
-                  alt="AI Skin Analysis"
-                  width={828}
-                  height={1792}
-                  className="h-auto w-60 rounded-3xl border-2"
-                  parallaxSpeed={0.3}
-                  loading="lazy"
-                />
+        <SectionContainer spacing="tight" className="md:py-12">
+          <div className="container mx-auto px-5">
+            <div className="flex flex-col md:flex-row md:items-center md:gap-12 md:max-w-6xl md:mx-auto">
+              {/* Left: Content */}
+              <div className="text-center md:text-left md:flex-1">
+                <SectionOverline>AI SKIN ANALYSIS</SectionOverline>
+                <SectionHeading spacing="tight">Personalized care for your unique skin</SectionHeading>
+                <BodyText className="hidden md:block mt-4 mb-6 text-muted-foreground max-w-xl">
+                  Our advanced AI technology analyzes your skin in seconds, identifying your unique concerns and
+                  recommending personalized formulas tailored specifically to your needs. Get professional-grade
+                  insights without leaving home.
+                </BodyText>
+                <Button asChild size="lg" className="font-mono">
+                  <Link href="/skin-analysis">Analyze My Skin</Link>
+                </Button>
+                <SmallText className="mt-4 md:mt-6">97% accurate when compared to a dermatological exam.</SmallText>
               </div>
-              <SmallText className="mt-4">97% accurate when compared to a dermatological exam.</SmallText>
+
+              {/* Right: Phone Image */}
+              <div className="mt-8 md:mt-0 md:flex-shrink-0 flex justify-center">
+                <div className="relative rounded-2xl overflow-hidden">
+                  <ParallaxImage
+                    src="/images/skin-analysis.png"
+                    alt="AI Skin Analysis"
+                    width={828}
+                    height={1792}
+                    className="h-auto w-60 md:w-48 rounded-3xl border-2"
+                    parallaxSpeed={0.3}
+                    loading="lazy"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </SectionContainer>
+        {/* </CHANGE> */}
 
         {/* What Our Scan Evaluates */}
         <SectionContainer variant="muted">
