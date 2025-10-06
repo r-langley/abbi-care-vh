@@ -289,7 +289,7 @@ export default function ShopPage() {
                       <h2 className="font-semibold text-[#586158] leading-[1.35] text-foreground tracking-tight text-2xl">
                         In Lab
                       </h2>
-                      <p className="font-medium text-[16px] tracking-[-0.32px] text-[#586158] leading-[1.35]">
+                      <p className="text-[16px] tracking-[-0.32px] text-[#586158] leading-[1.35] text-foreground font-normal">
                         Made-to-order in our French lab — just for you.
                       </p>
                     </div>
@@ -309,7 +309,7 @@ export default function ShopPage() {
                     <h2 className="font-semibold text-[#586158] text-foreground text-2xl tracking-tight">
                       Mix at Home
                     </h2>
-                    <p className="font-medium text-[16px] tracking-[-0.32px] text-[#586158] leading-[1.35]">
+                    <p className="text-[16px] tracking-[-0.32px] text-[#586158] leading-[1.35] text-foreground font-normal">
                       Create your own routines. Mix a specific base and active concentrates.
                     </p>
                   </div>
@@ -331,7 +331,7 @@ export default function ShopPage() {
                     <h2 className="font-semibold text-[#586158] text-foreground text-2xl tracking-tight">
                       Active Concentrates
                     </h2>
-                    <p className="font-medium text-[16px] tracking-[-0.32px] text-[#586158] leading-[1.35]">
+                    <p className="text-[16px] tracking-[-0.32px] text-[#586158] leading-[1.35] text-foreground font-normal">
                       Targeted treatments to address specific skin concerns
                     </p>
                   </div>

@@ -26,7 +26,7 @@ export function HeroSection({ image, title, description, imagePosition = "left" 
       <div className="flex-1 bg-[#f5f6f5] flex flex-col items-center justify-center gap-[10px] px-[20px] py-[20px] text-center text-[#586158] leading-[1.35] text-foreground bg-muted">
         <p className="font-semibold text-[24px] w-full tracking-normal">{title}</p>
         {description && (
-          <p className="font-medium text-[16px] tracking-[-0.32px] w-full text-muted-foreground">{description}</p>
+          <p className="text-[16px] tracking-[-0.32px] w-full text-foreground font-normal">{description}</p>
         )}
       </div>
     </div>
