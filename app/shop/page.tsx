@@ -58,6 +58,8 @@ export default function ShopPage() {
     }
   }, [])
 
+  console.log("[v0] personalizeData:", personalizeData)
+
   const handlePersonalizeComplete = (data: { traits: string[]; age: number }) => {
     localStorage.setItem("personalizeData", JSON.stringify(data))
     setPersonalizeData(data)
@@ -115,28 +117,33 @@ export default function ShopPage() {
   }, [scanResults, isLoggedIn, personalizeData])
 
   const recommendedCreamBase = useMemo(() => {
-    if ((!scanResults && !isLoggedIn && !personalizeData) || !groupedCreams) return null
+    if (!groupedCreams) return null
+
+    if (!scanResults && !isLoggedIn && !personalizeData) {
+      console.log("[v0] No cream recommendation - user needs to personalize first")
+      return null
+    }
 
     if (personalizeData && groupedCreams) {
       const userTraits = personalizeData.traits.map((t) => t.toLowerCase())
 
-      // Find cream that matches the most traits
       const creamWithScores = groupedCreams.inLab.map((cream) => ({
         cream,
         score: cream.traits.filter((t) => userTraits.includes(t.toLowerCase())).length,
       }))
 
       const bestMatch = creamWithScores.sort((a, b) => b.score - a.score)[0]
+      console.log("[v0] Personalized cream recommendation:", bestMatch?.cream)
       return bestMatch?.cream || groupedCreams.inLab[0]
     }
 
+    console.log("[v0] Default cream recommendation for logged-in user")
     return groupedCreams.inLab.find((p) => p.id === "inlab-aloe-vera") || groupedCreams.inLab[0]
   }, [scanResults, isLoggedIn, personalizeData, groupedCreams])
 
   const sortedMixAtHome = useMemo(() => {
     if (!groupedCreams || category !== "creams") return groupedCreams?.mixAtHome || []
 
-    // Recommended Mix-at-Home based on user traits
     const recommendedIds = ["cream-velvety"]
 
     return [...groupedCreams.mixAtHome].sort((a, b) => {
@@ -151,7 +158,6 @@ export default function ShopPage() {
   const sortedActiveConcentrates = useMemo(() => {
     if (!groupedCreams || category !== "creams") return groupedCreams?.activeConcentrate || []
 
-    // Recommended Active Concentrates based on user traits (Wrinkles, Radiance, Imperfections)
     const recommendedIds = ["concentrate-02-wrinkles", "concentrate-01-hydration"]
 
     return [...groupedCreams.activeConcentrate].sort((a, b) => {
