@@ -30,7 +30,7 @@ export function SectionHeading({ className, align = "center", spacing = "default
   return (
     <h2
       className={cn(
-        "text-2xl md:text-3xl leading-7 font-semibold text-foreground",
+        "text-2xl md:text-3xl leading-7 text-foreground font-medium",
         align === "center" && "text-center md:text-left",
         align === "left" && "text-left",
         spacing === "default" && "mb-12 md:mb-16",
