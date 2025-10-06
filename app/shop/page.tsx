@@ -313,7 +313,9 @@ export default function ShopPage() {
                       Create your own routines. Mix a specific base and active concentrates.
                     </p>
                     <p className="text-[18px] tracking-tight leading-[1.2] mt-2 text-center">
-                      <span className="font-serif italic text-foreground font-normal tracking-tight text-xl">Mix-at-Home</span>{" "}
+                      <span className="font-serif italic text-foreground font-normal tracking-tight text-xl">
+                        Mix-at-Home
+                      </span>{" "}
                       <span className="font-sans text-foreground font-medium">Base Creams</span>
                     </p>
                   </div>
@@ -331,12 +333,18 @@ export default function ShopPage() {
 
               {sortedActiveConcentrates.length > 0 && (
                 <div className="flex flex-col gap-[20px]">
-                  <div className="flex flex-col gap-[5px]">
+                  <div className="flex flex-col gap-2.5">
                     <h2 className="font-semibold text-[#586158] text-foreground text-2xl tracking-tight">
                       Active Concentrates
                     </h2>
                     <p className="text-[16px] tracking-[-0.32px] text-[#586158] leading-[1.35] text-foreground font-normal">
                       Targeted treatments to address specific skin concerns
+                    </p>
+                    <p className="text-[18px] tracking-tight leading-[1.2] mt-2 text-center">
+                      <span className="font-serif italic text-foreground font-normal tracking-tight text-xl">
+                        Mix-at-Home
+                      </span>{" "}
+                      <span className="font-sans text-foreground font-medium">Active Concentrates</span>
                     </p>
                   </div>
                   <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[10px]">
