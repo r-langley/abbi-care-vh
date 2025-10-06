@@ -339,14 +339,14 @@ export default function ShopPage() {
                 </div>
               ) : (
                 groupedCreams.inLab.length > 0 && (
-                  <div className="flex flex-col justify-start gap-0">
+                  <div className="flex flex-col md:grid md:grid-cols-2 gap-[10px] md:gap-8 pb-5 md:pb-0">
                     {!showScanResults && selectedTraits.length === 0 && (
                       <div className="md:hidden">
                         <ScanCTA />
                       </div>
                     )}
 
-                    <div className="flex flex-col gap-[10px] pb-5">
+                    <div className="flex flex-col gap-[10px] md:justify-start">
                       <h2 className="text-[#586158] leading-[1.35] text-foreground tracking-tight text-2xl font-medium">
                         In Lab
                       </h2>
@@ -355,15 +355,21 @@ export default function ShopPage() {
                       </p>
                     </div>
 
-                    {!isLoggedIn && !scanResults && selectedTraits.length === 0 ? (
-                      <PersonalizeCreamCTA onClick={() => setShowPersonalizeModal(true)} />
-                    ) : (
-                      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[10px]">
-                        {groupedCreams.inLab.map((product) => (
-                          <ProductCard key={product.id} product={product} showRecommended={selectedTraits.length > 0} />
-                        ))}
-                      </div>
-                    )}
+                    <div className="w-full">
+                      {!isLoggedIn && !scanResults && selectedTraits.length === 0 ? (
+                        <PersonalizeCreamCTA onClick={() => setShowPersonalizeModal(true)} />
+                      ) : (
+                        <div className="grid grid-cols-2 md:grid-cols-1 gap-[10px]">
+                          {groupedCreams.inLab.slice(0, 1).map((product) => (
+                            <ProductCard
+                              key={product.id}
+                              product={product}
+                              showRecommended={selectedTraits.length > 0}
+                            />
+                          ))}
+                        </div>
+                      )}
+                    </div>
                   </div>
                 )
               )}
