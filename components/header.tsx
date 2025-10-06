@@ -42,7 +42,7 @@ export function Header() {
               <Sheet open={open} onOpenChange={setOpen}>
                 <SheetTrigger asChild>
                   <button className="p-2 hover:bg-[#f5f6f5] rounded-[8px] transition-colors">
-                    <Bars3Icon className="w-6 h-6 md:w-7 md:h-7" />
+                    <Bars3Icon className="w-6 h-6" />
                   </button>
                 </SheetTrigger>
                 <SheetContent side="left" className="px-5 py-5 w-full md:w-1/2">
@@ -70,7 +70,7 @@ export function Header() {
             {/* Right: Cart + Account */}
             <div className="flex items-center gap-0">
               <Link href="/cart" className="relative p-2 hover:bg-[#f5f6f5] rounded-[8px] transition-colors">
-                <ShoppingBagIcon className="w-6 h-6 md:w-7 md:h-7" />
+                <ShoppingBagIcon className="w-6 h-6" />
                 {totalItems > 0 && (
                   <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-xs font-mono rounded-full h-5 w-5 flex items-center justify-center">
                     {totalItems}
@@ -83,9 +83,9 @@ export function Header() {
                 title={isLoggedIn ? "Log Out (Prototype)" : "Log In (Prototype)"}
               >
                 {isLoggedIn ? (
-                  <UserAvatar size="sm" className="md:w-7 md:h-7" />
+                  <UserAvatar size="sm" className="w-6 h-6" />
                 ) : (
-                  <UserCircleIcon className="w-6 h-6 md:w-7 md:h-7 text-muted-foreground" />
+                  <UserCircleIcon className="w-6 h-6 text-muted-foreground" />
                 )}
                 {/* Tooltip */}
                 <span className="absolute -bottom-8 right-0 bg-[#586158] text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
