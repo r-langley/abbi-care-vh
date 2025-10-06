@@ -340,9 +340,7 @@ export default function ShopPage() {
                     </div>
 
                     {!personalizeData && !scanResults && !isLoggedIn && selectedTraits.length === 0 ? (
-                      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[10px]">
-                        <PersonalizeCreamCTA onClick={() => setShowPersonalizeModal(true)} />
-                      </div>
+                      <PersonalizeCreamCTA onClick={() => setShowPersonalizeModal(true)} />
                     ) : (
                       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[10px]">
                         {groupedCreams.inLab.map((product) => (
