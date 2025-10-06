@@ -263,7 +263,7 @@ export default function ShopPage() {
               {showPersonalizedCream && recommendedCreamBase ? (
                 <div className="flex flex-col gap-[20px]">
                   <div className="flex flex-col md:grid md:grid-cols-2 gap-[10px] md:gap-8">
-                    <div className="flex flex-col gap-[10px] md:justify-start">
+                    <div className="flex flex-col gap-[10px] md:justify-between px-5 py-5">
                       <h2 className="text-[#586158] leading-[1.35] text-foreground tracking-tight text-2xl font-medium">
                         Personalized <span className="font-serif italic font-medium">Cream</span>
                       </h2>
@@ -271,13 +271,7 @@ export default function ShopPage() {
                         Your personalized cream base is selected based on your skin concerns and age. Complete your
                         routine by adding active concentrates below for targeted treatment.
                       </p>
-                      <Link
-                        href="/shop?category=creams"
-                        className="flex items-center gap-1 text-[16px] font-medium text-[#586158] hover:opacity-70 transition-opacity text-foreground md:self-start"
-                      >
-                        Change
-                        <ChevronRightIcon className="h-5 w-5" />
-                      </Link>
+                      
                     </div>
 
                     <div className="w-full">
