@@ -11,7 +11,7 @@ interface SkinResultsProps {
 
 export function MySkinResults({ userName, wrinkles, radiance, imperfections }: SkinResultsProps) {
   return (
-    <div className="bg-[#586158] px-2.5 py-2.5">
+    <div className="bg-[#586158] px-2.5 py-2.5 bg-foreground">
       <div className="flex justify-center">
         <div className="w-full max-w-[800px]">
           {/* Header */}
