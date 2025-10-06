@@ -20,6 +20,8 @@ export function ActiveIngredientCard({ id, number, name, image }: ActiveIngredie
           alt={name}
           fill
           className="object-cover"
+          loading="lazy"
+          sizes="(max-width: 768px) 33vw, (max-width: 1200px) 25vw, 20vw"
         />
       </div>
       <div className="bg-[#f5f6f5] p-[10px]">
@@ -31,9 +33,7 @@ export function ActiveIngredientCard({ id, number, name, image }: ActiveIngredie
             No.{number}
           </p>
         )}
-        <p className="font-semibold text-[14px] leading-[1.15] text-[#586158] tracking-normal">
-          {name}
-        </p>
+        <p className="font-semibold text-[14px] leading-[1.15] text-[#586158] tracking-normal">{name}</p>
       </div>
     </Link>
   )

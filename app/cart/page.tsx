@@ -33,8 +33,6 @@ export default function CartPage() {
       <Header />
       <main className="min-h-screen bg-muted">
         <div className="container mx-auto px-5 py-5">
-          
-
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-2.5">
             {/* Cart Items */}
             <div className="lg:col-span-2 space-y-4">
@@ -43,7 +41,14 @@ export default function CartPage() {
                   <CardContent className="p-4">
                     <div className="flex gap-4">
                       <div className="relative w-24 h-24 flex-shrink-0 rounded-md overflow-hidden bg-muted">
-                        <Image src={item.image || "/placeholder.svg"} alt={item.name} fill className="object-cover" />
+                        <Image
+                          src={item.image || "/placeholder.svg"}
+                          alt={item.name}
+                          fill
+                          className="object-cover"
+                          loading="lazy"
+                          sizes="96px"
+                        />
                       </div>
                       <div className="flex-1 min-w-0">
                         <div className="flex justify-between items-start mb-2">

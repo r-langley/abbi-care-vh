@@ -67,6 +67,7 @@ export default function HomePage() {
                   height={1792}
                   className="h-auto w-60 rounded-3xl border-2"
                   parallaxSpeed={0.3}
+                  loading="lazy"
                 />
               </div>
               <SmallText className="mt-4">97% accurate when compared to a dermatological exam.</SmallText>

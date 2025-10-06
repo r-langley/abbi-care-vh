@@ -226,6 +226,8 @@ export default function ShopPage() {
                         alt={recommendedCreamBase.name}
                         fill
                         className="object-cover"
+                        loading="lazy"
+                        sizes="(max-width: 768px) 100vw, 50vw"
                       />
                       <RecommendedBadge className="absolute top-3 left-3" />
                     </div>

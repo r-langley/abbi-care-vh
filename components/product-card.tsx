@@ -44,10 +44,10 @@ export function ProductCard({ product, showRecommended = false }: ProductCardPro
               alt={product.name}
               fill
               className="object-cover"
+              loading="lazy"
+              sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
             />
-            {showRecommended && product.recommended && (
-              <RecommendedBadge className="absolute top-3 left-3" />
-            )}
+            {showRecommended && product.recommended && <RecommendedBadge className="absolute top-3 left-3" />}
           </div>
           <div className="bg-[#f5f6f5] p-[10px] pb-[20px] flex flex-col justify-between gap-[10px] flex-1">
             <div className="flex flex-col gap-[10px]">
@@ -67,7 +67,11 @@ export function ProductCard({ product, showRecommended = false }: ProductCardPro
               onClick={handleAddToCart}
               className="bg-[#586158] rounded-full size-[32px] flex items-center justify-center shrink-0 hover:opacity-90 transition-opacity"
             >
-              {isInCart ? <CheckIcon className="h-5 w-5 text-[#f5f6f5]" /> : <PlusIcon className="h-5 w-5 text-[#f5f6f5]" />}
+              {isInCart ? (
+                <CheckIcon className="h-5 w-5 text-[#f5f6f5]" />
+              ) : (
+                <PlusIcon className="h-5 w-5 text-[#f5f6f5]" />
+              )}
             </button>
           </div>
         </div>

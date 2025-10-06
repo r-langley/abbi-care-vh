@@ -9,7 +9,6 @@ import {
   PhoneIcon,
   FlagIcon,
   ChevronDownIcon,
-  XMarkIcon,
 } from "@heroicons/react/24/solid"
 import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetDescription } from "@/components/ui/sheet"
 import { useCart } from "@/lib/cart-context"
@@ -135,11 +134,8 @@ function MobileNav({ closeMenu }: { closeMenu: () => void }) {
 
   return (
     <nav className="flex flex-col h-full">
-      <div className="flex items-center justify-center mb-8 relative flex-col">
+      <div className="flex items-center justify-center mb-8">
         <Image src="/images/logo.png" alt="ABBI" width={120} height={40} className="w-auto h-5" priority />
-        <button className="absolute top-0 right-0 p-2 hover:bg-[#f5f6f5] rounded-[8px] transition-colors">
-          <XMarkIcon className="w-6 h-6" />
-        </button>
       </div>
 
       <div className="flex flex-col flex-1 gap-5 overflow-y-auto">

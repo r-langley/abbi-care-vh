@@ -27,7 +27,7 @@ export function CategoryCarousel({ title, description, products, shopLink }: Cat
 
       {/* Scrollable Product Grid */}
       <div className="relative -mx-4 px-4">
-        <div className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-4 gap-2.5">
+        <div className="flex overflow-x-auto snap-x snap-mandatory pb-4 gap-2.5">
           {/* Product Cards */}
           {products.map((product) => (
             <div key={product.id} className="flex-none snap-start w-56">

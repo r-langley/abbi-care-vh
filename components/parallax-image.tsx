@@ -10,9 +10,18 @@ interface ParallaxImageProps {
   height: number
   className?: string
   parallaxSpeed?: number
+  loading?: "lazy" | "eager"
 }
 
-export function ParallaxImage({ src, alt, width, height, className = "", parallaxSpeed = 0.5 }: ParallaxImageProps) {
+export function ParallaxImage({
+  src,
+  alt,
+  width,
+  height,
+  className = "",
+  parallaxSpeed = 0.5,
+  loading = "lazy",
+}: ParallaxImageProps) {
   const [offsetY, setOffsetY] = useState(0)
   const [isInView, setIsInView] = useState(false)
   const imageRef = useRef<HTMLDivElement>(null)
@@ -48,7 +57,15 @@ export function ParallaxImage({ src, alt, width, height, className = "", paralla
           transition: "transform 0.1s ease-out",
         }}
       >
-        <Image src={src || "/placeholder.svg"} alt={alt} width={width} height={height} className={className} />
+        <Image
+          src={src || "/placeholder.svg"}
+          alt={alt}
+          width={width}
+          height={height}
+          className={className}
+          loading={loading}
+          sizes="(max-width: 768px) 100vw, 50vw"
+        />
       </div>
 
       {isInView && (

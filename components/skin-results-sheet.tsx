@@ -144,6 +144,8 @@ export function SkinResultsSheet({ userName = "Alya", currentTrait = "wrinkles" 
                 alt="Aloe Vera Cream"
                 fill
                 className="object-cover"
+                loading="lazy"
+                sizes="(max-width: 768px) 100vw, 50vw"
               />
               <RecommendedBadge variant="compact" className="absolute top-2.5 left-2.5" />
             </div>
