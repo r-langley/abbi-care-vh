@@ -262,61 +262,65 @@ export default function ShopPage() {
             <div className="space-y-10">
               {showPersonalizedCream && recommendedCreamBase ? (
                 <div className="flex flex-col gap-[20px]">
-                  <div className="flex items-center justify-between">
-                    <div className="flex flex-col gap-[10px]">
-                      <h2 className="text-[#586158] leading-[1.35] text-foreground tracking-tight text-2xl font-medium">
-                        Personalized <span className="font-serif italic font-medium">Cream</span>
-                      </h2>
-                    </div>
-                    <Link
-                      href="/shop?category=creams"
-                      className="flex items-center gap-1 text-[16px] font-medium text-[#586158] hover:opacity-70 transition-opacity text-foreground"
-                    >
-                      Change
-                      <ChevronRightIcon className="h-5 w-5" />
-                    </Link>
-                  </div>
-
-                  <Link
-                    href={`/product/${recommendedCreamBase.id}`}
-                    className="bg-white rounded-[10px] border-2 border-[#f5f6f5] overflow-hidden flex flex-col hover:border-[#586158] transition-colors"
-                  >
-                    <div className="relative h-[200px] overflow-hidden">
-                      <Image
-                        src="/minimalist-cosmetic-pump-bottle-product-photograph.jpg"
-                        alt={recommendedCreamBase.name}
-                        fill
-                        className="object-cover"
-                        loading="lazy"
-                        sizes="(max-width: 768px) 100vw, 50vw"
-                      />
-                      <RecommendedBadge className="absolute top-3 left-3" />
-                    </div>
-                    <div className="bg-[#f5f6f5] p-[10px] pb-[20px] flex flex-row items-end justify-between gap-[10px] bg-muted">
-                      <div className="flex flex-col gap-[10px]">
-                        <div className="flex flex-col gap-2.5">
-                          <p className="text-[18px] leading-[1.15] text-[#586158] tracking-normal text-foreground font-medium">
-                            {recommendedCreamBase.name}
-                          </p>
-                          <p className="font-medium text-[14px] tracking-[-0.28px] text-[#586158] leading-[1.15] text-foreground">
-                            Cream Base
-                          </p>
-                        </div>
-                        <p
-                          className="font-medium text-[13px] tracking-[-0.26px] leading-[1.15] text-primary"
-                          style={{ fontFamily: "var(--font-geist-mono)", fontVariationSettings: "'wdth' 100" }}
+                  <div className="flex flex-col md:grid md:grid-cols-2 gap-[10px] md:gap-8">
+                    <div className="flex flex-col gap-[10px] md:justify-start">
+                      <div className="flex items-center justify-between md:flex-col md:items-start md:gap-[10px]">
+                        <h2 className="text-[#586158] leading-[1.35] text-foreground tracking-tight text-2xl font-medium">
+                          Personalized <span className="font-serif italic font-medium">Cream</span>
+                        </h2>
+                        <Link
+                          href="/shop?category=creams"
+                          className="flex items-center gap-1 text-[16px] font-medium text-[#586158] hover:opacity-70 transition-opacity text-foreground"
                         >
-                          ${recommendedCreamBase.price.toFixed(2)}
-                        </p>
+                          Change
+                          <ChevronRightIcon className="h-5 w-5" />
+                        </Link>
                       </div>
-                      <button
-                        onClick={(e) => e.preventDefault()}
-                        className="bg-[#586158] rounded-full size-[32px] flex items-center justify-center shrink-0 hover:opacity-90 transition-opacity bg-accent"
-                      >
-                        <PlusIcon className="h-5 w-5 text-[#f5f6f5]" />
-                      </button>
                     </div>
-                  </Link>
+
+                    <div className="w-full">
+                      <Link
+                        href={`/product/${recommendedCreamBase.id}`}
+                        className="bg-white rounded-[10px] border-2 border-[#f5f6f5] overflow-hidden flex flex-col hover:border-[#586158] transition-colors"
+                      >
+                        <div className="relative h-[200px] overflow-hidden">
+                          <Image
+                            src="/minimalist-cosmetic-pump-bottle-product-photograph.jpg"
+                            alt={recommendedCreamBase.name}
+                            fill
+                            className="object-cover"
+                            loading="lazy"
+                            sizes="(max-width: 768px) 100vw, 50vw"
+                          />
+                          <RecommendedBadge className="absolute top-3 left-3" />
+                        </div>
+                        <div className="bg-[#f5f6f5] p-[10px] pb-[20px] flex flex-row items-end justify-between gap-[10px] bg-muted">
+                          <div className="flex flex-col gap-[10px]">
+                            <div className="flex flex-col gap-2.5">
+                              <p className="text-[18px] leading-[1.15] text-[#586158] tracking-normal text-foreground font-medium">
+                                {recommendedCreamBase.name}
+                              </p>
+                              <p className="font-medium text-[14px] tracking-[-0.28px] text-[#586158] leading-[1.15] text-foreground">
+                                Cream Base
+                              </p>
+                            </div>
+                            <p
+                              className="font-medium text-[13px] tracking-[-0.26px] leading-[1.15] text-primary"
+                              style={{ fontFamily: "var(--font-geist-mono)", fontVariationSettings: "'wdth' 100" }}
+                            >
+                              ${recommendedCreamBase.price.toFixed(2)}
+                            </p>
+                          </div>
+                          <button
+                            onClick={(e) => e.preventDefault()}
+                            className="bg-[#586158] rounded-full size-[32px] flex items-center justify-center shrink-0 hover:opacity-90 transition-opacity bg-accent"
+                          >
+                            <PlusIcon className="h-5 w-5 text-[#f5f6f5]" />
+                          </button>
+                        </div>
+                      </Link>
+                    </div>
+                  </div>
 
                   <div className="flex flex-col gap-[15px]">
                     <p className="text-center text-[#586158] text-xl font-normal text-foreground">
