@@ -9,6 +9,7 @@ import {
   PhoneIcon,
   FlagIcon,
   ChevronDownIcon,
+  XMarkIcon,
 } from "@heroicons/react/24/solid"
 import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetDescription } from "@/components/ui/sheet"
 import { useCart } from "@/lib/cart-context"
@@ -45,7 +46,7 @@ export function Header() {
                     <Bars3Icon className="w-6 h-6 md:w-7 md:h-7" />
                   </button>
                 </SheetTrigger>
-                <SheetContent side="left" className="px-5 py-5 w-[50vw]">
+                <SheetContent side="left" className="px-5 py-5 w-full">
                   <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
                   <SheetDescription className="sr-only">Browse site navigation and shop by skin trait</SheetDescription>
                   <MobileNav />
@@ -132,71 +133,121 @@ function MobileNav() {
   const [isTraitExpanded, setIsTraitExpanded] = React.useState(false)
 
   return (
-    <nav className="flex flex-col gap-6 mt-8">
-      <NavLink href="/skin-analysis" variant="mobile">
-        Skin Analysis
-      </NavLink>
-      <NavLink href="/shop" variant="mobile">
-        Shop All
-      </NavLink>
-      <NavLink href="/shop?category=creams" variant="mobile">
-        Creams
-      </NavLink>
-      <NavLink href="/shop?category=essentials" variant="mobile">
-        Essentials
-      </NavLink>
-      <NavLink href="/shop?category=simple-solutions" variant="mobile">
-        Simple Solutions
-      </NavLink>
-      <NavLink href="/ingredients" variant="mobile">
-        Ingredients
-      </NavLink>
-
-      <div>
-        <button
-          onClick={() => setIsTraitExpanded(!isTraitExpanded)}
-          className="text-lg hover:text-primary transition-colors flex items-center justify-between w-full font-sans font-medium text-muted-foreground"
-        >
-          Shop by Trait
-          <ChevronDownIcon className={`h-6 w-6 transition-transform ${isTraitExpanded ? "rotate-180" : ""}`} />
+    <nav className="flex flex-col h-full">
+      <div className="flex items-center justify-center mb-8 relative flex-col">
+        <Image src="/images/logo.png" alt="ABBI" width={120} height={40} className="w-auto h-5" priority />
+        <button className="absolute top-0 right-0 p-2 hover:bg-[#f5f6f5] rounded-[8px] transition-colors">
+          
         </button>
-        {isTraitExpanded && (
-          <div className="flex flex-col gap-3 pl-4 mt-3">
-            <NavLink href="/shop?category=creams&traits=wrinkles" variant="footer">
-              Wrinkles
-            </NavLink>
-            <NavLink href="/shop?category=creams&traits=radiance" variant="footer">
-              Radiance
-            </NavLink>
-            <NavLink href="/shop?category=creams&traits=imperfections" variant="footer">
-              Imperfections
-            </NavLink>
-            <NavLink href="/shop?category=creams&traits=spots" variant="footer">
-              Spots
-            </NavLink>
-            <NavLink href="/shop?category=creams&traits=hydration" variant="footer">
-              Hydration
-            </NavLink>
-            <NavLink href="/shop?category=creams&traits=sensitivity" variant="footer">
-              Sensitivity
-            </NavLink>
-            <NavLink href="/shop?category=creams&traits=shine" variant="footer">
-              Shine
-            </NavLink>
-            <NavLink href="/shop?category=creams&traits=texture" variant="footer">
-              Texture
-            </NavLink>
-          </div>
-        )}
       </div>
 
-      <div className="border-t border-border pt-6">
-        <NavLink href="/about" variant="mobile" className="block mb-4">
+      <div className="flex flex-col flex-1 gap-5 overflow-y-auto">
+        <div className="flex items-center justify-between">
+          <NavLink href="/skin-analysis" variant="mobile">
+            Skin Analysis
+          </NavLink>
+          <svg className="w-6 h-6 text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"
+            />
+          </svg>
+        </div>
+
+        <NavLink href="/shop" variant="mobile">
+          Shop All
+        </NavLink>
+
+        <div>
+          <NavLink href="/shop?category=creams" variant="mobile" className="block mb-1">
+            Creams
+          </NavLink>
+          <p className="text-[16px] font-medium tracking-[-0.32px] text-muted-foreground">
+            Choose between In-Lab and Mix-At-Home
+          </p>
+        </div>
+
+        <div>
+          <NavLink href="/shop?category=essentials" variant="mobile" className="block mb-1">
+            Essentials
+          </NavLink>
+          <p className="text-[16px] font-medium tracking-[-0.32px] text-muted-foreground">
+            Cleansers, Serums, Oils & Mists
+          </p>
+        </div>
+
+        <div>
+          <NavLink href="/shop?category=simple-solutions" variant="mobile" className="block mb-1">
+            Simple Solutions
+          </NavLink>
+          <p className="text-[16px] font-medium tracking-[-0.32px] text-muted-foreground">Complete skincare packages</p>
+        </div>
+
+        <div>
+          <button
+            onClick={() => setIsTraitExpanded(!isTraitExpanded)}
+            className="text-lg hover:text-primary transition-colors flex items-center justify-between w-full font-sans font-medium mb-1 text-foreground"
+          >
+            Shop by Trait
+            <ChevronDownIcon className={`h-6 w-6 transition-transform ${isTraitExpanded ? "rotate-180" : ""}`} />
+          </button>
+          <p className="text-[16px] font-medium tracking-[-0.32px] text-muted-foreground mb-3">
+            Shop based on your skin's top priorities
+          </p>
+          {isTraitExpanded && (
+            <div className="flex flex-col gap-3 pl-4">
+              <NavLink href="/shop?category=creams&traits=wrinkles" variant="footer">
+                Wrinkles
+              </NavLink>
+              <NavLink href="/shop?category=creams&traits=radiance" variant="footer">
+                Radiance
+              </NavLink>
+              <NavLink href="/shop?category=creams&traits=imperfections" variant="footer">
+                Imperfections
+              </NavLink>
+              <NavLink href="/shop?category=creams&traits=spots" variant="footer">
+                Spots
+              </NavLink>
+              <NavLink href="/shop?category=creams&traits=hydration" variant="footer">
+                Hydration
+              </NavLink>
+              <NavLink href="/shop?category=creams&traits=sensitivity" variant="footer">
+                Sensitivity
+              </NavLink>
+              <NavLink href="/shop?category=creams&traits=shine" variant="footer">
+                Shine
+              </NavLink>
+              <NavLink href="/shop?category=creams&traits=texture" variant="footer">
+                Texture
+              </NavLink>
+            </div>
+          )}
+        </div>
+
+        <NavLink href="/ingredients" variant="mobile">
+          Ingredients
+        </NavLink>
+
+        <NavLink href="/about" variant="mobile">
           About
         </NavLink>
-        <NavLink href="/join" variant="mobile" className="block">
+
+        <NavLink href="/join" variant="mobile">
           Join
         </NavLink>
+      </div>
+
+      <div className="flex items-center justify-between pt-6 border-t border-border mt-auto">
+        <button className="flex items-center gap-2 text-lg font-sans font-medium text-muted-foreground hover:text-primary transition-colors">
+          <span className="text-2xl">🇺🇸</span>
+          United States
+        </button>
+        <button className="flex items-center gap-2 text-lg font-sans font-medium text-muted-foreground hover:text-primary transition-colors">
+          Contact Us
+          <PhoneIcon className="w-6 h-6" />
+        </button>
       </div>
     </nav>
   )
