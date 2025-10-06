@@ -12,9 +12,9 @@ interface RecommendedCarouselProps {
 export function RecommendedCarousel({ products }: RecommendedCarouselProps) {
   return (
     <div className="flex flex-col gap-[20px] p-[20px] rounded-none bg-card py-10">
-      <div className="flex justify-center">
+      <div className="flex justify-center gap-0">
         <div className="w-full max-w-[900px]">
-          <div className="flex flex-col gap-[10px] pb-5">
+          <div className="flex flex-col pb-5 gap-5">
             <h2 className="md:text-[40px] leading-[1.2] text-foreground font-sans tracking-tight font-medium text-2xl">
               Recommended
             </h2>
