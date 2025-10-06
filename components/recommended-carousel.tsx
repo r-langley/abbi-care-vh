@@ -13,7 +13,7 @@ export function RecommendedCarousel({ products }: RecommendedCarouselProps) {
   return (
     <div className="flex flex-col gap-[20px] p-[20px] rounded-none bg-card py-10">
       <div className="flex flex-col gap-[10px]">
-        <h2 className="md:text-[40px] leading-[1.2] text-foreground font-sans tracking-tight text-2xl font-semibold">
+        <h2 className="md:text-[40px] leading-[1.2] text-foreground font-sans tracking-tight text-2xl font-medium">
           Recommended
         </h2>
         <p className="text-[16px] tracking-[-0.32px] text-foreground font-normal leading-[1.35]">

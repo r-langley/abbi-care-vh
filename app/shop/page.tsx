@@ -216,13 +216,13 @@ export default function ShopPage() {
                 <div className="flex flex-col gap-[20px]">
                   <div className="flex items-center justify-between">
                     <div className="flex flex-col gap-[10px]">
-                      <h2 className="font-semibold text-[#586158] leading-[1.35] text-foreground tracking-tight text-2xl">
+                      <h2 className="text-[#586158] leading-[1.35] text-foreground tracking-tight text-2xl font-medium">
                         Personalized <span className="font-serif italic font-medium">Cream</span>
                       </h2>
                     </div>
                     <Link
                       href="/shop?category=creams"
-                      className="flex items-center gap-1 text-[16px] font-medium text-[#586158] hover:opacity-70 transition-opacity"
+                      className="flex items-center gap-1 text-[16px] font-medium text-[#586158] hover:opacity-70 transition-opacity text-foreground"
                     >
                       Change
                       <ChevronRightIcon className="h-5 w-5" />
@@ -319,7 +319,7 @@ export default function ShopPage() {
               {sortedMixAtHome.length > 0 && (
                 <div className="flex flex-col gap-[20px]">
                   <div className="flex flex-col gap-2.5">
-                    <h2 className="font-semibold text-[#586158] text-foreground text-2xl tracking-tight">
+                    <h2 className="text-[#586158] text-foreground text-2xl tracking-tight font-medium">
                       Mix at Home
                     </h2>
                     <p className="text-[16px] tracking-[-0.32px] text-[#586158] leading-[1.35] text-foreground font-normal">
