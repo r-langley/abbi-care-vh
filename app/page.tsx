@@ -40,16 +40,14 @@ export default function HomePage() {
                 <span className="font-serif italic font-medium">Your</span> Skin, Our{" "}
                 <span className="font-serif italic font-medium">Formula</span>
               </PageTitle>
-              {/* </CHANGE> */}
               <p className="text-[16px] font-medium tracking-[-0.32px] text-muted-foreground leading-[1.35] mb-4">
                 Personalized skincare, perfected
               </p>
-              <Button asChild variant="textLink" className="font-mono">
+              <Button asChild className="font-mono">
                 <Link href="/skin-analysis">Start My Journey</Link>
               </Button>
             </div>
           </div>
-          {/* </CHANGE> */}
         </section>
 
         {/* AI Skin Analysis Section */}
@@ -70,7 +68,6 @@ export default function HomePage() {
                     <Link href="/skin-analysis">Analyze My Skin</Link>
                   </Button>
                 </div>
-                {/* </CHANGE> */}
                 <SmallText className="mt-4 md:mt-6">97% accurate when compared to a dermatological exam.</SmallText>
               </div>
 
@@ -91,7 +88,6 @@ export default function HomePage() {
             </div>
           </div>
         </SectionContainer>
-        {/* </CHANGE> */}
 
         {/* What Our Scan Evaluates */}
         <SectionContainer variant="muted">
@@ -103,7 +99,6 @@ export default function HomePage() {
               spacing="tight"
               className="mb-8 md:mb-12"
             />
-            {/* </CHANGE> */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5">
               {traits.map((trait) => (
                 <Link key={trait.id} href={`/shop?category=creams&traits=${trait.id}`}>
