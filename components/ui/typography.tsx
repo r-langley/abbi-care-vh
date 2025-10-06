@@ -30,7 +30,7 @@ export function SectionHeading({ className, align = "center", spacing = "default
   return (
     <h2
       className={cn(
-        "text-2xl md:text-3xl leading-7 font-semibold text-center",
+        "text-2xl md:text-3xl leading-7 font-semibold text-left",
         spacing === "default" && "mb-12 md:mb-16",
         spacing === "tight" && "mb-4 md:mb-6",
         className,
@@ -66,7 +66,7 @@ export function CardTitle({ className, variant = "default", ...props }: CardTitl
 
 // Body Text Variants
 export function BodyText({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
-  return <p className={cn("text-base text-foreground leading-relaxed", className)} {...props} />
+  return <p className={cn("text-base text-foreground leading-relaxed text-left", className)} {...props} />
 }
 
 export function SmallText({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
