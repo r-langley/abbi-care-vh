@@ -65,9 +65,12 @@ export default function HomePage() {
                   recommending personalized formulas tailored specifically to your needs. Get professional-grade
                   insights without leaving home.
                 </BodyText>
-                <Button asChild size="lg" className="font-mono">
-                  <Link href="/skin-analysis">Analyze My Skin</Link>
-                </Button>
+                <div className="flex justify-center md:justify-start">
+                  <Button asChild size="lg" className="font-mono">
+                    <Link href="/skin-analysis">Analyze My Skin</Link>
+                  </Button>
+                </div>
+                {/* </CHANGE> */}
                 <SmallText className="mt-4 md:mt-6">97% accurate when compared to a dermatological exam.</SmallText>
               </div>
 
