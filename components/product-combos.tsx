@@ -32,8 +32,8 @@ export function ProductCombos() {
               <div className="bg-[#f5f6f5] p-[10px] pb-[20px] flex flex-col justify-between gap-[10px] flex-1 bg-secondary">
                 <div className="flex flex-col gap-[10px]">
                   <div className="flex flex-col gap-[5px]">
-                    <p className="font-semibold text-[18px] leading-[1.15] text-[#586158] tracking-normal text-foreground">Duo Pack</p>
-                    <p className="font-medium text-[14px] tracking-[-0.28px] text-[#586158] leading-[1.15] text-foreground">
+                    <p className="text-[18px] leading-[1.15] text-[#586158] tracking-normal text-foreground font-medium">Duo Pack</p>
+                    <p className="text-[14px] tracking-[-0.28px] text-[#586158] leading-[1.15] text-foreground font-normal">
                       Aloe Vera Cleanser
                     </p>
                   </div>
@@ -69,8 +69,8 @@ export function ProductCombos() {
               <div className="bg-[#f5f6f5] p-[10px] pb-[20px] flex flex-col justify-between gap-[10px] flex-1 bg-secondary">
                 <div className="flex flex-col gap-[10px]">
                   <div className="flex flex-col gap-[5px]">
-                    <p className="font-semibold text-[18px] leading-[1.15] text-[#586158] tracking-normal text-foreground">Trio Pack</p>
-                    <p className="font-medium text-[14px] tracking-[-0.28px] text-[#586158] leading-[1.15] text-foreground">
+                    <p className="text-[18px] leading-[1.15] text-[#586158] tracking-normal text-foreground font-medium">Trio Pack</p>
+                    <p className="text-[14px] tracking-[-0.28px] text-[#586158] leading-[1.15] text-foreground font-normal">
                       Aloe Vera Cleanser and Collagen Serum
                     </p>
                   </div>

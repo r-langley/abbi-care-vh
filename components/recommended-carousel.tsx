@@ -42,10 +42,10 @@ export function RecommendedCarousel({ products }: RecommendedCarouselProps) {
                   <div className="bg-secondary p-[10px] pb-[20px] flex flex-row items-end justify-between gap-[10px]">
                     <div className="flex flex-col gap-[10px]">
                       <div className="flex flex-col gap-[5px]">
-                        <p className="font-semibold text-[18px] leading-[1.15] text-foreground tracking-normal">
+                        <p className="text-[18px] leading-[1.15] text-foreground tracking-normal font-medium">
                           {product.name}
                         </p>
-                        <p className="font-medium text-[14px] tracking-[-0.28px] text-foreground leading-[1.15]">
+                        <p className="text-[14px] tracking-[-0.28px] text-foreground leading-[1.15] font-normal">
                           {product.category}
                         </p>
                       </div>
