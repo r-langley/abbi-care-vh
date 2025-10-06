@@ -19,6 +19,7 @@ import Image from "next/image"
 import { ChevronRightIcon, PlusIcon, CheckIcon } from "@heroicons/react/24/outline"
 import { IngredientCarousel } from "@/components/ingredient-carousel"
 import { RecommendedBadge } from "@/components/recommended-badge"
+import { RecommendedCarousel } from "@/components/recommended-carousel"
 
 export default function ShopPage() {
   console.log("[v0] ShopPage component rendering")
@@ -167,6 +168,18 @@ export default function ShopPage() {
       return 0
     })
   }, [groupedCreams, category])
+
+  const recommendedProducts = useMemo(() => {
+    if (!scanResults && !isLoggedIn) return []
+
+    // Filter for Essentials and Simple Solutions
+    const essentialsAndSolutions = products.filter(
+      (p) => p.category === PRODUCT_CATEGORIES.ESSENTIAL || p.category === PRODUCT_CATEGORIES.SIMPLE_SOLUTION,
+    )
+
+    // Return top 6 products
+    return essentialsAndSolutions.slice(0, 6)
+  }, [scanResults, isLoggedIn])
 
   const showScanResults = (scanResults || isLoggedIn) && category === "creams"
 
@@ -334,9 +347,13 @@ export default function ShopPage() {
               {sortedActiveConcentrates.length > 0 && (
                 <div className="flex flex-col gap-[20px]">
                   <div className="flex flex-col gap-2.5">
-                    
-                    
-                    <p className="text-[18px] tracking-tight leading-[1.2] text-center mt-0">
+                    <h2 className="font-semibold text-[#586158] text-foreground text-2xl tracking-tight">
+                      Active Concentrates
+                    </h2>
+                    <p className="text-[16px] tracking-[-0.32px] text-[#586158] leading-[1.35] text-foreground font-normal">
+                      Concentrates to target specific skin concerns.
+                    </p>
+                    <p className="text-[18px] tracking-tight leading-[1.2] mt-2 text-center">
                       <span className="font-serif italic text-foreground font-normal tracking-tight text-xl">
                         Mix-at-Home
                       </span>{" "}
@@ -365,6 +382,10 @@ export default function ShopPage() {
         </div>
 
         {category === "creams" && <ProductCombos />}
+
+        {category === "creams" && recommendedProducts.length > 0 && (
+          <RecommendedCarousel products={recommendedProducts} />
+        )}
       </main>
       <Footer />
     </>
