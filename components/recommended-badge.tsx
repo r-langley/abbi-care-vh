@@ -15,7 +15,7 @@ export function RecommendedBadge({ className, variant = "default" }: Recommended
   }
 
   return (
-    <div className={cn("bg-[#586158] px-[10px] py-[5px] rounded-[4px]", className)}>
+    <div className={cn("bg-[#586158] px-1.5 rounded-xs py-0.5", className)}>
       <p className="font-semibold text-[12px] text-white">Recommended</p>
     </div>
   )

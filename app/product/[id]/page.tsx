@@ -1,7 +1,7 @@
 "use client"
 
 import type React from "react"
-
+import { RecommendedBadge } from "@/components/recommended-badge"
 import { useState } from "react"
 import { useParams } from "next/navigation"
 import Link from "next/link"
@@ -11,12 +11,11 @@ import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import { MinusIcon, PlusIcon, HeartIcon, ChevronRightIcon } from "@heroicons/react/24/solid"
+import { MinusIcon, PlusIcon, ChevronRightIcon } from "@heroicons/react/24/solid"
 import { getProductById, products } from "@/lib/products"
 import { useCart } from "@/lib/cart-context"
 import { ActiveIngredientCard } from "@/components/active-ingredient-card"
 import { PRODUCT_CATEGORIES } from "@/lib/constants"
-import { RecommendedBadge } from "@/components/recommended-badge"
 import { getIngredientsByTraits } from "@/lib/ingredients-data"
 import { IngredientCard } from "@/components/ingredient-card"
 
@@ -47,10 +46,10 @@ export default function ProductPage() {
 
   const isInLabCream = product.category === PRODUCT_CATEGORIES.IN_LAB_CREAM
   const isMixAtHomeCream = product.category === "Mix at Home Cream"
-  
+
   // Active Ingredients for Custom Creams (In-Lab) - based on product traits
   const activeIngredients = getIngredientsByTraits(product.traits).slice(0, 3)
-  
+
   // Active Concentrates for Mix at Home Creams
   const activeConcentrates = products.filter((p) => p.category === "Active Concentrate").slice(0, 3)
 
@@ -58,9 +57,9 @@ export default function ProductPage() {
     <>
       <Header />
       <main className="min-h-screen">
-        <div className="container mx-auto px-4 py-8">
+        <div className="container mx-auto px-5 py-5">
           {/* Breadcrumbs */}
-          <div className="flex items-center gap-2 text-sm text-muted-foreground mb-8">
+          <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2.5">
             <Link href="/" className="hover:text-foreground">
               Home
             </Link>
@@ -73,7 +72,7 @@ export default function ProductPage() {
           </div>
 
           {/* Product Details */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
             {/* Left: Image */}
             <div className="space-y-4">
               <div className="relative aspect-square rounded-lg overflow-hidden bg-muted">
@@ -84,14 +83,12 @@ export default function ProductPage() {
                   className="object-cover"
                   priority
                 />
-                {product.recommended && (
-                  <RecommendedBadge className="absolute top-4 left-4" />
-                )}
+                {product.recommended && <RecommendedBadge className="absolute top-4 left-4" />}
               </div>
             </div>
 
             {/* Right: Details */}
-            <div className="space-y-6">
+            <div className="space-y-5">
               {product.recommended && (
                 <Badge variant="secondary" className="font-mono text-xs">
                   Recommended for you
@@ -104,16 +101,20 @@ export default function ProductPage() {
 
               <p className="text-3xl font-mono">${product.price}</p>
 
-              <p className="text-muted-foreground leading-relaxed">{product.description}</p>
+              <p className="text-muted-foreground leading-relaxed tracking-tight font-medium leading-6 text-sm">{product.description}</p>
 
               {/* Skin Traits */}
               <div>
                 <h3 className="font-mono text-sm mb-3">Best for:</h3>
                 <div className="flex flex-wrap gap-2">
                   {product.traits.map((trait) => (
-                    <Badge key={trait} variant="outline" className="font-mono text-xs">
-                      {trait}
-                    </Badge>
+                    <Link
+                      key={trait}
+                      href={`/shop?category=creams&traits=${trait.toLowerCase()}`}
+                      className="flex items-center gap-[5px] px-[10px] py-[5px] rounded-[100px] shrink-0 transition-colors bg-[#f5f6f5] text-[#586158] hover:bg-[#586158] hover:text-[#f5f6f5]"
+                    >
+                      <span className="font-semibold text-[14px] whitespace-nowrap">{trait}</span>
+                    </Link>
                   ))}
                 </div>
               </div>
@@ -144,10 +145,6 @@ export default function ProductPage() {
                 <Button size="lg" className="w-full font-mono" onClick={handleAddToCart}>
                   Add to Cart
                 </Button>
-                <Button size="lg" variant="outline" className="w-full font-mono bg-transparent">
-                  <HeartIcon className="h-4 w-4 mr-2" />
-                  Add to Wishlist
-                </Button>
               </div>
 
               {/* Active Ingredients for Custom Creams (In-Lab) */}
@@ -159,7 +156,7 @@ export default function ProductPage() {
                       Based on your skin analysis, these ingredients are automatically included
                     </p>
                   </div>
-                  <div className="grid grid-cols-3 gap-[10px]">
+                  <div className="flex flex-col gap-[10px]">
                     {activeIngredients.map((ingredient) => (
                       <IngredientCard
                         key={ingredient.id}
@@ -187,7 +184,7 @@ export default function ProductPage() {
                       <ActiveIngredientCard
                         key={concentrate.id}
                         id={concentrate.id}
-                        number={parseInt(concentrate.name.match(/\d+/)?.[0] || "0")}
+                        number={Number.parseInt(concentrate.name.match(/\d+/)?.[0] || "0")}
                         name={concentrate.name.replace(/^No\.\s*\d+\s*/, "")}
                         image="/minimalist-cosmetic-pump-bottle-product-photograph.jpg"
                       />

@@ -26,6 +26,7 @@ export function Header() {
   const pathname = usePathname()
   const isHomepage = pathname === "/"
   const isShopPage = pathname === "/shop"
+  const [open, setOpen] = React.useState(false)
 
   return (
     <>
@@ -40,7 +41,7 @@ export function Header() {
           <div className="grid grid-cols-3 items-center px-2.5 h-14">
             {/* Left: Menu + Country + Contact */}
             <div className="flex items-center gap-3 justify-start">
-              <Sheet>
+              <Sheet open={open} onOpenChange={setOpen}>
                 <SheetTrigger asChild>
                   <button className="md:hidden p-2 hover:bg-[#f5f6f5] rounded-[8px] transition-colors">
                     <Bars3Icon className="w-6 h-6 md:w-7 md:h-7" />
@@ -49,7 +50,7 @@ export function Header() {
                 <SheetContent side="left" className="px-5 py-5 w-full">
                   <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
                   <SheetDescription className="sr-only">Browse site navigation and shop by skin trait</SheetDescription>
-                  <MobileNav />
+                  <MobileNav closeMenu={() => setOpen(false)} />
                 </SheetContent>
               </Sheet>
 
@@ -129,7 +130,7 @@ export function Header() {
   )
 }
 
-function MobileNav() {
+function MobileNav({ closeMenu }: { closeMenu: () => void }) {
   const [isTraitExpanded, setIsTraitExpanded] = React.useState(false)
 
   return (
@@ -137,12 +138,12 @@ function MobileNav() {
       <div className="flex items-center justify-center mb-8 relative flex-col">
         <Image src="/images/logo.png" alt="ABBI" width={120} height={40} className="w-auto h-5" priority />
         <button className="absolute top-0 right-0 p-2 hover:bg-[#f5f6f5] rounded-[8px] transition-colors">
-          
+          <XMarkIcon className="w-6 h-6" />
         </button>
       </div>
 
       <div className="flex flex-col flex-1 gap-5 overflow-y-auto">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between" onClick={closeMenu}>
           <NavLink href="/skin-analysis" variant="mobile">
             Skin Analysis
           </NavLink>
@@ -156,11 +157,11 @@ function MobileNav() {
           </svg>
         </div>
 
-        <NavLink href="/shop" variant="mobile">
+        <NavLink href="/shop" variant="mobile" onClick={closeMenu}>
           Shop All
         </NavLink>
 
-        <div>
+        <div onClick={closeMenu}>
           <NavLink href="/shop?category=creams" variant="mobile" className="block mb-1">
             Creams
           </NavLink>
@@ -169,7 +170,7 @@ function MobileNav() {
           </p>
         </div>
 
-        <div>
+        <div onClick={closeMenu}>
           <NavLink href="/shop?category=essentials" variant="mobile" className="block mb-1">
             Essentials
           </NavLink>
@@ -178,7 +179,7 @@ function MobileNav() {
           </p>
         </div>
 
-        <div>
+        <div onClick={closeMenu}>
           <NavLink href="/shop?category=simple-solutions" variant="mobile" className="block mb-1">
             Simple Solutions
           </NavLink>
@@ -198,43 +199,43 @@ function MobileNav() {
           </p>
           {isTraitExpanded && (
             <div className="flex flex-col gap-3 pl-4">
-              <NavLink href="/shop?category=creams&traits=wrinkles" variant="footer">
+              <NavLink href="/shop?category=creams&traits=wrinkles" variant="footer" onClick={closeMenu}>
                 Wrinkles
               </NavLink>
-              <NavLink href="/shop?category=creams&traits=radiance" variant="footer">
+              <NavLink href="/shop?category=creams&traits=radiance" variant="footer" onClick={closeMenu}>
                 Radiance
               </NavLink>
-              <NavLink href="/shop?category=creams&traits=imperfections" variant="footer">
+              <NavLink href="/shop?category=creams&traits=imperfections" variant="footer" onClick={closeMenu}>
                 Imperfections
               </NavLink>
-              <NavLink href="/shop?category=creams&traits=spots" variant="footer">
+              <NavLink href="/shop?category=creams&traits=spots" variant="footer" onClick={closeMenu}>
                 Spots
               </NavLink>
-              <NavLink href="/shop?category=creams&traits=hydration" variant="footer">
+              <NavLink href="/shop?category=creams&traits=hydration" variant="footer" onClick={closeMenu}>
                 Hydration
               </NavLink>
-              <NavLink href="/shop?category=creams&traits=sensitivity" variant="footer">
+              <NavLink href="/shop?category=creams&traits=sensitivity" variant="footer" onClick={closeMenu}>
                 Sensitivity
               </NavLink>
-              <NavLink href="/shop?category=creams&traits=shine" variant="footer">
+              <NavLink href="/shop?category=creams&traits=shine" variant="footer" onClick={closeMenu}>
                 Shine
               </NavLink>
-              <NavLink href="/shop?category=creams&traits=texture" variant="footer">
+              <NavLink href="/shop?category=creams&traits=texture" variant="footer" onClick={closeMenu}>
                 Texture
               </NavLink>
             </div>
           )}
         </div>
 
-        <NavLink href="/ingredients" variant="mobile">
+        <NavLink href="/ingredients" variant="mobile" onClick={closeMenu}>
           Ingredients
         </NavLink>
 
-        <NavLink href="/about" variant="mobile">
+        <NavLink href="/about" variant="mobile" onClick={closeMenu}>
           About
         </NavLink>
 
-        <NavLink href="/join" variant="mobile">
+        <NavLink href="/join" variant="mobile" onClick={closeMenu}>
           Join
         </NavLink>
       </div>
