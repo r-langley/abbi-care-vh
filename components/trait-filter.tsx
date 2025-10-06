@@ -48,7 +48,7 @@ export function TraitFilter() {
         onClick={clearTraits}
         className={cn(
           "flex items-center gap-[5px] px-[10px] py-[5px] rounded-[100px] shrink-0 transition-colors",
-          selectedTraits.length === 0 ? "bg-[#586158] text-[#f5f6f5]" : "bg-[#f5f6f5] text-[#586158]",
+          selectedTraits.length === 0 ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground",
         )}
       >
         <span className="font-semibold text-[14px] whitespace-nowrap">All</span>
@@ -59,7 +59,7 @@ export function TraitFilter() {
           onClick={() => toggleTrait(trait.id)}
           className={cn(
             "flex items-center gap-[5px] px-[10px] py-[5px] rounded-[100px] shrink-0 transition-colors",
-            selectedTraits.includes(trait.id) ? "bg-[#586158] text-[#f5f6f5]" : "bg-[#f5f6f5] text-[#586158]",
+            selectedTraits.includes(trait.id) ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground",
           )}
         >
           <span className="font-semibold text-[14px] whitespace-nowrap">{trait.name}</span>
