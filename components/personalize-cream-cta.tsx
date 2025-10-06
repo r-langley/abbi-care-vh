@@ -23,7 +23,7 @@ export function PersonalizeCreamCTA({ onClick }: PersonalizeCreamCTAProps) {
           sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
         />
       </div>
-      <div className="bg-[#e5e2f3] p-6 flex flex-col items-center justify-center gap-4 min-h-[140px]">
+      <div className="bg-[#e5e2f3] p-6 flex flex-col items-center justify-center gap-4 min-h-[140px] px-5 py-5">
         <p className="font-medium text-[18px] leading-[1.2] text-foreground text-center">Personalize your cream</p>
         <Button
           variant="default"
