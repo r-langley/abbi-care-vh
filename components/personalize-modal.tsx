@@ -5,7 +5,6 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { Button } from "@/components/ui/button"
 import { traits } from "@/lib/products"
 import { cn } from "@/lib/utils"
-import { ChevronUpIcon, ChevronDownIcon } from "@heroicons/react/24/outline"
 
 interface PersonalizeModalProps {
   open: boolean
@@ -15,7 +14,7 @@ interface PersonalizeModalProps {
 
 export function PersonalizeModal({ open, onOpenChange, onComplete }: PersonalizeModalProps) {
   const [selectedTraits, setSelectedTraits] = useState<string[]>([])
-  const [age, setAge] = useState<number | null>(null)
+  const [age, setAge] = useState<number>(40)
 
   const toggleTrait = (traitId: string) => {
     setSelectedTraits((prev) => {
@@ -35,21 +34,13 @@ export function PersonalizeModal({ open, onOpenChange, onComplete }: Personalize
       onOpenChange(false)
       // Reset state
       setSelectedTraits([])
-      setAge(null)
+      setAge(40)
     }
-  }
-
-  const incrementAge = () => {
-    setAge((prev) => (prev ? Math.min(prev + 1, 100) : 18))
-  }
-
-  const decrementAge = () => {
-    setAge((prev) => (prev ? Math.max(prev - 1, 18) : 18))
   }
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+      <DialogContent className="max-w-xl max-h-[90vh] overflow-y-auto p-8">
         <DialogHeader>
           <DialogTitle className="text-3xl font-medium text-foreground">Personalize Your Cream</DialogTitle>
         </DialogHeader>
@@ -59,8 +50,7 @@ export function PersonalizeModal({ open, onOpenChange, onComplete }: Personalize
             To craft the best Custom Base for you, we recommend telling us your skin's top 3 priorities and your age.
           </p>
 
-          {/* Trait Selection */}
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-[5px]">
             {traits.map((trait) => {
               const isSelected = selectedTraits.includes(trait.id)
               const isDisabled = !isSelected && selectedTraits.length >= 3
@@ -71,58 +61,37 @@ export function PersonalizeModal({ open, onOpenChange, onComplete }: Personalize
                   onClick={() => !isDisabled && toggleTrait(trait.id)}
                   disabled={isDisabled}
                   className={cn(
-                    "px-6 py-3 rounded-full text-base font-medium transition-all",
+                    "flex items-center gap-[5px] px-[10px] py-[5px] rounded-[100px] shrink-0 transition-colors",
                     isSelected
-                      ? "bg-[#e5e2f3] text-foreground"
+                      ? "bg-primary text-primary-foreground"
                       : isDisabled
                         ? "bg-muted text-muted-foreground opacity-50 cursor-not-allowed"
-                        : "bg-[#f4f3fd] text-foreground hover:bg-[#e5e2f3]",
+                        : "bg-muted text-muted-foreground hover:bg-primary/10",
                   )}
                 >
-                  {trait.name}
+                  <span className="text-[14px] whitespace-nowrap font-medium">{trait.name}</span>
                 </button>
               )
             })}
           </div>
 
-          {/* Age Input */}
-          <div className="relative">
-            <input
-              type="number"
-              value={age || ""}
-              onChange={(e) => {
-                const value = Number.parseInt(e.target.value)
-                if (!isNaN(value) && value >= 18 && value <= 100) {
-                  setAge(value)
-                }
-              }}
-              placeholder="Enter Age"
-              className="w-full px-6 py-4 rounded-[10px] border-2 border-[#e5e2f3] text-base text-primary placeholder:text-primary/50 focus:outline-none focus:border-primary transition-colors"
-            />
-            <div className="absolute right-4 top-1/2 -translate-y-1/2 flex flex-col gap-0">
-              <button
-                onClick={incrementAge}
-                className="text-foreground hover:text-primary transition-colors"
-                type="button"
-              >
-                <ChevronUpIcon className="h-5 w-5" />
-              </button>
-              <button
-                onClick={decrementAge}
-                className="text-foreground hover:text-primary transition-colors"
-                type="button"
-              >
-                <ChevronDownIcon className="h-5 w-5" />
-              </button>
-            </div>
-          </div>
+          <select
+            value={age}
+            onChange={(e) => setAge(Number(e.target.value))}
+            className="w-full px-6 py-4 rounded-[10px] border-2 border-muted text-base text-primary bg-background focus:outline-none focus:border-primary transition-colors"
+          >
+            {Array.from({ length: 63 }, (_, i) => i + 18).map((ageOption) => (
+              <option key={ageOption} value={ageOption}>
+                {ageOption}
+              </option>
+            ))}
+          </select>
 
           {/* Continue Button */}
           <Button
             onClick={handleContinue}
-            disabled={selectedTraits.length !== 3 || !age}
-            className="w-full py-6 text-base font-medium bg-[#e5e2f3] text-primary hover:bg-[#d5d0e8] disabled:opacity-50 disabled:cursor-not-allowed"
-            variant="secondary"
+            disabled={selectedTraits.length !== 3}
+            className="w-full py-6 text-base font-medium disabled:opacity-50 disabled:cursor-not-allowed"
           >
             Continue Shopping
           </Button>
