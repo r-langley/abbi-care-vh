@@ -174,7 +174,7 @@ export default function ShopPage() {
   }, [scanResults, isLoggedIn, personalizeData])
 
   const showScanResults = (scanResults || isLoggedIn) && category === "creams"
-  const showPersonalizedCream = (scanResults || isLoggedIn) && category === "creams"
+  const showPersonalizedCream = (scanResults || isLoggedIn || personalizeData) && category === "creams"
 
   console.log("[v0] Show scan results:", showScanResults, "Recommended cream base:", recommendedCreamBase)
 
