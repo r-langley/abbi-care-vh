@@ -6,7 +6,7 @@ import {
   Bars3Icon,
   ShoppingBagIcon,
   UserCircleIcon,
-  PhoneIcon,
+  ChatBubbleLeftRightIcon,
   FlagIcon,
   ChevronDownIcon,
 } from "@heroicons/react/24/solid"
@@ -55,7 +55,7 @@ export function Header() {
 
               <div className="hidden md:flex items-center gap-2">
                 <FlagIcon className="w-6 h-6 md:w-7 md:h-7 text-muted-foreground" />
-                <PhoneIcon className="w-6 h-6 md:w-7 md:h-7 text-muted-foreground" />
+                <ChatBubbleLeftRightIcon className="w-6 h-6 md:w-7 md:h-7 text-muted-foreground" />
               </div>
             </div>
 
@@ -134,8 +134,20 @@ function MobileNav({ closeMenu }: { closeMenu: () => void }) {
 
   return (
     <nav className="flex flex-col h-full">
-      <div className="flex items-center justify-center mb-8">
-        <Image src="/images/logo.png" alt="ABBI" width={120} height={40} className="w-auto h-5" priority />
+      <div className="sticky top-0 backdrop-blur-sm bg-white/95 px-5 py-2.5 flex items-center justify-between border-b border-[#e7e7e7] z-10 -mx-5 -mt-5 mb-5">
+        <div className="flex-1" />
+        <div className="flex items-center justify-center flex-1">
+          <Image src="/images/logo.png" alt="ABBI" width={120} height={40} className="w-auto h-5" priority />
+        </div>
+        <div className="flex-1 flex justify-end">
+          <SheetTrigger asChild>
+            <button className="bg-[#f5f6f5] rounded-full size-8 flex items-center justify-center hover:opacity-80 transition-opacity">
+              <svg className="w-5 h-5 text-[#586158]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </SheetTrigger>
+        </div>
       </div>
 
       <div className="flex flex-col flex-1 gap-5 overflow-y-auto">
@@ -237,13 +249,13 @@ function MobileNav({ closeMenu }: { closeMenu: () => void }) {
       </div>
 
       <div className="flex items-center justify-between pt-6 border-t border-border mt-auto">
-        <button className="flex items-center gap-2 text-lg font-sans font-medium text-muted-foreground hover:text-primary transition-colors">
+        <button className="flex items-center gap-2 font-sans font-medium text-muted-foreground hover:text-primary transition-colors text-base">
           <span className="text-2xl">🇺🇸</span>
           United States
         </button>
-        <button className="flex items-center gap-2 text-lg font-sans font-medium text-muted-foreground hover:text-primary transition-colors">
+        <button className="flex items-center gap-2 font-sans font-medium text-muted-foreground hover:text-primary transition-colors text-base">
           Contact Us
-          <PhoneIcon className="w-6 h-6" />
+          <ChatBubbleLeftRightIcon className="w-6 h-6" />
         </button>
       </div>
     </nav>
