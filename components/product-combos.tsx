@@ -34,7 +34,7 @@ export function ProductCombos() {
                   <div className="bg-[#f5f6f5] p-[10px] pb-[20px] flex flex-col justify-between gap-[10px] flex-1 bg-primary-foreground">
                     <div className="flex flex-col gap-[10px]">
                       <div className="flex flex-col gap-[5px]">
-                        <p className="text-[18px] leading-[1.15] text-[#586158] tracking-normal text-foreground font-semibold">
+                        <p className="text-[18px] leading-[1.15] text-[#586158] tracking-normal font-semibold text-primary">
                           Duo Pack
                         </p>
                         <p className="text-[14px] tracking-[-0.28px] text-[#586158] leading-[1.15] text-foreground font-normal">
@@ -74,7 +74,7 @@ export function ProductCombos() {
                   <div className="bg-[#f5f6f5] p-[10px] pb-[20px] flex flex-col justify-between gap-[10px] flex-1 bg-primary-foreground">
                     <div className="flex flex-col gap-[10px]">
                       <div className="flex flex-col gap-[5px]">
-                        <p className="text-[18px] leading-[1.15] text-[#586158] tracking-normal text-foreground font-semibold">
+                        <p className="text-[18px] leading-[1.15] text-[#586158] tracking-normal font-semibold text-primary">
                           Trio Pack
                         </p>
                         <p className="text-[14px] tracking-[-0.28px] text-[#586158] leading-[1.15] text-foreground font-normal">
