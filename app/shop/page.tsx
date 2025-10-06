@@ -339,7 +339,7 @@ export default function ShopPage() {
                       </p>
                     </div>
 
-                    {!personalizeData && !scanResults && !isLoggedIn && selectedTraits.length === 0 ? (
+                    {!isLoggedIn && !scanResults && selectedTraits.length === 0 ? (
                       <PersonalizeCreamCTA onClick={() => setShowPersonalizeModal(true)} />
                     ) : (
                       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[10px]">
