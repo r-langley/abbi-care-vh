@@ -57,7 +57,7 @@ export default function ProductPage() {
     <>
       <Header />
       <main className="min-h-screen">
-        <div className="container mx-auto px-5 py-5">
+        <div className="container mx-auto px-5 py-5 pt-2.5">
           {/* Breadcrumbs */}
           <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2.5">
             <Link href="/" className="hover:text-foreground">
