@@ -19,7 +19,7 @@ export function PersonalizeCreamCTA({ onClick }: PersonalizeCreamCTAProps) {
           src="/images/design-mode/image(1).png"
           alt="Personalize your cream"
           fill
-          className="object-cover bg-card"
+          className="object-cover bg-card border-2 border-muted rounded-xl border-b-0"
           loading="lazy"
           sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
         />
