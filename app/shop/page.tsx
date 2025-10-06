@@ -257,7 +257,7 @@ export default function ShopPage() {
           </>
         )}
 
-        <div className="py-5 px-5">
+        <div className="py-5 px-5 max-w-[900px] mx-auto">
           {category === "creams" && groupedCreams ? (
             <div className="space-y-10">
               {showPersonalizedCream && recommendedCreamBase ? (
@@ -276,6 +276,10 @@ export default function ShopPage() {
                           <ChevronRightIcon className="h-5 w-5" />
                         </Link>
                       </div>
+                      <p className="hidden md:block tracking-[-0.32px] text-[#586158] leading-[1.35] text-foreground font-normal text-sm">
+                        Your personalized cream base is selected based on your skin concerns and age. Complete your
+                        routine by adding active concentrates below for targeted treatment.
+                      </p>
                     </div>
 
                     <div className="w-full">
