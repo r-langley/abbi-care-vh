@@ -10,7 +10,15 @@ import { SectionContainer } from "@/components/ui/section-container"
 import { ParallaxImage } from "@/components/parallax-image"
 import { CategoryCarousel } from "@/components/category-carousel"
 import { FaqSection } from "@/components/faq-section"
-import { ClockIcon, SparklesIcon, ArrowsPointingInIcon, MagnifyingGlassIcon, BeakerIcon, SunIcon, Squares2X2Icon } from "@heroicons/react/24/solid"
+import {
+  ClockIcon,
+  SparklesIcon,
+  ArrowsPointingInIcon,
+  MagnifyingGlassIcon,
+  BeakerIcon,
+  SunIcon,
+  Squares2X2Icon,
+} from "@heroicons/react/24/solid"
 import type React from "react"
 
 export default function HomePage() {
@@ -30,7 +38,7 @@ export default function HomePage() {
               {/* Right: Hero Content */}
               <div className="flex flex-col justify-center items-start px-5 py-5">
                 <PageTitle variant="hero">Your Skin, Our Formula</PageTitle>
-                <p className="text-base md:text-xl text-muted-foreground leading-relaxed mb-4 md:mb-8 font-medium leading-7">
+                <p className="text-[16px] font-medium tracking-[-0.32px] text-muted-foreground leading-[1.35] mb-4 md:mb-8">
                   Personalized skincare, perfected
                 </p>
                 <Button asChild variant="textLink" className="font-mono">
@@ -70,7 +78,7 @@ export default function HomePage() {
         <SectionContainer variant="muted">
           <div className="container mx-auto px-5">
             <SectionHeading spacing="tight">What Our Scan Evaluates</SectionHeading>
-            <BodyText className="text-center text-base md:text-lg mb-8 md:mb-12 max-w-3xl mx-auto text-muted-foreground">
+            <BodyText className="text-center text-[16px] font-medium tracking-[-0.32px] mb-8 md:mb-12 max-w-3xl mx-auto text-muted-foreground leading-[1.35]">
               97% accurate when compared to a dermatological exam.
             </BodyText>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5">

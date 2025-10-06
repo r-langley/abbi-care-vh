@@ -9,7 +9,6 @@ import { products } from "@/lib/products"
 import { HeroSection } from "@/components/ui/hero-section"
 import { PRODUCT_CATEGORIES, SHOP_CATEGORIES } from "@/lib/constants"
 import { TraitFilter } from "@/components/trait-filter"
-import { CartFooter } from "@/components/cart-footer"
 import { ProductCombos } from "@/components/product-combos"
 import { ScanCTA } from "@/components/scan-cta"
 import { MySkinResults } from "@/components/my-skin-results"
@@ -18,14 +17,18 @@ import { getIngredientsByTraits } from "@/lib/ingredients-data"
 import Link from "next/link"
 import Image from "next/image"
 import { ChevronRightIcon, PlusIcon, CheckIcon } from "@heroicons/react/24/outline"
-import { IngredientCard } from "@/components/ingredient-card"
+import { IngredientCarousel } from "@/components/ingredient-carousel"
 import { RecommendedBadge } from "@/components/recommended-badge"
 
 export default function ShopPage() {
+  console.log("[v0] ShopPage component rendering")
+
   const searchParams = useSearchParams()
   const category = searchParams.get("category") || "creams"
   const selectedTraits = searchParams.get("traits")?.split(",").filter(Boolean) || []
   const { isLoggedIn } = useAuth()
+
+  console.log("[v0] Category:", category, "Selected traits:", selectedTraits, "Is logged in:", isLoggedIn)
 
   const [scanResults, setScanResults] = useState<{
     userName: string
@@ -125,7 +128,9 @@ export default function ShopPage() {
   const recommendedActiveIngredients = useMemo(() => {
     if (!scanResults && !isLoggedIn) return []
     const traits = ["Wrinkles", "Radiance", "Imperfections"]
-    return getIngredientsByTraits(traits).slice(0, 3)
+    const ingredients = getIngredientsByTraits(traits).slice(0, 3)
+    console.log("[v0] Recommended active ingredients:", ingredients)
+    return ingredients
   }, [scanResults, isLoggedIn])
 
   const recommendedCreamBase = useMemo(() => {
@@ -133,7 +138,39 @@ export default function ShopPage() {
     return groupedCreams.inLab.find((p) => p.id === "inlab-aloe-vera") || groupedCreams.inLab[0]
   }, [scanResults, isLoggedIn, groupedCreams])
 
+  const sortedMixAtHome = useMemo(() => {
+    if (!groupedCreams || category !== "creams") return groupedCreams?.mixAtHome || []
+
+    // Recommended Mix-at-Home based on user traits
+    const recommendedIds = ["cream-velvety"]
+
+    return [...groupedCreams.mixAtHome].sort((a, b) => {
+      const aRecommended = recommendedIds.includes(a.id)
+      const bRecommended = recommendedIds.includes(b.id)
+      if (aRecommended && !bRecommended) return -1
+      if (!aRecommended && bRecommended) return 1
+      return 0
+    })
+  }, [groupedCreams, category])
+
+  const sortedActiveConcentrates = useMemo(() => {
+    if (!groupedCreams || category !== "creams") return groupedCreams?.activeConcentrate || []
+
+    // Recommended Active Concentrates based on user traits (Wrinkles, Radiance, Imperfections)
+    const recommendedIds = ["concentrate-02-wrinkles", "concentrate-01-hydration"]
+
+    return [...groupedCreams.activeConcentrate].sort((a, b) => {
+      const aRecommended = recommendedIds.includes(a.id)
+      const bRecommended = recommendedIds.includes(b.id)
+      if (aRecommended && !bRecommended) return -1
+      if (!aRecommended && bRecommended) return 1
+      return 0
+    })
+  }, [groupedCreams, category])
+
   const showScanResults = (scanResults || isLoggedIn) && category === "creams"
+
+  console.log("[v0] Show scan results:", showScanResults, "Recommended cream base:", recommendedCreamBase)
 
   return (
     <>
@@ -179,7 +216,10 @@ export default function ShopPage() {
                     </Link>
                   </div>
 
-                  <Link href={`/product/${recommendedCreamBase.id}`} className="bg-white rounded-[10px] border-2 border-[#f5f6f5] overflow-hidden flex flex-col hover:border-[#586158] transition-colors">
+                  <Link
+                    href={`/product/${recommendedCreamBase.id}`}
+                    className="bg-white rounded-[10px] border-2 border-[#f5f6f5] overflow-hidden flex flex-col hover:border-[#586158] transition-colors"
+                  >
                     <div className="relative h-[200px] overflow-hidden">
                       <Image
                         src="/minimalist-cosmetic-pump-bottle-product-photograph.jpg"
@@ -206,7 +246,7 @@ export default function ShopPage() {
                           ${recommendedCreamBase.price.toFixed(2)}
                         </p>
                       </div>
-                      <button 
+                      <button
                         onClick={(e) => e.preventDefault()}
                         className="bg-[#586158] rounded-full size-[32px] flex items-center justify-center shrink-0 hover:opacity-90 transition-opacity"
                       >
@@ -216,13 +256,13 @@ export default function ShopPage() {
                   </Link>
 
                   <div className="flex flex-col gap-[15px]">
-                    <p className="text-center text-[#586158] text-xl font-normal">
+                    <p className="text-center text-[#586158] text-xl font-normal text-foreground">
                       <span className="font-medium">with </span>
                       <span className="font-serif italic font-medium text-2xl">Actives</span>
                       <span className="font-medium"> for</span>
                     </p>
 
-                    <div className="flex items-center justify-center gap-6">
+                    <div className="flex items-center justify-center gap-5">
                       {["Wrinkles", "Radiance", "Imperfections"].map((trait) => (
                         <div key={trait} className="flex items-center gap-1">
                           <CheckIcon className="text-[#586158] w-4 h-4" />
@@ -231,18 +271,7 @@ export default function ShopPage() {
                       ))}
                     </div>
 
-                    <div className="grid grid-cols-3 gap-[10px]">
-                      {recommendedActiveIngredients.map((ingredient) => (
-                        <IngredientCard
-                          key={ingredient.id}
-                          id={ingredient.id}
-                          number={ingredient.number}
-                          name={ingredient.name}
-                          description={ingredient.description}
-                          hideDescription={true}
-                        />
-                      ))}
-                    </div>
+                    <IngredientCarousel ingredients={recommendedActiveIngredients} />
                   </div>
                 </div>
               ) : (
@@ -268,37 +297,45 @@ export default function ShopPage() {
                 )
               )}
 
-              {groupedCreams.mixAtHome.length > 0 && (
+              {sortedMixAtHome.length > 0 && (
                 <div className="flex flex-col gap-[20px]">
                   <div className="flex flex-col gap-[5px]">
                     <h2 className="font-semibold text-[#586158] text-foreground text-2xl tracking-tight">
                       Mix at Home
                     </h2>
-                    <p className="font-medium text-[14px] tracking-[-0.28px] text-[#586158]">
+                    <p className="font-medium text-[16px] tracking-[-0.32px] text-[#586158] leading-[1.35]">
                       Create your own routines. Mix a specific base and active concentrates.
                     </p>
                   </div>
                   <div className="grid grid-cols-2 gap-[10px]">
-                    {groupedCreams.mixAtHome.map((product) => (
-                      <ProductCard key={product.id} product={product} showRecommended={selectedTraits.length > 0} />
+                    {sortedMixAtHome.map((product) => (
+                      <ProductCard
+                        key={product.id}
+                        product={product}
+                        showRecommended={showScanResults || selectedTraits.length > 0}
+                      />
                     ))}
                   </div>
                 </div>
               )}
 
-              {groupedCreams.activeConcentrate.length > 0 && (
+              {sortedActiveConcentrates.length > 0 && (
                 <div className="flex flex-col gap-[20px]">
                   <div className="flex flex-col gap-[5px]">
                     <h2 className="font-semibold text-[#586158] text-foreground text-2xl tracking-tight">
                       Active Concentrates
                     </h2>
-                    <p className="font-medium text-[14px] tracking-[-0.28px] text-[#586158]">
+                    <p className="font-medium text-[16px] tracking-[-0.32px] text-[#586158] leading-[1.35]">
                       Targeted treatments to address specific skin concerns
                     </p>
                   </div>
                   <div className="grid grid-cols-2 gap-[10px]">
-                    {groupedCreams.activeConcentrate.map((product) => (
-                      <ProductCard key={product.id} product={product} showRecommended={selectedTraits.length > 0} />
+                    {sortedActiveConcentrates.map((product) => (
+                      <ProductCard
+                        key={product.id}
+                        product={product}
+                        showRecommended={showScanResults || selectedTraits.length > 0}
+                      />
                     ))}
                   </div>
                 </div>
@@ -315,7 +352,6 @@ export default function ShopPage() {
 
         {category === "creams" && <ProductCombos />}
       </main>
-      <CartFooter headingText="Review your Routine" buttonText="CHECKOUT" />
       <Footer />
     </>
   )

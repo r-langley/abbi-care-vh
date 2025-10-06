@@ -2,13 +2,15 @@
 
 import { useState } from "react"
 import { XMarkIcon, ChevronRightIcon, PlusIcon } from "@heroicons/react/24/solid"
-import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet"
+import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetDescription } from "@/components/ui/sheet"
 import Image from "next/image"
 import Link from "next/link"
 import { CategoryCarousel } from "@/components/category-carousel"
-import { products } from "@/lib/products"
+import { products, getProductsByTrait } from "@/lib/products"
 import { RecommendedBadge } from "@/components/recommended-badge"
 import { SpiderChart } from "@/components/spider-chart"
+import { UserAvatar } from "@/components/ui/user-avatar"
+import { ProductCard } from "@/components/product-card"
 
 interface SkinResultsSheetProps {
   userName?: string
@@ -30,6 +32,8 @@ export function SkinResultsSheet({ userName = "Alya", currentTrait = "wrinkles" 
   const [selectedTrait, setSelectedTrait] = useState(currentTrait)
   const trait = traits.find((t) => t.id === selectedTrait) || traits[0]
 
+  const simpleSolutionProduct = getProductsByTrait(selectedTrait).find((p) => p.category === "Simple Solution")
+
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -40,13 +44,15 @@ export function SkinResultsSheet({ userName = "Alya", currentTrait = "wrinkles" 
       </SheetTrigger>
       <SheetContent side="bottom" className="h-[90vh] overflow-y-auto rounded-t-[10px] p-0 max-w-[800px] mx-auto">
         <SheetTitle className="sr-only">{userName}'s Skin Analysis Results</SheetTitle>
-        
+        <SheetDescription className="sr-only">
+          View detailed skin analysis results including trait scores, recommendations, and personalized product
+          suggestions
+        </SheetDescription>
+
         {/* Header */}
         <div className="sticky top-0 backdrop-blur-sm bg-white/95 px-5 py-2.5 flex items-center justify-between border-b border-[#e7e7e7] z-10">
           <div className="flex items-center gap-3">
-            <div className="size-8 rounded-full bg-[#f5f6f5] overflow-hidden">
-              <div className="w-full h-full bg-gradient-to-br from-[#586158] to-[#3e463e]" />
-            </div>
+            <UserAvatar size="md" />
           </div>
           <p className="font-medium text-[24px] tracking-[-0.48px] text-black leading-[1.15] flex-1 text-center">
             <span>{userName}'s </span>
@@ -128,7 +134,10 @@ export function SkinResultsSheet({ userName = "Alya", currentTrait = "wrinkles" 
             <span>Recommended </span>
             <span className="italic font-serif">Creams</span>
           </p>
-          <Link href="/product/inlab-aloe-vera" className="bg-white rounded-[10px] border-2 border-[#f5f6f5] overflow-hidden block hover:border-[#586158] transition-colors">
+          <Link
+            href="/product/inlab-aloe-vera"
+            className="bg-white rounded-[10px] border-2 border-[#f5f6f5] overflow-hidden block hover:border-[#586158] transition-colors"
+          >
             <div className="relative h-[200px] bg-white">
               <Image
                 src="/minimalist-cosmetic-pump-bottle-product-photograph.jpg"
@@ -151,7 +160,7 @@ export function SkinResultsSheet({ userName = "Alya", currentTrait = "wrinkles" 
                   $89.00
                 </p>
               </div>
-              <button 
+              <button
                 onClick={(e) => e.preventDefault()}
                 className="bg-[#586158] rounded-full size-[32px] flex items-center justify-center hover:opacity-90 transition-opacity"
               >
@@ -172,46 +181,21 @@ export function SkinResultsSheet({ userName = "Alya", currentTrait = "wrinkles" 
         </div>
 
         {/* Simple Solution */}
-        <div className="px-5 py-5 flex flex-col gap-[23px]">
-          <div className="flex flex-col gap-2.5">
-            <p className="font-medium text-[24px] tracking-[-0.48px] text-black leading-[1.15]">
-              {trait.name} Simple Solution
-            </p>
-            <p className="font-normal text-[16px] tracking-[-0.32px] text-black leading-[1.35]">
-              Products targeting this skin trait.
-            </p>
+        {simpleSolutionProduct && (
+          <div className="px-5 py-5 flex flex-col gap-[23px]">
+            <div className="flex flex-col gap-2.5">
+              <p className="font-medium text-[24px] tracking-[-0.48px] text-black leading-[1.15]">
+                {trait.name} Simple Solution
+              </p>
+              <p className="font-normal text-[16px] tracking-[-0.32px] text-black leading-[1.35]">
+                Products targeting this skin trait.
+              </p>
+            </div>
+            <div className="max-w-[280px]">
+              <ProductCard product={simpleSolutionProduct} />
+            </div>
           </div>
-          <Link href="/product/solution-smooth-operator" className="bg-white rounded-[10px] border-2 border-[#f5f6f5] overflow-hidden block hover:border-[#586158] transition-colors">
-            <div className="relative h-[200px] bg-white">
-              <Image
-                src="/minimalist-cosmetic-pump-bottle-product-photograph.jpg"
-                alt="The Smooth Operator"
-                fill
-                className="object-cover"
-              />
-            </div>
-            <div className="bg-[#f5f6f5] p-[10px] pb-[20px] flex flex-col gap-[10px]">
-              <div className="flex flex-col gap-[10px]">
-                <div className="flex flex-col gap-[5px]">
-                  <p className="font-semibold text-[18px] leading-[1.15] text-[#586158] tracking-normal">The Smooth Operator</p>
-                </div>
-                <p
-                  className="font-medium text-[13px] tracking-[-0.26px] text-[#586158] leading-[1.15]"
-                  style={{ fontFamily: "var(--font-geist-mono)", fontVariationSettings: "'wdth' 100" }}
-                >
-                  $99.00
-                </p>
-              </div>
-              <button 
-                onClick={(e) => e.preventDefault()}
-                className="bg-[#586158] rounded-full size-[32px] flex items-center justify-center hover:opacity-90 transition-opacity"
-              >
-                <PlusIcon className="size-[20px] text-[#f5f6f5]" />
-              </button>
-            </div>
-          </Link>
-        </div>
-
+        )}
       </SheetContent>
     </Sheet>
   )

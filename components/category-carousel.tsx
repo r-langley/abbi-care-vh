@@ -20,7 +20,9 @@ export function CategoryCarousel({ title, description, products, shopLink }: Cat
       {/* Category Header */}
       <div className="text-center md:text-left">
         <h3 className="md:text-2xl font-semibold text-foreground mb-1 font-sans text-left text-2xl">{title}</h3>
-        <p className="text-sm md:text-base text-muted-foreground text-left">{description}</p>
+        <p className="text-[16px] font-medium tracking-[-0.32px] text-muted-foreground text-left leading-[1.35]">
+          {description}
+        </p>
       </div>
 
       {/* Scrollable Product Grid */}

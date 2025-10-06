@@ -3,10 +3,10 @@ import { NavLink } from "@/components/ui/nav-link"
 export function Footer() {
   return (
     <footer className="bg-background border-t border-border">
-      <div className="container mx-auto px-4 py-12 bg-muted">
+      <div className="container mx-auto px-4 py-12 bg-accent">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
-            <h3 className="font-mono text-sm mb-4">Shop</h3>
+            <h3 className="font-mono text-sm mb-4 text-ring font-medium">Shop</h3>
             <ul className="space-y-2">
               <li>
                 <NavLink href="/shop" variant="footer">
@@ -32,7 +32,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="font-mono text-sm mb-4">Support</h3>
+            <h3 className="font-mono text-sm mb-4 font-medium text-ring">Support</h3>
             <ul className="space-y-2">
               <li>
                 <NavLink href="#" variant="footer">

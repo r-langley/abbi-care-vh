@@ -7,7 +7,6 @@ import { CartProvider } from "@/lib/cart-context"
 import { AuthProvider } from "@/lib/auth-context"
 import { Suspense } from "react"
 import { ScrollToTop } from "@/components/scroll-to-top"
-import { CartFooter } from "@/components/cart-footer"
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -44,10 +43,7 @@ export default function RootLayout({
         <Suspense fallback={null}>
           <ScrollToTop />
           <AuthProvider>
-            <CartProvider>
-              {children}
-              <CartFooter />
-            </CartProvider>
+            <CartProvider>{children}</CartProvider>
           </AuthProvider>
         </Suspense>
         <Analytics />

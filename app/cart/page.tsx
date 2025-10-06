@@ -3,10 +3,9 @@
 import Link from "next/link"
 import Image from "next/image"
 import { Header } from "@/components/header"
-import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { MinusIcon, PlusIcon, XMarkIcon } from "@heroicons/react/24/solid"
+import { MinusIcon, PlusIcon, TrashIcon } from "@heroicons/react/24/solid"
 import { useCart } from "@/lib/cart-context"
 
 export default function CartPage() {
@@ -25,7 +24,6 @@ export default function CartPage() {
             </Button>
           </div>
         </main>
-        <Footer />
       </>
     )
   }
@@ -33,13 +31,11 @@ export default function CartPage() {
   return (
     <>
       <Header />
-      <main className="min-h-screen">
-        <div className="container mx-auto px-4 py-8">
-          <h1 className="text-3xl md:text-4xl font-bold mb-8">
-            Your Cart ({items.length} {items.length === 1 ? "item" : "items"})
-          </h1>
+      <main className="min-h-screen bg-muted">
+        <div className="container mx-auto px-5 py-5">
+          
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-2.5">
             {/* Cart Items */}
             <div className="lg:col-span-2 space-y-4">
               {items.map((item) => (
@@ -66,7 +62,7 @@ export default function CartPage() {
                             onClick={() => removeItem(item.id)}
                             className="flex-shrink-0"
                           >
-                            <XMarkIcon className="h-4 w-4" />
+                            <TrashIcon className="h-4 w-4" />
                           </Button>
                         </div>
                         <div className="flex items-center justify-between">
@@ -129,7 +125,6 @@ export default function CartPage() {
           </div>
         </div>
       </main>
-      <Footer />
     </>
   )
 }

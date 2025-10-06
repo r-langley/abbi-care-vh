@@ -37,7 +37,7 @@ export function ProductCard({ product, showRecommended = false }: ProductCardPro
   return (
     <>
       <Link href={`/product/${product.id}`} className="block h-full">
-        <div className="bg-white rounded-[10px] border-2 border-[#f5f6f5] overflow-hidden relative flex flex-col h-full">
+        <div className="bg-white rounded-[10px] border-2 border-[#f5f6f5] overflow-hidden relative flex flex-col h-full w-full">
           <div className="relative h-[160px] overflow-hidden">
             <Image
               src="/minimalist-cosmetic-pump-bottle-product-photograph.jpg"
