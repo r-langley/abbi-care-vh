@@ -46,7 +46,7 @@ export function PersonalizeModal({ open, onOpenChange, onComplete }: Personalize
         showCloseButton={false}
       >
         <div className="sticky top-0 backdrop-blur-sm bg-white/95 px-5 py-4 flex items-center justify-between border-b border-border z-10">
-          <h2 className="font-medium text-[24px] tracking-[-0.48px] text-foreground leading-[1.15]">
+          <h2 className="font-medium tracking-[-0.48px] text-foreground leading-[1.15] text-lg">
             Personalize Your Cream
           </h2>
           <div className="bg-muted rounded-full size-8 flex items-center justify-center shrink-0 ml-4">
@@ -58,7 +58,7 @@ export function PersonalizeModal({ open, onOpenChange, onComplete }: Personalize
           </div>
         </div>
 
-        <div className="space-y-5 p-5">
+        <div className="space-y-5 p-5 pb-5 pt-0">
           <p className="leading-relaxed text-sm text-foreground">
             To craft the best Custom Base for you, we recommend telling us your skin's top 3 priorities and your age.
           </p>
