@@ -127,7 +127,7 @@ export default function HomePage() {
         {/* Product Categories */}
         <SectionContainer>
           <div className="container mx-auto">
-            <div className="space-y-5">
+            <div className="space-y-10">
               {/* Personalized Creams Carousel */}
               <CategoryCarousel
                 title="Personalized Creams"
