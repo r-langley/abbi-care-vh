@@ -52,7 +52,7 @@ export function ProductCard({ product, showRecommended = false }: ProductCardPro
           <div className="bg-[#f5f6f5] p-[10px] pb-[20px] flex flex-col justify-between gap-[10px] flex-1 bg-muted">
             <div className="flex flex-col gap-[10px]">
               <div className="flex flex-col gap-[5px]">
-                <p className="leading-[1.15] text-[#586158] tracking-normal text-foreground text-base font-medium">
+                <p className="leading-[1.15] text-[#586158] tracking-normal text-foreground text-base font-semibold">
                   {product.name}
                 </p>
               </div>
