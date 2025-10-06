@@ -183,7 +183,8 @@
 }
 
 @theme inline {
-  --font-sans: "Poppins", var(--font-geist-sans);
+  /* Updated to properly reference Poppins variable from layout.tsx */
+  --font-sans: var(--font-poppins);
   /* Updated to use Instrument Serif for design system serif family */
   --font-serif: "Instrument Serif", serif;
   /* Simplified to directly reference the Geist Mono variable set by GeistMono.variable */
