@@ -263,7 +263,7 @@ export default function ShopPage() {
               {showPersonalizedCream && recommendedCreamBase ? (
                 <div className="flex flex-col gap-[20px]">
                   <div className="flex flex-col md:grid md:grid-cols-2 gap-[10px] md:gap-8">
-                    <div className="flex flex-col gap-[10px] md:justify-between px-5 py-5">
+                    <div className="flex flex-col gap-[10px] px-5 py-5 md:justify-between">
                       <h2 className="text-[#586158] leading-[1.35] text-foreground tracking-tight text-2xl font-medium">
                         Personalized <span className="font-serif italic font-medium">Cream</span>
                       </h2>
