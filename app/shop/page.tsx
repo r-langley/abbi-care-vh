@@ -244,18 +244,18 @@ export default function ShopPage() {
                       />
                       <RecommendedBadge className="absolute top-3 left-3" />
                     </div>
-                    <div className="bg-[#f5f6f5] p-[10px] pb-[20px] flex flex-row items-end justify-between gap-[10px]">
+                    <div className="bg-[#f5f6f5] p-[10px] pb-[20px] flex flex-row items-end justify-between gap-[10px] bg-muted">
                       <div className="flex flex-col gap-[10px]">
                         <div className="flex flex-col gap-[5px]">
-                          <p className="font-semibold text-[18px] leading-[1.15] text-[#586158] tracking-normal">
+                          <p className="font-semibold text-[18px] leading-[1.15] text-[#586158] tracking-normal text-foreground">
                             {recommendedCreamBase.name}
                           </p>
-                          <p className="font-medium text-[14px] tracking-[-0.28px] text-[#586158] leading-[1.15]">
+                          <p className="font-medium text-[14px] tracking-[-0.28px] text-[#586158] leading-[1.15] text-foreground">
                             Cream Base
                           </p>
                         </div>
                         <p
-                          className="font-medium text-[13px] tracking-[-0.26px] text-[#586158] leading-[1.15]"
+                          className="font-medium text-[13px] tracking-[-0.26px] text-[#586158] leading-[1.15] text-accent"
                           style={{ fontFamily: "var(--font-geist-mono)", fontVariationSettings: "'wdth' 100" }}
                         >
                           ${recommendedCreamBase.price.toFixed(2)}
@@ -263,7 +263,7 @@ export default function ShopPage() {
                       </div>
                       <button
                         onClick={(e) => e.preventDefault()}
-                        className="bg-[#586158] rounded-full size-[32px] flex items-center justify-center shrink-0 hover:opacity-90 transition-opacity"
+                        className="bg-[#586158] rounded-full size-[32px] flex items-center justify-center shrink-0 hover:opacity-90 transition-opacity bg-accent"
                       >
                         <PlusIcon className="h-5 w-5 text-[#f5f6f5]" />
                       </button>
@@ -280,8 +280,8 @@ export default function ShopPage() {
                     <div className="flex items-center justify-center gap-5">
                       {["Wrinkles", "Radiance", "Imperfections"].map((trait) => (
                         <div key={trait} className="flex items-center gap-1">
-                          <CheckIcon className="text-[#586158] w-4 h-4" />
-                          <span className="font-medium text-[#586158] text-sm">{trait}</span>
+                          <CheckIcon className="text-[#586158] w-4 h-4 text-foreground" />
+                          <span className="font-medium text-[#586158] text-sm text-foreground">{trait}</span>
                         </div>
                       ))}
                     </div>
