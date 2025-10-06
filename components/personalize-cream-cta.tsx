@@ -11,16 +11,16 @@ export function PersonalizeCreamCTA({ onClick }: PersonalizeCreamCTAProps) {
   return (
     <button
       onClick={onClick}
-      className="bg-white rounded-[10px] border-2 overflow-hidden flex flex-col hover:border-primary transition-colors w-full border-0 border-none"
+      className="bg-white rounded-[10px] border-2 border-border overflow-hidden flex flex-col hover:border-primary transition-colors w-full"
     >
-      <div className="relative h-[200px] overflow-hidden bg-white">
+      <div className="relative h-[200px] overflow-hidden bg-muted">
         <Image
-          src="/minimalist-cosmetic-pump-bottle-product-photograph.jpg"
+          src="/minimalist-cosmetic-cream-bottle-product.jpg"
           alt="Personalize your cream"
           fill
           className="object-cover"
           loading="lazy"
-          sizes="(max-width: 768px) 50vw, 25vw"
+          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
         />
       </div>
       <div className="bg-[#e5e2f3] p-6 flex flex-col items-center justify-center gap-4 min-h-[140px]">
