@@ -13,8 +13,8 @@ export function UserAvatar({ size = "md", className }: UserAvatarProps) {
   }
 
   return (
-    <div className={cn("rounded-full bg-[#f5f6f5] overflow-hidden", sizeClasses[size], className)}>
-      <div className="w-full h-full bg-gradient-to-br from-[#586158] to-[#3e463e]" />
+    <div className={cn("rounded-full bg-muted overflow-hidden", sizeClasses[size], className)}>
+      <div className="w-full h-full bg-gradient-to-br from-primary to-[var(--evergreen)]" />
     </div>
   )
 }

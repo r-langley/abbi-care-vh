@@ -15,7 +15,7 @@ export function IngredientCard({ id, number, name, description, hideDescription 
 
   return (
     <Link href={linkHref} className="block h-full">
-      <div className="bg-white rounded-[10px] border-2 border-[#f5f6f5] overflow-hidden relative flex flex-col h-full hover:border-[#586158] transition-colors">
+      <div className="bg-white rounded-[10px] border-2 border-muted overflow-hidden relative flex flex-col h-full hover:border-primary transition-colors">
         <div className="relative h-[100px] overflow-hidden">
           <Image
             src="/ingredient-placeholder.jpg"
@@ -26,20 +26,20 @@ export function IngredientCard({ id, number, name, description, hideDescription 
             sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
           />
         </div>
-        <div className="bg-[#f5f6f5] p-[10px] pb-[20px] flex flex-col gap-[10px] flex-1 bg-muted">
+        <div className="bg-muted p-[10px] pb-[20px] flex flex-col gap-[10px] flex-1">
           <div className="flex flex-col gap-[5px]">
-            <p className="font-semibold leading-[1.15] text-[#586158] tracking-[-0.32px] text-sm text-foreground">
+            <p className="font-semibold leading-[1.15] text-primary tracking-[-0.32px] text-sm">
               {name}
             </p>
             {!hideDescription && (
-              <p className="text-[14px] tracking-[-0.28px] text-[#586158] text-foreground font-normal leading-5">
+              <p className="text-[14px] tracking-[-0.28px] text-primary font-normal leading-5">
                 {description}
               </p>
             )}
           </div>
           <p
-            className="font-medium text-[13px] tracking-[-0.26px] text-[#586158] leading-[1.15] text-accent"
-            style={{ fontFamily: "var(--font-geist-mono)", fontVariationSettings: "'wdth' 100" }}
+            className="font-medium text-[13px] tracking-[-0.26px] text-primary leading-[1.15] font-mono"
+            style={{ fontVariationSettings: "'wdth' 100" }}
           >
             No.{number}
           </p>

@@ -37,7 +37,7 @@ export function ProductCard({ product, showRecommended = false }: ProductCardPro
   return (
     <>
       <Link href={`/product/${product.id}`} className="block h-full">
-        <div className="bg-white rounded-[10px] border-2 border-[#f5f6f5] overflow-hidden relative flex flex-col h-full w-full">
+        <div className="bg-white rounded-[10px] border-2 border-muted overflow-hidden relative flex flex-col h-full w-full hover:border-primary transition-colors">
           <div className="relative h-[160px] overflow-hidden">
             <Image
               src="/minimalist-cosmetic-pump-bottle-product-photograph.jpg"
@@ -49,28 +49,28 @@ export function ProductCard({ product, showRecommended = false }: ProductCardPro
             />
             {showRecommended && product.recommended && <RecommendedBadge className="absolute top-3 left-3" />}
           </div>
-          <div className="bg-[#f5f6f5] p-[10px] pb-[20px] flex flex-col justify-between gap-[10px] flex-1 bg-muted">
+          <div className="bg-muted p-[10px] pb-[20px] flex flex-col justify-between gap-[10px] flex-1">
             <div className="flex flex-col gap-[10px]">
               <div className="flex flex-col gap-[5px]">
-                <p className="leading-[1.15] text-[#586158] tracking-normal text-foreground text-base font-semibold">
+                <p className="leading-[1.15] text-primary tracking-normal text-base font-semibold">
                   {product.name}
                 </p>
               </div>
               <p
-                className="text-[13px] tracking-[-0.26px] leading-[1.15] font-semibold text-accent"
-                style={{ fontFamily: "var(--font-geist-mono)", fontVariationSettings: "'wdth' 100" }}
+                className="text-[13px] tracking-[-0.26px] leading-[1.15] font-semibold text-primary font-mono"
+                style={{ fontVariationSettings: "'wdth' 100" }}
               >
                 ${product.price.toFixed(2)}
               </p>
             </div>
             <button
               onClick={handleAddToCart}
-              className="bg-[#586158] rounded-full size-[32px] flex items-center justify-center shrink-0 hover:opacity-90 transition-opacity bg-primary"
+              className="bg-primary text-primary-foreground rounded-full size-[32px] flex items-center justify-center shrink-0 hover:opacity-90 transition-opacity"
             >
               {isInCart ? (
-                <CheckIcon className="h-5 w-5 text-[#f5f6f5]" />
+                <CheckIcon className="h-5 w-5" />
               ) : (
-                <PlusIcon className="h-5 w-5 text-[#f5f6f5]" />
+                <PlusIcon className="h-5 w-5" />
               )}
             </button>
           </div>

@@ -72,7 +72,7 @@ export function BodyText({ className, ...props }: React.HTMLAttributes<HTMLParag
 }
 
 export function SmallText({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
-  return null
+  return <p className={cn("text-sm text-foreground leading-relaxed", className)} {...props} />
 }
 
 export function ExtraSmallText({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
