@@ -57,7 +57,7 @@ export function ProductCard({ product, showRecommended = false }: ProductCardPro
                 </p>
               </div>
               <p
-                className="text-[13px] tracking-[-0.26px] text-[#586158] leading-[1.15] font-semibold text-accent"
+                className="text-[13px] tracking-[-0.26px] leading-[1.15] font-semibold text-primary"
                 style={{ fontFamily: "var(--font-geist-mono)", fontVariationSettings: "'wdth' 100" }}
               >
                 ${product.price.toFixed(2)}
