@@ -132,7 +132,7 @@ export default function DesignSystemPage() {
             </TabsList>
           </div>
 
-          <div className="flex-1 px-6 lg:px-12 py-10 max-w-5xl flex flex-col gap-10">
+          <div className="flex-1 px-6 py-10 max-w-5xl flex flex-col gap-10 lg:px-10">
             <TabsContent value="colors" className="flex flex-col gap-10">
               <div>
                 <SectionHeading align="left" spacing="tight">
