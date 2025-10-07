@@ -117,7 +117,7 @@ export default function SkinAnalysisPage() {
             {/* Steps */}
             <div className="w-full max-w-[353px] grid grid-cols-3 gap-[5px] mb-5">
               {/* Step 1 */}
-              <div className="bg-[#f5f6f5] rounded-[10px] p-[10px] flex flex-col gap-2.5">
+              <div className="rounded-[10px] p-[10px] flex flex-col gap-2.5 border border-border">
                 <p className="font-medium text-[40px] leading-[1.15] text-[#586158] tracking-[-0.8px]">1</p>
                 <div className="flex flex-col gap-[5px] text-[#586158] leading-[1.15]">
                   <p className="font-semibold text-[16px] tracking-[-0.32px]">Lighting</p>
@@ -126,7 +126,7 @@ export default function SkinAnalysisPage() {
               </div>
 
               {/* Step 2 */}
-              <div className="bg-[#f5f6f5] rounded-[10px] p-[10px] flex flex-col gap-2.5">
+              <div className="rounded-[10px] p-[10px] flex flex-col gap-2.5 border border-border">
                 <p className="font-medium text-[40px] leading-[1.15] text-[#586158] tracking-[-0.8px]">2</p>
                 <div className="flex flex-col gap-[5px] text-[#586158] leading-[1.15]">
                   <p className="font-semibold text-[16px] tracking-[-0.32px]">Framing</p>
@@ -137,7 +137,7 @@ export default function SkinAnalysisPage() {
               </div>
 
               {/* Step 3 */}
-              <div className="bg-[#f5f6f5] rounded-[10px] p-[10px] flex flex-col gap-2.5">
+              <div className="rounded-[10px] p-[10px] flex flex-col gap-2.5 border border-border">
                 <p className="font-medium text-[40px] leading-[1.15] text-[#586158] tracking-[-0.8px]">3</p>
                 <div className="flex flex-col gap-[5px] text-[#586158] leading-[1.15]">
                   <p className="font-semibold text-[16px] tracking-[-0.32px]">Distance</p>

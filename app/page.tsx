@@ -58,7 +58,7 @@ export default function HomePage() {
               <div className="text-center md:text-left md:flex-1">
                 <SectionOverline>AI SKIN ANALYSIS</SectionOverline>
                 <SectionHeading spacing="tight">Personalized care for your unique skin</SectionHeading>
-                <BodyText className="hidden md:block mt-4 mb-6 text-muted-foreground max-w-xl">
+                <BodyText className="md:block mt-4 mb-6 text-muted-foreground max-w-xl">
                   Our advanced AI technology analyzes your skin in seconds, identifying your unique concerns and
                   recommending personalized formulas tailored specifically to your needs. Get professional-grade
                   insights without leaving home.

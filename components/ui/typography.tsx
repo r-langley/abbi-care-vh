@@ -68,15 +68,15 @@ export function CardTitle({ className, variant = "default", ...props }: CardTitl
 
 // Body Text Variants
 export function BodyText({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
-  return <p className={cn("text-base text-foreground leading-relaxed", className)} {...props} />
+  return null
 }
 
 export function SmallText({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
-  return <p className={cn("text-sm text-foreground leading-relaxed", className)} {...props} />
+  return <p className={cn("text-sm leading-relaxed text-muted-foreground", className)} {...props} />
 }
 
 export function ExtraSmallText({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
-  return <p className={cn("text-xs text-muted-foreground", className)} {...props} />
+  return <p className={cn("text-xs leading-relaxed text-muted-foreground", className)} {...props} />
 }
 
 // Price Display
