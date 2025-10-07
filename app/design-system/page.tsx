@@ -337,12 +337,39 @@ export default function DesignSystemPage() {
 
                     <Card>
                       <CardHeader>
-                        <CardTitle>With Action</CardTitle>
-                        <CardDescription>Card with header action</CardDescription>
+                        <CardTitle>With Actions</CardTitle>
+                        <CardDescription>Card with interactive elements</CardDescription>
+                      </CardHeader>
+                      <CardContent className="space-y-4">
+                        <BodyText>Cards can include action buttons in the content or footer area.</BodyText>
+                        <div className="flex gap-2">
+                          <Button size="sm">Primary Action</Button>
+                          <Button size="sm" variant="outline">
+                            Secondary
+                          </Button>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </div>
+                </div>
+
+                <div>
+                  <h3 className="text-lg font-semibold mb-4">Card with Footer Actions</h3>
+                  <div className="max-w-md">
+                    <Card>
+                      <CardHeader>
+                        <CardTitle>Confirmation Required</CardTitle>
+                        <CardDescription>Please review the information below</CardDescription>
                       </CardHeader>
                       <CardContent>
-                        <BodyText>Cards can include actions in the header area.</BodyText>
+                        <BodyText>
+                          This pattern is useful for forms, confirmations, or any content that requires user action.
+                        </BodyText>
                       </CardContent>
+                      <div className="px-6 pb-6 flex gap-2 justify-end">
+                        <Button variant="outline">Cancel</Button>
+                        <Button>Confirm</Button>
+                      </div>
                     </Card>
                   </div>
                 </div>
