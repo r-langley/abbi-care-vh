@@ -137,7 +137,7 @@ export default function CheckoutPage() {
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <div className="grid grid-cols-2 gap-4">
-                      <div>
+                      <div className="flex flex-col gap-2">
                         <Label htmlFor="firstName">First Name</Label>
                         <Input
                           id="firstName"
@@ -147,7 +147,7 @@ export default function CheckoutPage() {
                           required
                         />
                       </div>
-                      <div>
+                      <div className="flex flex-col gap-2">
                         <Label htmlFor="lastName">Last Name</Label>
                         <Input
                           id="lastName"
@@ -158,7 +158,7 @@ export default function CheckoutPage() {
                         />
                       </div>
                     </div>
-                    <div>
+                    <div className="flex flex-col gap-2">
                       <Label htmlFor="address">Address</Label>
                       <Input
                         id="address"
@@ -170,17 +170,17 @@ export default function CheckoutPage() {
                       />
                     </div>
                     <div className="grid grid-cols-2 gap-4">
-                      <div>
+                      <div className="flex flex-col gap-2">
                         <Label htmlFor="city">City</Label>
                         <Input id="city" name="city" value={formData.city} onChange={handleInputChange} required />
                       </div>
-                      <div>
+                      <div className="flex flex-col gap-2">
                         <Label htmlFor="state">State</Label>
                         <Input id="state" name="state" value={formData.state} onChange={handleInputChange} required />
                       </div>
                     </div>
                     <div className="grid grid-cols-2 gap-4">
-                      <div>
+                      <div className="flex flex-col gap-2">
                         <Label htmlFor="zipCode">ZIP Code</Label>
                         <Input
                           id="zipCode"
@@ -190,7 +190,7 @@ export default function CheckoutPage() {
                           required
                         />
                       </div>
-                      <div>
+                      <div className="flex flex-col gap-2">
                         <Label htmlFor="country">Country</Label>
                         <Select
                           value={formData.country}
@@ -217,7 +217,7 @@ export default function CheckoutPage() {
                     <CardTitle>Payment Information</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
-                    <div>
+                    <div className="flex flex-col gap-2">
                       <Label htmlFor="cardNumber">Card Number</Label>
                       <Input
                         id="cardNumber"
@@ -230,7 +230,7 @@ export default function CheckoutPage() {
                       />
                     </div>
                     <div className="grid grid-cols-3 gap-4">
-                      <div className="col-span-2">
+                      <div className="col-span-2 flex flex-col gap-2">
                         <Label htmlFor="expiryDate">Expiry Date</Label>
                         <Input
                           id="expiryDate"
@@ -242,7 +242,7 @@ export default function CheckoutPage() {
                           maxLength={5}
                         />
                       </div>
-                      <div>
+                      <div className="flex flex-col gap-2">
                         <Label htmlFor="cvv">CVV</Label>
                         <Input
                           id="cvv"
@@ -255,7 +255,7 @@ export default function CheckoutPage() {
                         />
                       </div>
                     </div>
-                    <div>
+                    <div className="flex flex-col gap-2">
                       <Label htmlFor="nameOnCard">Name on Card</Label>
                       <Input
                         id="nameOnCard"
