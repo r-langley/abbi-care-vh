@@ -24,6 +24,7 @@ import { TraitFilter } from "@/components/trait-filter"
 import { HeroSection } from "@/components/ui/hero-section"
 import { SectionContainer } from "@/components/ui/section-container"
 import { products } from "@/lib/products"
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import {
   SwatchIcon,
   DocumentTextIcon,
@@ -36,6 +37,7 @@ import {
   DocumentCheckIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
+  Bars3Icon,
 } from "@heroicons/react/24/outline"
 
 export default function DesignSystemPage() {
@@ -44,6 +46,7 @@ export default function DesignSystemPage() {
   const [showIcon, setShowIcon] = useState(false)
   const [showRecommended, setShowRecommended] = useState(true)
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   const sampleProducts = products.slice(0, 4)
 
@@ -51,7 +54,94 @@ export default function DesignSystemPage() {
     <div className="min-h-screen bg-background">
       <div className="border-b border-border bg-background/95 backdrop-blur sticky top-0 z-50">
         <div className="max-w-[1800px] mx-auto px-6 py-3 flex flex-col gap-1">
-          <PageTitle>ABBI Design System</PageTitle>
+          <div className="flex items-center justify-between">
+            <PageTitle>ABBI Design System</PageTitle>
+            <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+              <SheetTrigger asChild>
+                <Button variant="ghost" size="icon" className="lg:hidden">
+                  <Bars3Icon className="w-6 h-6" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="left" className="w-64 p-0">
+                <div className="py-6">
+                  <TabsList className="flex-col items-stretch h-auto bg-transparent px-6 space-y-1">
+                    <TabsTrigger
+                      value="colors"
+                      className="justify-start w-full gap-2"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      <SwatchIcon className="w-4 h-4 shrink-0" />
+                      Colors
+                    </TabsTrigger>
+                    <TabsTrigger
+                      value="typography"
+                      className="justify-start w-full gap-2"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      <DocumentTextIcon className="w-4 h-4 shrink-0" />
+                      Typography
+                    </TabsTrigger>
+                    <TabsTrigger
+                      value="buttons"
+                      className="justify-start w-full gap-2"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      <CursorArrowRaysIcon className="w-4 h-4 shrink-0" />
+                      Buttons
+                    </TabsTrigger>
+                    <TabsTrigger
+                      value="badges"
+                      className="justify-start w-full gap-2"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      <TagIcon className="w-4 h-4 shrink-0" />
+                      Badges
+                    </TabsTrigger>
+                    <TabsTrigger
+                      value="cards"
+                      className="justify-start w-full gap-2"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      <RectangleStackIcon className="w-4 h-4 shrink-0" />
+                      Cards
+                    </TabsTrigger>
+                    <TabsTrigger
+                      value="composite"
+                      className="justify-start w-full gap-2"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      <PuzzlePieceIcon className="w-4 h-4 shrink-0" />
+                      Composite
+                    </TabsTrigger>
+                    <TabsTrigger
+                      value="layouts"
+                      className="justify-start w-full gap-2"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      <Squares2X2Icon className="w-4 h-4 shrink-0" />
+                      Layouts
+                    </TabsTrigger>
+                    <TabsTrigger
+                      value="spacing"
+                      className="justify-start w-full gap-2"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      <ArrowsPointingOutIcon className="w-4 h-4 shrink-0" />
+                      Spacing
+                    </TabsTrigger>
+                    <TabsTrigger
+                      value="guidelines"
+                      className="justify-start w-full gap-2"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      <DocumentCheckIcon className="w-4 h-4 shrink-0" />
+                      Guidelines
+                    </TabsTrigger>
+                  </TabsList>
+                </div>
+              </SheetContent>
+            </Sheet>
+          </div>
           <BodyText className="text-muted-foreground">
             A comprehensive component library and design system for building cohesive ABBI experiences.
           </BodyText>
@@ -60,6 +150,7 @@ export default function DesignSystemPage() {
 
       <div className="max-w-[1800px] mx-auto">
         <Tabs defaultValue="colors" className="flex flex-col lg:flex-row">
+          {/* Desktop Sidebar */}
           <aside
             className={`hidden lg:block border-r border-border sticky top-[88px] h-[calc(100vh-88px)] overflow-y-auto shrink-0 transition-all duration-300 ease-in-out ${
               sidebarCollapsed ? "w-16" : "w-64"
@@ -118,20 +209,7 @@ export default function DesignSystemPage() {
             </TabsList>
           </aside>
 
-          <div className="lg:hidden border-b border-border sticky top-[88px] z-40 bg-background">
-            <TabsList className="flex-wrap justify-start p-4 w-full h-auto bg-transparent">
-              <TabsTrigger value="colors">Colors</TabsTrigger>
-              <TabsTrigger value="typography">Typography</TabsTrigger>
-              <TabsTrigger value="buttons">Buttons</TabsTrigger>
-              <TabsTrigger value="badges">Badges</TabsTrigger>
-              <TabsTrigger value="cards">Cards</TabsTrigger>
-              <TabsTrigger value="composite">Composite</TabsTrigger>
-              <TabsTrigger value="layouts">Layouts</TabsTrigger>
-              <TabsTrigger value="spacing">Spacing</TabsTrigger>
-              <TabsTrigger value="guidelines">Guidelines</TabsTrigger>
-            </TabsList>
-          </div>
-
+          {/* Content Area */}
           <div className="flex-1 px-6 py-10 max-w-5xl flex flex-col gap-10 lg:px-10">
             <TabsContent value="colors" className="flex flex-col gap-10">
               <div>
