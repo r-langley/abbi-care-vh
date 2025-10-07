@@ -10,7 +10,7 @@ export function PageTitle({ className, variant = "default", ...props }: PageTitl
   return (
     <h1
       className={cn(
-        "text-balance text-foreground font-medium tracking-tight text-xl flex items-center",
+        "text-balance text-foreground font-medium tracking-tight flex items-center text-xl",
         variant === "default" && "text-3xl md:text-4xl leading-none",
         variant === "hero" && "text-3xl md:text-6xl lg:text-7xl leading-none mb-2 md:mb-4",
         className,
@@ -28,17 +28,7 @@ interface SectionHeadingProps extends React.HTMLAttributes<HTMLHeadingElement> {
 
 export function SectionHeading({ className, align = "center", spacing = "default", ...props }: SectionHeadingProps) {
   return (
-    <h2
-      className={cn(
-        "text-2xl md:text-3xl leading-7 text-foreground font-medium",
-        align === "center" && "text-center md:text-left",
-        align === "left" && "text-left",
-        spacing === "default" && "mb-12 md:mb-16",
-        spacing === "tight" && "mb-4 md:mb-6",
-        className,
-      )}
-      {...props}
-    />
+    null
   )
 }
 
