@@ -449,7 +449,7 @@ export default function DesignSystemPage() {
 
                   <div>
                     <h3 className="text-lg font-semibold mb-4">Card Specifications</h3>
-                    <div className="p-6 rounded-lg space-y-2 font-mono text-sm bg-card">
+                    <div className="p-6 rounded-lg space-y-2 font-mono text-sm bg-card shadow-xs">
                       <div>Border: 2px solid var(--sage)</div>
                       <div>Border Radius: 10px</div>
                       <div>Hover: border-color changes to var(--sea-slate)</div>
