@@ -158,7 +158,7 @@ export default function DesignSystemPage() {
           <aside
             className={`hidden lg:block border-r border-border sticky top-[88px] h-[calc(100vh-88px)] overflow-y-auto shrink-0 transition-all duration-300 ease-in-out ${
               sidebarCollapsed ? "w-16" : "w-64"
-            } ml-4 mt-4 mb-4 rounded-lg bg-muted/30`}
+            } rounded-lg bg-muted/30`}
           >
             <div className="flex justify-end p-2 border-b border-border">
               <Button
