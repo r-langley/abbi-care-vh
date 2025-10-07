@@ -49,9 +49,9 @@ export default function DesignSystemPage() {
     <div className="min-h-screen bg-background">
       {/* Sticky Header */}
       <div className="border-b border-border bg-background/95 backdrop-blur sticky top-0 z-50">
-        <div className="max-w-[1800px] mx-auto px-6 py-6">
+        <div className="max-w-[1800px] mx-auto px-6 py-6 flex flex-col gap-2">
           <PageTitle>ABBI Design System</PageTitle>
-          <BodyText className="mt-2 text-muted-foreground">
+          <BodyText className="text-muted-foreground">
             A comprehensive component library and design system for building cohesive ABBI experiences.
           </BodyText>
         </div>
