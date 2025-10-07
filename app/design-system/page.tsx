@@ -60,7 +60,7 @@ export default function DesignSystemPage() {
       <div className="max-w-[1800px] mx-auto">
         <Tabs defaultValue="colors" className="flex flex-col lg:flex-row">
           <aside className="hidden lg:block w-64 border-r border-border sticky top-[100px] h-[calc(100vh-100px)] overflow-y-auto shrink-0">
-            <TabsList className="flex-col items-stretch h-auto bg-transparent px-6 py-6 space-y-1">
+            <TabsList className="flex-col items-stretch h-auto bg-transparent px-6 pb-6 space-y-1">
               <TabsTrigger value="colors" className="justify-start w-full gap-2">
                 <SwatchIcon className="w-4 h-4" />
                 Colors
