@@ -47,9 +47,8 @@ export default function DesignSystemPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Sticky Header */}
       <div className="border-b border-border bg-background/95 backdrop-blur sticky top-0 z-50">
-        <div className="max-w-[1800px] mx-auto px-6 py-6 flex gap-0 flex-col">
+        <div className="max-w-[1800px] mx-auto px-6 py-4 flex flex-col gap-1">
           <PageTitle>ABBI Design System</PageTitle>
           <BodyText className="text-muted-foreground">
             A comprehensive component library and design system for building cohesive ABBI experiences.
@@ -60,9 +59,8 @@ export default function DesignSystemPage() {
       {/* Main Layout */}
       <div className="max-w-[1800px] mx-auto">
         <Tabs defaultValue="colors" className="flex flex-col lg:flex-row">
-          {/* Sidebar Navigation - Desktop */}
-          <aside className="hidden lg:block w-64 border-r border-border sticky top-[140px] h-[calc(100vh-140px)] overflow-y-auto shrink-0 pt-0 bg-muted">
-            <TabsList className="flex-col items-stretch h-auto bg-transparent px-6 pb-6 pt-0 mt-0 space-y-1">
+          <aside className="hidden lg:block w-64 border-r border-border sticky top-[100px] h-[calc(100vh-100px)] overflow-y-auto shrink-0">
+            <TabsList className="flex-col items-stretch h-auto bg-transparent px-6 py-6 space-y-1">
               <TabsTrigger value="colors" className="justify-start w-full gap-2">
                 <SwatchIcon className="w-4 h-4" />
                 Colors
@@ -103,8 +101,8 @@ export default function DesignSystemPage() {
           </aside>
 
           {/* Mobile Navigation */}
-          <div className="lg:hidden border-b border-border sticky top-[140px] z-40 bg-background">
-            <TabsList className="flex-wrap justify-start p-4 w-full h-auto bg-muted/30">
+          <div className="lg:hidden border-b border-border sticky top-[100px] z-40 bg-background">
+            <TabsList className="flex-wrap justify-start p-4 w-full h-auto bg-transparent">
               <TabsTrigger value="colors">Colors</TabsTrigger>
               <TabsTrigger value="typography">Typography</TabsTrigger>
               <TabsTrigger value="buttons">Buttons</TabsTrigger>
@@ -117,8 +115,7 @@ export default function DesignSystemPage() {
             </TabsList>
           </div>
 
-          {/* Content Area */}
-          <div className="flex-1 px-6 lg:px-12 py-10 max-w-5xl bg-background flex flex-col gap-10">
+          <div className="flex-1 px-6 lg:px-12 py-10 max-w-5xl flex flex-col gap-10">
             {/* Colors Section */}
             <TabsContent value="colors" className="flex flex-col gap-10">
               <div>
