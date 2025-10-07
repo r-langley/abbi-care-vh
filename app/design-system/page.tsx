@@ -142,7 +142,7 @@ export default function DesignSystemPage() {
 
                 <div>
                   <h3 className="text-lg font-semibold mb-4">Typography Components</h3>
-                  <div className="space-y-6 bg-muted p-6 rounded-lg">
+                  <div className="bg-muted p-6 rounded-lg space-y-5">
                     <PageTitle>Page Title Component</PageTitle>
                     <SectionHeading align="left">Section Heading Component</SectionHeading>
                     <BodyText>Body text component for comfortable reading with proper line height.</BodyText>
