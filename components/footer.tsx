@@ -59,6 +59,13 @@ export function Footer() {
         </div>
         <div className="mt-12 pt-8 border-t border-border text-center text-sm text-muted-foreground">
           <p>© 2025 ABBI. All rights reserved.</p>
+          <NavLink
+            href="/design-system"
+            variant="footer"
+            className="text-xs opacity-30 hover:opacity-100 transition-opacity mt-2 inline-block"
+          >
+            Design System
+          </NavLink>
         </div>
       </div>
     </footer>
