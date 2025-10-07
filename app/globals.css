@@ -41,7 +41,7 @@
   --accent-foreground: #ffffff;
   --destructive: var(--status-red);
   --destructive-foreground: #ffffff;
-  --border: var(--sage);
+  --border: rgb(224, 228, 224);
   --input: var(--sage);
   --ring: var(--sea-slate);
   --chart-1: hsl(33 54% 38%);
