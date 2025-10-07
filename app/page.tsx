@@ -28,14 +28,14 @@ export default function HomePage() {
       <main>
         {/* Hero Section */}
         <section className="relative bg-background">
-          <div className="grid grid-cols-2 items-center gap-0 bg-muted">
+          <div className="grid grid-cols-2 items-center gap-0">
             {/* Left: Hero Image */}
-            <div className="relative aspect-[2/3] md:aspect-[4/3]">
+            <div className="relative aspect-[2/3] md:aspect-[4/3] bg-muted">
               <Image src="/images/design-mode/image.png" alt="ABBI Skincare" fill className="object-cover" priority />
             </div>
 
             {/* Right: Hero Content */}
-            <div className="flex flex-col justify-center items-start px-5 py-5 md:py-8">
+            <div className="flex flex-col justify-center items-start px-5 py-5 md:py-8 bg-muted border-l-2 border-primary/10">
               <PageTitle variant="hero">
                 <span className="font-serif italic font-medium">Your</span> Skin, Our{" "}
                 <span className="font-serif italic font-medium">Formula</span>
