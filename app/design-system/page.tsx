@@ -101,15 +101,15 @@ export default function DesignSystemPage() {
                 <div>
                   <h3 className="text-lg font-semibold mb-4">Font Families</h3>
                   <div className="space-y-4">
-                    <div className="p-6 rounded-lg border border-border">
+                    <div className="p-6 rounded-lg border border-border bg-card">
                       <p className="font-sans text-2xl mb-2">Poppins (Sans-serif)</p>
                       <SmallText className="text-muted-foreground">Primary font for body text and headings</SmallText>
                     </div>
-                    <div className="p-6 rounded-lg border border-border">
+                    <div className="p-6 rounded-lg border border-border bg-card">
                       <p className="font-serif text-2xl italic mb-2">Instrument Serif</p>
                       <SmallText className="text-muted-foreground">Italic accents for emphasis</SmallText>
                     </div>
-                    <div className="p-6 rounded-lg border border-border">
+                    <div className="p-6 rounded-lg border border-border bg-card">
                       <p className="font-mono text-2xl mb-2">Geist Mono</p>
                       <SmallText className="text-muted-foreground">Numbers, prices, technical data</SmallText>
                     </div>
@@ -142,7 +142,7 @@ export default function DesignSystemPage() {
 
                 <div>
                   <h3 className="text-lg font-semibold mb-4">Typography Components</h3>
-                  <div className="p-6 rounded-lg border border-border space-y-4">
+                  <div className="p-6 rounded-lg border border-border space-y-4 bg-card">
                     <PageTitle>Page Title Component</PageTitle>
                     <SectionHeading align="left">Section Heading Component</SectionHeading>
                     <BodyText>Body text component for comfortable reading with proper line height.</BodyText>
@@ -465,7 +465,7 @@ function TypeScale({
   description,
 }: { size: string; label: string; className: string; children: React.ReactNode; description?: string }) {
   return (
-    <div className="p-6 rounded-lg border border-border">
+    <div className="p-6 rounded-lg border border-border bg-card">
       <div className="flex items-baseline justify-between mb-2">
         <span className="text-xs font-mono text-muted-foreground">{label}</span>
         <span className="text-xs font-mono text-muted-foreground">{size}</span>
