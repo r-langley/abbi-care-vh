@@ -3,7 +3,7 @@ import { NavLink } from "@/components/ui/nav-link"
 export function Footer() {
   return (
     <footer className="bg-background border-t border-border">
-      <div className="px-10 py-10 bg-secondary">
+      <div className="px-10 py-10 bg-background">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
             <h3 className="font-mono text-sm mb-4 font-medium text-accent">Shop</h3>
