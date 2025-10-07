@@ -17,23 +17,19 @@ const faqs = [
 export function FaqSection() {
   return (
     <div className="py-10 px-5 pb-10 bg-muted">
-      <h2 className="font-semibold text-[24px] tracking-[-1px] text-[#292824] mb-5 text-accent">
-        FAQ
-      </h2>
-      <div className="flex flex-col gap-4">
-        {faqs.map((question, index) => (
-          <div key={index}>
-            <button className="flex items-center justify-between w-full text-left">
-              <p className="font-medium text-[16px] leading-[1.35] text-[#292824] flex-1">
-                {question}
-              </p>
-              <PlusIcon className="size-6 text-[#292824] shrink-0 ml-4" />
-            </button>
-            {index < faqs.length - 1 && (
-              <div className="h-px bg-[#e5e5e5] mt-4" />
-            )}
-          </div>
-        ))}
+      <div className="container mx-auto max-w-3xl">
+        <h2 className="font-semibold text-[24px] tracking-[-1px] text-[#292824] mb-5 text-accent">FAQ</h2>
+        <div className="flex flex-col gap-4">
+          {faqs.map((question, index) => (
+            <div key={index}>
+              <button className="flex items-center justify-between w-full text-left">
+                <p className="font-medium text-[16px] leading-[1.35] text-[#292824] flex-1">{question}</p>
+                <PlusIcon className="size-6 text-[#292824] shrink-0 ml-4" />
+              </button>
+              {index < faqs.length - 1 && <div className="h-px bg-[#e5e5e5] mt-4" />}
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   )
