@@ -165,7 +165,7 @@ export default function DesignSystemPage() {
                 Interactive controls for button variants and sizes.
               </BodyText>
 
-              <div className="p-6 rounded-lg border border-border mb-8">
+              <div className="p-6 rounded-lg border border-border mb-8 bg-card">
                 <h3 className="text-lg font-semibold mb-4">Controls</h3>
                 <div className="flex flex-wrap gap-6">
                   <div className="flex items-center gap-2">
@@ -482,10 +482,10 @@ function ComponentShowcase({
   children,
 }: { title: string; description: string; children: React.ReactNode }) {
   return (
-    <div className="p-6 rounded-lg border border-border">
+    <div className="p-6 rounded-lg border border-border bg-card">
       <h4 className="font-semibold mb-1">{title}</h4>
       <p className="text-xs text-muted-foreground mb-4">{description}</p>
-      <div className="flex items-center justify-center p-4 bg-background rounded">{children}</div>
+      <div className="flex items-center justify-center p-4 rounded bg-muted">{children}</div>
     </div>
   )
 }
