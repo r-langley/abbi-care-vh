@@ -17,31 +17,108 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Switch } from "@/components/ui/switch"
 import { Label } from "@/components/ui/label"
+import { ProductCard } from "@/components/product-card"
+import { IngredientCard } from "@/components/ingredient-card"
+import { ActiveIngredientCard } from "@/components/active-ingredient-card"
+import { TraitFilter } from "@/components/trait-filter"
+import { HeroSection } from "@/components/ui/hero-section"
+import { SectionContainer } from "@/components/ui/section-container"
+import { products } from "@/lib/products"
+import {
+  SwatchIcon,
+  DocumentTextIcon,
+  CursorArrowRaysIcon,
+  TagIcon,
+  RectangleStackIcon,
+  PuzzlePieceIcon,
+  Squares2X2Icon,
+  ArrowsPointingOutIcon,
+  DocumentCheckIcon,
+} from "@heroicons/react/24/outline"
 
 export default function DesignSystemPage() {
   const [buttonSize, setButtonSize] = useState<"default" | "sm" | "lg">("default")
   const [badgeVariant, setBadgeVariant] = useState<"default" | "compact">("default")
   const [showIcon, setShowIcon] = useState(false)
+  const [showRecommended, setShowRecommended] = useState(true)
+
+  // Get sample products for demonstrations
+  const sampleProducts = products.slice(0, 4)
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="max-w-7xl mx-auto px-5 py-10">
-        <div className="mb-12">
+      {/* Sticky Header */}
+      <div className="border-b border-border bg-background/95 backdrop-blur sticky top-0 z-50">
+        <div className="max-w-[1800px] mx-auto px-6 py-6">
           <PageTitle>ABBI Design System</PageTitle>
-          <BodyText className="mt-4 text-muted-foreground">
+          <BodyText className="mt-2 text-muted-foreground">
             A comprehensive component library and design system for building cohesive ABBI experiences.
           </BodyText>
         </div>
+      </div>
 
-        <Tabs defaultValue="colors" className="w-full">
-          <TabsList className="mb-8 flex-wrap h-auto">
-            <TabsTrigger value="colors">Colors</TabsTrigger>
-            <TabsTrigger value="typography">Typography</TabsTrigger>
-            <TabsTrigger value="buttons">Buttons</TabsTrigger>
-            <TabsTrigger value="badges">Badges</TabsTrigger>
-            <TabsTrigger value="cards">Cards</TabsTrigger>
-            <TabsTrigger value="spacing">Spacing</TabsTrigger>
-          </TabsList>
+      {/* Main Layout */}
+      <div className="max-w-[1800px] mx-auto">
+        <Tabs defaultValue="colors" className="flex flex-col lg:flex-row">
+          {/* Sidebar Navigation - Desktop */}
+          <aside className="hidden lg:block w-64 border-r border-border sticky top-[140px] h-[calc(100vh-140px)] overflow-y-auto shrink-0">
+            <TabsList className="flex-col items-stretch h-auto bg-transparent p-6 space-y-1">
+              <TabsTrigger value="colors" className="justify-start w-full gap-2">
+                <SwatchIcon className="w-4 h-4" />
+                Colors
+              </TabsTrigger>
+              <TabsTrigger value="typography" className="justify-start w-full gap-2">
+                <DocumentTextIcon className="w-4 h-4" />
+                Typography
+              </TabsTrigger>
+              <TabsTrigger value="buttons" className="justify-start w-full gap-2">
+                <CursorArrowRaysIcon className="w-4 h-4" />
+                Buttons
+              </TabsTrigger>
+              <TabsTrigger value="badges" className="justify-start w-full gap-2">
+                <TagIcon className="w-4 h-4" />
+                Badges
+              </TabsTrigger>
+              <TabsTrigger value="cards" className="justify-start w-full gap-2">
+                <RectangleStackIcon className="w-4 h-4" />
+                Cards
+              </TabsTrigger>
+              <TabsTrigger value="composite" className="justify-start w-full gap-2">
+                <PuzzlePieceIcon className="w-4 h-4" />
+                Composite
+              </TabsTrigger>
+              <TabsTrigger value="layouts" className="justify-start w-full gap-2">
+                <Squares2X2Icon className="w-4 h-4" />
+                Layouts
+              </TabsTrigger>
+              <TabsTrigger value="spacing" className="justify-start w-full gap-2">
+                <ArrowsPointingOutIcon className="w-4 h-4" />
+                Spacing
+              </TabsTrigger>
+              <TabsTrigger value="guidelines" className="justify-start w-full gap-2">
+                <DocumentCheckIcon className="w-4 h-4" />
+                Guidelines
+              </TabsTrigger>
+            </TabsList>
+          </aside>
+
+          {/* Mobile Navigation */}
+          <div className="lg:hidden border-b border-border sticky top-[140px] z-40 bg-background">
+            <TabsList className="flex-wrap justify-start p-4 w-full h-auto bg-muted/30">
+              <TabsTrigger value="colors">Colors</TabsTrigger>
+              <TabsTrigger value="typography">Typography</TabsTrigger>
+              <TabsTrigger value="buttons">Buttons</TabsTrigger>
+              <TabsTrigger value="badges">Badges</TabsTrigger>
+              <TabsTrigger value="cards">Cards</TabsTrigger>
+              <TabsTrigger value="composite">Composite</TabsTrigger>
+              <TabsTrigger value="layouts">Layouts</TabsTrigger>
+              <TabsTrigger value="spacing">Spacing</TabsTrigger>
+              <TabsTrigger value="guidelines">Guidelines</TabsTrigger>
+            </TabsList>
+          </div>
+
+          {/* Content Area */}
+          <div className="flex-1 px-6 lg:px-12 py-10 max-w-5xl">
 
           {/* Colors Section */}
           <TabsContent value="colors" className="space-y-8">
@@ -431,6 +508,247 @@ export default function DesignSystemPage() {
               </div>
             </div>
           </TabsContent>
+
+          {/* Composite Components Section */}
+          <TabsContent value="composite" className="space-y-12">
+            <div>
+              <SectionHeading align="left" spacing="tight">
+                Composite Components
+              </SectionHeading>
+              <BodyText className="mb-6 text-muted-foreground">
+                Complex, reusable components built from atomic elements.
+              </BodyText>
+
+              {/* Product Card */}
+              <div className="space-y-4">
+                <h3 className="text-lg font-semibold">Product Card</h3>
+                <BodyText className="text-sm text-muted-foreground">
+                  Location: <code className="bg-muted px-2 py-1 rounded text-xs font-mono">/components/product-card.tsx</code>
+                </BodyText>
+                <div className="bg-muted p-6 rounded-lg">
+                  <h4 className="font-semibold mb-2">Features</h4>
+                  <ul className="text-sm space-y-1 list-disc list-inside">
+                    <li>160px image height with lazy loading</li>
+                    <li>Hover state: border changes from muted to primary</li>
+                    <li>Add to cart button (32px circle)</li>
+                    <li>Optional recommended badge</li>
+                    <li>Automatic cart state detection</li>
+                  </ul>
+                </div>
+                <div className="flex items-center gap-4 bg-muted p-4 rounded-lg">
+                  <Switch id="show-rec" checked={showRecommended} onCheckedChange={setShowRecommended} />
+                  <Label htmlFor="show-rec">Show Recommended Badge</Label>
+                </div>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  {sampleProducts.map((product) => (
+                    <ProductCard key={product.id} product={product} showRecommended={showRecommended} />
+                  ))}
+                </div>
+              </div>
+
+              {/* Ingredient Card */}
+              <div className="space-y-4">
+                <h3 className="text-lg font-semibold">Ingredient Card</h3>
+                <BodyText className="text-sm text-muted-foreground">
+                  Location: <code className="bg-muted px-2 py-1 rounded text-xs font-mono">/components/ingredient-card.tsx</code>
+                </BodyText>
+                <div className="bg-muted p-6 rounded-lg">
+                  <ul className="text-sm space-y-1 list-disc list-inside">
+                    <li>100px image height (smaller than product cards)</li>
+                    <li>Number display in Geist Mono font</li>
+                    <li>Optional description</li>
+                  </ul>
+                </div>
+                <div className="max-w-xs">
+                  <IngredientCard
+                    id="demo-1"
+                    name="Hyaluronic Acid"
+                    number={1}
+                    description="Deeply hydrates and plumps the skin"
+                    href="#"
+                  />
+                </div>
+              </div>
+
+              {/* Active Ingredient Card */}
+              <div className="space-y-4">
+                <h3 className="text-lg font-semibold">Active Ingredient Card</h3>
+                <BodyText className="text-sm text-muted-foreground">
+                  Location: <code className="bg-muted px-2 py-1 rounded text-xs font-mono">/components/active-ingredient-card.tsx</code>
+                </BodyText>
+                <div className="max-w-xs">
+                  <ActiveIngredientCard
+                    id="demo-active"
+                    name="Retinol Complex"
+                    number={2}
+                    image="/minimalist-cosmetic-pump-bottle-product-photograph.jpg"
+                  />
+                </div>
+              </div>
+
+              {/* Hero Section */}
+              <div className="space-y-4">
+                <h3 className="text-lg font-semibold">Hero Section</h3>
+                <BodyText className="text-sm text-muted-foreground">
+                  Location: <code className="bg-muted px-2 py-1 rounded text-xs font-mono">/components/ui/hero-section.tsx</code>
+                </BodyText>
+                <HeroSection
+                  image="/minimalist-cosmetic-pump-bottle-product-photograph.jpg"
+                  title="Personalized Skincare"
+                  description="Tailored to your unique skin profile"
+                  imagePosition="left"
+                />
+              </div>
+
+              {/* Trait Filter */}
+              <div className="space-y-4">
+                <h3 className="text-lg font-semibold">Trait Filter</h3>
+                <BodyText className="text-sm text-muted-foreground">
+                  Location: <code className="bg-muted px-2 py-1 rounded text-xs font-mono">/components/trait-filter.tsx</code>
+                </BodyText>
+                <div className="bg-background rounded-lg border border-border overflow-hidden">
+                  <TraitFilter />
+                </div>
+              </div>
+            </div>
+          </TabsContent>
+
+          {/* Layouts Section */}
+          <TabsContent value="layouts" className="space-y-12">
+            <div>
+              <SectionHeading align="left" spacing="tight">
+                Layout Patterns
+              </SectionHeading>
+              <BodyText className="mb-6 text-muted-foreground">
+                Reusable layout patterns and grid systems.
+              </BodyText>
+
+              {/* Product Grids */}
+              <div className="space-y-6">
+                <h3 className="text-lg font-semibold">Product Grid Layouts</h3>
+                
+                <div>
+                  <h4 className="font-semibold mb-2">2-Column Grid (Mobile)</h4>
+                  <div className="bg-muted p-4 rounded-lg mb-2">
+                    <code className="text-xs font-mono">grid grid-cols-2 gap-[10px]</code>
+                  </div>
+                  <div className="grid grid-cols-2 gap-[10px]">
+                    {sampleProducts.slice(0, 2).map((product) => (
+                      <ProductCard key={product.id} product={product} />
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <h4 className="font-semibold mb-2">4-Column Grid (Desktop)</h4>
+                  <div className="bg-muted p-4 rounded-lg mb-2">
+                    <code className="text-xs font-mono">grid md:grid-cols-3 lg:grid-cols-4 gap-[10px]</code>
+                  </div>
+                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[10px]">
+                    {sampleProducts.map((product) => (
+                      <ProductCard key={product.id} product={product} />
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Section Containers */}
+              <div className="space-y-4">
+                <h3 className="text-lg font-semibold">Section Container</h3>
+                <BodyText className="text-sm text-muted-foreground">
+                  Location: <code className="bg-muted px-2 py-1 rounded text-xs font-mono">/components/ui/section-container.tsx</code>
+                </BodyText>
+                <div className="space-y-4">
+                  <SectionContainer variant="default" spacing="tight" className="border border-border">
+                    <BodyText className="text-center">Default Section (Tight Spacing)</BodyText>
+                  </SectionContainer>
+                  <SectionContainer variant="muted" spacing="default" className="border border-border">
+                    <BodyText className="text-center">Muted Section (Default Spacing)</BodyText>
+                  </SectionContainer>
+                </div>
+              </div>
+            </div>
+          </TabsContent>
+
+          {/* Guidelines Section */}
+          <TabsContent value="guidelines" className="space-y-8">
+            <div>
+              <SectionHeading align="left" spacing="tight">
+                Development Guidelines
+              </SectionHeading>
+              <BodyText className="mb-6 text-muted-foreground">
+                Best practices for building with the ABBI design system.
+              </BodyText>
+
+              {/* Component Principles */}
+              <div className="space-y-4">
+                <h3 className="text-lg font-semibold">Component Principles</h3>
+                <div className="bg-muted p-6 rounded-lg">
+                  <h4 className="font-semibold mb-2">Single Source of Truth</h4>
+                  <p className="text-sm mb-3">
+                    All components in <code className="bg-background px-2 py-1 rounded text-xs">/components</code> represent the canonical implementation.
+                    When you modify a component, it updates everywhere it's used.
+                  </p>
+                  <div className="bg-background p-4 rounded space-y-2 text-sm">
+                    <div className="text-green-600">✓ Modify the source component in /components</div>
+                    <div className="text-red-600">✗ Don't copy/paste and modify inline</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Color Usage */}
+              <div className="space-y-4">
+                <h3 className="text-lg font-semibold">Color Usage Rules</h3>
+                <div className="bg-muted p-6 rounded-lg">
+                  <h4 className="font-semibold mb-3">CRITICAL: Always Use Semantic Tokens</h4>
+                  <div className="space-y-4">
+                    <div>
+                      <p className="text-sm mb-2 font-semibold text-green-600">✓ Correct Usage</p>
+                      <div className="bg-background p-4 rounded text-xs font-mono space-y-1">
+                        <div>className="bg-primary text-primary-foreground"</div>
+                        <div>className="border-muted hover:border-primary"</div>
+                      </div>
+                    </div>
+                    <div>
+                      <p className="text-sm mb-2 font-semibold text-red-600">✗ Wrong - Never Do This</p>
+                      <div className="bg-background p-4 rounded text-xs font-mono space-y-1">
+                        <div className="text-red-600">className="bg-[#586158] text-white"</div>
+                        <div className="text-red-600">className="border-[#f5f6f5]"</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Quick Reference */}
+              <div className="space-y-4">
+                <h3 className="text-lg font-semibold">Quick Reference</h3>
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div className="bg-muted p-6 rounded-lg">
+                    <h4 className="font-semibold mb-3">Card Specs</h4>
+                    <div className="text-xs font-mono space-y-1">
+                      <div>Border: 2px border-muted</div>
+                      <div>Radius: rounded-[10px]</div>
+                      <div>Hover: hover:border-primary</div>
+                      <div>Padding: p-[10px] pb-[20px]</div>
+                      <div>Gap: gap-[10px]</div>
+                    </div>
+                  </div>
+
+                  <div className="bg-muted p-6 rounded-lg">
+                    <h4 className="font-semibold mb-3">Image Heights</h4>
+                    <div className="text-xs font-mono space-y-1">
+                      <div>Product Card: h-[160px]</div>
+                      <div>Active Card: h-[120px]</div>
+                      <div>Ingredient Card: h-[100px]</div>
+                      <div>Hero Section: h-[160px]</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </TabsContent>
+          </div>
         </Tabs>
       </div>
     </div>

@@ -130,6 +130,26 @@ export function Header() {
               paramName="category"
             />
           )}
+
+          {/* Mobile Submenu - Only visible on mobile for homepage and about pages */}
+          {(isHomepage || pathname === "/about") && (
+            <nav className="md:hidden border-t border-border">
+              <div className="flex items-center justify-around py-2 px-2">
+                <NavLink href="/skin-analysis" className="text-sm">
+                  Skin Analysis
+                </NavLink>
+                <NavLink href="/shop" className="text-sm">
+                  Shop
+                </NavLink>
+                <NavLink href="/about" className="text-sm">
+                  About
+                </NavLink>
+                <NavLink href="/join" className="text-sm">
+                  Join
+                </NavLink>
+              </div>
+            </nav>
+          )}
         </div>
       </header>
     </>

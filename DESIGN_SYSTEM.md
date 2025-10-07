@@ -1,21 +1,41 @@
 # ABBI Design System
 
-## Color Palette
+> **Comprehensive design system documentation for developers**  
+> This document serves as the single source of truth for all UI components, patterns, and design tokens in the ABBI application.
 
-### Primary Colors
+## Table of Contents
+1. [Foundation](#foundation) - Colors, Typography, Spacing
+2. [Atomic Components](#atomic-components) - Basic UI elements
+3. [Composite Components](#composite-components) - Complex, reusable patterns
+4. [Layout Patterns](#layout-patterns) - Grids, sections, containers
+5. [Design Tokens](#design-tokens) - Programmatic access
+6. [Best Practices](#best-practices) - Guidelines and conventions
+
+---
+
+## Foundation
+
+### Color Palette
+
+#### Primary Colors
 - **Sea Slate**: `#586158` - Primary brand color, buttons, active states
+  - CSS Variable: `--primary`
+  - Tailwind: `bg-primary`, `text-primary`, `border-primary`
 - **Sage**: `#f5f6f5` - Background, card details sections
+  - CSS Variable: `--muted`
+  - Tailwind: `bg-muted`, `text-muted`, `border-muted`
 - **Evergreen**: `#3e463e` - Darker accent
+  - CSS Variable: `--evergreen`
 
-### Status Colors
+#### Status Colors
 - **Red**: `#ff3b30` - Low scores, needs attention
 - **Orange**: `#ff9500` - Moderate scores
 - **Green**: `#34c759` - Good scores
 
-### Neutral Colors
-- **Black**: `#000000` - Primary text
-- **White**: `#ffffff` - Backgrounds, cards
-- **Gray**: `#e7e7e7` - Borders, dividers
+#### Neutral Colors
+- **Black**: `#000000` - Primary text (`--foreground`)
+- **White**: `#ffffff` - Backgrounds, cards (`--background`)
+- **Gray**: `#e7e7e7` - Borders, dividers (`--border`)
 
 ## Typography
 
