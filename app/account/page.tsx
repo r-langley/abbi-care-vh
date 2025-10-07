@@ -164,7 +164,7 @@ function AmbassadorView() {
                     <span>{item.category}</span>
                     <span className="font-mono">{item.amount}</span>
                   </div>
-                  <div className="h-2 bg-background rounded-full overflow-hidden">
+                  <div className="h-2 rounded-full overflow-hidden bg-muted">
                     <div className="h-full bg-primary" style={{ width: `${item.percentage}%` }} />
                   </div>
                 </div>
