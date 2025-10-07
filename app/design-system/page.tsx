@@ -25,7 +25,7 @@ export default function DesignSystemPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="max-w-7xl mx-auto px-5 py-10">
+      <div className="max-w-7xl mx-auto px-5 py-10 bg-sidebar-primary-foreground">
         <div className="mb-12">
           <PageTitle>ABBI Design System</PageTitle>
           <BodyText className="mt-4 text-muted-foreground">
