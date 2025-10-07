@@ -24,7 +24,7 @@ import { TraitFilter } from "@/components/trait-filter"
 import { HeroSection } from "@/components/ui/hero-section"
 import { SectionContainer } from "@/components/ui/section-container"
 import { products } from "@/lib/products"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import { Sheet, SheetContent } from "@/components/ui/sheet"
 import {
   SwatchIcon,
   DocumentTextIcon,
@@ -56,91 +56,9 @@ export default function DesignSystemPage() {
         <div className="max-w-[1800px] mx-auto px-6 py-3 flex flex-col gap-1">
           <div className="flex items-center justify-between">
             <PageTitle>ABBI Design System</PageTitle>
-            <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
-              <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className="lg:hidden">
-                  <Bars3Icon className="w-6 h-6" />
-                </Button>
-              </SheetTrigger>
-              <SheetContent side="left" className="w-64 p-0">
-                <div className="py-6">
-                  <TabsList className="flex-col items-stretch h-auto bg-transparent px-6 space-y-1">
-                    <TabsTrigger
-                      value="colors"
-                      className="justify-start w-full gap-2"
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      <SwatchIcon className="w-4 h-4 shrink-0" />
-                      Colors
-                    </TabsTrigger>
-                    <TabsTrigger
-                      value="typography"
-                      className="justify-start w-full gap-2"
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      <DocumentTextIcon className="w-4 h-4 shrink-0" />
-                      Typography
-                    </TabsTrigger>
-                    <TabsTrigger
-                      value="buttons"
-                      className="justify-start w-full gap-2"
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      <CursorArrowRaysIcon className="w-4 h-4 shrink-0" />
-                      Buttons
-                    </TabsTrigger>
-                    <TabsTrigger
-                      value="badges"
-                      className="justify-start w-full gap-2"
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      <TagIcon className="w-4 h-4 shrink-0" />
-                      Badges
-                    </TabsTrigger>
-                    <TabsTrigger
-                      value="cards"
-                      className="justify-start w-full gap-2"
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      <RectangleStackIcon className="w-4 h-4 shrink-0" />
-                      Cards
-                    </TabsTrigger>
-                    <TabsTrigger
-                      value="composite"
-                      className="justify-start w-full gap-2"
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      <PuzzlePieceIcon className="w-4 h-4 shrink-0" />
-                      Composite
-                    </TabsTrigger>
-                    <TabsTrigger
-                      value="layouts"
-                      className="justify-start w-full gap-2"
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      <Squares2X2Icon className="w-4 h-4 shrink-0" />
-                      Layouts
-                    </TabsTrigger>
-                    <TabsTrigger
-                      value="spacing"
-                      className="justify-start w-full gap-2"
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      <ArrowsPointingOutIcon className="w-4 h-4 shrink-0" />
-                      Spacing
-                    </TabsTrigger>
-                    <TabsTrigger
-                      value="guidelines"
-                      className="justify-start w-full gap-2"
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      <DocumentCheckIcon className="w-4 h-4 shrink-0" />
-                      Guidelines
-                    </TabsTrigger>
-                  </TabsList>
-                </div>
-              </SheetContent>
-            </Sheet>
+            <Button variant="ghost" size="icon" className="lg:hidden" onClick={() => setMobileMenuOpen(true)}>
+              <Bars3Icon className="w-6 h-6" />
+            </Button>
           </div>
           <BodyText className="text-muted-foreground">
             A comprehensive component library and design system for building cohesive ABBI experiences.
@@ -150,6 +68,87 @@ export default function DesignSystemPage() {
 
       <div className="max-w-[1800px] mx-auto">
         <Tabs defaultValue="colors" className="flex flex-col lg:flex-row">
+          <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+            <SheetContent side="left" className="w-64 p-0">
+              <div className="py-6">
+                <TabsList className="flex-col items-stretch h-auto bg-transparent px-6 space-y-1">
+                  <TabsTrigger
+                    value="colors"
+                    className="justify-start w-full gap-2"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <SwatchIcon className="w-4 h-4 shrink-0" />
+                    Colors
+                  </TabsTrigger>
+                  <TabsTrigger
+                    value="typography"
+                    className="justify-start w-full gap-2"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <DocumentTextIcon className="w-4 h-4 shrink-0" />
+                    Typography
+                  </TabsTrigger>
+                  <TabsTrigger
+                    value="buttons"
+                    className="justify-start w-full gap-2"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <CursorArrowRaysIcon className="w-4 h-4 shrink-0" />
+                    Buttons
+                  </TabsTrigger>
+                  <TabsTrigger
+                    value="badges"
+                    className="justify-start w-full gap-2"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <TagIcon className="w-4 h-4 shrink-0" />
+                    Badges
+                  </TabsTrigger>
+                  <TabsTrigger
+                    value="cards"
+                    className="justify-start w-full gap-2"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <RectangleStackIcon className="w-4 h-4 shrink-0" />
+                    Cards
+                  </TabsTrigger>
+                  <TabsTrigger
+                    value="composite"
+                    className="justify-start w-full gap-2"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <PuzzlePieceIcon className="w-4 h-4 shrink-0" />
+                    Composite
+                  </TabsTrigger>
+                  <TabsTrigger
+                    value="layouts"
+                    className="justify-start w-full gap-2"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <Squares2X2Icon className="w-4 h-4 shrink-0" />
+                    Layouts
+                  </TabsTrigger>
+                  <TabsTrigger
+                    value="spacing"
+                    className="justify-start w-full gap-2"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <ArrowsPointingOutIcon className="w-4 h-4 shrink-0" />
+                    Spacing
+                  </TabsTrigger>
+                  <TabsTrigger
+                    value="guidelines"
+                    className="justify-start w-full gap-2"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <DocumentCheckIcon className="w-4 h-4 shrink-0" />
+                    Guidelines
+                  </TabsTrigger>
+                </TabsList>
+              </div>
+            </SheetContent>
+          </Sheet>
+
           {/* Desktop Sidebar */}
           <aside
             className={`hidden lg:block border-r border-border sticky top-[88px] h-[calc(100vh-88px)] overflow-y-auto shrink-0 transition-all duration-300 ease-in-out ${
