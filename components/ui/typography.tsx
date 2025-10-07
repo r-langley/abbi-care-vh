@@ -10,7 +10,7 @@ export function PageTitle({ className, variant = "default", ...props }: PageTitl
   return (
     <h1
       className={cn(
-        "text-balance text-foreground font-medium tracking-tight",
+        "text-balance text-foreground font-medium tracking-tight text-xl",
         variant === "default" && "text-3xl md:text-4xl leading-7 mb-4",
         variant === "hero" && "text-3xl md:text-6xl lg:text-7xl leading-none mb-2 md:mb-4",
         className,
