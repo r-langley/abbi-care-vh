@@ -115,7 +115,7 @@ export default function CheckoutPage() {
                     <CardTitle>Contact Information</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
-                    <div>
+                    <div className="flex flex-col gap-2">
                       <Label htmlFor="email">Email</Label>
                       <Input
                         id="email"
