@@ -61,8 +61,8 @@ export default function DesignSystemPage() {
       <div className="max-w-[1800px] mx-auto">
         <Tabs defaultValue="colors" className="flex flex-col lg:flex-row">
           {/* Sidebar Navigation - Desktop */}
-          <aside className="hidden lg:block w-64 border-r border-border sticky top-[140px] h-[calc(100vh-140px)] overflow-y-auto shrink-0">
-            <TabsList className="flex-col items-stretch h-auto bg-transparent px-6 pb-6 space-y-1">
+          <aside className="hidden lg:block w-64 border-r border-border sticky top-[140px] h-[calc(100vh-140px)] overflow-y-auto shrink-0 pt-0">
+            <TabsList className="flex-col items-stretch h-auto bg-transparent px-6 pb-6 pt-0 mt-0 space-y-1">
               <TabsTrigger value="colors" className="justify-start w-full gap-2">
                 <SwatchIcon className="w-4 h-4" />
                 Colors
