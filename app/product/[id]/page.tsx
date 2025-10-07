@@ -74,7 +74,7 @@ export default function ProductPage() {
           {/* Product Details */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
             {/* Left: Image */}
-            <div className="space-y-4">
+            <div className="space-y-4 lg:sticky lg:top-5 lg:self-start">
               <div className="relative aspect-square rounded-lg overflow-hidden bg-muted">
                 <Image
                   src="/minimalist-cosmetic-pump-bottle-product-photograph.jpg"
@@ -101,7 +101,9 @@ export default function ProductPage() {
 
               <p className="text-3xl font-mono">${product.price}</p>
 
-              <p className="text-muted-foreground leading-relaxed tracking-tight font-medium leading-6 text-sm">{product.description}</p>
+              <p className="text-muted-foreground leading-relaxed tracking-tight font-medium leading-6 text-sm">
+                {product.description}
+              </p>
 
               {/* Skin Traits */}
               <div>
