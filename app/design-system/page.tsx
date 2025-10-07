@@ -53,16 +53,21 @@ export default function DesignSystemPage() {
   return (
     <div className="min-h-screen bg-background">
       <div className="border-b border-border bg-background/95 backdrop-blur sticky top-0 z-50">
-        <div className="max-w-[1800px] mx-auto px-6 py-3 flex flex-col gap-1">
-          <div className="flex items-center flex-row justify-between">
+        <div className="mx-auto px-5">
+          <div className="flex items-center justify-between h-14">
             <PageTitle>ABBI Design System</PageTitle>
-            <Button variant="ghost" size="icon" className="lg:hidden" onClick={() => setMobileMenuOpen(true)}>
+            <button
+              className="lg:hidden p-2 hover:bg-muted rounded-lg transition-colors"
+              onClick={() => setMobileMenuOpen(true)}
+            >
               <Bars3Icon className="w-6 h-6" />
-            </Button>
+            </button>
           </div>
-          <BodyText className="text-muted-foreground">
-            A comprehensive component library and design system for building cohesive ABBI experiences.
-          </BodyText>
+          <div className="hidden lg:block pb-3">
+            <BodyText className="text-muted-foreground text-sm">
+              A comprehensive component library and design system for building cohesive ABBI experiences.
+            </BodyText>
+          </div>
         </div>
       </div>
 
