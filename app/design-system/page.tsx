@@ -181,7 +181,7 @@ export default function DesignSystemPage() {
                     </select>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Switch id="show-icon" checked={showIcon} onCheckedChange={setShowIcon} />
+                    <Switch className="" id="show-icon" checked={showIcon} onCheckedChange={setShowIcon} />
                     <Label htmlFor="show-icon">Show Icon</Label>
                   </div>
                 </div>
