@@ -118,7 +118,7 @@ export default function DesignSystemPage() {
           </div>
 
           {/* Content Area */}
-          <div className="flex-1 px-6 lg:px-12 py-10 max-w-5xl">
+          <div className="flex-1 px-6 lg:px-12 py-10 max-w-5xl bg-muted">
 
           {/* Colors Section */}
           <TabsContent value="colors" className="space-y-8">
@@ -763,7 +763,7 @@ function ColorSwatch({
   description,
 }: { name: string; hex: string; var: string; description: string }) {
   return (
-    <div className="bg-background border border-border rounded-lg overflow-hidden">
+    <div className="bg-background border rounded-lg overflow-hidden border-border">
       <div className="h-24" style={{ backgroundColor: hex }} />
       <div className="p-4">
         <h4 className="font-semibold mb-1">{name}</h4>
