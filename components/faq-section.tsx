@@ -16,8 +16,8 @@ const faqs = [
 
 export function FaqSection() {
   return (
-    <div className="py-10 px-5 pb-10 bg-primary-foreground">
-      <h2 className="font-semibold text-[24px] tracking-[-1px] text-[#292824] mb-5">
+    <div className="py-10 px-5 pb-10 bg-muted">
+      <h2 className="font-semibold text-[24px] tracking-[-1px] text-[#292824] mb-5 text-accent">
         FAQ
       </h2>
       <div className="flex flex-col gap-4">

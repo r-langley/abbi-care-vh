@@ -4,34 +4,40 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* ABBI Brand Colors */
+  /* ABBI Brand Colors - Primary Palette */
   --sea-slate: #586158;
   --sage: #f5f6f5;
+  --evergreen: #3e463e;
   --dark-slate: #373737;
   --off-white: #ffffff;
   --light-gray: #dfdfdf;
   --accent-purple: #4b4262;
+  
+  /* ABBI Status Colors */
+  --status-red: #ff3b30;
+  --status-orange: #ff9500;
+  --status-green: #34c759;
 
-  /* Semantic tokens */
-  --background: hsl(0 0% 100%);
-  --foreground: hsl(25 20% 15%);
-  --card: hsl(0 0% 100%);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: hsl(0 0% 100%);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: rgb(88, 97, 88);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: hsl(30 12% 92%);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: hsl(30 12% 92%);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: hsl(30 25% 85%);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: hsl(0 84.2% 60.2%);
-  --destructive-foreground: oklch(0.577 0.245 27.325);
-  --border: hsl(30 15% 88%);
-  --input: hsl(30 15% 88%);
-  --ring: hsl(33 54% 38%);
+  /* Semantic tokens - Aligned with ABBI Brand */
+  --background: #ffffff;
+  --foreground: #000000;
+  --card: #ffffff;
+  --card-foreground: #000000;
+  --popover: #ffffff;
+  --popover-foreground: #000000;
+  --primary: var(--sea-slate);
+  --primary-foreground: #ffffff;
+  --secondary: var(--sage);
+  --secondary-foreground: var(--sea-slate);
+  --muted: var(--sage);
+  --muted-foreground: var(--sea-slate);
+  --accent: var(--sea-slate);
+  --accent-foreground: #ffffff;
+  --destructive: var(--status-red);
+  --destructive-foreground: #ffffff;
+  --border: var(--sage);
+  --input: var(--sage);
+  --ring: var(--sea-slate);
   --chart-1: hsl(33 54% 38%);
   --chart-2: hsl(28 40% 52%);
   --chart-3: hsl(35 35% 68%);
@@ -119,9 +125,21 @@
   --skin-score-radius: 0.5rem;
   --skin-score-bar-height: 0.25rem;
   --skin-score-bar-bg: #e5e7eb;
-  --skin-score-low: #ef4444;
-  --skin-score-medium: #f97316;
-  --skin-score-high: #22c55e;
+  --skin-score-low: var(--status-red);
+  --skin-score-medium: var(--status-orange);
+  --skin-score-high: var(--status-green);
+  
+  /* ABBI Product Card Design Tokens */
+  --product-card-bg: #ffffff;
+  --product-card-border: var(--sage);
+  --product-card-border-hover: var(--sea-slate);
+  --product-card-details-bg: var(--sage);
+  --product-card-image-height: 160px;
+  --product-card-radius: 10px;
+  --product-card-border-width: 2px;
+  --product-card-padding: 10px;
+  --product-card-padding-bottom: 20px;
+  --product-card-gap: 10px;
 }
 
 .dark {
@@ -183,7 +201,8 @@
 }
 
 @theme inline {
-  --font-sans: "Poppins", var(--font-geist-sans);
+  /* Updated to properly reference Poppins variable from layout.tsx */
+  --font-sans: var(--font-poppins);
   /* Updated to use Instrument Serif for design system serif family */
   --font-serif: "Instrument Serif", serif;
   /* Simplified to directly reference the Geist Mono variable set by GeistMono.variable */

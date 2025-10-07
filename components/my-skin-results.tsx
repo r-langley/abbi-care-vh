@@ -11,9 +11,9 @@ interface SkinResultsProps {
 
 export function MySkinResults({ userName, wrinkles, radiance, imperfections }: SkinResultsProps) {
   return (
-    <div className="bg-[#586158] px-2.5 py-2.5">
+    <div className="bg-[#586158] px-2.5 py-2.5 bg-primary">
       <div className="flex justify-center">
-        <div className="w-full max-w-[800px]">
+        <div className="max-w-[800px] w-full">
           {/* Header */}
           <div className="flex items-center justify-between mb-2.5">
             <div className="flex items-center gap-[5px]">
@@ -28,9 +28,15 @@ export function MySkinResults({ userName, wrinkles, radiance, imperfections }: S
           </div>
 
           <div className="flex gap-2.5">
-            <SkinScoreCard score={wrinkles} label="Wrinkles" />
-            <SkinScoreCard score={radiance} label="Radiance" />
-            <SkinScoreCard score={imperfections} label="Imperfections" />
+            <div className="flex-1">
+              <SkinScoreCard score={wrinkles} label="Wrinkles" />
+            </div>
+            <div className="flex-1">
+              <SkinScoreCard score={radiance} label="Radiance" />
+            </div>
+            <div className="flex-1">
+              <SkinScoreCard score={imperfections} label="Imperfections" />
+            </div>
           </div>
         </div>
       </div>

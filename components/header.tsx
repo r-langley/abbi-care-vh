@@ -17,19 +17,31 @@ import React from "react"
 import { NavLink } from "@/components/ui/nav-link"
 import { TabsNav } from "@/components/ui/tabs-nav"
 import { UserAvatar } from "@/components/ui/user-avatar"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 
 export function Header() {
   const { totalItems } = useCart()
-  const { isLoggedIn, login, logout } = useAuth()
+  const { isLoggedIn, userRole, setUserRole, login, logout } = useAuth()
   const pathname = usePathname()
   const isHomepage = pathname === "/"
   const isShopPage = pathname === "/shop"
   const [open, setOpen] = React.useState(false)
 
+  const handleRoleSwitch = () => {
+    const newRole = userRole === "member" ? "ambassador" : "member"
+    setUserRole(newRole)
+  }
+
   return (
     <>
       {/* Top Banner */}
-      <div className="bg-[#586158] text-white text-center py-2 px-4">
+      <div className="bg-[#586158] text-white text-center py-2 px-4 bg-primary">
         <p className="text-xs font-mono tracking-wide font-medium md:text-xs">ENJOY 10% OFF YOUR FIRST ORDER</p>
       </div>
 
@@ -42,7 +54,7 @@ export function Header() {
               <Sheet open={open} onOpenChange={setOpen}>
                 <SheetTrigger asChild>
                   <button className="p-2 hover:bg-[#f5f6f5] rounded-[8px] transition-colors">
-                    <Bars3Icon className="w-6 h-6 md:w-7 md:h-7" />
+                    <Bars3Icon className="w-6 h-6" />
                   </button>
                 </SheetTrigger>
                 <SheetContent side="left" className="px-5 py-5 w-full md:w-1/2">
@@ -70,28 +82,40 @@ export function Header() {
             {/* Right: Cart + Account */}
             <div className="flex items-center gap-0">
               <Link href="/cart" className="relative p-2 hover:bg-[#f5f6f5] rounded-[8px] transition-colors">
-                <ShoppingBagIcon className="w-6 h-6 md:w-7 md:h-7" />
+                <ShoppingBagIcon className="w-6 h-6" />
                 {totalItems > 0 && (
                   <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-xs font-mono rounded-full h-5 w-5 flex items-center justify-center">
                     {totalItems}
                   </span>
                 )}
               </Link>
-              <button
-                onClick={isLoggedIn ? logout : login}
-                className="p-2 hover:bg-[#f5f6f5] rounded-[8px] transition-colors relative group"
-                title={isLoggedIn ? "Log Out (Prototype)" : "Log In (Prototype)"}
-              >
-                {isLoggedIn ? (
-                  <UserAvatar size="sm" className="md:w-7 md:h-7" />
-                ) : (
-                  <UserCircleIcon className="w-6 h-6 md:w-7 md:h-7 text-muted-foreground" />
-                )}
-                {/* Tooltip */}
-                <span className="absolute -bottom-8 right-0 bg-[#586158] text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
-                  {isLoggedIn ? "Log Out" : "Log In"}
-                </span>
-              </button>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <button className="p-2 hover:bg-[#f5f6f5] rounded-[8px] transition-colors">
+                    {isLoggedIn ? (
+                      <UserAvatar size="sm" className="w-6 h-6" />
+                    ) : (
+                      <UserCircleIcon className="w-6 h-6 text-muted-foreground" />
+                    )}
+                  </button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-48">
+                  {isLoggedIn ? (
+                    <>
+                      <DropdownMenuItem asChild>
+                        <Link href="/account">My Account</Link>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={handleRoleSwitch}>
+                        {userRole === "member" ? "Switch to Ambassador" : "Switch to Member"}
+                      </DropdownMenuItem>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem onClick={logout}>Log Out</DropdownMenuItem>
+                    </>
+                  ) : (
+                    <DropdownMenuItem onClick={login}>Log In</DropdownMenuItem>
+                  )}
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
           </div>
 
@@ -156,7 +180,7 @@ function MobileNav({ closeMenu }: { closeMenu: () => void }) {
           <NavLink href="/shop?category=creams" variant="mobile" className="block mb-1">
             Creams
           </NavLink>
-          <p className="text-[16px] font-medium tracking-[-0.32px] text-muted-foreground">
+          <p className="tracking-[-0.32px] text-sm text-foreground font-normal">
             Choose between In-Lab and Mix-At-Home
           </p>
         </div>
@@ -165,16 +189,14 @@ function MobileNav({ closeMenu }: { closeMenu: () => void }) {
           <NavLink href="/shop?category=essentials" variant="mobile" className="block mb-1">
             Essentials
           </NavLink>
-          <p className="text-[16px] font-medium tracking-[-0.32px] text-muted-foreground">
-            Cleansers, Serums, Oils & Mists
-          </p>
+          <p className="tracking-[-0.32px] text-sm text-foreground font-normal">Cleansers, Serums, Oils & Mists</p>
         </div>
 
         <div onClick={closeMenu}>
           <NavLink href="/shop?category=simple-solutions" variant="mobile" className="block mb-1">
             Simple Solutions
           </NavLink>
-          <p className="text-[16px] font-medium tracking-[-0.32px] text-muted-foreground">Complete skincare packages</p>
+          <p className="tracking-[-0.32px] mb-3 text-sm text-foreground font-normal">Complete skincare packages</p>
         </div>
 
         <div>
@@ -185,7 +207,7 @@ function MobileNav({ closeMenu }: { closeMenu: () => void }) {
             Shop by Trait
             <ChevronDownIcon className={`h-6 w-6 transition-transform ${isTraitExpanded ? "rotate-180" : ""}`} />
           </button>
-          <p className="text-[16px] font-medium tracking-[-0.32px] text-muted-foreground mb-3">
+          <p className="tracking-[-0.32px] mb-3 text-sm text-foreground font-normal">
             Shop based on your skin's top priorities
           </p>
           {isTraitExpanded && (

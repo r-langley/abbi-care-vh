@@ -166,13 +166,48 @@
 - SkinResultsSheet
 - TraitFilter
 
+## Design Tokens
+
+### CSS Variables (Preferred)
+Always use CSS variables for colors instead of hardcoded hex values:
+
+\`\`\`tsx
+// ✅ CORRECT - Use semantic tokens
+className="bg-primary text-primary-foreground"
+className="border-muted hover:border-primary"
+className="bg-muted text-primary"
+
+// ❌ WRONG - Don't hardcode colors
+className="bg-[#586158] text-white"
+className="border-[#f5f6f5] hover:border-[#586158]"
+\`\`\`
+
+### Available Semantic Tokens
+- `--primary`: Sea Slate (#586158)
+- `--primary-foreground`: White
+- `--secondary` / `--muted`: Sage (#f5f6f5)
+- `--accent`: Sea Slate
+- `--background`: White
+- `--foreground`: Black
+- `--border`: Sage
+- `--destructive`: Status Red
+
+### TypeScript Constants
+Import from `@/lib/design-tokens` for programmatic use:
+
+\`\`\`tsx
+import { COLORS, SPACING, CARD, CSS_VARS } from '@/lib/design-tokens'
+\`\`\`
+
 ## Best Practices
 
 1. **Consistency**: Use existing components, don't create duplicates
 2. **Spacing**: Follow the spacing system (5px, 10px, 20px, 23px)
-3. **Colors**: Use design tokens, not hard-coded values
+3. **Colors**: ALWAYS use CSS variables/Tailwind classes, NEVER hardcode hex values
 4. **Typography**: Match font sizes and tracking exactly
 5. **Borders**: 2px for cards, 1px for dividers
-6. **Hover**: Always include hover states
+6. **Hover**: Always include hover states with `transition-colors` or `transition-opacity`
 7. **Accessibility**: Include sr-only titles, alt text
 8. **Responsive**: Mobile-first, use max-width constraints
+9. **Font Mono**: Use `font-mono` class instead of inline `fontFamily` styles
+10. **Card Components**: Use shared card patterns from `ui/base-card.tsx` when possible
