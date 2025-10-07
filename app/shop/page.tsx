@@ -16,7 +16,7 @@ import { useAuth } from "@/lib/auth-context"
 import { getIngredientsByTraits } from "@/lib/ingredients-data"
 import Link from "next/link"
 import Image from "next/image"
-import { ChevronRightIcon, PlusIcon, CheckIcon } from "@heroicons/react/24/outline"
+import { PlusIcon, CheckIcon } from "@heroicons/react/24/outline"
 import { IngredientCarousel } from "@/components/ingredient-carousel"
 import { RecommendedBadge } from "@/components/recommended-badge"
 import { RecommendedCarousel } from "@/components/recommended-carousel"
@@ -29,7 +29,7 @@ export default function ShopPage() {
   const searchParams = useSearchParams()
   const category = searchParams.get("category") || "creams"
   const selectedTraits = searchParams.get("traits")?.split(",").filter(Boolean) || []
-  const { isLoggedIn } = useAuth()
+  const { isLoggedIn, userInfo } = useAuth()
 
   console.log("[v0] Category:", category, "Selected traits:", selectedTraits, "Is logged in:", isLoggedIn)
 
@@ -239,7 +239,7 @@ export default function ShopPage() {
       <main className="min-h-screen pb-0">
         {showScanResults ? (
           <MySkinResults
-            userName={scanResults?.userName || "User"}
+            userName={userInfo?.firstName || scanResults?.userName || "User"}
             wrinkles={scanResults?.wrinkles || 25}
             radiance={scanResults?.radiance || 67}
             imperfections={scanResults?.imperfections || 55}
@@ -271,7 +271,6 @@ export default function ShopPage() {
                         Your personalized cream base is selected based on your skin concerns and age. Complete your
                         routine by adding active concentrates below for targeted treatment.
                       </p>
-                      
                     </div>
 
                     <div className="w-full">
@@ -354,7 +353,8 @@ export default function ShopPage() {
                         Made-to-order in our French lab — just for you.
                       </p>
                       <p className="hidden md:block tracking-[-0.32px] text-[#586158] leading-[1.5] text-foreground font-normal text-sm">
-                        Each In Lab cream is custom-formulated and made-to-order in our French laboratory, crafted specifically for your unique skin needs. 
+                        Each In Lab cream is custom-formulated and made-to-order in our French laboratory, crafted
+                        specifically for your unique skin needs.
                       </p>
                     </div>
 

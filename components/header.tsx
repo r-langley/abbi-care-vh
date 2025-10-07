@@ -17,14 +17,26 @@ import React from "react"
 import { NavLink } from "@/components/ui/nav-link"
 import { TabsNav } from "@/components/ui/tabs-nav"
 import { UserAvatar } from "@/components/ui/user-avatar"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 
 export function Header() {
   const { totalItems } = useCart()
-  const { isLoggedIn, login, logout } = useAuth()
+  const { isLoggedIn, userRole, setUserRole, login, logout } = useAuth()
   const pathname = usePathname()
   const isHomepage = pathname === "/"
   const isShopPage = pathname === "/shop"
   const [open, setOpen] = React.useState(false)
+
+  const handleRoleSwitch = () => {
+    const newRole = userRole === "member" ? "ambassador" : "member"
+    setUserRole(newRole)
+  }
 
   return (
     <>
@@ -77,21 +89,33 @@ export function Header() {
                   </span>
                 )}
               </Link>
-              <button
-                onClick={isLoggedIn ? logout : login}
-                className="p-2 hover:bg-[#f5f6f5] rounded-[8px] transition-colors relative group"
-                title={isLoggedIn ? "Log Out (Prototype)" : "Log In (Prototype)"}
-              >
-                {isLoggedIn ? (
-                  <UserAvatar size="sm" className="w-6 h-6" />
-                ) : (
-                  <UserCircleIcon className="w-6 h-6 text-muted-foreground" />
-                )}
-                {/* Tooltip */}
-                <span className="absolute -bottom-8 right-0 bg-[#586158] text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
-                  {isLoggedIn ? "Log Out" : "Log In"}
-                </span>
-              </button>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <button className="p-2 hover:bg-[#f5f6f5] rounded-[8px] transition-colors">
+                    {isLoggedIn ? (
+                      <UserAvatar size="sm" className="w-6 h-6" />
+                    ) : (
+                      <UserCircleIcon className="w-6 h-6 text-muted-foreground" />
+                    )}
+                  </button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-48">
+                  {isLoggedIn ? (
+                    <>
+                      <DropdownMenuItem asChild>
+                        <Link href="/account">My Account</Link>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={handleRoleSwitch}>
+                        {userRole === "member" ? "Switch to Ambassador" : "Switch to Member"}
+                      </DropdownMenuItem>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem onClick={logout}>Log Out</DropdownMenuItem>
+                    </>
+                  ) : (
+                    <DropdownMenuItem onClick={login}>Log In</DropdownMenuItem>
+                  )}
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
           </div>
 
@@ -165,16 +189,14 @@ function MobileNav({ closeMenu }: { closeMenu: () => void }) {
           <NavLink href="/shop?category=essentials" variant="mobile" className="block mb-1">
             Essentials
           </NavLink>
-          <p className="tracking-[-0.32px] text-sm text-foreground font-normal">
-            Cleansers, Serums, Oils & Mists
-          </p>
+          <p className="tracking-[-0.32px] text-sm text-foreground font-normal">Cleansers, Serums, Oils & Mists</p>
         </div>
 
         <div onClick={closeMenu}>
           <NavLink href="/shop?category=simple-solutions" variant="mobile" className="block mb-1">
             Simple Solutions
           </NavLink>
-          <p className="tracking-[-0.32px] text-sm text-foreground font-normal">Complete skincare packages</p>
+          <p className="tracking-[-0.32px] mb-3 text-sm text-foreground font-normal">Complete skincare packages</p>
         </div>
 
         <div>
