@@ -27,7 +27,7 @@ export default function DesignSystemPage() {
     <div className="min-h-screen bg-background">
       <div className="max-w-7xl mx-auto px-5 py-10 bg-sidebar-primary-foreground">
         <div className="mb-12">
-          <PageTitle>ABBI Design System</PageTitle>
+          <PageTitle>ABBI Component Library</PageTitle>
           <BodyText className="mt-4 text-muted-foreground">
             A comprehensive component library and design system for building cohesive ABBI experiences.
           </BodyText>
@@ -437,7 +437,7 @@ export default function DesignSystemPage() {
                 <div>
                   <h3 className="text-lg font-semibold mb-4">Layout Patterns</h3>
                   <div className="space-y-4">
-                    <div className="p-6 rounded-lg border border-border">
+                    <div className="p-6 rounded-lg border border-border bg-card">
                       <h4 className="font-semibold mb-2">Grid Layouts</h4>
                       <div className="space-y-2 text-sm">
                         <div>2 columns: Product grids, ingredient grids</div>
@@ -445,7 +445,7 @@ export default function DesignSystemPage() {
                         <div>Gap: 8-10px between items</div>
                       </div>
                     </div>
-                    <div className="p-6 rounded-lg border border-border">
+                    <div className="p-6 rounded-lg border border-border bg-card">
                       <h4 className="font-semibold mb-2">Sections</h4>
                       <div className="space-y-2 text-sm">
                         <div>Padding: 20px (px-5 py-5)</div>
@@ -519,7 +519,7 @@ function ComponentShowcase({
 
 function SpacingExample({ size, label, description }: { size: string; label: string; description: string }) {
   return (
-    <div className="p-6 rounded-lg border border-border">
+    <div className="p-6 rounded-lg border border-border bg-card">
       <div className="flex items-center gap-4 mb-2">
         <span className="text-sm font-semibold min-w-20">{label}</span>
         <span className="text-xs font-mono text-muted-foreground">{size}</span>
