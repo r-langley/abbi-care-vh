@@ -9,9 +9,7 @@ import Image from "next/image"
 import { Header } from "@/components/header"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { FormField } from "@/components/form-field"
 import { useCart } from "@/lib/cart-context"
 import { useAuth } from "@/lib/auth-context"
 
@@ -115,18 +113,16 @@ export default function CheckoutPage() {
                     <CardTitle>Contact Information</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
-                    <div className="flex flex-col gap-2">
-                      <Label htmlFor="email">Email</Label>
-                      <Input
-                        id="email"
-                        name="email"
-                        type="email"
-                        value={formData.email}
-                        onChange={handleInputChange}
-                        required
-                        placeholder="sarah.miller@example.com"
-                      />
-                    </div>
+                    <FormField
+                      label="Email"
+                      id="email"
+                      name="email"
+                      type="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      required
+                      placeholder="sarah.miller@example.com"
+                    />
                   </CardContent>
                 </Card>
 
@@ -137,75 +133,68 @@ export default function CheckoutPage() {
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <div className="grid grid-cols-2 gap-4">
-                      <div className="flex flex-col gap-2">
-                        <Label htmlFor="firstName">First Name</Label>
-                        <Input
-                          id="firstName"
-                          name="firstName"
-                          value={formData.firstName}
-                          onChange={handleInputChange}
-                          required
-                        />
-                      </div>
-                      <div className="flex flex-col gap-2">
-                        <Label htmlFor="lastName">Last Name</Label>
-                        <Input
-                          id="lastName"
-                          name="lastName"
-                          value={formData.lastName}
-                          onChange={handleInputChange}
-                          required
-                        />
-                      </div>
-                    </div>
-                    <div className="flex flex-col gap-2">
-                      <Label htmlFor="address">Address</Label>
-                      <Input
-                        id="address"
-                        name="address"
-                        value={formData.address}
+                      <FormField
+                        label="First Name"
+                        id="firstName"
+                        name="firstName"
+                        value={formData.firstName}
                         onChange={handleInputChange}
                         required
-                        placeholder="123 Main St"
+                      />
+                      <FormField
+                        label="Last Name"
+                        id="lastName"
+                        name="lastName"
+                        value={formData.lastName}
+                        onChange={handleInputChange}
+                        required
+                      />
+                    </div>
+                    <FormField
+                      label="Address"
+                      id="address"
+                      name="address"
+                      value={formData.address}
+                      onChange={handleInputChange}
+                      required
+                      placeholder="123 Main St"
+                    />
+                    <div className="grid grid-cols-2 gap-4">
+                      <FormField
+                        label="City"
+                        id="city"
+                        name="city"
+                        value={formData.city}
+                        onChange={handleInputChange}
+                        required
+                      />
+                      <FormField
+                        label="State"
+                        id="state"
+                        name="state"
+                        value={formData.state}
+                        onChange={handleInputChange}
+                        required
                       />
                     </div>
                     <div className="grid grid-cols-2 gap-4">
+                      <FormField
+                        label="ZIP Code"
+                        id="zipCode"
+                        name="zipCode"
+                        value={formData.zipCode}
+                        onChange={handleInputChange}
+                        required
+                      />
                       <div className="flex flex-col gap-2">
-                        <Label htmlFor="city">City</Label>
-                        <Input id="city" name="city" value={formData.city} onChange={handleInputChange} required />
-                      </div>
-                      <div className="flex flex-col gap-2">
-                        <Label htmlFor="state">State</Label>
-                        <Input id="state" name="state" value={formData.state} onChange={handleInputChange} required />
-                      </div>
-                    </div>
-                    <div className="grid grid-cols-2 gap-4">
-                      <div className="flex flex-col gap-2">
-                        <Label htmlFor="zipCode">ZIP Code</Label>
-                        <Input
-                          id="zipCode"
-                          name="zipCode"
-                          value={formData.zipCode}
-                          onChange={handleInputChange}
+                        <FormField
+                          label="Country"
+                          id="country"
+                          name="country"
+                          value={formData.country}
+                          onChange={(value) => setFormData({ ...formData, country: value })}
                           required
                         />
-                      </div>
-                      <div className="flex flex-col gap-2">
-                        <Label htmlFor="country">Country</Label>
-                        <Select
-                          value={formData.country}
-                          onValueChange={(value) => setFormData({ ...formData, country: value })}
-                        >
-                          <SelectTrigger id="country" className="w-full">
-                            <SelectValue />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="United States">United States</SelectItem>
-                            <SelectItem value="Canada">Canada</SelectItem>
-                            <SelectItem value="United Kingdom">United Kingdom</SelectItem>
-                            <SelectItem value="France">France</SelectItem>
-                          </SelectContent>
-                        </Select>
                       </div>
                     </div>
                   </CardContent>
@@ -217,22 +206,20 @@ export default function CheckoutPage() {
                     <CardTitle>Payment Information</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
-                    <div className="flex flex-col gap-2">
-                      <Label htmlFor="cardNumber">Card Number</Label>
-                      <Input
-                        id="cardNumber"
-                        name="cardNumber"
-                        value={formData.cardNumber}
-                        onChange={handleInputChange}
-                        required
-                        placeholder="1234 5678 9012 3456"
-                        maxLength={19}
-                      />
-                    </div>
+                    <FormField
+                      label="Card Number"
+                      id="cardNumber"
+                      name="cardNumber"
+                      value={formData.cardNumber}
+                      onChange={handleInputChange}
+                      required
+                      placeholder="1234 5678 9012 3456"
+                      maxLength={19}
+                    />
                     <div className="grid grid-cols-3 gap-4">
-                      <div className="col-span-2 flex flex-col gap-2">
-                        <Label htmlFor="expiryDate">Expiry Date</Label>
-                        <Input
+                      <div className="col-span-2">
+                        <FormField
+                          label="Expiry Date"
                           id="expiryDate"
                           name="expiryDate"
                           value={formData.expiryDate}
@@ -242,29 +229,25 @@ export default function CheckoutPage() {
                           maxLength={5}
                         />
                       </div>
-                      <div className="flex flex-col gap-2">
-                        <Label htmlFor="cvv">CVV</Label>
-                        <Input
-                          id="cvv"
-                          name="cvv"
-                          value={formData.cvv}
-                          onChange={handleInputChange}
-                          required
-                          placeholder="123"
-                          maxLength={4}
-                        />
-                      </div>
-                    </div>
-                    <div className="flex flex-col gap-2">
-                      <Label htmlFor="nameOnCard">Name on Card</Label>
-                      <Input
-                        id="nameOnCard"
-                        name="nameOnCard"
-                        value={formData.nameOnCard}
+                      <FormField
+                        label="CVV"
+                        id="cvv"
+                        name="cvv"
+                        value={formData.cvv}
                         onChange={handleInputChange}
                         required
+                        placeholder="123"
+                        maxLength={4}
                       />
                     </div>
+                    <FormField
+                      label="Name on Card"
+                      id="nameOnCard"
+                      name="nameOnCard"
+                      value={formData.nameOnCard}
+                      onChange={handleInputChange}
+                      required
+                    />
                   </CardContent>
                 </Card>
               </div>
