@@ -103,7 +103,7 @@ export default function CheckoutPage() {
       <Header />
       <main className="min-h-screen bg-muted">
         <div className="container mx-auto px-5 py-5 max-w-[1200px]">
-          <h1 className="text-2xl sm:text-3xl font-bold mb-6">Checkout</h1>
+          <h1 className="text-2xl sm:text-3xl mb-6 font-semibold">Checkout</h1>
 
           <form onSubmit={handlePlaceOrder}>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
