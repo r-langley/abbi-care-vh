@@ -61,7 +61,7 @@ export default function DesignSystemPage() {
       <div className="max-w-[1800px] mx-auto">
         <Tabs defaultValue="colors" className="flex flex-col lg:flex-row">
           {/* Sidebar Navigation - Desktop */}
-          <aside className="hidden lg:block w-64 border-r border-border sticky top-[140px] h-[calc(100vh-140px)] overflow-y-auto shrink-0 pt-0">
+          <aside className="hidden lg:block w-64 border-r border-border sticky top-[140px] h-[calc(100vh-140px)] overflow-y-auto shrink-0 pt-0 bg-muted">
             <TabsList className="flex-col items-stretch h-auto bg-transparent px-6 pb-6 pt-0 mt-0 space-y-1">
               <TabsTrigger value="colors" className="justify-start w-full gap-2">
                 <SwatchIcon className="w-4 h-4" />
@@ -175,17 +175,17 @@ export default function DesignSystemPage() {
 
                 <div className="space-y-8">
                   <div>
-                    <h3 className="text-lg font-semibold mb-4">Font Families</h3>
+                    <h3 className="text-lg font-semibold mb-4 text-primary">Font Families</h3>
                     <div className="space-y-4">
-                      <div className="p-6 rounded-lg bg-card">
+                      <div className="p-6 rounded-lg bg-muted">
                         <p className="font-sans text-2xl mb-2">Poppins (Sans-serif)</p>
                         <SmallText className="text-muted-foreground">Primary font for body text and headings</SmallText>
                       </div>
-                      <div className="p-6 rounded-lg bg-card">
+                      <div className="p-6 rounded-lg bg-muted">
                         <p className="font-serif text-2xl italic mb-2">Instrument Serif</p>
                         <SmallText className="text-muted-foreground">Italic accents for emphasis</SmallText>
                       </div>
-                      <div className="p-6 rounded-lg bg-card">
+                      <div className="p-6 rounded-lg bg-muted">
                         <p className="font-mono text-2xl mb-2">Geist Mono</p>
                         <SmallText className="text-muted-foreground">Numbers, prices, technical data</SmallText>
                       </div>
@@ -193,7 +193,7 @@ export default function DesignSystemPage() {
                   </div>
 
                   <div>
-                    <h3 className="text-lg font-semibold mb-4">Text Sizes</h3>
+                    <h3 className="text-lg font-semibold mb-4 text-primary">Text Sizes</h3>
                     <div className="space-y-4">
                       <TypeScale size="24px" className="text-2xl font-semibold" label="Headings">
                         The quick brown fox jumps
@@ -217,8 +217,8 @@ export default function DesignSystemPage() {
                   </div>
 
                   <div>
-                    <h3 className="text-lg font-semibold mb-4">Typography Components</h3>
-                    <div className="p-6 rounded-lg space-y-5 bg-card">
+                    <h3 className="text-lg font-semibold mb-4 text-primary">Typography Components</h3>
+                    <div className="p-6 rounded-lg space-y-5 bg-muted">
                       <PageTitle>Page Title Component</PageTitle>
                       <SectionHeading align="left">Section Heading Component</SectionHeading>
                       <BodyText>Body text component for comfortable reading with proper line height.</BodyText>
@@ -795,7 +795,7 @@ function TypeScale({
   description,
 }: { size: string; label: string; className: string; children: React.ReactNode; description?: string }) {
   return (
-    <div className="p-6 rounded-lg bg-card">
+    <div className="p-6 rounded-lg bg-muted">
       <div className="flex items-baseline justify-between mb-2">
         <span className="text-xs font-mono text-muted-foreground">{label}</span>
         <span className="text-xs font-mono text-muted-foreground">{size}</span>
