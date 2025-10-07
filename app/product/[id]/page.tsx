@@ -95,7 +95,7 @@ export default function ProductPage() {
                 </Badge>
               )}
               <div>
-                <h1 className="text-3xl md:text-4xl font-bold mb-2">{product.name}</h1>
+                <h1 className="text-3xl md:text-4xl mb-2 font-semibold">{product.name}</h1>
                 {product.subtitle && <p className="text-muted-foreground">{product.subtitle}</p>}
               </div>
 
