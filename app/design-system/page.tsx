@@ -118,9 +118,9 @@ export default function DesignSystemPage() {
           </div>
 
           {/* Content Area */}
-          <div className="flex-1 px-6 lg:px-12 py-10 max-w-5xl bg-muted">
+          <div className="flex-1 px-6 lg:px-12 py-10 max-w-5xl bg-background flex flex-col gap-10">
             {/* Colors Section */}
-            <TabsContent value="colors" className="space-y-8">
+            <TabsContent value="colors" className="flex flex-col gap-10">
               <div>
                 <SectionHeading align="left" spacing="tight">
                   Color Palette
@@ -164,7 +164,7 @@ export default function DesignSystemPage() {
             </TabsContent>
 
             {/* Typography Section */}
-            <TabsContent value="typography" className="space-y-8">
+            <TabsContent value="typography" className="flex flex-col gap-10">
               <div>
                 <SectionHeading align="left" spacing="tight">
                   Typography System
@@ -232,7 +232,7 @@ export default function DesignSystemPage() {
             </TabsContent>
 
             {/* Buttons Section */}
-            <TabsContent value="buttons" className="space-y-8">
+            <TabsContent value="buttons" className="flex flex-col gap-10">
               <div>
                 <SectionHeading align="left" spacing="tight">
                   Button Components
@@ -339,7 +339,7 @@ export default function DesignSystemPage() {
             </TabsContent>
 
             {/* Badges Section */}
-            <TabsContent value="badges" className="space-y-8">
+            <TabsContent value="badges" className="flex flex-col gap-10">
               <div>
                 <SectionHeading align="left" spacing="tight">
                   Badge Components
@@ -388,7 +388,7 @@ export default function DesignSystemPage() {
             </TabsContent>
 
             {/* Cards Section */}
-            <TabsContent value="cards" className="space-y-8">
+            <TabsContent value="cards" className="flex flex-col gap-10">
               <div>
                 <SectionHeading align="left" spacing="tight">
                   Card Components
@@ -463,7 +463,7 @@ export default function DesignSystemPage() {
             </TabsContent>
 
             {/* Spacing Section */}
-            <TabsContent value="spacing" className="space-y-8">
+            <TabsContent value="spacing" className="flex flex-col gap-10">
               <div>
                 <SectionHeading align="left" spacing="tight">
                   Spacing System
@@ -509,7 +509,7 @@ export default function DesignSystemPage() {
             </TabsContent>
 
             {/* Composite Components Section */}
-            <TabsContent value="composite" className="space-y-12">
+            <TabsContent value="composite" className="flex flex-col gap-10">
               <div>
                 <SectionHeading align="left" spacing="tight">
                   Composite Components
@@ -624,7 +624,7 @@ export default function DesignSystemPage() {
             </TabsContent>
 
             {/* Layouts Section */}
-            <TabsContent value="layouts" className="space-y-12">
+            <TabsContent value="layouts" className="flex flex-col gap-10">
               <div>
                 <SectionHeading align="left" spacing="tight">
                   Layout Patterns
@@ -682,7 +682,7 @@ export default function DesignSystemPage() {
             </TabsContent>
 
             {/* Guidelines Section */}
-            <TabsContent value="guidelines" className="space-y-8">
+            <TabsContent value="guidelines" className="flex flex-col gap-10">
               <div>
                 <SectionHeading align="left" spacing="tight">
                   Development Guidelines
