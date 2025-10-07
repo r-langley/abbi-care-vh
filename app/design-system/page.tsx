@@ -510,7 +510,7 @@ export default function DesignSystemPage() {
 
             {/* Composite Components Section */}
             <TabsContent value="composite" className="flex flex-col gap-10">
-              <div>
+              <div className="flex flex-col gap-10">
                 <SectionHeading align="left" spacing="tight">
                   Composite Components
                 </SectionHeading>
