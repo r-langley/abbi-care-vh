@@ -12,11 +12,17 @@
   --off-white: #ffffff;
   --light-gray: #dfdfdf;
   --accent-purple: #4b4262;
-  
+
   /* ABBI Status Colors */
   --status-red: #ff3b30;
   --status-orange: #ff9500;
   --status-green: #34c759;
+
+  /* Added spacing system tokens */
+  --spacing-micro: 5px;
+  --spacing-small: 10px;
+  --spacing-medium: 20px;
+  --spacing-large: 40px;
 
   /* Semantic tokens - Aligned with ABBI Brand */
   --background: #ffffff;
@@ -128,7 +134,7 @@
   --skin-score-low: var(--status-red);
   --skin-score-medium: var(--status-orange);
   --skin-score-high: var(--status-green);
-  
+
   /* ABBI Product Card Design Tokens */
   --product-card-bg: #ffffff;
   --product-card-border: var(--sage);

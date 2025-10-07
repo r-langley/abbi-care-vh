@@ -430,8 +430,21 @@ export default function DesignSystemPage() {
                     <SpacingExample size="5px" label="Micro" description="Between related items" />
                     <SpacingExample size="10px" label="Small" description="Standard gap" />
                     <SpacingExample size="20px" label="Medium" description="Section spacing" />
-                    <SpacingExample size="23px" label="Large" description="Major sections" />
+                    <SpacingExample size="40px" label="Large" description="Major sections" />
                   </div>
+                </div>
+
+                <div>
+                  <h3 className="text-lg font-semibold mb-4">CSS Custom Properties</h3>
+                  <div className="p-6 rounded-lg border border-border space-y-2 font-mono text-sm bg-card">
+                    <div>--spacing-micro: 5px</div>
+                    <div>--spacing-small: 10px</div>
+                    <div>--spacing-medium: 20px</div>
+                    <div>--spacing-large: 40px</div>
+                  </div>
+                  <BodyText className="mt-4 text-muted-foreground text-sm">
+                    Use these CSS custom properties for consistent spacing throughout the application.
+                  </BodyText>
                 </div>
 
                 <div>
