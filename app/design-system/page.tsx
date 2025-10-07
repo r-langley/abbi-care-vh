@@ -74,7 +74,7 @@ export default function DesignSystemPage() {
 
                 <div>
                   <h3 className="text-lg font-semibold mb-4">Semantic Tokens</h3>
-                  <div className="bg-muted p-6 rounded-lg">
+                  <div className="p-6 rounded-lg border border-border">
                     <BodyText className="mb-4">Always use semantic tokens instead of hardcoded hex values:</BodyText>
                     <div className="bg-background p-4 rounded font-mono text-sm space-y-2">
                       <div className="text-green-600">✓ bg-primary text-primary-foreground</div>
@@ -101,15 +101,15 @@ export default function DesignSystemPage() {
                 <div>
                   <h3 className="text-lg font-semibold mb-4">Font Families</h3>
                   <div className="space-y-4">
-                    <div className="bg-muted p-6 rounded-lg">
+                    <div className="p-6 rounded-lg border border-border">
                       <p className="font-sans text-2xl mb-2">Poppins (Sans-serif)</p>
                       <SmallText className="text-muted-foreground">Primary font for body text and headings</SmallText>
                     </div>
-                    <div className="bg-muted p-6 rounded-lg">
+                    <div className="p-6 rounded-lg border border-border">
                       <p className="font-serif text-2xl italic mb-2">Instrument Serif</p>
                       <SmallText className="text-muted-foreground">Italic accents for emphasis</SmallText>
                     </div>
-                    <div className="bg-muted p-6 rounded-lg">
+                    <div className="p-6 rounded-lg border border-border">
                       <p className="font-mono text-2xl mb-2">Geist Mono</p>
                       <SmallText className="text-muted-foreground">Numbers, prices, technical data</SmallText>
                     </div>
@@ -142,7 +142,7 @@ export default function DesignSystemPage() {
 
                 <div>
                   <h3 className="text-lg font-semibold mb-4">Typography Components</h3>
-                  <div className="bg-muted p-6 rounded-lg space-y-0">
+                  <div className="p-6 rounded-lg border border-border space-y-4">
                     <PageTitle>Page Title Component</PageTitle>
                     <SectionHeading align="left">Section Heading Component</SectionHeading>
                     <BodyText>Body text component for comfortable reading with proper line height.</BodyText>
@@ -165,7 +165,7 @@ export default function DesignSystemPage() {
                 Interactive controls for button variants and sizes.
               </BodyText>
 
-              <div className="bg-muted p-6 rounded-lg mb-8">
+              <div className="p-6 rounded-lg border border-border mb-8">
                 <h3 className="text-lg font-semibold mb-4">Controls</h3>
                 <div className="flex flex-wrap gap-6">
                   <div className="flex items-center gap-2">
@@ -270,7 +270,7 @@ export default function DesignSystemPage() {
               </SectionHeading>
               <BodyText className="mb-6 text-muted-foreground">Small status indicators and labels.</BodyText>
 
-              <div className="bg-muted p-6 rounded-lg mb-8">
+              <div className="p-6 rounded-lg border border-border mb-8">
                 <h3 className="text-lg font-semibold mb-4">Controls</h3>
                 <div className="flex items-center gap-2">
                   <Label>Variant:</Label>
@@ -300,7 +300,7 @@ export default function DesignSystemPage() {
 
                 <div>
                   <h3 className="text-lg font-semibold mb-4">Usage Example</h3>
-                  <div className="bg-muted p-6 rounded-lg">
+                  <div className="p-6 rounded-lg border border-border">
                     <div className="relative inline-block">
                       <div className="w-48 h-48 bg-background rounded-lg border-2 border-border" />
                       <RecommendedBadge variant={badgeVariant} className="absolute top-3 left-3" />
@@ -373,7 +373,7 @@ export default function DesignSystemPage() {
 
                 <div>
                   <h3 className="text-lg font-semibold mb-4">Card Specifications</h3>
-                  <div className="bg-muted p-6 rounded-lg space-y-2 font-mono text-sm">
+                  <div className="p-6 rounded-lg border border-border space-y-2 font-mono text-sm">
                     <div>Border: 2px solid var(--sage)</div>
                     <div>Border Radius: 10px</div>
                     <div>Hover: border-color changes to var(--sea-slate)</div>
@@ -410,7 +410,7 @@ export default function DesignSystemPage() {
                 <div>
                   <h3 className="text-lg font-semibold mb-4">Layout Patterns</h3>
                   <div className="space-y-4">
-                    <div className="bg-muted p-6 rounded-lg">
+                    <div className="p-6 rounded-lg border border-border">
                       <h4 className="font-semibold mb-2">Grid Layouts</h4>
                       <div className="space-y-2 text-sm">
                         <div>2 columns: Product grids, ingredient grids</div>
@@ -418,7 +418,7 @@ export default function DesignSystemPage() {
                         <div>Gap: 8-10px between items</div>
                       </div>
                     </div>
-                    <div className="bg-muted p-6 rounded-lg">
+                    <div className="p-6 rounded-lg border border-border">
                       <h4 className="font-semibold mb-2">Sections</h4>
                       <div className="space-y-2 text-sm">
                         <div>Padding: 20px (px-5 py-5)</div>
@@ -465,7 +465,7 @@ function TypeScale({
   description,
 }: { size: string; label: string; className: string; children: React.ReactNode; description?: string }) {
   return (
-    <div className="bg-muted p-6 rounded-lg">
+    <div className="p-6 rounded-lg border border-border">
       <div className="flex items-baseline justify-between mb-2">
         <span className="text-xs font-mono text-muted-foreground">{label}</span>
         <span className="text-xs font-mono text-muted-foreground">{size}</span>
@@ -482,7 +482,7 @@ function ComponentShowcase({
   children,
 }: { title: string; description: string; children: React.ReactNode }) {
   return (
-    <div className="bg-muted p-6 rounded-lg">
+    <div className="p-6 rounded-lg border border-border">
       <h4 className="font-semibold mb-1">{title}</h4>
       <p className="text-xs text-muted-foreground mb-4">{description}</p>
       <div className="flex items-center justify-center p-4 bg-background rounded">{children}</div>
@@ -492,7 +492,7 @@ function ComponentShowcase({
 
 function SpacingExample({ size, label, description }: { size: string; label: string; description: string }) {
   return (
-    <div className="bg-muted p-6 rounded-lg">
+    <div className="p-6 rounded-lg border border-border">
       <div className="flex items-center gap-4 mb-2">
         <span className="text-sm font-semibold min-w-20">{label}</span>
         <span className="text-xs font-mono text-muted-foreground">{size}</span>
