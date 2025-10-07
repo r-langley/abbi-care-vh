@@ -351,7 +351,7 @@ export default function DesignSystemPage() {
                   <h3 className="text-lg font-semibold mb-4">Product Card Pattern</h3>
                   <div className="max-w-xs">
                     <div className="bg-white rounded-[10px] border-2 border-muted overflow-hidden hover:border-primary transition-colors">
-                      <div className="relative h-[160px] bg-muted flex items-center justify-center">
+                      <div className="relative h-[160px] flex items-center justify-center bg-popover">
                         <SmallText className="text-muted-foreground">Product Image</SmallText>
                       </div>
                       <div className="bg-muted p-[10px] pb-[20px] flex flex-col gap-[10px]">
@@ -373,7 +373,7 @@ export default function DesignSystemPage() {
 
                 <div>
                   <h3 className="text-lg font-semibold mb-4">Card Specifications</h3>
-                  <div className="p-6 rounded-lg border border-border space-y-2 font-mono text-sm">
+                  <div className="p-6 rounded-lg border border-border space-y-2 font-mono text-sm bg-card">
                     <div>Border: 2px solid var(--sage)</div>
                     <div>Border Radius: 10px</div>
                     <div>Hover: border-color changes to var(--sea-slate)</div>
