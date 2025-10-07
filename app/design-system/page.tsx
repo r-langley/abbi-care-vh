@@ -150,9 +150,9 @@ export default function DesignSystemPage() {
 
                   <div>
                     <h3 className="text-lg font-semibold mb-4">Semantic Tokens</h3>
-                    <div className="p-6 rounded-lg bg-card">
+                    <div className="p-6 rounded-lg bg-muted">
                       <BodyText className="mb-4">Always use semantic tokens instead of hardcoded hex values:</BodyText>
-                      <div className="p-4 rounded font-mono text-sm space-y-2 bg-muted">
+                      <div className="p-4 rounded font-mono text-sm space-y-2 bg-accent-foreground">
                         <div className="text-green-600">✓ bg-primary text-primary-foreground</div>
                         <div className="text-green-600">✓ border-muted hover:border-primary</div>
                         <div className="text-red-600">✗ bg-[#586158] text-white</div>
