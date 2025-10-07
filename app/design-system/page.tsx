@@ -34,6 +34,8 @@ import {
   Squares2X2Icon,
   ArrowsPointingOutIcon,
   DocumentCheckIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
 } from "@heroicons/react/24/outline"
 
 export default function DesignSystemPage() {
@@ -41,8 +43,8 @@ export default function DesignSystemPage() {
   const [badgeVariant, setBadgeVariant] = useState<"default" | "compact">("default")
   const [showIcon, setShowIcon] = useState(false)
   const [showRecommended, setShowRecommended] = useState(true)
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
 
-  // Get sample products for demonstrations
   const sampleProducts = products.slice(0, 4)
 
   return (
@@ -56,46 +58,62 @@ export default function DesignSystemPage() {
         </div>
       </div>
 
-      {/* Main Layout */}
       <div className="max-w-[1800px] mx-auto">
         <Tabs defaultValue="colors" className="flex flex-col lg:flex-row">
-          <aside className="hidden lg:block w-64 border-r border-border sticky top-[88px] h-[calc(100vh-88px)] overflow-y-auto shrink-0">
-            <TabsList className="flex-col items-stretch h-auto bg-transparent px-6 pb-6 pt-0 mt-0 space-y-1">
-              <TabsTrigger value="colors" className="justify-start w-full gap-2">
-                <SwatchIcon className="w-4 h-4" />
-                Colors
+          <aside
+            className={`hidden lg:block border-r border-border sticky top-[88px] h-[calc(100vh-88px)] overflow-y-auto shrink-0 transition-all duration-300 ease-in-out ${
+              sidebarCollapsed ? "w-16" : "w-64"
+            } ml-4 mt-4 mb-4 rounded-lg bg-muted/30`}
+          >
+            <div className="flex justify-end p-2 border-b border-border">
+              <Button
+                variant="ghost"
+                size="icon-sm"
+                onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
+                className="hover:bg-muted"
+              >
+                {sidebarCollapsed ? <ChevronRightIcon className="w-4 h-4" /> : <ChevronLeftIcon className="w-4 h-4" />}
+              </Button>
+            </div>
+
+            <TabsList
+              className={`flex-col items-stretch h-auto bg-transparent pb-6 space-y-1 ${sidebarCollapsed ? "px-2" : "px-6"}`}
+            >
+              <TabsTrigger value="colors" className="justify-start w-full gap-2" title="Colors">
+                <SwatchIcon className="w-4 h-4 shrink-0" />
+                {!sidebarCollapsed && "Colors"}
               </TabsTrigger>
-              <TabsTrigger value="typography" className="justify-start w-full gap-2">
-                <DocumentTextIcon className="w-4 h-4" />
-                Typography
+              <TabsTrigger value="typography" className="justify-start w-full gap-2" title="Typography">
+                <DocumentTextIcon className="w-4 h-4 shrink-0" />
+                {!sidebarCollapsed && "Typography"}
               </TabsTrigger>
-              <TabsTrigger value="buttons" className="justify-start w-full gap-2">
-                <CursorArrowRaysIcon className="w-4 h-4" />
-                Buttons
+              <TabsTrigger value="buttons" className="justify-start w-full gap-2" title="Buttons">
+                <CursorArrowRaysIcon className="w-4 h-4 shrink-0" />
+                {!sidebarCollapsed && "Buttons"}
               </TabsTrigger>
-              <TabsTrigger value="badges" className="justify-start w-full gap-2">
-                <TagIcon className="w-4 h-4" />
-                Badges
+              <TabsTrigger value="badges" className="justify-start w-full gap-2" title="Badges">
+                <TagIcon className="w-4 h-4 shrink-0" />
+                {!sidebarCollapsed && "Badges"}
               </TabsTrigger>
-              <TabsTrigger value="cards" className="justify-start w-full gap-2">
-                <RectangleStackIcon className="w-4 h-4" />
-                Cards
+              <TabsTrigger value="cards" className="justify-start w-full gap-2" title="Cards">
+                <RectangleStackIcon className="w-4 h-4 shrink-0" />
+                {!sidebarCollapsed && "Cards"}
               </TabsTrigger>
-              <TabsTrigger value="composite" className="justify-start w-full gap-2">
-                <PuzzlePieceIcon className="w-4 h-4" />
-                Composite
+              <TabsTrigger value="composite" className="justify-start w-full gap-2" title="Composite">
+                <PuzzlePieceIcon className="w-4 h-4 shrink-0" />
+                {!sidebarCollapsed && "Composite"}
               </TabsTrigger>
-              <TabsTrigger value="layouts" className="justify-start w-full gap-2">
-                <Squares2X2Icon className="w-4 h-4" />
-                Layouts
+              <TabsTrigger value="layouts" className="justify-start w-full gap-2" title="Layouts">
+                <Squares2X2Icon className="w-4 h-4 shrink-0" />
+                {!sidebarCollapsed && "Layouts"}
               </TabsTrigger>
-              <TabsTrigger value="spacing" className="justify-start w-full gap-2">
-                <ArrowsPointingOutIcon className="w-4 h-4" />
-                Spacing
+              <TabsTrigger value="spacing" className="justify-start w-full gap-2" title="Spacing">
+                <ArrowsPointingOutIcon className="w-4 h-4 shrink-0" />
+                {!sidebarCollapsed && "Spacing"}
               </TabsTrigger>
-              <TabsTrigger value="guidelines" className="justify-start w-full gap-2">
-                <DocumentCheckIcon className="w-4 h-4" />
-                Guidelines
+              <TabsTrigger value="guidelines" className="justify-start w-full gap-2" title="Guidelines">
+                <DocumentCheckIcon className="w-4 h-4 shrink-0" />
+                {!sidebarCollapsed && "Guidelines"}
               </TabsTrigger>
             </TabsList>
           </aside>
@@ -115,7 +133,6 @@ export default function DesignSystemPage() {
           </div>
 
           <div className="flex-1 px-6 lg:px-12 py-10 max-w-5xl flex flex-col gap-10">
-            {/* Colors Section */}
             <TabsContent value="colors" className="flex flex-col gap-10">
               <div>
                 <SectionHeading align="left" spacing="tight">
@@ -159,7 +176,6 @@ export default function DesignSystemPage() {
               </div>
             </TabsContent>
 
-            {/* Typography Section */}
             <TabsContent value="typography" className="flex flex-col gap-10">
               <div>
                 <SectionHeading align="left" spacing="tight">
@@ -227,7 +243,6 @@ export default function DesignSystemPage() {
               </div>
             </TabsContent>
 
-            {/* Buttons Section */}
             <TabsContent value="buttons" className="flex flex-col gap-10">
               <div>
                 <SectionHeading align="left" spacing="tight">
@@ -334,7 +349,6 @@ export default function DesignSystemPage() {
               </div>
             </TabsContent>
 
-            {/* Badges Section */}
             <TabsContent value="badges" className="flex flex-col gap-10">
               <div>
                 <SectionHeading align="left" spacing="tight">
@@ -383,7 +397,6 @@ export default function DesignSystemPage() {
               </div>
             </TabsContent>
 
-            {/* Cards Section */}
             <TabsContent value="cards" className="flex flex-col gap-10">
               <div>
                 <SectionHeading align="left" spacing="tight">
@@ -458,7 +471,6 @@ export default function DesignSystemPage() {
               </div>
             </TabsContent>
 
-            {/* Spacing Section */}
             <TabsContent value="spacing" className="flex flex-col gap-10">
               <div>
                 <SectionHeading align="left" spacing="tight">
@@ -504,7 +516,6 @@ export default function DesignSystemPage() {
               </div>
             </TabsContent>
 
-            {/* Composite Components Section */}
             <TabsContent value="composite" className="flex flex-col gap-10">
               <div className="flex flex-col gap-10">
                 <SectionHeading align="left" spacing="tight">
@@ -514,7 +525,6 @@ export default function DesignSystemPage() {
                   Complex, reusable components built from atomic elements.
                 </BodyText>
 
-                {/* Product Card */}
                 <div className="space-y-4">
                   <h3 className="text-lg font-semibold">Product Card</h3>
                   <BodyText className="text-sm text-muted-foreground">
@@ -542,7 +552,6 @@ export default function DesignSystemPage() {
                   </div>
                 </div>
 
-                {/* Ingredient Card */}
                 <div className="space-y-4">
                   <h3 className="text-lg font-semibold">Ingredient Card</h3>
                   <BodyText className="text-sm text-muted-foreground">
@@ -569,7 +578,6 @@ export default function DesignSystemPage() {
                   </div>
                 </div>
 
-                {/* Active Ingredient Card */}
                 <div className="space-y-4">
                   <h3 className="text-lg font-semibold">Active Ingredient Card</h3>
                   <BodyText className="text-sm text-muted-foreground">
@@ -588,7 +596,6 @@ export default function DesignSystemPage() {
                   </div>
                 </div>
 
-                {/* Hero Section */}
                 <div className="space-y-4">
                   <h3 className="text-lg font-semibold">Hero Section</h3>
                   <BodyText className="text-sm text-muted-foreground">
@@ -605,7 +612,6 @@ export default function DesignSystemPage() {
                   />
                 </div>
 
-                {/* Trait Filter */}
                 <div className="space-y-4">
                   <h3 className="text-lg font-semibold">Trait Filter</h3>
                   <BodyText className="text-sm text-muted-foreground">
@@ -619,7 +625,6 @@ export default function DesignSystemPage() {
               </div>
             </TabsContent>
 
-            {/* Layouts Section */}
             <TabsContent value="layouts" className="flex flex-col gap-10">
               <div>
                 <SectionHeading align="left" spacing="tight">
@@ -627,57 +632,58 @@ export default function DesignSystemPage() {
                 </SectionHeading>
                 <BodyText className="mb-6 text-muted-foreground">Reusable layout patterns and grid systems.</BodyText>
 
-                {/* Product Grids */}
                 <div className="space-y-6">
-                  <h3 className="text-lg font-semibold">Product Grid Layouts</h3>
-
                   <div>
-                    <h4 className="font-semibold mb-2">2-Column Grid (Mobile)</h4>
-                    <div className="bg-muted p-4 rounded-lg mb-2">
-                      <code className="text-xs font-mono">grid grid-cols-2 gap-[10px]</code>
-                    </div>
-                    <div className="grid grid-cols-2 gap-[10px]">
-                      {sampleProducts.slice(0, 2).map((product) => (
-                        <ProductCard key={product.id} product={product} />
-                      ))}
-                    </div>
-                  </div>
+                    <h3 className="text-lg font-semibold">Product Grid Layouts</h3>
 
-                  <div>
-                    <h4 className="font-semibold mb-2">4-Column Grid (Desktop)</h4>
-                    <div className="bg-muted p-4 rounded-lg mb-2">
-                      <code className="text-xs font-mono">grid md:grid-cols-3 lg:grid-cols-4 gap-[10px]</code>
+                    <div>
+                      <h4 className="font-semibold mb-2">2-Column Grid (Mobile)</h4>
+                      <div className="bg-muted p-4 rounded-lg mb-2">
+                        <code className="text-xs font-mono">grid grid-cols-2 gap-[10px]</code>
+                      </div>
+                      <div className="grid grid-cols-2 gap-[10px]">
+                        {sampleProducts.slice(0, 2).map((product) => (
+                          <ProductCard key={product.id} product={product} />
+                        ))}
+                      </div>
                     </div>
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[10px]">
-                      {sampleProducts.map((product) => (
-                        <ProductCard key={product.id} product={product} />
-                      ))}
+
+                    <div>
+                      <h4 className="font-semibold mb-2">4-Column Grid (Desktop)</h4>
+                      <div className="bg-muted p-4 rounded-lg mb-2">
+                        <code className="text-xs font-mono">grid md:grid-cols-3 lg:grid-cols-4 gap-[10px]</code>
+                      </div>
+                      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[10px]">
+                        {sampleProducts.map((product) => (
+                          <ProductCard key={product.id} product={product} />
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </div>
 
-                {/* Section Containers */}
                 <div className="space-y-4">
-                  <h3 className="text-lg font-semibold">Section Container</h3>
-                  <BodyText className="text-sm text-muted-foreground">
-                    Location:{" "}
-                    <code className="bg-muted px-2 py-1 rounded text-xs font-mono">
-                      /components/ui/section-container.tsx
-                    </code>
-                  </BodyText>
-                  <div className="space-y-4">
-                    <SectionContainer variant="default" spacing="tight" className="border border-border">
-                      <BodyText className="text-center">Default Section (Tight Spacing)</BodyText>
-                    </SectionContainer>
-                    <SectionContainer variant="muted" spacing="default" className="border border-border">
-                      <BodyText className="text-center">Muted Section (Default Spacing)</BodyText>
-                    </SectionContainer>
+                  <div>
+                    <h3 className="text-lg font-semibold">Section Container</h3>
+                    <BodyText className="text-sm text-muted-foreground">
+                      Location:{" "}
+                      <code className="bg-muted px-2 py-1 rounded text-xs font-mono">
+                        /components/ui/section-container.tsx
+                      </code>
+                    </BodyText>
+                    <div className="space-y-4">
+                      <SectionContainer variant="default" spacing="tight" className="border border-border">
+                        <BodyText className="text-center">Default Section (Tight Spacing)</BodyText>
+                      </SectionContainer>
+                      <SectionContainer variant="muted" spacing="default" className="border border-border">
+                        <BodyText className="text-center">Muted Section (Default Spacing)</BodyText>
+                      </SectionContainer>
+                    </div>
                   </div>
                 </div>
               </div>
             </TabsContent>
 
-            {/* Guidelines Section */}
             <TabsContent value="guidelines" className="flex flex-col gap-10">
               <div>
                 <SectionHeading align="left" spacing="tight">
@@ -687,69 +693,68 @@ export default function DesignSystemPage() {
                   Best practices for building with the ABBI design system.
                 </BodyText>
 
-                {/* Component Principles */}
                 <div className="space-y-4">
-                  <h3 className="text-lg font-semibold">Component Principles</h3>
-                  <div className="bg-muted p-6 rounded-lg">
-                    <h4 className="font-semibold mb-2">Single Source of Truth</h4>
-                    <p className="text-sm mb-3">
-                      All components in <code className="bg-background px-2 py-1 rounded text-xs">/components</code>{" "}
-                      represent the canonical implementation. When you modify a component, it updates everywhere it's
-                      used.
-                    </p>
-                    <div className="bg-background p-4 rounded space-y-2 text-sm">
-                      <div className="text-green-600">✓ Modify the source component in /components</div>
-                      <div className="text-red-600">✗ Don't copy/paste and modify inline</div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Color Usage */}
-                <div className="space-y-4">
-                  <h3 className="text-lg font-semibold">Color Usage Rules</h3>
-                  <div className="bg-muted p-6 rounded-lg">
-                    <h4 className="font-semibold mb-3">CRITICAL: Always Use Semantic Tokens</h4>
-                    <div className="space-y-4">
-                      <div>
-                        <p className="text-sm mb-2 font-semibold text-green-600">✓ Correct Usage</p>
-                        <div className="bg-background p-4 rounded text-xs font-mono space-y-1">
-                          <div>className="bg-primary text-primary-foreground"</div>
-                          <div>className="border-muted hover:border-primary"</div>
-                        </div>
-                      </div>
-                      <div>
-                        <p className="text-sm mb-2 font-semibold text-red-600">✗ Wrong - Never Do This</p>
-                        <div className="bg-background p-4 rounded text-xs font-mono space-y-1">
-                          <div className="text-red-600">className="bg-[#586158] text-white"</div>
-                          <div className="text-red-600">className="border-[#f5f6f5]"</div>
-                        </div>
+                  <div>
+                    <h3 className="text-lg font-semibold">Component Principles</h3>
+                    <div className="bg-muted p-6 rounded-lg">
+                      <h4 className="font-semibold mb-2">Single Source of Truth</h4>
+                      <p className="text-sm mb-3">
+                        All components in <code className="bg-background px-2 py-1 rounded text-xs">/components</code>{" "}
+                        represent the canonical implementation. When you modify a component, it updates everywhere it's
+                        used.
+                      </p>
+                      <div className="bg-background p-4 rounded space-y-2 text-sm">
+                        <div className="text-green-600">✓ Modify the source component in /components</div>
+                        <div className="text-red-600">✗ Don't copy/paste and modify inline</div>
                       </div>
                     </div>
                   </div>
-                </div>
 
-                {/* Quick Reference */}
-                <div className="space-y-4">
-                  <h3 className="text-lg font-semibold">Quick Reference</h3>
-                  <div className="grid md:grid-cols-2 gap-4">
+                  <div>
+                    <h3 className="text-lg font-semibold">Color Usage Rules</h3>
                     <div className="bg-muted p-6 rounded-lg">
-                      <h4 className="font-semibold mb-3">Card Specs</h4>
-                      <div className="text-xs font-mono space-y-1">
-                        <div>Border: 2px border-muted</div>
-                        <div>Radius: rounded-[10px]</div>
-                        <div>Hover: hover:border-primary</div>
-                        <div>Padding: p-[10px] pb-[20px]</div>
-                        <div>Gap: gap-[10px]</div>
+                      <h4 className="font-semibold mb-3">CRITICAL: Always Use Semantic Tokens</h4>
+                      <div className="space-y-4">
+                        <div>
+                          <p className="text-sm mb-2 font-semibold text-green-600">✓ Correct Usage</p>
+                          <div className="bg-background p-4 rounded text-xs font-mono space-y-1">
+                            <div>className="bg-primary text-primary-foreground"</div>
+                            <div>className="border-muted hover:border-primary"</div>
+                          </div>
+                        </div>
+                        <div>
+                          <p className="text-sm mb-2 font-semibold text-red-600">✗ Wrong - Never Do This</p>
+                          <div className="bg-background p-4 rounded text-xs font-mono space-y-1">
+                            <div className="text-red-600">className="bg-[#586158] text-white"</div>
+                            <div className="text-red-600">className="border-[#f5f6f5]"</div>
+                          </div>
+                        </div>
                       </div>
                     </div>
+                  </div>
 
-                    <div className="bg-muted p-6 rounded-lg">
-                      <h4 className="font-semibold mb-3">Image Heights</h4>
-                      <div className="text-xs font-mono space-y-1">
-                        <div>Product Card: h-[160px]</div>
-                        <div>Active Card: h-[120px]</div>
-                        <div>Ingredient Card: h-[100px]</div>
-                        <div>Hero Section: h-[160px]</div>
+                  <div>
+                    <h3 className="text-lg font-semibold">Quick Reference</h3>
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <div className="bg-muted p-6 rounded-lg">
+                        <h4 className="font-semibold mb-3">Card Specs</h4>
+                        <div className="text-xs font-mono space-y-1">
+                          <div>Border: 2px border-muted</div>
+                          <div>Radius: rounded-[10px]</div>
+                          <div>Hover: hover:border-primary</div>
+                          <div>Padding: p-[10px] pb-[20px]</div>
+                          <div>Gap: gap-[10px]</div>
+                        </div>
+                      </div>
+
+                      <div className="bg-muted p-6 rounded-lg">
+                        <h4 className="font-semibold mb-3">Image Heights</h4>
+                        <div className="text-xs font-mono space-y-1">
+                          <div>Product Card: h-[160px]</div>
+                          <div>Active Card: h-[120px]</div>
+                          <div>Ingredient Card: h-[100px]</div>
+                          <div>Hero Section: h-[160px]</div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -763,7 +768,6 @@ export default function DesignSystemPage() {
   )
 }
 
-// Helper Components
 function ColorSwatch({
   name,
   hex,
