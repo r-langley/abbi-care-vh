@@ -164,7 +164,7 @@ function AmbassadorView() {
                     <span>{item.category}</span>
                     <span className="font-mono">{item.amount}</span>
                   </div>
-                  <div className="h-2 rounded-full overflow-hidden bg-muted">
+                  <div className="h-2 overflow-hidden bg-muted rounded-none">
                     <div className="h-full bg-primary" style={{ width: `${item.percentage}%` }} />
                   </div>
                 </div>
@@ -218,8 +218,8 @@ function AmbassadorView() {
             <span>Progress to Platinum Level</span>
             <span className="font-semibold">79%</span>
           </div>
-          <div className="h-3 bg-muted rounded-full overflow-hidden">
-            <div className="h-full bg-primary" style={{ width: "79%" }} />
+          <div className="h-3 bg-muted overflow-hidden rounded-none">
+            <div className="h-full bg-primary rounded-none" style={{ width: "79%" }} />
           </div>
           <div className="flex justify-between text-sm">
             <div>
