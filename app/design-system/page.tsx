@@ -26,6 +26,27 @@ import { SectionContainer } from "@/components/ui/section-container"
 import { products } from "@/lib/products"
 import { Sheet, SheetContent } from "@/components/ui/sheet"
 import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+import { Spinner } from "@/components/ui/spinner"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import {
   SwatchIcon,
   DocumentTextIcon,
   CursorArrowRaysIcon,
@@ -38,6 +59,10 @@ import {
   ChevronLeftIcon,
   ChevronRightIcon,
   Bars3Icon,
+  ArrowPathIcon,
+  WindowIcon,
+  ChevronDownIcon,
+  PlusIcon,
 } from "@heroicons/react/24/outline"
 
 export default function DesignSystemPage() {
@@ -47,15 +72,21 @@ export default function DesignSystemPage() {
   const [showRecommended, setShowRecommended] = useState(true)
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   const sampleProducts = products.slice(0, 4)
+
+  const simulateLoading = () => {
+    setIsLoading(true)
+    setTimeout(() => setIsLoading(false), 2000)
+  }
 
   return (
     <div className="min-h-screen bg-background">
       <div className="border-b border-border bg-background/95 backdrop-blur sticky top-0 z-50">
         <div className="mx-auto px-5">
           <div className="flex items-center justify-between h-14">
-            <PageTitle>ABBI Design System</PageTitle>
+            <h1 className="text-xl font-medium tracking-tight text-foreground">ABBI Design System</h1>
             <button
               className="lg:hidden p-2 hover:bg-muted rounded-lg transition-colors"
               onClick={() => setMobileMenuOpen(true)}
@@ -149,6 +180,30 @@ export default function DesignSystemPage() {
                     <DocumentCheckIcon className="w-4 h-4 shrink-0" />
                     Guidelines
                   </TabsTrigger>
+                  <TabsTrigger
+                    value="loaders"
+                    className="justify-start w-full gap-2"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <ArrowPathIcon className="w-4 h-4 shrink-0" />
+                    Loaders
+                  </TabsTrigger>
+                  <TabsTrigger
+                    value="modals"
+                    className="justify-start w-full gap-2"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <WindowIcon className="w-4 h-4 shrink-0" />
+                    Modals
+                  </TabsTrigger>
+                  <TabsTrigger
+                    value="interactions"
+                    className="justify-start w-full gap-2"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <ChevronDownIcon className="w-4 h-4 shrink-0" />
+                    Interactions
+                  </TabsTrigger>
                 </TabsList>
               </div>
             </SheetContent>
@@ -158,7 +213,7 @@ export default function DesignSystemPage() {
           <aside
             className={`hidden lg:block border-r border-border sticky top-[88px] h-[calc(100vh-88px)] overflow-y-auto shrink-0 transition-all duration-300 ease-in-out ${
               sidebarCollapsed ? "w-16" : "w-64"
-            } rounded-lg bg-muted/30`}
+            } ml-4 mt-4 mb-4 rounded-lg bg-muted/30`}
           >
             <div className="flex justify-end p-2 border-b border-border">
               <Button
@@ -210,11 +265,23 @@ export default function DesignSystemPage() {
                 <DocumentCheckIcon className="w-4 h-4 shrink-0" />
                 {!sidebarCollapsed && "Guidelines"}
               </TabsTrigger>
+              <TabsTrigger value="loaders" className="justify-start w-full gap-2" title="Loaders">
+                <ArrowPathIcon className="w-4 h-4 shrink-0" />
+                {!sidebarCollapsed && "Loaders"}
+              </TabsTrigger>
+              <TabsTrigger value="modals" className="justify-start w-full gap-2" title="Modals">
+                <WindowIcon className="w-4 h-4 shrink-0" />
+                {!sidebarCollapsed && "Modals"}
+              </TabsTrigger>
+              <TabsTrigger value="interactions" className="justify-start w-full gap-2" title="Interactions">
+                <ChevronDownIcon className="w-4 h-4 shrink-0" />
+                {!sidebarCollapsed && "Interactions"}
+              </TabsTrigger>
             </TabsList>
           </aside>
 
           {/* Content Area */}
-          <div className="flex-1 max-w-5xl flex flex-col gap-10 lg:px-10 py-5 px-5">
+          <div className="flex-1 px-6 py-10 max-w-5xl flex flex-col gap-10 lg:px-10">
             <TabsContent value="colors" className="flex flex-col gap-10">
               <div>
                 <SectionHeading align="left" spacing="tight">
@@ -569,7 +636,7 @@ export default function DesignSystemPage() {
                       <SpacingExample size="5px" label="Micro" description="Between related items" />
                       <SpacingExample size="10px" label="Small" description="Standard gap" />
                       <SpacingExample size="20px" label="Medium" description="Section spacing" />
-                      <SpacingExample size="23px" label="Large" description="Major sections" />
+                      <SpacingExample size="40px" label="Large" description="Major sections" />
                     </div>
                   </div>
 
@@ -577,19 +644,28 @@ export default function DesignSystemPage() {
                     <h3 className="text-lg font-semibold mb-4">Layout Patterns</h3>
                     <div className="space-y-4">
                       <div className="bg-muted p-6 rounded-lg">
-                        <h4 className="font-semibold mb-2">Grid Layouts</h4>
-                        <div className="space-y-2 text-sm">
+                        <h4 className="font-semibold mb-3">Grid Layouts</h4>
+                        <div className="text-xs font-mono space-y-1">
                           <div>2 columns: Product grids, ingredient grids</div>
                           <div>3 columns: Active ingredients, concentrates</div>
                           <div>Gap: 8-10px between items</div>
                         </div>
                       </div>
                       <div className="bg-muted p-6 rounded-lg">
-                        <h4 className="font-semibold mb-2">Sections</h4>
-                        <div className="space-y-2 text-sm">
+                        <h4 className="font-semibold mb-3">Sections</h4>
+                        <div className="text-xs font-mono space-y-1">
                           <div>Padding: 20px (px-5 py-5)</div>
                           <div>Max width: 800px for sheets</div>
                           <div>Background alternation: White / Sage</div>
+                        </div>
+                      </div>
+                      <div className="bg-muted p-6 rounded-lg">
+                        <h4 className="font-semibold mb-3">Spacing Reference</h4>
+                        <div className="text-xs font-mono space-y-1">
+                          <div>Micro: 5px (gap-[5px])</div>
+                          <div>Small: 10px (gap-2.5)</div>
+                          <div>Medium: 20px (gap-5)</div>
+                          <div>Large: 40px (gap-10 or var(--spacing-large))</div>
                         </div>
                       </div>
                     </div>
@@ -843,6 +919,473 @@ export default function DesignSystemPage() {
                 </div>
               </div>
             </TabsContent>
+
+            <TabsContent value="loaders" className="flex flex-col gap-10">
+              <div>
+                <SectionHeading align="left" spacing="tight">
+                  Loading States
+                </SectionHeading>
+                <BodyText className="mb-6 text-muted-foreground">
+                  Spinner components for indicating loading states and async operations.
+                </BodyText>
+
+                <div className="space-y-8">
+                  <div>
+                    <h3 className="text-lg font-semibold mb-4">Spinner Sizes</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                      <ComponentShowcase title="Small" description="16px - Inline loading">
+                        <Spinner className="size-4" />
+                      </ComponentShowcase>
+                      <ComponentShowcase title="Default" description="24px - Standard loading">
+                        <Spinner className="size-6" />
+                      </ComponentShowcase>
+                      <ComponentShowcase title="Large" description="32px - Page loading">
+                        <Spinner className="size-8" />
+                      </ComponentShowcase>
+                    </div>
+                  </div>
+
+                  <div>
+                    <h3 className="text-lg font-semibold mb-4">Loading Button</h3>
+                    <div className="bg-muted p-6 rounded-lg">
+                      <div className="flex flex-wrap gap-4">
+                        <Button onClick={simulateLoading} disabled={isLoading}>
+                          {isLoading && <Spinner className="mr-2" />}
+                          {isLoading ? "Loading..." : "Click to Load"}
+                        </Button>
+                        <Button variant="outline" disabled>
+                          <Spinner className="mr-2" />
+                          Processing...
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <h3 className="text-lg font-semibold mb-4">Full Page Loader</h3>
+                    <div className="bg-muted p-6 rounded-lg">
+                      <div className="h-48 flex items-center justify-center bg-background rounded-lg border border-border">
+                        <div className="flex flex-col items-center gap-3">
+                          <Spinner className="size-8" />
+                          <SmallText className="text-muted-foreground">Loading content...</SmallText>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <h3 className="text-lg font-semibold mb-4">Usage</h3>
+                    <div className="p-6 rounded-lg border border-border space-y-2 font-mono text-sm bg-card">
+                      <div className="text-green-600">{'import { Spinner } from "@/components/ui/spinner"'}</div>
+                      <div className="mt-4">{'<Spinner className="size-6" />'}</div>
+                      <div className="mt-2">{"<Button disabled={isLoading}>"}</div>
+                      <div className="ml-4">{'  {isLoading && <Spinner className="mr-2" />}'}</div>
+                      <div className="ml-4">{'  {isLoading ? "Loading..." : "Submit"}'}</div>
+                      <div>{"</Button>"}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </TabsContent>
+
+            <TabsContent value="modals" className="flex flex-col gap-10">
+              <div>
+                <SectionHeading align="left" spacing="tight">
+                  Modal Dialogs
+                </SectionHeading>
+                <BodyText className="mb-6 text-muted-foreground">
+                  Dialog components for focused user interactions and confirmations.
+                </BodyText>
+
+                <div className="space-y-8">
+                  <div>
+                    <h3 className="text-lg font-semibold mb-4">Basic Dialog</h3>
+                    <div className="bg-muted p-6 rounded-lg">
+                      <Dialog>
+                        <DialogTrigger asChild>
+                          <Button>Open Dialog</Button>
+                        </DialogTrigger>
+                        <DialogContent>
+                          <DialogHeader>
+                            <DialogTitle>Dialog Title</DialogTitle>
+                            <DialogDescription>
+                              This is a description of what the dialog is about. It provides context to the user.
+                            </DialogDescription>
+                          </DialogHeader>
+                          <div className="py-4">
+                            <BodyText>
+                              Dialog content goes here. You can add forms, text, or any other content.
+                            </BodyText>
+                          </div>
+                          <DialogFooter>
+                            <Button variant="outline">Cancel</Button>
+                            <Button>Confirm</Button>
+                          </DialogFooter>
+                        </DialogContent>
+                      </Dialog>
+                    </div>
+                  </div>
+
+                  <div>
+                    <h3 className="text-lg font-semibold mb-4">Dialog with Image</h3>
+                    <div className="bg-muted p-6 rounded-lg">
+                      <BodyText className="mb-4 text-sm">
+                        Dialogs can include images at the top for product showcases, announcements, or visual context.
+                      </BodyText>
+                      <Dialog>
+                        <DialogTrigger asChild>
+                          <Button variant="outline">View Product</Button>
+                        </DialogTrigger>
+                        <DialogContent className="p-0 gap-0 max-w-md">
+                          <div className="relative h-64 w-full bg-muted overflow-hidden rounded-t-lg">
+                            <img
+                              src="/minimalist-cosmetic-pump-bottle-product-photograph.jpg"
+                              alt="Product"
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                          <div className="p-6">
+                            <DialogHeader>
+                              <DialogTitle>Hydrating Serum</DialogTitle>
+                              <DialogDescription>
+                                A lightweight, fast-absorbing serum that delivers deep hydration and plumps the skin.
+                              </DialogDescription>
+                            </DialogHeader>
+                            <div className="py-4">
+                              <BodyText className="mb-4">
+                                Formulated with hyaluronic acid and vitamin B5 to restore moisture balance and improve
+                                skin texture.
+                              </BodyText>
+                              <PriceDisplay amount={49.99} size="large" />
+                            </div>
+                            <DialogFooter>
+                              <Button variant="outline">Learn More</Button>
+                              <Button>Add to Cart</Button>
+                            </DialogFooter>
+                          </div>
+                        </DialogContent>
+                      </Dialog>
+                    </div>
+                  </div>
+
+                  <div>
+                    <h3 className="text-lg font-semibold mb-4">Confirmation Dialog</h3>
+                    <div className="bg-muted p-6 rounded-lg">
+                      <Dialog>
+                        <DialogTrigger asChild>
+                          <Button variant="destructive">Delete Item</Button>
+                        </DialogTrigger>
+                        <DialogContent>
+                          <DialogHeader>
+                            <DialogTitle>Are you sure?</DialogTitle>
+                            <DialogDescription>
+                              This action cannot be undone. This will permanently delete the item.
+                            </DialogDescription>
+                          </DialogHeader>
+                          <DialogFooter>
+                            <Button variant="outline">Cancel</Button>
+                            <Button variant="destructive">Delete</Button>
+                          </DialogFooter>
+                        </DialogContent>
+                      </Dialog>
+                    </div>
+                  </div>
+
+                  <div>
+                    <h3 className="text-lg font-semibold mb-4">Dialog Variants</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="p-4 rounded-lg border border-border bg-card">
+                        <h4 className="font-semibold mb-2">Standard</h4>
+                        <SmallText className="text-muted-foreground mb-3">Default dialog with close button</SmallText>
+                        <Dialog>
+                          <DialogTrigger asChild>
+                            <Button size="sm" variant="outline">
+                              Open
+                            </Button>
+                          </DialogTrigger>
+                          <DialogContent>
+                            <DialogHeader>
+                              <DialogTitle>Standard Dialog</DialogTitle>
+                            </DialogHeader>
+                            <BodyText>This dialog has a close button in the top right.</BodyText>
+                          </DialogContent>
+                        </Dialog>
+                      </div>
+
+                      <div className="p-4 rounded-lg border border-border bg-card">
+                        <h4 className="font-semibold mb-2">No Close Button</h4>
+                        <SmallText className="text-muted-foreground mb-3">Forces user to make a choice</SmallText>
+                        <Dialog>
+                          <DialogTrigger asChild>
+                            <Button size="sm" variant="outline">
+                              Open
+                            </Button>
+                          </DialogTrigger>
+                          <DialogContent showCloseButton={false}>
+                            <DialogHeader>
+                              <DialogTitle>Choose an Option</DialogTitle>
+                            </DialogHeader>
+                            <DialogFooter>
+                              <Button variant="outline">Option 1</Button>
+                              <Button>Option 2</Button>
+                            </DialogFooter>
+                          </DialogContent>
+                        </Dialog>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <h3 className="text-lg font-semibold mb-4">Usage</h3>
+                    <div className="p-6 rounded-lg border border-border space-y-2 font-mono text-sm bg-card">
+                      <div className="text-green-600">
+                        {'import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"'}
+                      </div>
+                      <div className="mt-4">{"<Dialog>"}</div>
+                      <div className="ml-4">{"  <DialogTrigger asChild>"}</div>
+                      <div className="ml-8">{"    <Button>Open</Button>"}</div>
+                      <div className="ml-4">{"  </DialogTrigger>"}</div>
+                      <div className="ml-4">{"  <DialogContent>"}</div>
+                      <div className="ml-8">{"    <DialogHeader>"}</div>
+                      <div className="ml-12">{"      <DialogTitle>Title</DialogTitle>"}</div>
+                      <div className="ml-8">{"    </DialogHeader>"}</div>
+                      <div className="ml-8">{"    {/* Content */}"}</div>
+                      <div className="ml-4">{"  </DialogContent>"}</div>
+                      <div>{"</Dialog>"}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </TabsContent>
+
+            <TabsContent value="interactions" className="flex flex-col gap-10">
+              <div>
+                <SectionHeading align="left" spacing="tight">
+                  Interactive Behaviors
+                </SectionHeading>
+                <BodyText className="mb-6 text-muted-foreground">
+                  Transitions, animations, and interactive component patterns.
+                </BodyText>
+
+                <div className="space-y-8">
+                  <div>
+                    <h3 className="text-lg font-semibold mb-4">Tab Variants</h3>
+                    <div className="space-y-6">
+                      <div>
+                        <h4 className="font-semibold mb-3">Default Tabs (Background)</h4>
+                        <div className="bg-muted p-6 rounded-lg">
+                          <BodyText className="mb-4 text-sm">
+                            Default tabs use a muted background for the active state with smooth transitions.
+                          </BodyText>
+                          <Tabs defaultValue="tab1" className="w-full">
+                            <TabsList className="w-full">
+                              <TabsTrigger value="tab1" className="flex-1">
+                                Tab One
+                              </TabsTrigger>
+                              <TabsTrigger value="tab2" className="flex-1">
+                                Tab Two
+                              </TabsTrigger>
+                              <TabsTrigger value="tab3" className="flex-1">
+                                Tab Three
+                              </TabsTrigger>
+                            </TabsList>
+                            <TabsContent
+                              value="tab1"
+                              className="mt-4 p-4 bg-background rounded-lg border border-border"
+                            >
+                              <BodyText>Content for tab one with smooth fade-in transition.</BodyText>
+                            </TabsContent>
+                            <TabsContent
+                              value="tab2"
+                              className="mt-4 p-4 bg-background rounded-lg border border-border"
+                            >
+                              <BodyText>Content for tab two with smooth fade-in transition.</BodyText>
+                            </TabsContent>
+                            <TabsContent
+                              value="tab3"
+                              className="mt-4 p-4 bg-background rounded-lg border border-border"
+                            >
+                              <BodyText>Content for tab three with smooth fade-in transition.</BodyText>
+                            </TabsContent>
+                          </Tabs>
+                        </div>
+                      </div>
+
+                      <div>
+                        <h4 className="font-semibold mb-3">Underline Tabs (Bottom Border)</h4>
+                        <div className="bg-muted p-6 rounded-lg">
+                          <BodyText className="mb-4 text-sm">
+                            Underline tabs show a bottom border on the active tab, commonly used for navigation like on
+                            shop pages.
+                          </BodyText>
+                          <Tabs defaultValue="products" className="w-full">
+                            <TabsList variant="underline" className="w-full">
+                              <TabsTrigger variant="underline" value="products" className="flex-1">
+                                Products
+                              </TabsTrigger>
+                              <TabsTrigger variant="underline" value="ingredients" className="flex-1">
+                                Ingredients
+                              </TabsTrigger>
+                              <TabsTrigger variant="underline" value="reviews" className="flex-1">
+                                Reviews
+                              </TabsTrigger>
+                            </TabsList>
+                            <TabsContent
+                              value="products"
+                              className="mt-4 p-4 bg-background rounded-lg border border-border"
+                            >
+                              <BodyText>Products content with underline tab navigation.</BodyText>
+                            </TabsContent>
+                            <TabsContent
+                              value="ingredients"
+                              className="mt-4 p-4 bg-background rounded-lg border border-border"
+                            >
+                              <BodyText>Ingredients content with underline tab navigation.</BodyText>
+                            </TabsContent>
+                            <TabsContent
+                              value="reviews"
+                              className="mt-4 p-4 bg-background rounded-lg border border-border"
+                            >
+                              <BodyText>Reviews content with underline tab navigation.</BodyText>
+                            </TabsContent>
+                          </Tabs>
+                        </div>
+                      </div>
+
+                      <div>
+                        <h4 className="font-semibold mb-3">Usage</h4>
+                        <div className="p-6 rounded-lg border border-border space-y-4 font-mono text-sm bg-card">
+                          <div>
+                            <div className="text-muted-foreground mb-2">Default Tabs:</div>
+                            <div className="space-y-1">
+                              <div>{"<TabsList>"}</div>
+                              <div className="ml-4">{'  <TabsTrigger value="tab1">Tab 1</TabsTrigger>'}</div>
+                              <div>{"</TabsList>"}</div>
+                            </div>
+                          </div>
+                          <div>
+                            <div className="text-muted-foreground mb-2">Underline Tabs:</div>
+                            <div className="space-y-1">
+                              <div>{'<TabsList variant="underline">'}</div>
+                              <div className="ml-4">{'  <TabsTrigger variant="underline" value="tab1">'}</div>
+                              <div className="ml-8">{"    Tab 1"}</div>
+                              <div className="ml-4">{"  </TabsTrigger>"}</div>
+                              <div>{"</TabsList>"}</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <h3 className="text-lg font-semibold mb-4">Dropdown Menus</h3>
+                    <div className="bg-muted p-6 rounded-lg">
+                      <BodyText className="mb-4 text-sm">
+                        Dropdown menus with smooth animations and submenu support.
+                      </BodyText>
+                      <div className="flex flex-wrap gap-4">
+                        <DropdownMenu>
+                          <DropdownMenuTrigger asChild>
+                            <Button variant="outline">
+                              Basic Menu
+                              <ChevronDownIcon className="ml-2 w-4 h-4" />
+                            </Button>
+                          </DropdownMenuTrigger>
+                          <DropdownMenuContent>
+                            <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                            <DropdownMenuSeparator />
+                            <DropdownMenuItem>View Details</DropdownMenuItem>
+                            <DropdownMenuItem>Edit Item</DropdownMenuItem>
+                            <DropdownMenuItem>Share</DropdownMenuItem>
+                            <DropdownMenuSeparator />
+                            <DropdownMenuItem className="text-destructive">Delete</DropdownMenuItem>
+                          </DropdownMenuContent>
+                        </DropdownMenu>
+
+                        <DropdownMenu>
+                          <DropdownMenuTrigger asChild>
+                            <Button variant="outline">
+                              With Submenu
+                              <ChevronDownIcon className="ml-2 w-4 h-4" />
+                            </Button>
+                          </DropdownMenuTrigger>
+                          <DropdownMenuContent>
+                            <DropdownMenuLabel>Options</DropdownMenuLabel>
+                            <DropdownMenuSeparator />
+                            <DropdownMenuItem>Profile</DropdownMenuItem>
+                            <DropdownMenuItem>Settings</DropdownMenuItem>
+                            <DropdownMenuSub>
+                              <DropdownMenuSubTrigger>More Options</DropdownMenuSubTrigger>
+                              <DropdownMenuSubContent>
+                                <DropdownMenuItem>Export Data</DropdownMenuItem>
+                                <DropdownMenuItem>Import Data</DropdownMenuItem>
+                                <DropdownMenuItem>Preferences</DropdownMenuItem>
+                              </DropdownMenuSubContent>
+                            </DropdownMenuSub>
+                            <DropdownMenuSeparator />
+                            <DropdownMenuItem>Logout</DropdownMenuItem>
+                          </DropdownMenuContent>
+                        </DropdownMenu>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <h3 className="text-lg font-semibold mb-4">Hover States</h3>
+                    <div className="bg-muted p-6 rounded-lg">
+                      <BodyText className="mb-4 text-sm">
+                        Interactive elements use consistent hover transitions.
+                      </BodyText>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="p-4 bg-background rounded-lg border-2 border-muted hover:border-primary transition-colors cursor-pointer">
+                          <h4 className="font-semibold mb-1">Card Hover</h4>
+                          <SmallText className="text-muted-foreground">Border changes from muted to primary</SmallText>
+                        </div>
+                        <div className="p-4 bg-background rounded-lg border border-border hover:bg-muted transition-colors cursor-pointer">
+                          <h4 className="font-semibold mb-1">Background Hover</h4>
+                          <SmallText className="text-muted-foreground">Background changes to muted</SmallText>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <h3 className="text-lg font-semibold mb-4">Animation Guidelines</h3>
+                    <div className="space-y-4">
+                      <div className="p-6 rounded-lg border border-border bg-card">
+                        <h4 className="font-semibold mb-3">Transition Timing</h4>
+                        <div className="space-y-2 text-sm">
+                          <div className="flex justify-between">
+                            <span>Fast (150ms)</span>
+                            <code className="text-xs bg-muted px-2 py-1 rounded">transition-colors</code>
+                          </div>
+                          <div className="flex justify-between">
+                            <span>Standard (300ms)</span>
+                            <code className="text-xs bg-muted px-2 py-1 rounded">transition-all duration-300</code>
+                          </div>
+                          <div className="flex justify-between">
+                            <span>Slow (500ms)</span>
+                            <code className="text-xs bg-muted px-2 py-1 rounded">transition-all duration-500</code>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="p-6 rounded-lg border border-border bg-card">
+                        <h4 className="font-semibold mb-3">Animation Patterns</h4>
+                        <ul className="text-sm space-y-2 list-disc list-inside">
+                          <li>Modals: Fade in with scale (zoom-in-95)</li>
+                          <li>Dropdowns: Slide in from trigger direction</li>
+                          <li>Tabs: Fade content transitions</li>
+                          <li>Hover: Color and background transitions</li>
+                          <li>Loading: Continuous spin animation</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </TabsContent>
           </div>
         </Tabs>
       </div>
@@ -912,13 +1455,5 @@ function SpacingExample({ size, label, description }: { size: string; label: str
       <div className="bg-primary rounded" style={{ height: "8px", width: size }} />
       <p className="text-xs text-muted-foreground mt-2">{description}</p>
     </div>
-  )
-}
-
-function PlusIcon() {
-  return (
-    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-    </svg>
   )
 }
