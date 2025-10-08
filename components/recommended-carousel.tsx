@@ -15,13 +15,10 @@ export function RecommendedCarousel({ products }: RecommendedCarouselProps) {
     <div className="flex flex-col gap-[20px] p-[20px] rounded-none bg-card py-10">
       <div className="flex justify-center gap-0">
         <div className="w-full max-w-[900px]">
-          <div className="flex flex-col pb-5 gap-5">
+          <div className="pb-5">
             <SectionHeading align="left" spacing="tight">
               Recommended
             </SectionHeading>
-            <p className="text-[16px] tracking-[-0.32px] text-foreground font-normal leading-[1.35]">
-              Complete you routine. Add a Cleanser and Serum to your Cream and save!
-            </p>
           </div>
 
           {/* Horizontal Scrollable Carousel */}
