@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Dialog, DialogContent, DialogClose } from "@/components/ui/dialog"
+import { Dialog, DialogContent, DialogClose, DialogTitle } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
 import { traits } from "@/lib/products"
 import { cn } from "@/lib/utils"
@@ -46,9 +46,9 @@ export function PersonalizeModal({ open, onOpenChange, onComplete }: Personalize
         showCloseButton={false}
       >
         <div className="sticky top-0 backdrop-blur-sm bg-white/95 px-5 py-4 flex items-center justify-between border-b border-border z-10">
-          <h2 className="font-medium tracking-[-0.48px] text-foreground leading-[1.15] text-lg">
+          <DialogTitle className="font-medium tracking-[-0.48px] text-foreground leading-[1.15] text-lg">
             Personalize Your Cream
-          </h2>
+          </DialogTitle>
           <div className="bg-muted rounded-full size-8 flex items-center justify-center shrink-0 ml-4">
             <DialogClose asChild>
               <button aria-label="Close">
