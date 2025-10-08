@@ -25,15 +25,7 @@ import { HeroSection } from "@/components/ui/hero-section"
 import { SectionContainer } from "@/components/ui/section-container"
 import { products } from "@/lib/products"
 import { Sheet, SheetContent } from "@/components/ui/sheet"
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
+import { Dialog, DialogContent, DialogTrigger, DialogClose } from "@/components/ui/dialog"
 import { Spinner } from "@/components/ui/spinner"
 import {
   DropdownMenu,
@@ -63,6 +55,7 @@ import {
   WindowIcon,
   ChevronDownIcon,
   PlusIcon,
+  XMarkIcon,
 } from "@heroicons/react/24/outline"
 
 export default function DesignSystemPage() {
@@ -1005,22 +998,36 @@ export default function DesignSystemPage() {
                         <DialogTrigger asChild>
                           <Button>Open Dialog</Button>
                         </DialogTrigger>
-                        <DialogContent>
-                          <DialogHeader>
-                            <DialogTitle>Dialog Title</DialogTitle>
-                            <DialogDescription>
+                        <DialogContent
+                          className="w-[calc(100%-2rem)] sm:w-[calc(100%-3rem)] md:w-full md:max-w-xl max-h-[90vh] overflow-y-auto p-0"
+                          showCloseButton={false}
+                        >
+                          <div className="sticky top-0 backdrop-blur-sm bg-white/95 px-5 py-4 flex items-center justify-between border-b border-border z-10">
+                            <h2 className="font-medium tracking-[-0.48px] text-foreground leading-[1.15] text-lg">
+                              Dialog Title
+                            </h2>
+                            <div className="bg-muted rounded-full size-8 flex items-center justify-center shrink-0 ml-4">
+                              <DialogClose asChild>
+                                <button aria-label="Close">
+                                  <XMarkIcon className="size-5 text-muted-foreground" />
+                                </button>
+                              </DialogClose>
+                            </div>
+                          </div>
+                          <div className="space-y-5 p-5">
+                            <BodyText className="text-sm">
                               This is a description of what the dialog is about. It provides context to the user.
-                            </DialogDescription>
-                          </DialogHeader>
-                          <div className="py-4">
+                            </BodyText>
                             <BodyText>
                               Dialog content goes here. You can add forms, text, or any other content.
                             </BodyText>
+                            <div className="flex gap-3 pt-2">
+                              <Button variant="outline" className="flex-1 bg-transparent">
+                                Cancel
+                              </Button>
+                              <Button className="flex-1">Confirm</Button>
+                            </div>
                           </div>
-                          <DialogFooter>
-                            <Button variant="outline">Cancel</Button>
-                            <Button>Confirm</Button>
-                          </DialogFooter>
                         </DialogContent>
                       </Dialog>
                     </div>
@@ -1036,32 +1043,44 @@ export default function DesignSystemPage() {
                         <DialogTrigger asChild>
                           <Button variant="outline">View Product</Button>
                         </DialogTrigger>
-                        <DialogContent className="p-0 gap-0 max-w-md">
-                          <div className="relative h-64 w-full bg-muted overflow-hidden rounded-t-lg">
+                        <DialogContent
+                          className="w-[calc(100%-2rem)] sm:w-[calc(100%-3rem)] md:w-full md:max-w-xl max-h-[90vh] overflow-y-auto p-0"
+                          showCloseButton={false}
+                        >
+                          <div className="sticky top-0 backdrop-blur-sm bg-white/95 px-5 py-4 flex items-center justify-between border-b border-border z-10">
+                            <h2 className="font-medium tracking-[-0.48px] text-foreground leading-[1.15] text-lg">
+                              Hydrating Serum
+                            </h2>
+                            <div className="bg-muted rounded-full size-8 flex items-center justify-center shrink-0 ml-4">
+                              <DialogClose asChild>
+                                <button aria-label="Close">
+                                  <XMarkIcon className="size-5 text-muted-foreground" />
+                                </button>
+                              </DialogClose>
+                            </div>
+                          </div>
+                          <div className="relative h-64 w-full bg-muted overflow-hidden">
                             <img
                               src="/minimalist-cosmetic-pump-bottle-product-photograph.jpg"
                               alt="Product"
                               className="w-full h-full object-cover"
                             />
                           </div>
-                          <div className="p-6">
-                            <DialogHeader>
-                              <DialogTitle>Hydrating Serum</DialogTitle>
-                              <DialogDescription>
-                                A lightweight, fast-absorbing serum that delivers deep hydration and plumps the skin.
-                              </DialogDescription>
-                            </DialogHeader>
-                            <div className="py-4">
-                              <BodyText className="mb-4">
-                                Formulated with hyaluronic acid and vitamin B5 to restore moisture balance and improve
-                                skin texture.
-                              </BodyText>
-                              <PriceDisplay amount={49.99} size="large" />
+                          <div className="space-y-5 p-5">
+                            <BodyText className="text-sm text-muted-foreground">
+                              A lightweight, fast-absorbing serum that delivers deep hydration and plumps the skin.
+                            </BodyText>
+                            <BodyText>
+                              Formulated with hyaluronic acid and vitamin B5 to restore moisture balance and improve
+                              skin texture.
+                            </BodyText>
+                            <PriceDisplay amount={49.99} size="large" />
+                            <div className="flex gap-3 pt-2">
+                              <Button variant="outline" className="flex-1 bg-transparent">
+                                Learn More
+                              </Button>
+                              <Button className="flex-1">Add to Cart</Button>
                             </div>
-                            <DialogFooter>
-                              <Button variant="outline">Learn More</Button>
-                              <Button>Add to Cart</Button>
-                            </DialogFooter>
                           </div>
                         </DialogContent>
                       </Dialog>
@@ -1075,63 +1094,51 @@ export default function DesignSystemPage() {
                         <DialogTrigger asChild>
                           <Button variant="destructive">Delete Item</Button>
                         </DialogTrigger>
-                        <DialogContent>
-                          <DialogHeader>
-                            <DialogTitle>Are you sure?</DialogTitle>
-                            <DialogDescription>
+                        <DialogContent
+                          className="w-[calc(100%-2rem)] sm:w-[calc(100%-3rem)] md:w-full md:max-w-md max-h-[90vh] overflow-y-auto p-0"
+                          showCloseButton={false}
+                        >
+                          <div className="sticky top-0 backdrop-blur-sm bg-white/95 px-5 py-4 flex items-center justify-between border-b border-border z-10">
+                            <h2 className="font-medium tracking-[-0.48px] text-foreground leading-[1.15] text-lg">
+                              Are you sure?
+                            </h2>
+                            <div className="bg-muted rounded-full size-8 flex items-center justify-center shrink-0 ml-4">
+                              <DialogClose asChild>
+                                <button aria-label="Close">
+                                  <XMarkIcon className="size-5 text-muted-foreground" />
+                                </button>
+                              </DialogClose>
+                            </div>
+                          </div>
+                          <div className="space-y-5 p-5">
+                            <BodyText className="text-sm">
                               This action cannot be undone. This will permanently delete the item.
-                            </DialogDescription>
-                          </DialogHeader>
-                          <DialogFooter>
-                            <Button variant="outline">Cancel</Button>
-                            <Button variant="destructive">Delete</Button>
-                          </DialogFooter>
+                            </BodyText>
+                            <div className="flex gap-3 pt-2">
+                              <Button variant="outline" className="flex-1 bg-transparent">
+                                Cancel
+                              </Button>
+                              <Button variant="destructive" className="flex-1">
+                                Delete
+                              </Button>
+                            </div>
+                          </div>
                         </DialogContent>
                       </Dialog>
                     </div>
                   </div>
 
                   <div>
-                    <h3 className="text-lg font-semibold mb-4">Dialog Variants</h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div className="p-4 rounded-lg border border-border bg-card">
-                        <h4 className="font-semibold mb-2">Standard</h4>
-                        <SmallText className="text-muted-foreground mb-3">Default dialog with close button</SmallText>
-                        <Dialog>
-                          <DialogTrigger asChild>
-                            <Button size="sm" variant="outline">
-                              Open
-                            </Button>
-                          </DialogTrigger>
-                          <DialogContent>
-                            <DialogHeader>
-                              <DialogTitle>Standard Dialog</DialogTitle>
-                            </DialogHeader>
-                            <BodyText>This dialog has a close button in the top right.</BodyText>
-                          </DialogContent>
-                        </Dialog>
-                      </div>
-
-                      <div className="p-4 rounded-lg border border-border bg-card">
-                        <h4 className="font-semibold mb-2">No Close Button</h4>
-                        <SmallText className="text-muted-foreground mb-3">Forces user to make a choice</SmallText>
-                        <Dialog>
-                          <DialogTrigger asChild>
-                            <Button size="sm" variant="outline">
-                              Open
-                            </Button>
-                          </DialogTrigger>
-                          <DialogContent showCloseButton={false}>
-                            <DialogHeader>
-                              <DialogTitle>Choose an Option</DialogTitle>
-                            </DialogHeader>
-                            <DialogFooter>
-                              <Button variant="outline">Option 1</Button>
-                              <Button>Option 2</Button>
-                            </DialogFooter>
-                          </DialogContent>
-                        </Dialog>
-                      </div>
+                    <h3 className="text-lg font-semibold mb-4">Modal Specifications</h3>
+                    <div className="p-6 rounded-lg border border-border space-y-3 font-mono text-sm bg-card">
+                      <div className="font-semibold text-base mb-2">Styling Pattern</div>
+                      <div>Width: w-[calc(100%-2rem)] sm:w-[calc(100%-3rem)] md:max-w-xl</div>
+                      <div>Max Height: max-h-[90vh] with overflow-y-auto</div>
+                      <div>Padding: p-0 (content areas use p-5)</div>
+                      <div>Header: Sticky with backdrop-blur-sm bg-white/95</div>
+                      <div>Close Button: bg-muted rounded-full size-8</div>
+                      <div>Content Spacing: space-y-5</div>
+                      <div>Border: border-b border-border on header</div>
                     </div>
                   </div>
 
@@ -1139,17 +1146,23 @@ export default function DesignSystemPage() {
                     <h3 className="text-lg font-semibold mb-4">Usage</h3>
                     <div className="p-6 rounded-lg border border-border space-y-2 font-mono text-sm bg-card">
                       <div className="text-green-600">
-                        {'import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"'}
+                        {'import { Dialog, DialogContent, DialogClose } from "@/components/ui/dialog"'}
                       </div>
+                      <div className="text-green-600">{'import { XMarkIcon } from "@heroicons/react/24/solid"'}</div>
                       <div className="mt-4">{"<Dialog>"}</div>
                       <div className="ml-4">{"  <DialogTrigger asChild>"}</div>
                       <div className="ml-8">{"    <Button>Open</Button>"}</div>
                       <div className="ml-4">{"  </DialogTrigger>"}</div>
-                      <div className="ml-4">{"  <DialogContent>"}</div>
-                      <div className="ml-8">{"    <DialogHeader>"}</div>
-                      <div className="ml-12">{"      <DialogTitle>Title</DialogTitle>"}</div>
-                      <div className="ml-8">{"    </DialogHeader>"}</div>
-                      <div className="ml-8">{"    {/* Content */}"}</div>
+                      <div className="ml-4">{'  <DialogContent className="p-0" showCloseButton={false}>'}</div>
+                      <div className="ml-8">
+                        {'    <div className="sticky top-0 backdrop-blur-sm bg-white/95 px-5 py-4">'}
+                      </div>
+                      <div className="ml-12">{"      <h2>Title</h2>"}</div>
+                      <div className="ml-12">{"      <DialogClose>...</DialogClose>"}</div>
+                      <div className="ml-8">{"    </div>"}</div>
+                      <div className="ml-8">{'    <div className="space-y-5 p-5">'}</div>
+                      <div className="ml-12">{"      {/* Content */}"}</div>
+                      <div className="ml-8">{"    </div>"}</div>
                       <div className="ml-4">{"  </DialogContent>"}</div>
                       <div>{"</Dialog>"}</div>
                     </div>
