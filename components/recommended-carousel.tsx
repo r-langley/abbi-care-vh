@@ -4,6 +4,7 @@ import { PlusIcon } from "@heroicons/react/24/solid"
 import Image from "next/image"
 import Link from "next/link"
 import type { Product } from "@/lib/products"
+import { SectionHeading } from "@/components/ui/typography"
 
 interface RecommendedCarouselProps {
   products: Product[]
@@ -15,9 +16,9 @@ export function RecommendedCarousel({ products }: RecommendedCarouselProps) {
       <div className="flex justify-center gap-0">
         <div className="w-full max-w-[900px]">
           <div className="flex flex-col pb-5 gap-5">
-            <h2 className="md:text-[40px] leading-[1.2] text-foreground font-sans tracking-tight font-medium text-xl">
+            <SectionHeading align="left" spacing="tight">
               Recommended
-            </h2>
+            </SectionHeading>
             <p className="text-[16px] tracking-[-0.32px] text-foreground font-normal leading-[1.35]">
               Complete you routine. Add a Cleanser and Serum to your Cream and save!
             </p>
