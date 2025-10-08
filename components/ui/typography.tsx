@@ -10,9 +10,9 @@ export function PageTitle({ className, variant = "default", ...props }: PageTitl
   return (
     <h1
       className={cn(
-        "text-balance text-foreground leading-7 font-medium tracking-tight text-3xl",
-        variant === "default" && "text-3xl md:text-4xl mb-4",
-        variant === "hero" && "text-2xl md:text-5xl lg:text-6xl mb-2 md:mb-4",
+        "text-balance text-foreground font-medium tracking-tight text-xl",
+        variant === "default" && "text-3xl md:text-4xl leading-7 mb-4",
+        variant === "hero" && "text-3xl md:text-6xl lg:text-7xl leading-none mb-2 md:mb-4",
         className,
       )}
       {...props}
@@ -30,7 +30,9 @@ export function SectionHeading({ className, align = "center", spacing = "default
   return (
     <h2
       className={cn(
-        "text-2xl md:text-3xl leading-7 font-semibold text-center md:text-left",
+        "text-2xl md:text-3xl leading-7 text-foreground font-medium",
+        align === "center" && "text-center md:text-left",
+        align === "left" && "text-left",
         spacing === "default" && "mb-12 md:mb-16",
         spacing === "tight" && "mb-4 md:mb-6",
         className,
@@ -66,15 +68,15 @@ export function CardTitle({ className, variant = "default", ...props }: CardTitl
 
 // Body Text Variants
 export function BodyText({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
-  return <p className={cn("text-base text-foreground leading-relaxed", className)} {...props} />
-}
-
-export function SmallText({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
   return null
 }
 
+export function SmallText({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
+  return <p className={cn("text-sm leading-relaxed text-muted-foreground", className)} {...props} />
+}
+
 export function ExtraSmallText({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
-  return <p className={cn("text-xs text-muted-foreground", className)} {...props} />
+  return <p className={cn("text-xs leading-relaxed text-muted-foreground", className)} {...props} />
 }
 
 // Price Display
@@ -97,5 +99,24 @@ export function PriceDisplay({ amount, size = "default", className, ...props }: 
     >
       ${amount}
     </span>
+  )
+}
+
+interface SectionProps {
+  heading: React.ReactNode
+  body?: React.ReactNode
+  align?: "left" | "center"
+  spacing?: "default" | "tight"
+  className?: string
+}
+
+export function Section({ heading, body, align = "center", spacing = "default", className }: SectionProps) {
+  return (
+    <div className={cn(align === "center" && "text-center", align === "left" && "text-left", className)}>
+      <SectionHeading align={align} spacing={spacing}>
+        {heading}
+      </SectionHeading>
+      {body && <BodyText>{body}</BodyText>}
+    </div>
   )
 }
