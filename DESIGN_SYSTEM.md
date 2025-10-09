@@ -1,21 +1,41 @@
 # ABBI Design System
 
-## Color Palette
+> **Comprehensive design system documentation for developers**  
+> This document serves as the single source of truth for all UI components, patterns, and design tokens in the ABBI application.
 
-### Primary Colors
+## Table of Contents
+1. [Foundation](#foundation) - Colors, Typography, Spacing
+2. [Atomic Components](#atomic-components) - Basic UI elements
+3. [Composite Components](#composite-components) - Complex, reusable patterns
+4. [Layout Patterns](#layout-patterns) - Grids, sections, containers
+5. [Design Tokens](#design-tokens) - Programmatic access
+6. [Best Practices](#best-practices) - Guidelines and conventions
+
+---
+
+## Foundation
+
+### Color Palette
+
+#### Primary Colors
 - **Sea Slate**: `#586158` - Primary brand color, buttons, active states
+  - CSS Variable: `--primary`
+  - Tailwind: `bg-primary`, `text-primary`, `border-primary`
 - **Sage**: `#f5f6f5` - Background, card details sections
+  - CSS Variable: `--muted`
+  - Tailwind: `bg-muted`, `text-muted`, `border-muted`
 - **Evergreen**: `#3e463e` - Darker accent
+  - CSS Variable: `--evergreen`
 
-### Status Colors
+#### Status Colors
 - **Red**: `#ff3b30` - Low scores, needs attention
 - **Orange**: `#ff9500` - Moderate scores
 - **Green**: `#34c759` - Good scores
 
-### Neutral Colors
-- **Black**: `#000000` - Primary text
-- **White**: `#ffffff` - Backgrounds, cards
-- **Gray**: `#e7e7e7` - Borders, dividers
+#### Neutral Colors
+- **Black**: `#000000` - Primary text (`--foreground`)
+- **White**: `#ffffff` - Backgrounds, cards (`--background`)
+- **Gray**: `#e7e7e7` - Borders, dividers (`--border`)
 
 ## Typography
 
@@ -166,13 +186,48 @@
 - SkinResultsSheet
 - TraitFilter
 
+## Design Tokens
+
+### CSS Variables (Preferred)
+Always use CSS variables for colors instead of hardcoded hex values:
+
+\`\`\`tsx
+// ✅ CORRECT - Use semantic tokens
+className="bg-primary text-primary-foreground"
+className="border-muted hover:border-primary"
+className="bg-muted text-primary"
+
+// ❌ WRONG - Don't hardcode colors
+className="bg-[#586158] text-white"
+className="border-[#f5f6f5] hover:border-[#586158]"
+\`\`\`
+
+### Available Semantic Tokens
+- `--primary`: Sea Slate (#586158)
+- `--primary-foreground`: White
+- `--secondary` / `--muted`: Sage (#f5f6f5)
+- `--accent`: Sea Slate
+- `--background`: White
+- `--foreground`: Black
+- `--border`: Sage
+- `--destructive`: Status Red
+
+### TypeScript Constants
+Import from `@/lib/design-tokens` for programmatic use:
+
+\`\`\`tsx
+import { COLORS, SPACING, CARD, CSS_VARS } from '@/lib/design-tokens'
+\`\`\`
+
 ## Best Practices
 
 1. **Consistency**: Use existing components, don't create duplicates
 2. **Spacing**: Follow the spacing system (5px, 10px, 20px, 23px)
-3. **Colors**: Use design tokens, not hard-coded values
+3. **Colors**: ALWAYS use CSS variables/Tailwind classes, NEVER hardcode hex values
 4. **Typography**: Match font sizes and tracking exactly
 5. **Borders**: 2px for cards, 1px for dividers
-6. **Hover**: Always include hover states
+6. **Hover**: Always include hover states with `transition-colors` or `transition-opacity`
 7. **Accessibility**: Include sr-only titles, alt text
 8. **Responsive**: Mobile-first, use max-width constraints
+9. **Font Mono**: Use `font-mono` class instead of inline `fontFamily` styles
+10. **Card Components**: Use shared card patterns from `ui/base-card.tsx` when possible

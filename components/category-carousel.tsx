@@ -19,7 +19,7 @@ export function CategoryCarousel({ title, description, products, shopLink }: Cat
     <div className="space-y-5">
       {/* Category Header */}
       <div className="text-center md:text-left">
-        <h3 className="md:text-2xl font-semibold text-foreground mb-1 font-sans text-left text-2xl">{title}</h3>
+        <h3 className="md:text-2xl text-foreground mb-1 font-sans text-left text-2xl font-medium">{title}</h3>
         <p className="text-[16px] font-medium tracking-[-0.32px] text-muted-foreground text-left leading-[1.35]">
           {description}
         </p>
