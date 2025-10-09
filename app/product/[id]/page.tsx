@@ -14,6 +14,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { MinusIcon, PlusIcon, ChevronRightIcon, ChevronLeftIcon } from "@heroicons/react/24/solid"
 import { getProductById, products, traits } from "@/lib/products"
 import { useCart } from "@/lib/cart-context"
+import { useAuth } from "@/lib/auth-context"
 import { ActiveIngredientCard } from "@/components/active-ingredient-card"
 import { PRODUCT_CATEGORIES } from "@/lib/constants"
 import { getIngredientsByTraits } from "@/lib/ingredients-data"
@@ -104,10 +105,12 @@ export default function ProductPage() {
 
   const [quantity, setQuantity] = useState(1)
   const { addItem } = useCart()
+  const { isLoggedIn } = useAuth()
 
   const [selectedTraits, setSelectedTraits] = useState<string[]>([])
   const [age, setAge] = useState<number>(40)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  const [isEditingBase, setIsEditingBase] = useState(false)
 
   useEffect(() => {
     const personalizeData = localStorage.getItem("personalizeData")
@@ -118,24 +121,8 @@ export default function ProductPage() {
     }
   }, [])
 
-  if (!product && !isCustomCream) {
-    return (
-      <>
-        <Header />
-        <div className="container mx-auto px-4 py-20 text-center">
-          <h1 className="text-2xl font-bold mb-4">Product not found</h1>
-          <Button asChild>
-            <Link href="/shop">Back to Shop</Link>
-          </Button>
-        </div>
-        <Footer />
-      </>
-    )
-  }
-
   const handleAddToCart = () => {
     if (isCustomCream && customBase) {
-      // Create a temporary product object for custom cream
       const customProduct = {
         id: customBase.id,
         name: customBase.name,
@@ -168,14 +155,12 @@ export default function ProductPage() {
   const isInLabCream = isCustomCream || product?.category === PRODUCT_CATEGORIES.IN_LAB_CREAM
   const isMixAtHomeCream = !isCustomCream && product?.category === "Mix at Home Cream"
 
-  // Active Ingredients for Custom Creams (In-Lab) - based on product traits
   const activeIngredients = isCustomCream
     ? customBase?.activeIngredients || []
     : product
       ? getIngredientsByTraits(product.traits).slice(0, 3)
       : []
 
-  // Active Concentrates for Mix at Home Creams
   const activeConcentrates = products.filter((p) => p.category === "Active Concentrate").slice(0, 3)
 
   const carouselImages = [
@@ -189,12 +174,21 @@ export default function ProductPage() {
   const displayPrice = isCustomCream ? 89.0 : product?.price
   const displayTraits = isCustomCream ? customBase?.traits : product?.traits
 
+  const baseMatchesTraits = (baseTraits: string[]) => {
+    if (selectedTraits.length === 0) return false
+    return selectedTraits.some((trait) => baseTraits.includes(trait))
+  }
+
+  const traitInSelectedBase = (traitId: string) => {
+    if (!customBase) return false
+    return customBase.traits.includes(traitId)
+  }
+
   return (
     <>
       <Header />
       <main className="min-h-screen">
         <div className="container mx-auto px-5 py-5 pt-2.5">
-          {/* Breadcrumbs */}
           <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2.5">
             <Link href="/" className="hover:text-foreground">
               Home
@@ -207,9 +201,7 @@ export default function ProductPage() {
             <span className="text-foreground">{isCustomCream ? "Custom Cream" : displayName}</span>
           </div>
 
-          {/* Product Details */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
-            {/* Left: Image or Carousel */}
             <div className="space-y-4 lg:sticky lg:top-24 lg:self-start">
               {isCustomCream ? (
                 <div className="relative">
@@ -270,7 +262,6 @@ export default function ProductPage() {
               )}
             </div>
 
-            {/* Right: Details */}
             <div className="space-y-5">
               {product?.recommended && (
                 <Badge variant="secondary" className="font-mono text-xs">
@@ -290,32 +281,137 @@ export default function ProductPage() {
 
               {isCustomCream && (
                 <div className="border-t border-border pt-5">
-                  <div className="space-y-3">
-                    <h3 className="font-medium text-sm">Select Base Type</h3>
-                    <div className="grid grid-cols-1 gap-2">
-                      {CUSTOM_CREAM_BASES.map((base, index) => (
-                        <button
-                          key={base.id}
-                          onClick={() => setSelectedBaseIndex(index)}
-                          className={cn(
-                            "text-left p-3 rounded-lg border-2 transition-colors",
-                            selectedBaseIndex === index
-                              ? "border-primary bg-primary/5"
-                              : "border-muted hover:border-primary/50",
-                          )}
-                        >
-                          <div className="font-medium text-sm">{base.name}</div>
-                          <div className="text-xs text-muted-foreground mt-1">
-                            {base.activeIngredients.length} active ingredients
-                          </div>
+                  {isLoggedIn && !isEditingBase ? (
+                    <div className="space-y-3">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <h3 className="font-medium text-sm">Selected Base</h3>
+                          <p className="text-sm text-muted-foreground mt-1">{customBase?.name}</p>
+                        </div>
+                        <button onClick={() => setIsEditingBase(true)} className="text-sm text-primary hover:underline">
+                          Change Base
                         </button>
-                      ))}
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="space-y-4">
+                      <div>
+                        <h3 className="font-medium text-sm mb-2">Select Your Top 3 Skin Priorities</h3>
+                        <p className="text-xs text-muted-foreground mb-3">
+                          Choose your main concerns to see which base is best for you
+                        </p>
+                        <div className="flex flex-wrap gap-[5px]">
+                          {traits.map((trait) => {
+                            const isSelected = selectedTraits.includes(trait.id)
+                            const isDisabled = !isSelected && selectedTraits.length >= 3
+                            const matchesBase = traitInSelectedBase(trait.id)
+
+                            return (
+                              <button
+                                key={trait.id}
+                                onClick={() => !isDisabled && toggleTrait(trait.id)}
+                                disabled={isDisabled}
+                                className={cn(
+                                  "flex items-center gap-[5px] px-[10px] py-[5px] rounded-[100px] shrink-0 transition-all",
+                                  isSelected
+                                    ? "bg-primary text-primary-foreground"
+                                    : matchesBase
+                                      ? "bg-primary/20 text-primary border-2 border-primary"
+                                      : isDisabled
+                                        ? "bg-muted text-muted-foreground opacity-50 cursor-not-allowed"
+                                        : "bg-muted text-muted-foreground hover:bg-primary/10",
+                                )}
+                              >
+                                <span className="text-[14px] whitespace-nowrap font-medium">{trait.name}</span>
+                              </button>
+                            )
+                          })}
+                        </div>
+                      </div>
+
+                      <div>
+                        <h3 className="font-medium text-sm mb-3">Select Base Type</h3>
+                        <div className="grid grid-cols-2 gap-2">
+                          {CUSTOM_CREAM_BASES.map((base, index) => {
+                            const matchesTraits = baseMatchesTraits(base.traits)
+
+                            return (
+                              <button
+                                key={base.id}
+                                onClick={() => {
+                                  setSelectedBaseIndex(index)
+                                  if (isLoggedIn) setIsEditingBase(false)
+                                }}
+                                className={cn(
+                                  "text-left p-3 rounded-lg border-2 transition-all",
+                                  selectedBaseIndex === index
+                                    ? "border-primary bg-primary/5"
+                                    : matchesTraits
+                                      ? "border-primary/50 bg-primary/5"
+                                      : "border-muted hover:border-primary/30",
+                                )}
+                              >
+                                <div className="flex items-start gap-2">
+                                  <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center shrink-0 mt-0.5">
+                                    <span className="text-xs font-mono text-primary">
+                                      {base.activeIngredients.length}
+                                    </span>
+                                  </div>
+                                  <div className="flex-1 min-w-0">
+                                    <div className="font-medium text-sm leading-tight">{base.name}</div>
+                                    <div className="flex flex-wrap gap-1 mt-1.5">
+                                      {base.traits.map((trait) => (
+                                        <span
+                                          key={trait}
+                                          className="text-[10px] px-1.5 py-0.5 rounded bg-muted text-muted-foreground"
+                                        >
+                                          {trait}
+                                        </span>
+                                      ))}
+                                    </div>
+                                  </div>
+                                </div>
+                              </button>
+                            )
+                          })}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {isCustomCream && (!isLoggedIn || isEditingBase) && (
+                <div className="border-t border-border pt-5">
+                  <div className="space-y-4">
+                    <div>
+                      <h3 className="font-medium text-sm mb-2">Your Age</h3>
+                      <select
+                        value={age}
+                        onChange={(e) => setAge(Number(e.target.value))}
+                        className="w-full rounded-[10px] border-2 border-muted text-sm bg-background focus:outline-none focus:border-primary transition-colors px-3 py-2 text-foreground"
+                      >
+                        {Array.from({ length: 63 }, (_, i) => i + 18).map((ageOption) => (
+                          <option key={ageOption} value={ageOption}>
+                            {ageOption}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div className="pt-2">
+                      <Link
+                        href="/skin-analysis"
+                        className="text-xs text-muted-foreground hover:text-foreground underline"
+                      >
+                        Want better results? Try our AI skin scan
+                      </Link>
                     </div>
                   </div>
                 </div>
               )}
 
-              {(isMixAtHomeCream || isInLabCream) && (
+              {(isMixAtHomeCream || isInLabCream) && !isCustomCream && (
                 <div className="border-t border-border pt-5">
                   <div className="space-y-4">
                     <div>
@@ -376,7 +472,6 @@ export default function ProductPage() {
                 </div>
               )}
 
-              {/* Skin Traits */}
               {!isMixAtHomeCream && !isInLabCream && displayTraits && (
                 <div>
                   <h3 className="font-mono text-sm mb-3">Best for:</h3>
@@ -394,7 +489,6 @@ export default function ProductPage() {
                 </div>
               )}
 
-              {/* Quantity */}
               <div>
                 <Label className="font-mono text-sm mb-3 block">Quantity:</Label>
                 <div className="flex items-center gap-4">
@@ -415,7 +509,6 @@ export default function ProductPage() {
                 </div>
               </div>
 
-              {/* Actions */}
               <div className="space-y-3">
                 <Button size="lg" className="w-full font-mono" onClick={handleAddToCart}>
                   Add to Cart
@@ -444,7 +537,6 @@ export default function ProductPage() {
                 </div>
               )}
 
-              {/* Active Ingredients for In-Lab Creams (non-custom) */}
               {isInLabCream && !isCustomCream && (
                 <div className="space-y-4 pt-4 border-t border-border">
                   <div>
@@ -467,7 +559,6 @@ export default function ProductPage() {
                 </div>
               )}
 
-              {/* Active Concentrates for Mix at Home Creams */}
               {isMixAtHomeCream && (
                 <div className="space-y-4 pt-4 border-t border-border">
                   <div>
@@ -490,7 +581,6 @@ export default function ProductPage() {
                 </div>
               )}
 
-              {/* Accordion Details */}
               <Accordion type="single" collapsible className="w-full">
                 {!isInLabCream && (
                   <AccordionItem value="ingredients">
