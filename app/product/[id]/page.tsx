@@ -2,7 +2,7 @@
 
 import type React from "react"
 import { RecommendedBadge } from "@/components/recommended-badge"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useParams } from "next/navigation"
 import Link from "next/link"
 import Image from "next/image"
@@ -12,18 +12,31 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { MinusIcon, PlusIcon, ChevronRightIcon } from "@heroicons/react/24/solid"
-import { getProductById, products } from "@/lib/products"
+import { getProductById, products, traits } from "@/lib/products"
 import { useCart } from "@/lib/cart-context"
 import { ActiveIngredientCard } from "@/components/active-ingredient-card"
 import { PRODUCT_CATEGORIES } from "@/lib/constants"
 import { getIngredientsByTraits } from "@/lib/ingredients-data"
 import { IngredientCard } from "@/components/ingredient-card"
+import { cn } from "@/lib/utils"
 
 export default function ProductPage() {
   const params = useParams()
   const product = getProductById(params.id as string)
   const [quantity, setQuantity] = useState(1)
   const { addItem } = useCart()
+
+  const [selectedTraits, setSelectedTraits] = useState<string[]>([])
+  const [age, setAge] = useState<number>(40)
+
+  useEffect(() => {
+    const personalizeData = localStorage.getItem("personalizeData")
+    if (personalizeData) {
+      const data = JSON.parse(personalizeData)
+      setSelectedTraits(data.traits || [])
+      setAge(data.age || 40)
+    }
+  }, [])
 
   if (!product) {
     return (
@@ -42,6 +55,18 @@ export default function ProductPage() {
 
   const handleAddToCart = () => {
     addItem(product, quantity)
+  }
+
+  const toggleTrait = (traitId: string) => {
+    setSelectedTraits((prev) => {
+      if (prev.includes(traitId)) {
+        return prev.filter((t) => t !== traitId)
+      }
+      if (prev.length < 3) {
+        return [...prev, traitId]
+      }
+      return prev
+    })
   }
 
   const isInLabCream = product.category === PRODUCT_CATEGORIES.IN_LAB_CREAM
@@ -105,21 +130,84 @@ export default function ProductPage() {
                 {product.description}
               </p>
 
-              {/* Skin Traits */}
-              <div>
-                <h3 className="font-mono text-sm mb-3">Best for:</h3>
-                <div className="flex flex-wrap gap-2">
-                  {product.traits.map((trait) => (
-                    <Link
-                      key={trait}
-                      href={`/shop?category=creams&traits=${trait.toLowerCase()}`}
-                      className="flex items-center gap-[5px] px-[10px] py-[5px] rounded-[100px] shrink-0 transition-colors bg-[#f5f6f5] text-[#586158] hover:bg-[#586158] hover:text-[#f5f6f5]"
-                    >
-                      <span className="font-semibold text-[14px] whitespace-nowrap">{trait}</span>
-                    </Link>
-                  ))}
+              {(isMixAtHomeCream || isInLabCream) && (
+                <div className="border-t border-border pt-5">
+                  <div className="space-y-4">
+                    <div>
+                      <h3 className="font-medium text-sm mb-2">Select Your Top 3 Skin Priorities</h3>
+                      <p className="text-xs text-muted-foreground mb-3">
+                        Choose your main concerns to get personalized active concentrate recommendations
+                      </p>
+                      <div className="flex flex-wrap gap-[5px]">
+                        {traits.map((trait) => {
+                          const isSelected = selectedTraits.includes(trait.id)
+                          const isDisabled = !isSelected && selectedTraits.length >= 3
+
+                          return (
+                            <button
+                              key={trait.id}
+                              onClick={() => !isDisabled && toggleTrait(trait.id)}
+                              disabled={isDisabled}
+                              className={cn(
+                                "flex items-center gap-[5px] px-[10px] py-[5px] rounded-[100px] shrink-0 transition-colors",
+                                isSelected
+                                  ? "bg-primary text-primary-foreground"
+                                  : isDisabled
+                                    ? "bg-muted text-muted-foreground opacity-50 cursor-not-allowed"
+                                    : "bg-muted text-muted-foreground hover:bg-primary/10",
+                              )}
+                            >
+                              <span className="text-[14px] whitespace-nowrap font-medium">{trait.name}</span>
+                            </button>
+                          )
+                        })}
+                      </div>
+                    </div>
+
+                    <div>
+                      <h3 className="font-medium text-sm mb-2">Your Age</h3>
+                      <select
+                        value={age}
+                        onChange={(e) => setAge(Number(e.target.value))}
+                        className="w-full rounded-[10px] border-2 border-muted text-sm bg-background focus:outline-none focus:border-primary transition-colors px-3 py-2 text-foreground"
+                      >
+                        {Array.from({ length: 63 }, (_, i) => i + 18).map((ageOption) => (
+                          <option key={ageOption} value={ageOption}>
+                            {ageOption}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div className="pt-2">
+                      <Link
+                        href="/skin-analysis"
+                        className="text-xs text-muted-foreground hover:text-foreground underline"
+                      >
+                        Want better results? Try our AI skin scan
+                      </Link>
+                    </div>
+                  </div>
                 </div>
-              </div>
+              )}
+
+              {/* Skin Traits */}
+              {!isMixAtHomeCream && !isInLabCream && (
+                <div>
+                  <h3 className="font-mono text-sm mb-3">Best for:</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {product.traits.map((trait) => (
+                      <Link
+                        key={trait}
+                        href={`/shop?category=creams&traits=${trait.toLowerCase()}`}
+                        className="flex items-center gap-[5px] px-[10px] py-[5px] rounded-[100px] shrink-0 transition-colors bg-[#f5f6f5] text-[#586158] hover:bg-[#586158] hover:text-[#f5f6f5]"
+                      >
+                        <span className="font-semibold text-[14px] whitespace-nowrap">{trait}</span>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
 
               {/* Quantity */}
               <div>

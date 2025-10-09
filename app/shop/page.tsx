@@ -1,12 +1,12 @@
 "use client"
 
-import { useMemo, useEffect, useState } from "react"
+import { useMemo, useEffect, useState, useRef } from "react"
 import { useSearchParams } from "next/navigation"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { ProductCard } from "@/components/product-card"
 import { products } from "@/lib/products"
-import { HeroSection } from "@/components/ui/hero-section" // Import HeroSection component
+import { HeroSection } from "@/components/ui/hero-section"
 import { PRODUCT_CATEGORIES, SHOP_CATEGORIES } from "@/lib/constants"
 import { TraitFilter } from "@/components/trait-filter"
 import { ProductCombos } from "@/components/product-combos"
@@ -20,7 +20,6 @@ import { PlusIcon, CheckIcon } from "@heroicons/react/24/outline"
 import { IngredientCarousel } from "@/components/ingredient-carousel"
 import { RecommendedBadge } from "@/components/recommended-badge"
 import { RecommendedCarousel } from "@/components/recommended-carousel"
-import { PersonalizeCreamCTA } from "@/components/personalize-cream-cta"
 import { PersonalizeModal } from "@/components/personalize-modal"
 
 export default function ShopPage() {
@@ -45,6 +44,8 @@ export default function ShopPage() {
     age: number
   } | null>(null)
   const [showPersonalizeModal, setShowPersonalizeModal] = useState(false)
+
+  const activeConcentratesRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     if (!isLoggedIn) {
@@ -73,6 +74,15 @@ export default function ShopPage() {
   const handlePersonalizeComplete = (data: { traits: string[]; age: number }) => {
     localStorage.setItem("personalizeData", JSON.stringify(data))
     setPersonalizeData(data)
+  }
+
+  const handleMixAtHomePersonalizeComplete = (data: { traits: string[]; age: number }) => {
+    localStorage.setItem("personalizeData", JSON.stringify(data))
+    setPersonalizeData(data)
+    // Scroll to active concentrates section
+    setTimeout(() => {
+      activeConcentratesRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })
+    }, 100)
   }
 
   const { filteredProducts, groupedCreams } = useMemo(() => {
@@ -360,7 +370,29 @@ export default function ShopPage() {
 
                     <div className="w-full">
                       {!isLoggedIn && !scanResults && selectedTraits.length === 0 ? (
-                        <PersonalizeCreamCTA onClick={() => setShowPersonalizeModal(true)} />
+                        <Link
+                          href="/custom-cream"
+                          className="bg-white rounded-[10px] border-2 border-muted overflow-hidden flex flex-col hover:border-primary transition-colors w-full cursor-pointer"
+                        >
+                          <div className="relative h-[200px] overflow-hidden bg-muted">
+                            <Image
+                              src="/images/design-mode/image(1).png"
+                              alt="Custom cream"
+                              fill
+                              className="object-cover bg-card border-2 border-muted rounded-xl border-b-0"
+                              loading="lazy"
+                              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                            />
+                          </div>
+                          <div className="bg-muted p-4 flex flex-col items-center justify-center gap-3">
+                            <p className="font-medium text-[18px] leading-[1.2] text-foreground text-center">
+                              Custom Cream
+                            </p>
+                            <div className="bg-primary text-primary-foreground hover:bg-primary/90 font-sans px-4 py-2 rounded-md text-sm font-medium">
+                              Explore Types
+                            </div>
+                          </div>
+                        </Link>
                       ) : (
                         <div className="grid grid-cols-2 md:grid-cols-1 gap-[10px]">
                           {groupedCreams.inLab.slice(0, 1).map((product) => (
@@ -397,6 +429,7 @@ export default function ShopPage() {
                         key={product.id}
                         product={product}
                         showRecommended={showScanResults || selectedTraits.length > 0}
+                        onPersonalizeComplete={handleMixAtHomePersonalizeComplete}
                       />
                     ))}
                   </div>
@@ -404,7 +437,7 @@ export default function ShopPage() {
               )}
 
               {sortedActiveConcentrates.length > 0 && (
-                <div className="flex flex-col gap-[20px]">
+                <div ref={activeConcentratesRef} className="flex flex-col gap-[20px]">
                   <div className="flex flex-col gap-2.5">
                     <h2 className="text-[#586158] text-foreground text-2xl tracking-tight font-medium">
                       Active Concentrates
