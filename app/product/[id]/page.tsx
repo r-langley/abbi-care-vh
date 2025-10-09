@@ -11,7 +11,7 @@ import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import { MinusIcon, PlusIcon, ChevronRightIcon } from "@heroicons/react/24/solid"
+import { MinusIcon, PlusIcon, ChevronRightIcon, ChevronLeftIcon } from "@heroicons/react/24/solid"
 import { getProductById, products, traits } from "@/lib/products"
 import { useCart } from "@/lib/cart-context"
 import { ActiveIngredientCard } from "@/components/active-ingredient-card"
@@ -20,14 +20,94 @@ import { getIngredientsByTraits } from "@/lib/ingredients-data"
 import { IngredientCard } from "@/components/ingredient-card"
 import { cn } from "@/lib/utils"
 
+const CUSTOM_CREAM_BASES = [
+  {
+    id: "inlab-aloe-vera",
+    name: "Aloe Vera Base",
+    description: "Soothing aloe vera base cream with calming and hydrating properties.",
+    traits: ["Hydration", "Sensitivity"],
+    activeIngredients: [
+      { number: 12, name: "Wild Acanthus Dermal Protector", description: "Shields and repairs skin barrier." },
+      { number: 14, name: "Organic Brown Flax Seed Soother", description: "Prevents irritation and calms skin." },
+      { number: 21, name: "Japanese Cedar Hydration Enhancer", description: "Renews layers and prevents dehydration." },
+      { number: 23, name: "Chestnut Epidermal Moisture Promoter", description: "Restores moisture balance." },
+      { number: 25, name: "Corn Glucose Hydration Biopolymer", description: "Deeply hydrates and soothes." },
+    ],
+  },
+  {
+    id: "inlab-apple-stem-cells",
+    name: "Apple Stem Cells Base",
+    description: "Advanced apple stem cell formula that promotes skin renewal and fights aging.",
+    traits: ["Wrinkles", "Radiance"],
+    activeIngredients: [
+      { number: 1, name: "Soybean Collagen Booster", description: "Reduces wrinkles and strengthens skin." },
+      { number: 3, name: "Yarrow Epidermal Regenerator", description: "Smooths wrinkles and restores lipids." },
+      { number: 4, name: "Grape Juice Polyphenol Protector", description: "Prevents aging and protects DNA." },
+      { number: 6, name: "Nasturtium Oxygen Booster", description: "Enhances oxygen barrier for radiance." },
+      { number: 18, name: "Biotechnology Skin Detoxifier", description: "Stimulates waste elimination." },
+      { number: 24, name: "Brazilian Bark Cell-Renewal Energizer", description: "Boosts cell renewal and lifespan." },
+    ],
+  },
+  {
+    id: "inlab-honey-shea",
+    name: "Honey & Shea Butter Base",
+    description: "Rich honey and shea butter blend that deeply nourishes and protects.",
+    traits: ["Hydration", "Sensitivity"],
+    activeIngredients: [
+      { number: 12, name: "Wild Acanthus Dermal Protector", description: "Shields and repairs skin barrier." },
+      { number: 15, name: "Red Sage Sensitive Skin Protector", description: "Calms and reduces redness." },
+      { number: 16, name: "Marine Brown Algae Soothing Shield", description: "Prevents redness and soothes." },
+      { number: 23, name: "Chestnut Epidermal Moisture Promoter", description: "Restores moisture balance." },
+      { number: 26, name: "Pearl Chemistry Moisture Lock", description: "Locks in moisture and strengthens barrier." },
+    ],
+  },
+  {
+    id: "inlab-selenium-vitamin-c",
+    name: "Selenium & Vitamin C Base",
+    description: "Brightening formula with selenium and vitamin C to even skin tone.",
+    traits: ["Radiance", "Spots"],
+    activeIngredients: [
+      { number: 6, name: "Nasturtium Oxygen Booster", description: "Enhances oxygen barrier for radiance." },
+      { number: 7, name: "Berry Complexion Illuminator", description: "Reduces dark spots and blemishes." },
+      { number: 8, name: "Berry Pigmentation Balancer", description: "Evens tone and reduces spots." },
+      { number: 9, name: "Green Chemistry Anti-Glycation Salt", description: "Unifies complexion and firms." },
+      { number: 13, name: "Pre-Probiotic Microbiota Balancer", description: "Enhances radiance and comfort." },
+      { number: 18, name: "Biotechnology Skin Detoxifier", description: "Stimulates waste elimination." },
+      { number: 19, name: "Soybean and Enoki Pigmentation Corrector", description: "Corrects pigmentation." },
+    ],
+  },
+  {
+    id: "inlab-peptide-complex",
+    name: "Peptide Complex Base",
+    description: "Advanced peptide formula that firms and smooths skin.",
+    traits: ["Wrinkles", "Texture"],
+    activeIngredients: [
+      { number: 1, name: "Soybean Collagen Booster", description: "Reduces wrinkles and strengthens skin." },
+      { number: 2, name: "Organic Oat Lifting Complex", description: "Instantly firms and lifts skin." },
+      { number: 3, name: "Yarrow Epidermal Regenerator", description: "Smooths wrinkles and restores lipids." },
+      { number: 5, name: "Brèdes Mafane Wrinkle Reducer", description: "Instantly smooths skin." },
+      { number: 9, name: "Green Chemistry Anti-Glycation Salt", description: "Unifies complexion and firms." },
+      { number: 10, name: "Meadowsweet Sebum-Regulation Salt", description: "Alleviates skin texture." },
+    ],
+  },
+]
+
 export default function ProductPage() {
   const params = useParams()
-  const product = getProductById(params.id as string)
+  const productId = params.id as string
+
+  const isCustomCream = productId === "custom-cream"
+  const [selectedBaseIndex, setSelectedBaseIndex] = useState(0)
+
+  const product = isCustomCream ? null : getProductById(productId)
+  const customBase = isCustomCream ? CUSTOM_CREAM_BASES[selectedBaseIndex] : null
+
   const [quantity, setQuantity] = useState(1)
   const { addItem } = useCart()
 
   const [selectedTraits, setSelectedTraits] = useState<string[]>([])
   const [age, setAge] = useState<number>(40)
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
 
   useEffect(() => {
     const personalizeData = localStorage.getItem("personalizeData")
@@ -38,7 +118,7 @@ export default function ProductPage() {
     }
   }, [])
 
-  if (!product) {
+  if (!product && !isCustomCream) {
     return (
       <>
         <Header />
@@ -54,7 +134,23 @@ export default function ProductPage() {
   }
 
   const handleAddToCart = () => {
-    addItem(product, quantity)
+    if (isCustomCream && customBase) {
+      // Create a temporary product object for custom cream
+      const customProduct = {
+        id: customBase.id,
+        name: customBase.name,
+        category: PRODUCT_CATEGORIES.IN_LAB_CREAM,
+        price: 89.0,
+        description: customBase.description,
+        traits: customBase.traits,
+        image: "/minimalist-cosmetic-pump-bottle-product-photograph.jpg",
+        inStock: true,
+        recommended: false,
+      }
+      addItem(customProduct, quantity)
+    } else if (product) {
+      addItem(product, quantity)
+    }
   }
 
   const toggleTrait = (traitId: string) => {
@@ -69,14 +165,29 @@ export default function ProductPage() {
     })
   }
 
-  const isInLabCream = product.category === PRODUCT_CATEGORIES.IN_LAB_CREAM
-  const isMixAtHomeCream = product.category === "Mix at Home Cream"
+  const isInLabCream = isCustomCream || product?.category === PRODUCT_CATEGORIES.IN_LAB_CREAM
+  const isMixAtHomeCream = !isCustomCream && product?.category === "Mix at Home Cream"
 
   // Active Ingredients for Custom Creams (In-Lab) - based on product traits
-  const activeIngredients = getIngredientsByTraits(product.traits).slice(0, 3)
+  const activeIngredients = isCustomCream
+    ? customBase?.activeIngredients || []
+    : product
+      ? getIngredientsByTraits(product.traits).slice(0, 3)
+      : []
 
   // Active Concentrates for Mix at Home Creams
   const activeConcentrates = products.filter((p) => p.category === "Active Concentrate").slice(0, 3)
+
+  const carouselImages = [
+    "/minimalist-cosmetic-pump-bottle-product-photograph.jpg",
+    "/images/design-mode/image(1).png",
+    "/minimalist-cosmetic-pump-bottle-product-photograph.jpg",
+  ]
+
+  const displayName = isCustomCream ? customBase?.name : product?.name
+  const displayDescription = isCustomCream ? customBase?.description : product?.description
+  const displayPrice = isCustomCream ? 89.0 : product?.price
+  const displayTraits = isCustomCream ? customBase?.traits : product?.traits
 
   return (
     <>
@@ -93,42 +204,116 @@ export default function ProductPage() {
               Shop
             </Link>
             <ChevronRightIcon className="h-4 w-4" />
-            <span className="text-foreground">{product.name}</span>
+            <span className="text-foreground">{isCustomCream ? "Custom Cream" : displayName}</span>
           </div>
 
           {/* Product Details */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
-            {/* Left: Image */}
+            {/* Left: Image or Carousel */}
             <div className="space-y-4 lg:sticky lg:top-24 lg:self-start">
-              <div className="relative aspect-square rounded-lg overflow-hidden bg-muted">
-                <Image
-                  src="/minimalist-cosmetic-pump-bottle-product-photograph.jpg"
-                  alt={product.name}
-                  fill
-                  className="object-cover"
-                  priority
-                />
-                {product.recommended && <RecommendedBadge className="absolute top-4 left-4" />}
-              </div>
+              {isCustomCream ? (
+                <div className="relative">
+                  <div className="relative aspect-square rounded-lg overflow-hidden bg-muted">
+                    <Image
+                      src={carouselImages[currentImageIndex] || "/placeholder.svg"}
+                      alt={displayName || "Custom Cream"}
+                      fill
+                      className="object-cover"
+                      priority
+                    />
+                  </div>
+                  {carouselImages.length > 1 && (
+                    <>
+                      <button
+                        onClick={() =>
+                          setCurrentImageIndex((prev) => (prev - 1 + carouselImages.length) % carouselImages.length)
+                        }
+                        className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white rounded-full p-2 shadow-lg transition-colors"
+                        aria-label="Previous image"
+                      >
+                        <ChevronLeftIcon className="h-5 w-5 text-foreground" />
+                      </button>
+                      <button
+                        onClick={() => setCurrentImageIndex((prev) => (prev + 1) % carouselImages.length)}
+                        className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white rounded-full p-2 shadow-lg transition-colors"
+                        aria-label="Next image"
+                      >
+                        <ChevronRightIcon className="h-5 w-5 text-foreground" />
+                      </button>
+                      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+                        {carouselImages.map((_, index) => (
+                          <button
+                            key={index}
+                            onClick={() => setCurrentImageIndex(index)}
+                            className={cn(
+                              "w-2 h-2 rounded-full transition-colors",
+                              index === currentImageIndex ? "bg-white" : "bg-white/50",
+                            )}
+                            aria-label={`Go to image ${index + 1}`}
+                          />
+                        ))}
+                      </div>
+                    </>
+                  )}
+                </div>
+              ) : (
+                <div className="relative aspect-square rounded-lg overflow-hidden bg-muted">
+                  <Image
+                    src="/minimalist-cosmetic-pump-bottle-product-photograph.jpg"
+                    alt={displayName || "Product"}
+                    fill
+                    className="object-cover"
+                    priority
+                  />
+                  {product?.recommended && <RecommendedBadge className="absolute top-4 left-4" />}
+                </div>
+              )}
             </div>
 
             {/* Right: Details */}
             <div className="space-y-5">
-              {product.recommended && (
+              {product?.recommended && (
                 <Badge variant="secondary" className="font-mono text-xs">
                   Recommended for you
                 </Badge>
               )}
               <div>
-                <h1 className="text-3xl md:text-4xl mb-2 font-semibold">{product.name}</h1>
-                {product.subtitle && <p className="text-muted-foreground">{product.subtitle}</p>}
+                <h1 className="text-3xl md:text-4xl mb-2 font-semibold">{displayName}</h1>
+                {product?.subtitle && <p className="text-muted-foreground">{product.subtitle}</p>}
               </div>
 
-              <p className="text-3xl font-mono">${product.price}</p>
+              <p className="text-3xl font-mono">${displayPrice}</p>
 
               <p className="text-muted-foreground leading-relaxed tracking-tight font-medium leading-6 text-sm">
-                {product.description}
+                {displayDescription}
               </p>
+
+              {isCustomCream && (
+                <div className="border-t border-border pt-5">
+                  <div className="space-y-3">
+                    <h3 className="font-medium text-sm">Select Base Type</h3>
+                    <div className="grid grid-cols-1 gap-2">
+                      {CUSTOM_CREAM_BASES.map((base, index) => (
+                        <button
+                          key={base.id}
+                          onClick={() => setSelectedBaseIndex(index)}
+                          className={cn(
+                            "text-left p-3 rounded-lg border-2 transition-colors",
+                            selectedBaseIndex === index
+                              ? "border-primary bg-primary/5"
+                              : "border-muted hover:border-primary/50",
+                          )}
+                        >
+                          <div className="font-medium text-sm">{base.name}</div>
+                          <div className="text-xs text-muted-foreground mt-1">
+                            {base.activeIngredients.length} active ingredients
+                          </div>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
 
               {(isMixAtHomeCream || isInLabCream) && (
                 <div className="border-t border-border pt-5">
@@ -192,11 +377,11 @@ export default function ProductPage() {
               )}
 
               {/* Skin Traits */}
-              {!isMixAtHomeCream && !isInLabCream && (
+              {!isMixAtHomeCream && !isInLabCream && displayTraits && (
                 <div>
                   <h3 className="font-mono text-sm mb-3">Best for:</h3>
                   <div className="flex flex-wrap gap-2">
-                    {product.traits.map((trait) => (
+                    {displayTraits.map((trait) => (
                       <Link
                         key={trait}
                         href={`/shop?category=creams&traits=${trait.toLowerCase()}`}
@@ -237,8 +422,30 @@ export default function ProductPage() {
                 </Button>
               </div>
 
-              {/* Active Ingredients for Custom Creams (In-Lab) */}
-              {isInLabCream && (
+              {isCustomCream && customBase && (
+                <div className="space-y-4 pt-4 border-t border-border">
+                  <div>
+                    <h3 className="font-semibold text-lg mb-2">Active Ingredients in {customBase.name}</h3>
+                    <p className="text-sm text-muted-foreground">
+                      This base contains {customBase.activeIngredients.length} carefully selected active ingredients
+                    </p>
+                  </div>
+                  <div className="flex flex-col gap-[10px]">
+                    {customBase.activeIngredients.map((ingredient) => (
+                      <IngredientCard
+                        key={ingredient.number}
+                        id={ingredient.number.toString()}
+                        number={ingredient.number}
+                        name={ingredient.name}
+                        description={ingredient.description}
+                      />
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Active Ingredients for In-Lab Creams (non-custom) */}
+              {isInLabCream && !isCustomCream && (
                 <div className="space-y-4 pt-4 border-t border-border">
                   <div>
                     <h3 className="font-semibold text-lg mb-2">Active Ingredients</h3>
@@ -247,7 +454,7 @@ export default function ProductPage() {
                     </p>
                   </div>
                   <div className="flex flex-col gap-[10px]">
-                    {activeIngredients.map((ingredient) => (
+                    {activeIngredients.map((ingredient: any) => (
                       <IngredientCard
                         key={ingredient.id}
                         id={ingredient.id}

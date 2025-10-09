@@ -371,7 +371,7 @@ export default function ShopPage() {
                     <div className="w-full">
                       {!isLoggedIn && !scanResults && selectedTraits.length === 0 ? (
                         <Link
-                          href="/custom-cream"
+                          href="/product/custom-cream"
                           className="bg-white rounded-[10px] border-2 border-muted overflow-hidden flex flex-col hover:border-primary transition-colors w-full cursor-pointer"
                         >
                           <div className="relative h-[200px] overflow-hidden bg-muted">
