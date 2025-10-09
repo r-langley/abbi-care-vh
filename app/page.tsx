@@ -5,7 +5,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { traits, products } from "@/lib/products"
-import { PageTitle, SectionHeading, SectionOverline, BodyText, SmallText } from "@/components/ui/typography"
+import { PageTitle, SectionHeading, SectionOverline, BodyText, SmallText, Section } from "@/components/ui/typography"
 import { SectionContainer } from "@/components/ui/section-container"
 import { ParallaxImage } from "@/components/parallax-image"
 import { CategoryCarousel } from "@/components/category-carousel"
@@ -28,7 +28,7 @@ export default function HomePage() {
       <main>
         {/* Hero Section */}
         <section className="relative bg-background">
-          <div className="grid grid-cols-2 items-center gap-0 bg-primary-foreground">
+          <div className="grid grid-cols-2 items-center gap-0 bg-muted">
             {/* Left: Hero Image */}
             <div className="relative aspect-[2/3] md:aspect-[4/3]">
               <Image src="/images/design-mode/image.png" alt="ABBI Skincare" fill className="object-cover" priority />
@@ -40,16 +40,14 @@ export default function HomePage() {
                 <span className="font-serif italic font-medium">Your</span> Skin, Our{" "}
                 <span className="font-serif italic font-medium">Formula</span>
               </PageTitle>
-              {/* </CHANGE> */}
               <p className="text-[16px] font-medium tracking-[-0.32px] text-muted-foreground leading-[1.35] mb-4">
                 Personalized skincare, perfected
               </p>
-              <Button asChild variant="textLink" className="font-mono">
+              <Button asChild className="font-mono">
                 <Link href="/skin-analysis">Start My Journey</Link>
               </Button>
             </div>
           </div>
-          {/* </CHANGE> */}
         </section>
 
         {/* AI Skin Analysis Section */}
@@ -60,14 +58,16 @@ export default function HomePage() {
               <div className="text-center md:text-left md:flex-1">
                 <SectionOverline>AI SKIN ANALYSIS</SectionOverline>
                 <SectionHeading spacing="tight">Personalized care for your unique skin</SectionHeading>
-                <BodyText className="hidden md:block mt-4 mb-6 text-muted-foreground max-w-xl">
+                <BodyText className="md:block mt-4 mb-6 text-muted-foreground max-w-xl">
                   Our advanced AI technology analyzes your skin in seconds, identifying your unique concerns and
                   recommending personalized formulas tailored specifically to your needs. Get professional-grade
                   insights without leaving home.
                 </BodyText>
-                <Button asChild size="lg" className="font-mono">
-                  <Link href="/skin-analysis">Analyze My Skin</Link>
-                </Button>
+                <div className="flex justify-center md:justify-start">
+                  <Button asChild size="lg" className="font-mono">
+                    <Link href="/skin-analysis">Analyze My Skin</Link>
+                  </Button>
+                </div>
                 <SmallText className="mt-4 md:mt-6">97% accurate when compared to a dermatological exam.</SmallText>
               </div>
 
@@ -88,15 +88,17 @@ export default function HomePage() {
             </div>
           </div>
         </SectionContainer>
-        {/* </CHANGE> */}
 
         {/* What Our Scan Evaluates */}
         <SectionContainer variant="muted">
           <div className="container mx-auto px-5">
-            <SectionHeading spacing="tight">What Our Scan Evaluates</SectionHeading>
-            <BodyText className="text-center text-[16px] font-medium tracking-[-0.32px] mb-8 md:mb-12 max-w-3xl mx-auto text-muted-foreground leading-[1.35]">
-              97% accurate when compared to a dermatological exam.
-            </BodyText>
+            <Section
+              heading="What Our Scan Evaluates"
+              body="97% accurate when compared to a dermatological exam."
+              align="left"
+              spacing="tight"
+              className="mb-8 md:mb-12"
+            />
             <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5">
               {traits.map((trait) => (
                 <Link key={trait.id} href={`/shop?category=creams&traits=${trait.id}`}>
@@ -114,7 +116,7 @@ export default function HomePage() {
                 </Link>
               ))}
             </div>
-            <div className="text-center mt-8 md:mt-12">
+            <div className="mt-8 md:mt-12 text-left">
               <Button asChild size="lg" className="font-mono">
                 <Link href="/skin-analysis">Get Your Skin Analysis</Link>
               </Button>
@@ -124,8 +126,8 @@ export default function HomePage() {
 
         {/* Product Categories */}
         <SectionContainer>
-          <div className="container mx-auto px-4">
-            <div className="space-y-5">
+          <div className="container mx-auto px-5">
+            <div className="space-y-10">
               {/* Personalized Creams Carousel */}
               <CategoryCarousel
                 title="Personalized Creams"

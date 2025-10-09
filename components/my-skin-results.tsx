@@ -11,25 +11,29 @@ interface SkinResultsProps {
 
 export function MySkinResults({ userName, wrinkles, radiance, imperfections }: SkinResultsProps) {
   return (
-    <div className="bg-[#586158] px-2.5 py-2.5">
-      <div className="flex justify-center">
-        <div className="w-full max-w-[800px]">
-          {/* Header */}
-          <div className="flex items-center justify-between mb-2.5">
-            <div className="flex items-center gap-[5px]">
-              <div className="rounded-full bg-white/20 overflow-hidden w-fit h-fit">
-                <div className="bg-gradient-to-br from-white/40 to-white/20 w-8 h-8" />
-              </div>
-              <h2 className="text-white font-normal text-xl">
-                {userName}'s <span className="italic font-serif">Skin</span>
-              </h2>
+    <div className="bg-[#586158] px-2.5 py-2.5 bg-primary">
+      <div className="w-full">
+        {/* Header */}
+        <div className="flex items-center justify-between mb-2.5">
+          <div className="flex items-center gap-[5px]">
+            <div className="rounded-full bg-white/20 overflow-hidden w-fit h-fit">
+              <div className="bg-gradient-to-br from-white/40 to-white/20 w-8 h-8" />
             </div>
-            <SkinResultsSheet userName={userName} />
+            <h2 className="text-white font-normal text-xl">
+              {userName}'s <span className="italic font-serif">Skin</span>
+            </h2>
           </div>
+          <SkinResultsSheet userName={userName} />
+        </div>
 
-          <div className="flex gap-2.5">
+        <div className="flex gap-2.5">
+          <div className="flex-1">
             <SkinScoreCard score={wrinkles} label="Wrinkles" />
+          </div>
+          <div className="flex-1">
             <SkinScoreCard score={radiance} label="Radiance" />
+          </div>
+          <div className="flex-1">
             <SkinScoreCard score={imperfections} label="Imperfections" />
           </div>
         </div>

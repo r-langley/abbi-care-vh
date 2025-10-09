@@ -1,3 +1,4 @@
+import Image from "next/image"
 import { cn } from "@/lib/utils"
 
 interface UserAvatarProps {
@@ -13,8 +14,14 @@ export function UserAvatar({ size = "md", className }: UserAvatarProps) {
   }
 
   return (
-    <div className={cn("rounded-full bg-[#f5f6f5] overflow-hidden", sizeClasses[size], className)}>
-      <div className="w-full h-full bg-gradient-to-br from-[#586158] to-[#3e463e]" />
+    <div className={cn("rounded-full bg-muted overflow-hidden", sizeClasses[size], className)}>
+      <Image
+        src="/images/sarah-avatar.jpg"
+        alt="Sarah Miller"
+        width={80}
+        height={80}
+        className="w-full h-full object-cover"
+      />
     </div>
   )
 }

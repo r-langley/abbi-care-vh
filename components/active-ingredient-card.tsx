@@ -12,7 +12,7 @@ export function ActiveIngredientCard({ id, number, name, image }: ActiveIngredie
   return (
     <Link
       href={`/active-ingredient/${id}`}
-      className="block bg-white rounded-[10px] border-2 border-[#f5f6f5] overflow-hidden hover:border-[#586158] transition-colors"
+      className="block bg-white rounded-[10px] border-2 border-muted overflow-hidden hover:border-primary transition-colors"
     >
       <div className="relative h-[120px] overflow-hidden">
         <Image
@@ -24,16 +24,16 @@ export function ActiveIngredientCard({ id, number, name, image }: ActiveIngredie
           sizes="(max-width: 768px) 33vw, (max-width: 1200px) 25vw, 20vw"
         />
       </div>
-      <div className="bg-[#f5f6f5] p-[10px]">
+      <div className="bg-muted p-[10px]">
         {number && (
           <p
-            className="font-medium text-[12px] tracking-[-0.24px] text-[#586158] leading-[1.15] mb-1"
-            style={{ fontFamily: "var(--font-geist-mono)", fontVariationSettings: "'wdth' 100" }}
+            className="font-medium text-[12px] tracking-[-0.24px] text-primary leading-[1.15] mb-1 font-mono"
+            style={{ fontVariationSettings: "'wdth' 100" }}
           >
             No.{number}
           </p>
         )}
-        <p className="font-semibold text-[14px] leading-[1.15] text-[#586158] tracking-normal">{name}</p>
+        <p className="font-semibold text-[14px] leading-[1.15] text-primary tracking-normal">{name}</p>
       </div>
     </Link>
   )

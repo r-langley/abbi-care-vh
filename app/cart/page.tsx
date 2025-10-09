@@ -107,7 +107,7 @@ export default function CartPage() {
                   <div className="space-y-2 py-4 border-y border-border">
                     <div className="flex justify-between text-sm">
                       <span className="text-muted-foreground">Subtotal</span>
-                      <span className="font-mono">${subtotal}</span>
+                      <span className="font-mono">${subtotal.toFixed(2)}</span>
                     </div>
                     <div className="flex justify-between text-sm">
                       <span className="text-muted-foreground">Shipping</span>
@@ -116,10 +116,10 @@ export default function CartPage() {
                   </div>
                   <div className="flex justify-between text-lg font-bold">
                     <span>Total</span>
-                    <span className="font-mono">${subtotal}</span>
+                    <span className="font-mono">${subtotal.toFixed(2)}</span>
                   </div>
-                  <Button size="lg" className="w-full font-mono">
-                    Proceed to Checkout
+                  <Button asChild size="lg" className="w-full font-mono">
+                    <Link href="/checkout">Proceed to Checkout</Link>
                   </Button>
                   <Button asChild size="lg" variant="outline" className="w-full font-mono bg-transparent">
                     <Link href="/shop">Continue Shopping</Link>
