@@ -352,11 +352,7 @@ export default function ProductPage() {
                                 )}
                               >
                                 <div className="flex items-start gap-2">
-                                  <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center shrink-0 mt-0.5">
-                                    <span className="text-xs font-mono text-primary">
-                                      {base.activeIngredients.length}
-                                    </span>
-                                  </div>
+                                  
                                   <div className="flex-1 min-w-0">
                                     <div className="font-medium text-sm leading-tight">{base.name}</div>
                                     <div className="flex flex-wrap gap-1 mt-1.5">
