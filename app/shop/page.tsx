@@ -379,7 +379,7 @@ export default function ShopPage() {
                               src="/images/design-mode/image(1).png"
                               alt="Custom cream"
                               fill
-                              className="object-cover bg-card border-2 border-muted rounded-xl border-b-0"
+                              className="object-cover bg-card border-2 border-muted border-b-0 rounded-lg"
                               loading="lazy"
                               sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                             />
