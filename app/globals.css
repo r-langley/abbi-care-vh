@@ -34,7 +34,7 @@
   --primary: var(--sea-slate);
   --primary-foreground: #ffffff;
   --secondary: var(--sage);
-  --secondary-foreground: var(--sea-slate);
+  --secondary-foreground: rgb(132, 148, 132);
   --muted: var(--sage);
   --muted-foreground: var(--sea-slate);
   --accent: var(--sea-slate);

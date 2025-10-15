@@ -15,13 +15,15 @@ import { PRODUCT_CATEGORIES } from "@/lib/constants"
 interface ProductCardProps {
   product: Product
   showRecommended?: boolean
+  onMixAtHomeAdd?: () => void
 }
 
-export function ProductCard({ product, showRecommended = false }: ProductCardProps) {
+export function ProductCard({ product, showRecommended = false, onMixAtHomeAdd }: ProductCardProps) {
   const { addItem, items } = useCart()
   const [showAnalysisModal, setShowAnalysisModal] = useState(false)
 
   const isInLabCream = product.category === PRODUCT_CATEGORIES.IN_LAB_CREAM
+  const isMixAtHomeCream = product.category === PRODUCT_CATEGORIES.MIX_AT_HOME_CREAM
   const isInCart = items.some((item) => item.id === product.id)
 
   const handleAddToCart = (e: React.MouseEvent) => {
@@ -29,6 +31,8 @@ export function ProductCard({ product, showRecommended = false }: ProductCardPro
     e.stopPropagation()
     if (isInLabCream) {
       setShowAnalysisModal(true)
+    } else if (isMixAtHomeCream && onMixAtHomeAdd) {
+      onMixAtHomeAdd()
     } else {
       addItem(product)
     }
@@ -52,9 +56,7 @@ export function ProductCard({ product, showRecommended = false }: ProductCardPro
           <div className="bg-muted p-[10px] pb-[20px] flex flex-col justify-between gap-[10px] flex-1">
             <div className="flex flex-col gap-[10px]">
               <div className="flex flex-col gap-[5px]">
-                <p className="leading-[1.15] text-primary tracking-normal text-base font-semibold">
-                  {product.name}
-                </p>
+                <p className="leading-[1.15] text-primary tracking-normal text-base font-semibold">{product.name}</p>
               </div>
               <p
                 className="text-[13px] tracking-[-0.26px] leading-[1.15] font-semibold text-primary font-mono"
@@ -67,11 +69,7 @@ export function ProductCard({ product, showRecommended = false }: ProductCardPro
               onClick={handleAddToCart}
               className="bg-primary text-primary-foreground rounded-full size-[32px] flex items-center justify-center shrink-0 hover:opacity-90 transition-opacity"
             >
-              {isInCart ? (
-                <CheckIcon className="h-5 w-5" />
-              ) : (
-                <PlusIcon className="h-5 w-5" />
-              )}
+              {isInCart ? <CheckIcon className="h-5 w-5" /> : <PlusIcon className="h-5 w-5" />}
             </button>
           </div>
         </div>

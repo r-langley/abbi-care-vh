@@ -4,6 +4,7 @@ export interface Ingredient {
   name: string
   description: string
   traits: string[]
+  purity: number
 }
 
 export const ingredients: Ingredient[] = [
@@ -13,6 +14,7 @@ export const ingredients: Ingredient[] = [
     name: "Soybean Collagen Booster",
     description: "Reduces wrinkles, strengthens and smooths skin's dermal layer.",
     traits: ["Wrinkles"],
+    purity: 98,
   },
   {
     id: "2",
@@ -20,6 +22,7 @@ export const ingredients: Ingredient[] = [
     name: "Organic Oat Lifting Complex",
     description: "Instantly firms and lifts skin with natural sugar network.",
     traits: ["Firmness"],
+    purity: 97,
   },
   {
     id: "3",
@@ -27,6 +30,7 @@ export const ingredients: Ingredient[] = [
     name: "Yarrow Epidermal Regenerator",
     description: "Smooths wrinkles, restores surface lipids, and protects skin barrier.",
     traits: ["Wrinkles"],
+    purity: 96,
   },
   {
     id: "4",
@@ -34,6 +38,7 @@ export const ingredients: Ingredient[] = [
     name: "Grape Juice Polyphenol Protector",
     description: "Prevents aging, protects DNA, and strengthens cell barrier.",
     traits: ["Wrinkles"],
+    purity: 99,
   },
   {
     id: "5",
@@ -41,6 +46,7 @@ export const ingredients: Ingredient[] = [
     name: "Brèdes Mafane Wrinkle Reducer",
     description: "Instantly smooths skin and reduces wrinkles without invasive procedures.",
     traits: ["Wrinkles"],
+    purity: 95,
   },
   {
     id: "6",
@@ -48,6 +54,7 @@ export const ingredients: Ingredient[] = [
     name: "Nasturtium Oxygen Booster",
     description: "Contains digital oxygen to enhance oxygen skin barrier.",
     traits: ["Radiance"],
+    purity: 98,
   },
   {
     id: "7",
@@ -55,6 +62,7 @@ export const ingredients: Ingredient[] = [
     name: "Berry Complexion Illuminator",
     description: "Reduces dark spots, age spots, and reduces skin blemishes.",
     traits: ["Spots", "Radiance"],
+    purity: 97,
   },
   {
     id: "8",
@@ -62,6 +70,7 @@ export const ingredients: Ingredient[] = [
     name: "Berry Pigmentation Balancer",
     description: "Evens tone and reduces spots and pigmentation with antioxidants.",
     traits: ["Spots"],
+    purity: 96,
   },
   {
     id: "9",
@@ -69,6 +78,7 @@ export const ingredients: Ingredient[] = [
     name: "Green Chemistry Anti-Glycation Salt",
     description: "Unifies complexion, firms skin, and reduces age-related discoloration.",
     traits: ["Firmness", "Spots"],
+    purity: 99,
   },
   {
     id: "10",
@@ -76,6 +86,7 @@ export const ingredients: Ingredient[] = [
     name: "Meadowsweet Sebum-Regulation Salt",
     description: "Targets inflammation and alleviates skin texture.",
     traits: ["Texture", "Shine"],
+    purity: 98,
   },
   {
     id: "11",
@@ -83,6 +94,7 @@ export const ingredients: Ingredient[] = [
     name: "Iris Zinc Skin Purifier",
     description: "Purifies skin, reduces pores, and banishes imperfections.",
     traits: ["Imperfections"],
+    purity: 97,
   },
   {
     id: "12",
@@ -90,6 +102,7 @@ export const ingredients: Ingredient[] = [
     name: "Wild Acanthus Dermal Protector",
     description: "Shields skin, repairs skin, and supports skin's barrier function.",
     traits: ["Sensitivity"],
+    purity: 96,
   },
   {
     id: "13",
@@ -97,6 +110,7 @@ export const ingredients: Ingredient[] = [
     name: "Pre-Probiotic Microbiota Balancer",
     description: "Balances microbiome, enhances radiance, and improves skin comfort.",
     traits: ["Radiance", "Sensitivity"],
+    purity: 95,
   },
   {
     id: "14",
@@ -104,6 +118,7 @@ export const ingredients: Ingredient[] = [
     name: "Organic Brown Flax Seed Soother",
     description: "Prevents irritation, soothes inflammation, and calms sensitive skin.",
     traits: ["Sensitivity"],
+    purity: 98,
   },
   {
     id: "15",
@@ -111,6 +126,7 @@ export const ingredients: Ingredient[] = [
     name: "Red Sage Sensitive Skin Protector",
     description: "Calms sensitive skin, reduces redness, and protects barrier.",
     traits: ["Sensitivity"],
+    purity: 97,
   },
   {
     id: "16",
@@ -118,6 +134,7 @@ export const ingredients: Ingredient[] = [
     name: "Marine Brown Algae Soothing Shield",
     description: "Prevents redness, soothes inflamed skin, and reduces irritation.",
     traits: ["Sensitivity"],
+    purity: 96,
   },
   {
     id: "17",
@@ -125,6 +142,7 @@ export const ingredients: Ingredient[] = [
     name: "Chinese Plant Pore Refiner",
     description: "Minimizes pores, controls bacteria, and purifies skin complexion.",
     traits: ["Imperfections"],
+    purity: 99,
   },
   {
     id: "18",
@@ -132,6 +150,7 @@ export const ingredients: Ingredient[] = [
     name: "Biotechnology Skin Detoxifier",
     description: "Stimulates natural waste elimination and prevents oxidation.",
     traits: ["Radiance"],
+    purity: 98,
   },
   {
     id: "19",
@@ -139,6 +158,7 @@ export const ingredients: Ingredient[] = [
     name: "Soybean and Enoki Pigmentation Corrector",
     description: "Corrects pigmentation and brightens overall skin tones.",
     traits: ["Spots", "Radiance"],
+    purity: 97,
   },
   {
     id: "20",
@@ -146,6 +166,7 @@ export const ingredients: Ingredient[] = [
     name: "Wild Rose Sebum Normalizer",
     description: "Regulates sebum production, prevents shine, and controls shine.",
     traits: ["Shine"],
+    purity: 96,
   },
   {
     id: "21",
@@ -153,6 +174,7 @@ export const ingredients: Ingredient[] = [
     name: "Japanese Cedar Hydration Enhancer",
     description: "Renews epidermal layers, prevents dehydration, and improves suppleness.",
     traits: ["Hydration"],
+    purity: 95,
   },
   {
     id: "22",
@@ -160,6 +182,7 @@ export const ingredients: Ingredient[] = [
     name: "Lentil Pore-Refining Minimizer",
     description: "Reduces pore size, controls oil, and mattifies skin surface.",
     traits: ["Imperfections", "Shine"],
+    purity: 98,
   },
   {
     id: "23",
@@ -167,6 +190,7 @@ export const ingredients: Ingredient[] = [
     name: "Chestnut Epidermal Moisture Promoter",
     description: "Promotes skin barrier, restores moisture balance, and enhances suppleness.",
     traits: ["Hydration"],
+    purity: 97,
   },
   {
     id: "24",
@@ -174,6 +198,7 @@ export const ingredients: Ingredient[] = [
     name: "Brazilian Bark Cell-Renewal Energizer",
     description: "Energizes cells, boosts cell renewal, and boosts cell lifespan.",
     traits: ["Radiance"],
+    purity: 96,
   },
   {
     id: "25",
@@ -181,6 +206,7 @@ export const ingredients: Ingredient[] = [
     name: "Corn Glucose Hydration Biopolymer",
     description: "Deeply hydrates, soothes skin, and provides lightweight softness.",
     traits: ["Hydration"],
+    purity: 99,
   },
   {
     id: "26",
@@ -188,6 +214,7 @@ export const ingredients: Ingredient[] = [
     name: "Pearl Chemistry Moisture Lock",
     description: "Locks in moisture and strengthens barrier protection.",
     traits: ["Hydration"],
+    purity: 98,
   },
 ]
 

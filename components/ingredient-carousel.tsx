@@ -19,6 +19,7 @@ export function IngredientCarousel({ ingredients }: IngredientCarouselProps) {
               name={ingredient.name}
               description={ingredient.description}
               href="/ingredients"
+              purity={ingredient.purity}
             />
           </div>
         ))}

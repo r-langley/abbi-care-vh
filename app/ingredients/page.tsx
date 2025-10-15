@@ -24,6 +24,7 @@ export default function IngredientsPage() {
                 number={ingredient.number}
                 name={ingredient.name}
                 description={ingredient.description}
+                purity={ingredient.purity}
               />
             ))}
           </div>

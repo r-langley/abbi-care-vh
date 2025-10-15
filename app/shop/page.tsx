@@ -73,6 +73,17 @@ export default function ShopPage() {
   const handlePersonalizeComplete = (data: { traits: string[]; age: number }) => {
     localStorage.setItem("personalizeData", JSON.stringify(data))
     setPersonalizeData(data)
+
+    setTimeout(() => {
+      const activeConcentratesSection = document.querySelector('[data-section="active-concentrates"]')
+      if (activeConcentratesSection) {
+        activeConcentratesSection.scrollIntoView({ behavior: "smooth", block: "start" })
+      }
+    }, 300)
+  }
+
+  const handleMixAtHomeAdd = () => {
+    setShowPersonalizeModal(true)
   }
 
   const { filteredProducts, groupedCreams } = useMemo(() => {
@@ -397,6 +408,7 @@ export default function ShopPage() {
                         key={product.id}
                         product={product}
                         showRecommended={showScanResults || selectedTraits.length > 0}
+                        onMixAtHomeAdd={handleMixAtHomeAdd}
                       />
                     ))}
                   </div>
@@ -404,7 +416,7 @@ export default function ShopPage() {
               )}
 
               {sortedActiveConcentrates.length > 0 && (
-                <div className="flex flex-col gap-[20px]">
+                <div className="flex flex-col gap-[20px]" data-section="active-concentrates">
                   <div className="flex flex-col gap-2.5">
                     <h2 className="text-[#586158] text-foreground text-2xl tracking-tight font-medium">
                       Active Concentrates

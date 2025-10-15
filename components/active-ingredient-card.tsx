@@ -6,9 +6,10 @@ interface ActiveIngredientCardProps {
   number?: number
   name: string
   image?: string
+  purity?: number // Added purity prop
 }
 
-export function ActiveIngredientCard({ id, number, name, image }: ActiveIngredientCardProps) {
+export function ActiveIngredientCard({ id, number, name, image, purity }: ActiveIngredientCardProps) {
   return (
     <Link
       href={`/active-ingredient/${id}`}
@@ -25,14 +26,17 @@ export function ActiveIngredientCard({ id, number, name, image }: ActiveIngredie
         />
       </div>
       <div className="bg-muted p-[10px]">
-        {number && (
-          <p
-            className="font-medium text-[12px] tracking-[-0.24px] text-primary leading-[1.15] mb-1 font-mono"
-            style={{ fontVariationSettings: "'wdth' 100" }}
-          >
-            No.{number}
-          </p>
-        )}
+        <div className="flex items-center gap-2 mb-1">
+          {number && (
+            <p
+              className="font-medium text-[12px] tracking-[-0.24px] text-primary leading-[1.15] font-mono"
+              style={{ fontVariationSettings: "'wdth' 100" }}
+            >
+              No.{number}
+            </p>
+          )}
+          {purity && <p className="text-[11px] text-primary/60 font-medium">{purity}%</p>}
+        </div>
         <p className="font-semibold text-[14px] leading-[1.15] text-primary tracking-normal">{name}</p>
       </div>
     </Link>

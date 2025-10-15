@@ -74,7 +74,7 @@ export function ParallaxImage({
           style={{
             background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent)",
             boxShadow: "0 0 20px 4px rgba(255,255,255,0.6)",
-            animation: "scan 1.8s ease-in-out",
+            animation: "scan 4s ease-in-out infinite",
           }}
         />
       )}
@@ -85,14 +85,33 @@ export function ParallaxImage({
             top: 0%;
             opacity: 0;
           }
-          10% {
+          5% {
+            opacity: 1;
+          }
+          40% {
+            top: 100%;
+            opacity: 1;
+          }
+          45% {
+            top: 100%;
+            opacity: 1;
+          }
+          50% {
+            top: 100%;
+            opacity: 1;
+          }
+          55% {
             opacity: 1;
           }
           90% {
+            top: 0%;
             opacity: 1;
           }
+          95% {
+            opacity: 0;
+          }
           100% {
-            top: 100%;
+            top: 0%;
             opacity: 0;
           }
         }
