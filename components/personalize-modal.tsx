@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import Link from "next/link"
 import { Dialog, DialogContent, DialogClose } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
 import { traits } from "@/lib/products"
@@ -59,9 +60,18 @@ export function PersonalizeModal({ open, onOpenChange, onComplete }: Personalize
         </div>
 
         <div className="space-y-5 p-5 pb-5 pt-0">
-          <p className="leading-relaxed text-sm text-foreground">
-            To craft the best Custom Base for you, we recommend telling us your skin's top 3 priorities and your age.
-          </p>
+          <div className="space-y-2">
+            <p className="leading-relaxed text-sm text-foreground">
+              To craft the best Custom Base for you, we recommend telling us your skin's top 3 priorities and your age.
+            </p>
+            <Link
+              href="/skin-analysis"
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors inline-block"
+              onClick={() => onOpenChange(false)}
+            >
+              For best results, scan your skin →
+            </Link>
+          </div>
 
           <div className="flex flex-wrap gap-[5px]">
             {traits.map((trait) => {
@@ -107,6 +117,14 @@ export function PersonalizeModal({ open, onOpenChange, onComplete }: Personalize
           >
             Continue Shopping
           </Button>
+
+          <div className="text-center">
+            <Button variant="link" asChild className="text-sm">
+              <Link href="/skin-analysis" onClick={() => onOpenChange(false)}>
+                For best results, scan your skin →
+              </Link>
+            </Button>
+          </div>
         </div>
       </DialogContent>
     </Dialog>

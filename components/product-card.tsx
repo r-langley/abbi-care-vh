@@ -15,7 +15,7 @@ import { PRODUCT_CATEGORIES } from "@/lib/constants"
 interface ProductCardProps {
   product: Product
   showRecommended?: boolean
-  onMixAtHomeAdd?: () => void
+  onMixAtHomeAdd?: (product: Product) => void
 }
 
 export function ProductCard({ product, showRecommended = false, onMixAtHomeAdd }: ProductCardProps) {
@@ -29,10 +29,12 @@ export function ProductCard({ product, showRecommended = false, onMixAtHomeAdd }
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault()
     e.stopPropagation()
+
     if (isInLabCream) {
       setShowAnalysisModal(true)
     } else if (isMixAtHomeCream && onMixAtHomeAdd) {
-      onMixAtHomeAdd()
+      addItem(product)
+      onMixAtHomeAdd(product)
     } else {
       addItem(product)
     }

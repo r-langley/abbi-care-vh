@@ -6,7 +6,7 @@ import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { ProductCard } from "@/components/product-card"
 import { products } from "@/lib/products"
-import { HeroSection } from "@/components/ui/hero-section" // Import HeroSection component
+import { HeroSection } from "@/components/ui/hero-section"
 import { PRODUCT_CATEGORIES, SHOP_CATEGORIES } from "@/lib/constants"
 import { TraitFilter } from "@/components/trait-filter"
 import { ProductCombos } from "@/components/product-combos"
@@ -22,6 +22,7 @@ import { RecommendedBadge } from "@/components/recommended-badge"
 import { RecommendedCarousel } from "@/components/recommended-carousel"
 import { PersonalizeCreamCTA } from "@/components/personalize-cream-cta"
 import { PersonalizeModal } from "@/components/personalize-modal"
+import type { Product } from "@/lib/products"
 
 export default function ShopPage() {
   console.log("[v0] ShopPage component rendering")
@@ -82,7 +83,8 @@ export default function ShopPage() {
     }, 300)
   }
 
-  const handleMixAtHomeAdd = () => {
+  const handleMixAtHomeAdd = (product: Product) => {
+    console.log("[v0] Mix-at-home cream added, opening personalize modal")
     setShowPersonalizeModal(true)
   }
 
