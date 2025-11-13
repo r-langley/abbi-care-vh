@@ -26,6 +26,7 @@ export type SkinTrait = (typeof SKIN_TRAITS)[keyof typeof SKIN_TRAITS]
 // Storage Keys
 export const STORAGE_KEYS = {
   CART: "abbi-cart",
+  AMBASSADOR_CODE: "abbi-ambassador-code",
   USER_PREFERENCES: "abbi-preferences",
   SKIN_ANALYSIS: "abbi-skin-analysis",
 } as const

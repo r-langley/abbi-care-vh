@@ -23,10 +23,11 @@ export function CartFooter({
   buttonClassName,
   containerClassName,
 }: CartFooterProps = {}) {
-  const { totalItems, subtotal } = useCart()
+  const { totalItems, subtotal, subscriptionSavings } = useCart()
   const pathname = usePathname()
 
   const isCartPage = pathname === "/cart"
+  const finalTotal = subtotal - subscriptionSavings
 
   const dynamicHeadingText = headingText || (isCartPage ? "Ready to checkout?" : "Review your Routine")
   const dynamicButtonText = buttonText || (isCartPage ? "CHECKOUT" : "PAY")
@@ -72,7 +73,7 @@ export function CartFooter({
                 buttonClassName,
               )}
             >
-              {dynamicButtonText} ${subtotal}
+              {dynamicButtonText} ${finalTotal.toFixed(2)}
             </Button>
           </Link>
         </div>

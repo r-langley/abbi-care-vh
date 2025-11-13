@@ -167,7 +167,10 @@
 - Badge
 - Button
 - Card
+- Checkbox
 - Dialog/Sheet
+- Input
+- Select
 - Typography
 - Nav Link
 
@@ -219,6 +222,37 @@ Import from `@/lib/design-tokens` for programmatic use:
 import { COLORS, SPACING, CARD, CSS_VARS } from '@/lib/design-tokens'
 \`\`\`
 
+## E-Commerce Patterns
+
+### Multi-Customer Shopping
+- Customer assignment via Select dropdown per cart item
+- Split order breakdown in Order Summary
+- Customer management with inline add/remove
+- Default customers: "Customer 1", "Customer 2"
+- Unassigned items grouped together
+
+### Subscription & Auto-Ship
+- 15% discount on subscription items (industry standard)
+- Checkbox toggle per cart item
+- Real-time savings calculation
+- Green (#34c759) for savings display
+- Inline savings shown next to item price
+
+### Ambassador Program
+- Ambassador code input at top of cart
+- Uppercase text transformation
+- localStorage persistence
+- Sea Slate (#586158) color for code display
+- Green checkmark when code applied
+
+### Cart Context Management
+- localStorage persistence with 300ms debounce
+- Customer assignment tracking per item
+- Subscription state per item
+- Ambassador code persistence
+- Split order calculations
+- Subscription savings calculations
+
 ## Best Practices
 
 1. **Consistency**: Use existing components, don't create duplicates
@@ -231,3 +265,5 @@ import { COLORS, SPACING, CARD, CSS_VARS } from '@/lib/design-tokens'
 8. **Responsive**: Mobile-first, use max-width constraints
 9. **Font Mono**: Use `font-mono` class instead of inline `fontFamily` styles
 10. **Card Components**: Use shared card patterns from `ui/base-card.tsx` when possible
+11. **Forms**: Use Checkbox for toggles, Select for dropdowns, Input for text
+12. **Feedback**: Show real-time updates (savings, totals, validations)
