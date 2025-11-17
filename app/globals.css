@@ -11,7 +11,7 @@
   --dark-slate: #373737;
   --off-white: #ffffff;
   --light-gray: #dfdfdf;
-  --accent-purple: #4b4262;
+  --accent-purple: #8A6EFA; /* Updated accent-purple from #4b4262 to #8A6EFA */
 
   /* ABBI Status Colors */
   --status-red: #ff3b30;
@@ -34,7 +34,7 @@
   --primary: rgb(188, 170, 255);
   --primary-foreground: rgb(244, 243, 253);
   --secondary: var(--sage);
-  --secondary-foreground: rgb(132, 148, 132);
+  --secondary-foreground: rgb(229, 226, 243);
   --muted: rgb(244, 243, 253);
   --muted-foreground: var(--sea-slate);
   --accent: var(--sea-slate);
@@ -249,6 +249,9 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Added accent-purple color to Tailwind theme */
+  --color-accent-purple: var(--accent-purple);
 
   /* Expose text link design tokens to Tailwind theme */
   --color-text-link: var(--text-link-color);
