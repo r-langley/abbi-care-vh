@@ -37,9 +37,9 @@ export function IngredientCard({
         </div>
         <div className="bg-muted p-[10px] pb-[20px] flex flex-col gap-[10px] flex-1">
           <div className="flex flex-col gap-[5px]">
-            <p className="font-semibold leading-[1.15] text-primary tracking-[-0.32px] text-sm">{name}</p>
+            <p className="font-semibold leading-[1.15] tracking-[-0.32px] text-sm text-foreground">{name}</p>
             {!hideDescription && (
-              <p className="text-[14px] tracking-[-0.28px] text-primary font-normal leading-5">{description}</p>
+              <p className="text-[14px] tracking-[-0.28px] font-normal leading-5 text-muted-foreground">{description}</p>
             )}
           </div>
           <div className="flex items-center gap-2">
@@ -49,7 +49,7 @@ export function IngredientCard({
             >
               No.{number}
             </p>
-            {purity && <p className="font-medium text-sm text-secondary-foreground">{purity}% purity</p>}
+            {purity && <p className="font-medium text-sm text-accent">{purity}% purity</p>}
           </div>
         </div>
       </div>

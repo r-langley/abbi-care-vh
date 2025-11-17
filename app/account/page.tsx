@@ -3,9 +3,10 @@
 import { useAuth } from "@/lib/auth-context"
 import { Header } from "@/components/header"
 import { Button } from "@/components/ui/button"
-import { Card } from "@/components/ui/card"
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import Image from "next/image"
+import { ArrowUpIcon, ArrowDownIcon, ArrowTrendingUpIcon, UsersIcon, ShoppingBagIcon, CurrencyDollarIcon } from "@heroicons/react/24/outline"
 
 export default function AccountPage() {
   const { isLoggedIn, userRole } = useAuth()
@@ -42,14 +43,8 @@ function AmbassadorView() {
       {/* Profile Header */}
       <Card className="p-4 sm:p-6">
         <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4">
-          <div className="w-20 h-20 rounded-full overflow-hidden bg-muted">
-            <Image
-              src="/images/sarah-avatar.jpg"
-              alt="Sarah Miller"
-              width={80}
-              height={80}
-              className="w-full h-full object-cover"
-            />
+          <div className="w-20 h-20 rounded-full overflow-hidden bg-primary/10 flex items-center justify-center text-2xl font-semibold">
+            SM
           </div>
           <div className="flex-1 text-center sm:text-left">
             <h1 className="text-lg sm:text-xl font-semibold">Sarah Miller</h1>
@@ -59,184 +54,293 @@ function AmbassadorView() {
         </div>
       </Card>
 
-      {/* My Information */}
-      <div>
-        <h2 className="text-lg sm:text-xl font-semibold mb-4">My Information</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <Card className="p-4">
-            <p className="text-sm text-muted-foreground mb-1">Email</p>
-            <p className="font-medium truncate">sarah.miller@example.com</p>
-          </Card>
-          <Card className="p-4">
-            <p className="text-sm text-muted-foreground mb-1">Phone</p>
-            <p className="font-medium">(555) 123-4567</p>
-          </Card>
-          <Card className="p-4">
-            <p className="text-sm text-muted-foreground mb-1">Ambassador ID</p>
-            <p className="font-mono break-all">AMB-2023-8472</p>
-          </Card>
-          <Card className="p-4">
-            <p className="text-sm text-muted-foreground mb-1">Join Date</p>
-            <p className="font-medium">March 15, 2023</p>
-          </Card>
-        </div>
+      {/* Performance Metrics */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <Card className="p-4 sm:p-6">
+          <div className="flex items-start justify-between">
+            <div>
+              <p className="text-sm text-muted-foreground mb-1">Total Sales</p>
+              <p className="text-2xl font-semibold font-mono">$12,450</p>
+            </div>
+            <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center">
+              <CurrencyDollarIcon className="w-5 h-5" />
+            </div>
+          </div>
+          <div className="flex items-center gap-1 mt-2 text-sm">
+            <ArrowUpIcon className="w-4 h-4 text-[#4b4262]" />
+            <span className="text-[#4b4262] font-medium">12.5%</span>
+            <span className="text-muted-foreground">vs last month</span>
+          </div>
+        </Card>
+
+        <Card className="p-4 sm:p-6">
+          <div className="flex items-start justify-between">
+            <div>
+              <p className="text-sm text-muted-foreground mb-1">Customers</p>
+              <p className="text-2xl font-semibold font-mono">24</p>
+            </div>
+            <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center">
+              <UsersIcon className="w-5 h-5" />
+            </div>
+          </div>
+          <div className="flex items-center gap-1 mt-2 text-sm">
+            <ArrowUpIcon className="w-4 h-4 text-[#4b4262]" />
+            <span className="text-[#4b4262] font-medium">3 new</span>
+            <span className="text-muted-foreground">this month</span>
+          </div>
+        </Card>
+
+        <Card className="p-4 sm:p-6">
+          <div className="flex items-start justify-between">
+            <div>
+              <p className="text-sm text-muted-foreground mb-1">Team Size</p>
+              <p className="text-2xl font-semibold font-mono">8</p>
+            </div>
+            <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center">
+              <ArrowTrendingUpIcon className="w-5 h-5" />
+            </div>
+          </div>
+          <div className="flex items-center gap-1 mt-2 text-sm">
+            <ArrowUpIcon className="w-4 h-4 text-[#4b4262]" />
+            <span className="text-[#4b4262] font-medium">2 active</span>
+            <span className="text-muted-foreground">this week</span>
+          </div>
+        </Card>
+
+        <Card className="p-4 sm:p-6">
+          <div className="flex items-start justify-between">
+            <div>
+              <p className="text-sm text-muted-foreground mb-1">Commission</p>
+              <p className="text-2xl font-semibold font-mono">$1,867</p>
+            </div>
+            <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center">
+              <ShoppingBagIcon className="w-5 h-5" />
+            </div>
+          </div>
+          <div className="flex items-center gap-1 mt-2 text-sm">
+            <ArrowUpIcon className="w-4 h-4 text-[#4b4262]" />
+            <span className="text-[#4b4262] font-medium">$234</span>
+            <span className="text-muted-foreground">vs last month</span>
+          </div>
+        </Card>
       </div>
 
-      {/* My Customers */}
-      <div>
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-lg sm:text-xl font-semibold">My Customers</h2>
-          <Button size="sm">Add Customer</Button>
-        </div>
-        <div className="space-y-3">
-          {[
-            { name: "Jessica Taylor", email: "j.taylor@email.com", sales: "$1,245.00" },
-            { name: "Michael Chen", email: "m.chen@email.com", sales: "$892.50" },
-            { name: "Amanda Rodriguez", email: "a.rodriguez@email.com", sales: "$2,156.00" },
-          ].map((customer, i) => (
-            <Card key={i} className="p-4">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center font-semibold">
-                  {customer.name
-                    .split(" ")
-                    .map((n) => n[0])
-                    .join("")}
+      {/* Rank Progress */}
+      <Card className="p-4 sm:p-6">
+        <CardHeader className="px-0 pt-0">
+          <CardTitle className="text-lg">Rank Progress</CardTitle>
+        </CardHeader>
+        <CardContent className="px-0 pb-0">
+          <div className="space-y-4">
+            <div>
+              <div className="flex items-center justify-between mb-2">
+                <div className="flex items-center gap-2">
+                  <Badge variant="outline">Current: Gold</Badge>
+                  <span className="text-sm text-muted-foreground">→</span>
+                  <Badge>Next: Platinum</Badge>
                 </div>
-                <div className="flex-1 min-w-0">
-                  <p className="font-medium truncate">{customer.name}</p>
-                  <p className="text-sm text-muted-foreground truncate">{customer.email}</p>
-                </div>
-                <p className="font-mono text-sm">{customer.sales}</p>
+                <span className="text-sm font-semibold">79%</span>
               </div>
-            </Card>
-          ))}
-        </div>
-      </div>
-
-      {/* My Legs */}
-      <div>
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-lg sm:text-xl font-semibold">My Legs</h2>
-          <Button size="sm">Recruit Ambassador</Button>
-        </div>
-        <div className="space-y-3">
-          {[
-            { name: "David Wilson", level: "Silver", customers: 12, volume: "$4,200" },
-            { name: "Lisa Anderson", level: "Bronze", customers: 8, volume: "$2,800" },
-          ].map((leg, i) => (
-            <Card key={i} className="p-4">
-              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center font-semibold">
-                  {leg.name
-                    .split(" ")
-                    .map((n) => n[0])
-                    .join("")}
-                </div>
-                <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-1">
-                    <p className="font-medium">{leg.name}</p>
-                    <Badge variant="outline">{leg.level}</Badge>
-                  </div>
-                  <p className="text-sm text-muted-foreground">
-                    {leg.customers} customers • {leg.volume} monthly volume
-                  </p>
-                </div>
+              <div className="h-3 bg-muted overflow-hidden rounded-none">
+                <div className="h-full bg-primary rounded-none" style={{ width: "79%" }} />
               </div>
-            </Card>
-          ))}
-        </div>
-      </div>
+            </div>
 
-      {/* Sales Performance */}
-      <div>
-        <h2 className="text-lg sm:text-xl font-semibold mb-4">Sales Performance</h2>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-          <Card className="p-4 sm:p-6 bg-muted">
-            <h3 className="font-semibold mb-4">Product Category Breakdown</h3>
-            <div className="space-y-3">
+            <div className="grid grid-cols-3 gap-4 pt-2">
+              <div>
+                <p className="text-sm text-muted-foreground">Current Volume</p>
+                <p className="font-mono text-lg">$7,900</p>
+              </div>
+              <div>
+                <p className="text-sm text-muted-foreground">Remaining</p>
+                <p className="font-mono text-lg">$2,100</p>
+              </div>
+              <div>
+                <p className="text-sm text-muted-foreground">Goal</p>
+                <p className="font-mono text-lg">$10,000</p>
+              </div>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Recent Activity & Team Performance Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        {/* Recent Activity */}
+        <Card className="p-4 sm:p-6">
+          <CardHeader className="px-0 pt-0">
+            <CardTitle className="text-lg">Recent Activity</CardTitle>
+          </CardHeader>
+          <CardContent className="px-0 pb-0">
+            <div className="space-y-4">
               {[
-                { category: "Creams", amount: "$3,200", percentage: 40 },
-                { category: "Simple Solutions", amount: "$2,400", percentage: 30 },
-                { category: "Essentials", amount: "$2,400", percentage: 30 },
-              ].map((item, i) => (
-                <div key={i}>
-                  <div className="flex justify-between text-sm mb-1">
-                    <span>{item.category}</span>
-                    <span className="font-mono">{item.amount}</span>
+                {
+                  type: "sale",
+                  customer: "Jessica Taylor",
+                  action: "New order",
+                  amount: "$124.50",
+                  time: "2 hours ago",
+                },
+                {
+                  type: "recruit",
+                  customer: "Mike Johnson",
+                  action: "Joined your team",
+                  amount: null,
+                  time: "1 day ago",
+                },
+                {
+                  type: "sale",
+                  customer: "Amanda Rodriguez",
+                  action: "Reorder",
+                  amount: "$89.00",
+                  time: "2 days ago",
+                },
+              ].map((activity, i) => (
+                <div key={i} className="flex items-center justify-between py-2 border-b last:border-0">
+                  <div className="flex-1">
+                    <p className="font-medium text-sm">{activity.customer}</p>
+                    <p className="text-xs text-muted-foreground">{activity.action}</p>
                   </div>
-                  <div className="h-2 overflow-hidden bg-muted rounded-none">
-                    <div className="h-full bg-primary" style={{ width: `${item.percentage}%` }} />
+                  <div className="text-right">
+                    {activity.amount && <p className="font-mono text-sm">{activity.amount}</p>}
+                    <p className="text-xs text-muted-foreground">{activity.time}</p>
                   </div>
                 </div>
               ))}
             </div>
-          </Card>
-          <div className="space-y-4">
-            <Card className="p-4 sm:p-6">
-              <h3 className="font-semibold mb-3">This Month</h3>
-              <div className="space-y-2">
-                <div className="flex justify-between">
-                  <span className="text-sm text-muted-foreground">Personal Sales</span>
-                  <span className="font-mono">$5,200</span>
+          </CardContent>
+        </Card>
+
+        {/* Team Performance */}
+        <Card className="p-4 sm:p-6">
+          <CardHeader className="px-0 pt-0">
+            <CardTitle className="text-lg">Team Performance</CardTitle>
+          </CardHeader>
+          <CardContent className="px-0 pb-0">
+            <div className="space-y-4">
+              {[
+                { name: "David Wilson", level: "Silver", sales: "$4,200", trend: "up" },
+                { name: "Lisa Anderson", level: "Bronze", sales: "$2,800", trend: "up" },
+                { name: "Mike Johnson", level: "Bronze", sales: "$1,450", trend: "down" },
+              ].map((member, i) => (
+                <div key={i} className="flex items-center justify-between py-2 border-b last:border-0">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center text-sm font-semibold">
+                      {member.name
+                        .split(" ")
+                        .map((n) => n[0])
+                        .join("")}
+                    </div>
+                    <div>
+                      <p className="font-medium text-sm">{member.name}</p>
+                      <Badge variant="outline" className="text-xs">
+                        {member.level}
+                      </Badge>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <p className="font-mono text-sm">{member.sales}</p>
+                    {member.trend === "up" ? (
+                      <ArrowUpIcon className="w-4 h-4 text-[#4b4262]" />
+                    ) : (
+                      <ArrowDownIcon className="w-4 h-4 text-muted-foreground" />
+                    )}
+                  </div>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-sm text-muted-foreground">Team Sales</span>
-                  <span className="font-mono">$7,000</span>
-                </div>
-                <div className="flex justify-between pt-2 border-t">
-                  <span className="font-semibold">Total Volume</span>
-                  <span className="font-mono font-semibold">$12,200</span>
-                </div>
-              </div>
-            </Card>
-            <Card className="p-4 sm:p-6">
-              <h3 className="font-semibold mb-3">Commissions</h3>
-              <div className="space-y-2">
-                <div className="flex justify-between">
-                  <span className="text-sm text-muted-foreground">Personal</span>
-                  <span className="font-mono">$1,040</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-sm text-muted-foreground">Team Bonus</span>
-                  <span className="font-mono">$420</span>
-                </div>
-                <div className="flex justify-between pt-2 border-t">
-                  <span className="font-semibold">Total Earned</span>
-                  <span className="font-mono font-semibold">$1,460</span>
-                </div>
-              </div>
-            </Card>
-          </div>
-        </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
       </div>
 
-      {/* Performance to Goal */}
-      <Card className="p-4 sm:p-6">
-        <h2 className="text-lg sm:text-xl font-semibold mb-4">Performance to Goal</h2>
-        <div className="space-y-3">
-          <div className="flex justify-between text-sm">
-            <span>Progress to Platinum Level</span>
-            <span className="font-semibold">79%</span>
-          </div>
-          <div className="h-3 bg-muted overflow-hidden rounded-none">
-            <div className="h-full bg-primary rounded-none" style={{ width: "79%" }} />
-          </div>
-          <div className="flex justify-between text-sm">
-            <div>
-              <p className="text-muted-foreground">Current Volume</p>
-              <p className="font-mono">$7,900</p>
+      {/* Data Tables */}
+      <div className="space-y-4">
+        {/* Rank Advancements */}
+        <Card className="p-4 sm:p-6">
+          <CardHeader className="px-0 pt-0">
+            <div className="flex items-center justify-between">
+              <CardTitle className="text-lg">Recent Rank Advancements</CardTitle>
+              <Button variant="outline" size="sm">
+                View All
+              </Button>
             </div>
-            <div className="text-center">
-              <p className="text-muted-foreground">Remaining</p>
-              <p className="font-mono">$2,100</p>
+          </CardHeader>
+          <CardContent className="px-0 pb-0">
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead>
+                  <tr className="border-b">
+                    <th className="text-left py-2 text-sm font-medium text-muted-foreground">Name</th>
+                    <th className="text-left py-2 text-sm font-medium text-muted-foreground">Previous Rank</th>
+                    <th className="text-left py-2 text-sm font-medium text-muted-foreground">New Rank</th>
+                    <th className="text-left py-2 text-sm font-medium text-muted-foreground">Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    { name: "Lisa Anderson", prev: "Member", new: "Bronze", date: "Dec 15" },
+                    { name: "David Wilson", prev: "Bronze", new: "Silver", date: "Dec 10" },
+                    { name: "Emma Thompson", prev: "Member", new: "Bronze", date: "Dec 5" },
+                  ].map((advancement, i) => (
+                    <tr key={i} className="border-b last:border-0">
+                      <td className="py-3 text-sm">{advancement.name}</td>
+                      <td className="py-3">
+                        <Badge variant="outline" className="text-xs">
+                          {advancement.prev}
+                        </Badge>
+                      </td>
+                      <td className="py-3">
+                        <Badge className="text-xs">{advancement.new}</Badge>
+                      </td>
+                      <td className="py-3 text-sm text-muted-foreground">{advancement.date}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
-            <div className="text-right">
-              <p className="text-muted-foreground">Goal</p>
-              <p className="font-mono">$10,000</p>
+          </CardContent>
+        </Card>
+
+        {/* Top Customers */}
+        <Card className="p-4 sm:p-6">
+          <CardHeader className="px-0 pt-0">
+            <div className="flex items-center justify-between">
+              <CardTitle className="text-lg">Top Customers This Month</CardTitle>
+              <Button variant="outline" size="sm">
+                View All
+              </Button>
             </div>
-          </div>
-        </div>
-      </Card>
+          </CardHeader>
+          <CardContent className="px-0 pb-0">
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead>
+                  <tr className="border-b">
+                    <th className="text-left py-2 text-sm font-medium text-muted-foreground">Customer</th>
+                    <th className="text-left py-2 text-sm font-medium text-muted-foreground">Orders</th>
+                    <th className="text-left py-2 text-sm font-medium text-muted-foreground">Total Sales</th>
+                    <th className="text-left py-2 text-sm font-medium text-muted-foreground">Last Order</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    { name: "Amanda Rodriguez", orders: 8, sales: "$2,156.00", date: "Dec 18" },
+                    { name: "Jessica Taylor", orders: 6, sales: "$1,245.00", date: "Dec 17" },
+                    { name: "Michael Chen", orders: 5, sales: "$892.50", date: "Dec 15" },
+                  ].map((customer, i) => (
+                    <tr key={i} className="border-b last:border-0">
+                      <td className="py-3 text-sm">{customer.name}</td>
+                      <td className="py-3 text-sm font-mono">{customer.orders}</td>
+                      <td className="py-3 text-sm font-mono">{customer.sales}</td>
+                      <td className="py-3 text-sm text-muted-foreground">{customer.date}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   )
 }
@@ -247,14 +351,8 @@ function MemberView() {
       {/* Profile Header */}
       <Card className="p-4 sm:p-6">
         <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4">
-          <div className="w-20 h-20 rounded-full overflow-hidden bg-muted">
-            <Image
-              src="/images/sarah-avatar.jpg"
-              alt="Sarah Miller"
-              width={80}
-              height={80}
-              className="w-full h-full object-cover"
-            />
+          <div className="w-20 h-20 rounded-full overflow-hidden bg-primary/10 flex items-center justify-center text-2xl font-semibold">
+            SM
           </div>
           <div className="flex-1 text-center sm:text-left">
             <h1 className="text-lg sm:text-xl font-semibold">Sarah Miller</h1>

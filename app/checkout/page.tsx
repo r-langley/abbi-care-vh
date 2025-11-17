@@ -3,7 +3,7 @@
 import type React from "react"
 
 import { useState } from "react"
-import { useRouter } from "next/navigation"
+import { useRouter } from 'next/navigation'
 import Link from "next/link"
 import Image from "next/image"
 import { Header } from "@/components/header"
@@ -15,7 +15,7 @@ import { useAuth } from "@/lib/auth-context"
 
 export default function CheckoutPage() {
   const router = useRouter()
-  const { items, subtotal, clearCart } = useCart()
+  const { items, subtotal, subscriptionSavings, clearCart, customerGroups } = useCart()
   const { userInfo } = useAuth()
   const [formData, setFormData] = useState({
     email: userInfo?.email || "",
@@ -33,7 +33,6 @@ export default function CheckoutPage() {
   })
   const [isProcessing, setIsProcessing] = useState(false)
 
-  // Redirect if cart is empty
   if (items.length === 0) {
     return (
       <>
@@ -52,8 +51,8 @@ export default function CheckoutPage() {
   }
 
   const shipping = 9.99
-  const tax = subtotal * 0.08 // 8% tax
-  const total = subtotal + shipping + tax
+  const tax = subtotal * 0.08
+  const finalTotal = subtotal - subscriptionSavings + shipping + tax
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -63,17 +62,16 @@ export default function CheckoutPage() {
     e.preventDefault()
     setIsProcessing(true)
 
-    // Simulate order processing
     await new Promise((resolve) => setTimeout(resolve, 2000))
 
-    // Store order details for confirmation page
     const orderData = {
       orderNumber: `ORD-${Date.now()}`,
       items,
       subtotal,
+      subscriptionSavings,
       shipping,
       tax,
-      total,
+      total: finalTotal,
       shippingAddress: {
         firstName: formData.firstName,
         lastName: formData.lastName,
@@ -88,11 +86,7 @@ export default function CheckoutPage() {
     }
 
     localStorage.setItem("lastOrder", JSON.stringify(orderData))
-
-    // Clear cart
     clearCart()
-
-    // Redirect to confirmation
     router.push("/order-confirmation")
   }
 
@@ -259,26 +253,78 @@ export default function CheckoutPage() {
                     <CardTitle>Order Summary</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
-                    {/* Order Items */}
-                    <div className="space-y-3 max-h-[300px] overflow-y-auto">
-                      {items.map((item) => (
-                        <div key={item.id} className="flex gap-3">
-                          <div className="relative w-16 h-16 flex-shrink-0 rounded-md overflow-hidden bg-muted">
-                            <Image
-                              src={item.image || "/placeholder.svg"}
-                              alt={item.name}
-                              fill
-                              className="object-cover"
-                              sizes="64px"
-                            />
+                    <div className="space-y-4 max-h-[400px] overflow-y-auto">
+                      {customerGroups.size > 1 ? (
+                        // Multiple customers - show grouped
+                        Array.from(customerGroups.entries()).map(([customerId, customerItems]) => {
+                          const customerSubtotal = customerItems.reduce(
+                            (sum, item) => sum + item.price * item.quantity,
+                            0,
+                          )
+                          const customerSavings = customerItems
+                            .filter((item) => item.isSubscription)
+                            .reduce((sum, item) => sum + item.price * item.quantity * 0.05, 0)
+                          
+                          return (
+                            <div key={customerId || "unassigned"} className="space-y-3">
+                              <div className="flex items-center justify-between px-3 py-1.5 bg-muted rounded-md border border-border">
+                                <h4 className="font-medium text-xs">{customerId || "Unassigned"}</h4>
+                                <span className="text-xs font-mono">
+                                  ${(customerSubtotal - customerSavings).toFixed(2)}
+                                </span>
+                              </div>
+                              {customerItems.map((item) => (
+                                <div key={item.id} className="flex gap-3 pl-3">
+                                  <div className="relative w-12 h-12 flex-shrink-0 rounded-md overflow-hidden bg-muted">
+                                    <Image
+                                      src={item.image || "/placeholder.svg"}
+                                      alt={item.name}
+                                      fill
+                                      className="object-cover"
+                                      sizes="48px"
+                                    />
+                                  </div>
+                                  <div className="flex-1 min-w-0">
+                                    <p className="text-xs font-medium truncate">{item.name}</p>
+                                    <p className="text-xs text-muted-foreground">Qty: {item.quantity}</p>
+                                    <p className="text-xs font-mono">${(item.price * item.quantity).toFixed(2)}</p>
+                                    {item.isSubscription && (
+                                      <p className="text-xs text-[#34c759] font-mono">
+                                        -${(item.price * item.quantity * 0.05).toFixed(2)} saved
+                                      </p>
+                                    )}
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          )
+                        })
+                      ) : (
+                        // Single customer - show all items
+                        items.map((item) => (
+                          <div key={item.id} className="flex gap-3">
+                            <div className="relative w-16 h-16 flex-shrink-0 rounded-md overflow-hidden bg-muted">
+                              <Image
+                                src={item.image || "/placeholder.svg"}
+                                alt={item.name}
+                                fill
+                                className="object-cover"
+                                sizes="64px"
+                              />
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <p className="text-sm font-medium truncate">{item.name}</p>
+                              <p className="text-xs text-muted-foreground">Qty: {item.quantity}</p>
+                              <p className="text-sm font-mono">${(item.price * item.quantity).toFixed(2)}</p>
+                              {item.isSubscription && (
+                                <p className="text-xs text-[#34c759] font-mono">
+                                  -${(item.price * item.quantity * 0.05).toFixed(2)} saved
+                                </p>
+                              )}
+                            </div>
                           </div>
-                          <div className="flex-1 min-w-0">
-                            <p className="text-sm font-medium truncate">{item.name}</p>
-                            <p className="text-xs text-muted-foreground">Qty: {item.quantity}</p>
-                            <p className="text-sm font-mono">${(item.price * item.quantity).toFixed(2)}</p>
-                          </div>
-                        </div>
-                      ))}
+                        ))
+                      )}
                     </div>
 
                     {/* Price Breakdown */}
@@ -287,6 +333,12 @@ export default function CheckoutPage() {
                         <span className="text-muted-foreground">Subtotal</span>
                         <span className="font-mono">${subtotal.toFixed(2)}</span>
                       </div>
+                      {subscriptionSavings > 0 && (
+                        <div className="flex justify-between text-sm">
+                          <span className="text-[#34c759]">Subscription Savings (5%)</span>
+                          <span className="font-mono text-[#34c759]">-${subscriptionSavings.toFixed(2)}</span>
+                        </div>
+                      )}
                       <div className="flex justify-between text-sm">
                         <span className="text-muted-foreground">Shipping</span>
                         <span className="font-mono">${shipping.toFixed(2)}</span>
@@ -299,7 +351,7 @@ export default function CheckoutPage() {
 
                     <div className="flex justify-between text-lg font-bold">
                       <span>Total</span>
-                      <span className="font-mono">${total.toFixed(2)}</span>
+                      <span className="font-mono">${finalTotal.toFixed(2)}</span>
                     </div>
 
                     <Button type="submit" size="lg" className="w-full font-mono" disabled={isProcessing}>

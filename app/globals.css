@@ -31,14 +31,14 @@
   --card-foreground: #000000;
   --popover: #ffffff;
   --popover-foreground: #000000;
-  --primary: var(--sea-slate);
-  --primary-foreground: #ffffff;
+  --primary: rgb(188, 170, 255);
+  --primary-foreground: rgb(244, 243, 253);
   --secondary: var(--sage);
   --secondary-foreground: rgb(132, 148, 132);
-  --muted: var(--sage);
+  --muted: rgb(244, 243, 253);
   --muted-foreground: var(--sea-slate);
   --accent: var(--sea-slate);
-  --accent-foreground: #ffffff;
+  --accent-foreground: rgb(243, 242, 252);
   --destructive: var(--status-red);
   --destructive-foreground: #ffffff;
   --border: rgb(224, 228, 224);
@@ -325,4 +325,6 @@
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
+}
+
 }

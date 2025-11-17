@@ -123,9 +123,8 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   const subtotal = useMemo(() => items.reduce((sum, item) => sum + item.price * item.quantity, 0), [items])
 
-  // 15% savings on subscription items (common e-commerce practice)
   const subscriptionSavings = useMemo(
-    () => items.filter((item) => item.isSubscription).reduce((sum, item) => sum + item.price * item.quantity * 0.15, 0),
+    () => items.filter((item) => item.isSubscription).reduce((sum, item) => sum + item.price * item.quantity * 0.05, 0),
     [items],
   )
 

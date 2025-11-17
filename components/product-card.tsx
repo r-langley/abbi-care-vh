@@ -58,7 +58,7 @@ export function ProductCard({ product, showRecommended = false, onMixAtHomeAdd }
           <div className="bg-muted p-[10px] pb-[20px] flex flex-col justify-between gap-[10px] flex-1">
             <div className="flex flex-col gap-[10px]">
               <div className="flex flex-col gap-[5px]">
-                <p className="leading-[1.15] text-primary tracking-normal text-base font-semibold">{product.name}</p>
+                <p className="leading-[1.15] tracking-normal text-base font-semibold text-foreground">{product.name}</p>
               </div>
               <p
                 className="text-[13px] tracking-[-0.26px] leading-[1.15] font-semibold text-primary font-mono"
