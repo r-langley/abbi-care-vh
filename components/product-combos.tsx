@@ -11,7 +11,7 @@ export function ProductCombos() {
           <div className="flex flex-col gap-[23px]">
             <div className="flex flex-col gap-[10px] text-[#586158] leading-[1.35]">
               <h2 className="text-foreground font-medium tracking-tight text-2xl">Make it a Combo & Save!</h2>
-              <p className="tracking-[-0.32px] text-foreground font-normal text-sm">
+              <p className="text-foreground font-normal text-sm tracking-normal">
                 Complete your routine. Add a Cleanser and Serum to your Cream and save!
               </p>
             </div>
@@ -31,10 +31,10 @@ export function ProductCombos() {
                   </div>
 
                   {/* Details */}
-                  <div className="bg-[#f5f6f5] p-[10px] pb-[20px] flex flex-col justify-between gap-[10px] flex-1 bg-primary-foreground">
+                  <div className="bg-[#f5f6f5] p-[10px] pb-[20px] flex flex-col justify-between gap-[10px] flex-1 bg-secondary-foreground">
                     <div className="flex flex-col gap-[10px]">
                       <div className="flex flex-col gap-[5px]">
-                        <p className="text-[18px] leading-[1.15] text-[#586158] tracking-normal font-semibold text-primary">
+                        <p className="text-[18px] leading-[1.15] text-[#586158] tracking-normal font-semibold text-card-foreground">
                           Duo Pack
                         </p>
                         <p className="text-[14px] tracking-[-0.28px] text-[#586158] leading-[1.15] text-foreground font-normal">
@@ -71,10 +71,10 @@ export function ProductCombos() {
                   </div>
 
                   {/* Details */}
-                  <div className="bg-[#f5f6f5] p-[10px] pb-[20px] flex flex-col justify-between gap-[10px] flex-1 bg-primary-foreground">
+                  <div className="bg-[#f5f6f5] p-[10px] pb-[20px] flex flex-col justify-between gap-[10px] flex-1 bg-secondary-foreground">
                     <div className="flex flex-col gap-[10px]">
                       <div className="flex flex-col gap-[5px]">
-                        <p className="text-[18px] leading-[1.15] text-[#586158] tracking-normal font-semibold text-primary">
+                        <p className="text-[18px] leading-[1.15] text-[#586158] tracking-normal font-semibold text-card-foreground">
                           Trio Pack
                         </p>
                         <p className="text-[14px] tracking-[-0.28px] text-[#586158] leading-[1.15] text-foreground font-normal">

@@ -365,7 +365,7 @@ export default function ShopPage() {
                       <p className="md:hidden tracking-[-0.32px] text-[#586158] leading-[1.35] text-foreground font-normal text-sm">
                         Made-to-order in our French lab — just for you.
                       </p>
-                      <p className="hidden md:block tracking-[-0.32px] text-[#586158] leading-[1.5] text-foreground font-normal text-sm">
+                      <p className="hidden md:block text-[#586158] leading-[1.5] text-foreground font-normal text-sm tracking-normal">
                         Each In Lab cream is custom-formulated and made-to-order in our French laboratory, crafted
                         specifically for your unique skin needs.
                       </p>
@@ -394,7 +394,7 @@ export default function ShopPage() {
                 <div className="flex flex-col gap-[20px]">
                   <div className="flex flex-col gap-2.5">
                     <h2 className="text-[#586158] text-foreground text-2xl tracking-tight font-medium">Mix at Home</h2>
-                    <p className="tracking-[-0.32px] text-[#586158] leading-[1.35] text-foreground font-normal text-sm">
+                    <p className="text-[#586158] leading-[1.35] text-foreground font-normal text-sm tracking-normal">
                       Create your own routines. Mix a specific base and active concentrates.
                     </p>
                     <p className="text-[18px] tracking-tight leading-[1.2] mt-2 text-center">
@@ -423,7 +423,7 @@ export default function ShopPage() {
                     <h2 className="text-[#586158] text-foreground text-2xl tracking-tight font-medium">
                       Active Concentrates
                     </h2>
-                    <p className="tracking-[-0.32px] text-[#586158] leading-[1.35] text-foreground font-normal text-sm">
+                    <p className="text-[#586158] leading-[1.35] text-foreground font-normal text-sm tracking-normal">
                       Concentrated solutions for your skincare needs.
                     </p>
                     <p className="text-[18px] tracking-tight leading-[1.2] mt-2 text-center">

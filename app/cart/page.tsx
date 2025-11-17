@@ -159,9 +159,9 @@ export default function CartPage() {
                   return (
                     <div key={customerId || "my-cart"} className="space-y-4">
                       {/* Customer Header */}
-                      <div className="flex items-center justify-between px-4 py-2 rounded-md border border-border bg-popover">
-                        <h3 className="font-medium text-sm">{customerId || "My Cart"}</h3>
-                        <span className="text-sm font-mono text-muted-foreground">
+                      <div className="flex items-center justify-between rounded-md border border-border px-0 py-0 border-none bg-transparent">
+                        <h3 className="text-lg font-semibold text-foreground">{customerId || "My Cart"}</h3>
+                        <span className="font-mono text-card-foreground text-lg font-normal">
                           ${(customerSubtotal - customerSavings).toFixed(2)}
                         </span>
                       </div>
