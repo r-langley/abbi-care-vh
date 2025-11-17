@@ -78,7 +78,7 @@ export function RegionLanguageSelector() {
   return (
     <>
       {/* Region/Language Selector Button */}
-      <div className="flex items-center gap-1">
+      <div className="flex items-center gap-0">
         {/* Region Button - Opens full modal */}
         <button
           onClick={() => setIsRegionModalOpen(true)}

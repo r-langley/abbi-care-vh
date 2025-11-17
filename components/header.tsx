@@ -51,7 +51,7 @@ export function Header() {
         <div className="mx-auto px-0">
           <div className="flex items-center justify-between px-5 h-14">
             {/* Left: Hamburger + Desktop Nav Links */}
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-0">
               <Sheet open={open} onOpenChange={setOpen}>
                 <SheetTrigger asChild>
                   <button className="p-2 hover:bg-[#f5f6f5] rounded-[8px] transition-colors">
@@ -64,6 +64,10 @@ export function Header() {
                   <MobileNav closeMenu={() => setOpen(false)} />
                 </SheetContent>
               </Sheet>
+
+              <div className="md:hidden">
+                <RegionLanguageSelector />
+              </div>
 
               <nav className="hidden md:flex items-center gap-6">
                 <NavLink href="/skin-analysis">Skin Analysis</NavLink>
@@ -82,7 +86,9 @@ export function Header() {
 
             {/* Right: Cart + Account */}
             <div className="flex items-center gap-0">
-              <RegionLanguageSelector />
+              <div className="hidden md:block">
+                <RegionLanguageSelector />
+              </div>
               
               <Link href="/cart" className="relative p-2 hover:bg-[#f5f6f5] rounded-[8px] transition-colors">
                 <ShoppingBagIcon className="w-6 h-6" />
