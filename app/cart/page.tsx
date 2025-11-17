@@ -377,6 +377,52 @@ export default function CartPage() {
 
             {/* Order Summary */}
             <div className="lg:col-span-1">
+              <Card className="mb-4 border-accent-purple/20 bg-accent-purple/5">
+                <CardContent className="p-4">
+                  <div className="space-y-3">
+                    <div className="flex items-start gap-3">
+                      <div className="flex-shrink-0 w-10 h-10 rounded-full bg-accent-purple/10 flex items-center justify-center">
+                        <svg
+                          className="w-5 h-5 text-accent-purple"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M5 13l4 4L19 7"
+                          />
+                        </svg>
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="font-semibold text-sm mb-1">Subscribe & Save 5%</h3>
+                        <p className="text-xs text-muted-foreground leading-relaxed">
+                          Get automatic deliveries and save on every order. Cancel anytime, no commitment required.
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2 pt-2 border-t border-accent-purple/10">
+                      <svg
+                        className="w-4 h-4 text-accent-purple flex-shrink-0"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                      </svg>
+                      <p className="text-xs text-muted-foreground">Free shipping on subscription orders</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
               <Card className="sticky top-24">
                 <CardContent className="p-6 space-y-4">
                   <div className="pb-4 border-b border-border">

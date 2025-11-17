@@ -12,7 +12,7 @@ import {
 import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetDescription } from "@/components/ui/sheet"
 import { useCart } from "@/lib/cart-context"
 import { useAuth } from "@/lib/auth-context"
-import { usePathname } from "next/navigation"
+import { usePathname } from 'next/navigation'
 import React from "react"
 import { NavLink } from "@/components/ui/nav-link"
 import { TabsNav } from "@/components/ui/tabs-nav"
@@ -24,6 +24,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { RegionLanguageSelector } from "@/components/region-language-selector"
 
 export function Header() {
   const { totalItems } = useCart()
@@ -81,6 +82,8 @@ export function Header() {
 
             {/* Right: Cart + Account */}
             <div className="flex items-center gap-0">
+              <RegionLanguageSelector />
+              
               <Link href="/cart" className="relative p-2 hover:bg-[#f5f6f5] rounded-[8px] transition-colors">
                 <ShoppingBagIcon className="w-6 h-6" />
                 {totalItems > 0 && (
