@@ -104,7 +104,7 @@ export function RegionLanguageSelector() {
                   className={cn(
                     "w-full text-left px-3 py-2 rounded-md text-sm transition-colors",
                     selectedLanguage === lang.code
-                      ? "bg-accent text-accent-foreground font-medium"
+                      ? "bg-accent-purple/10 text-accent-purple font-medium"
                       : "hover:bg-muted"
                   )}
                 >
@@ -130,8 +130,8 @@ export function RegionLanguageSelector() {
                 key={code}
                 onClick={() => handleRegionChange(code)}
                 className={cn(
-                  "flex flex-col items-center justify-center gap-3 p-6 rounded-lg border-2 transition-all hover:border-accent-purple hover:bg-muted",
-                  selectedRegion === code ? "border-accent-purple bg-muted" : "border-border"
+                  "flex flex-col items-center justify-center gap-3 p-6 rounded-lg border-2 transition-all hover:border-accent-purple hover:bg-accent-purple/5",
+                  selectedRegion === code ? "border-accent-purple bg-accent-purple/5" : "border-border"
                 )}
               >
                 <span className="text-5xl">{regionData.flag}</span>

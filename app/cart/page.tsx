@@ -75,7 +75,7 @@ export default function CartPage() {
       <Header />
       <main className="min-h-screen bg-muted">
         <div className="container mx-auto px-5 py-5">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-2.5">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
             {/* Cart Items */}
             <div className="lg:col-span-2 space-y-6">
               <Card className="border-primary/20">
