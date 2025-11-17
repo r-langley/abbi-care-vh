@@ -78,10 +78,10 @@ export default function CartPage() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-2.5">
             {/* Cart Items */}
             <div className="lg:col-span-2 space-y-6">
-              <Card className="border-[#586158]/20">
+              <Card className="border-primary/20">
                 <CardContent className="p-4">
                   <div className="flex items-center gap-2 mb-2">
-                    <UserGroupIcon className="h-5 w-5 text-[#586158]" />
+                    <UserGroupIcon className="h-5 w-5 text-primary" />
                     <h3 className="font-medium text-sm">Ambassador Code</h3>
                   </div>
                   <div className="flex gap-2">
@@ -91,13 +91,18 @@ export default function CartPage() {
                       value={ambassadorCode}
                       onChange={(e) => handleAmbassadorCodeChange(e.target.value)}
                       className="font-mono uppercase flex-1"
+                      aria-describedby="ambassador-code-requirement"
                     />
-                    <Button 
-                      size="sm" 
+                    <Button
+                      size="sm"
                       disabled={!ambassadorCode || ambassadorCode.length < 6}
+                      aria-label="Apply ambassador code"
                     >
                       Apply
                     </Button>
+                    <span id="ambassador-code-requirement" className="sr-only">
+                      Ambassador code must be at least 6 characters
+                    </span>
                   </div>
                   {ambassadorName && (
                     <p className="text-xs text-accent-purple mt-1">
@@ -181,7 +186,7 @@ export default function CartPage() {
                                   <div className="flex-1">
                                     <Link
                                       href={`/product/${item.id}`}
-                                      className="font-medium hover:text-[#586158] transition-colors text-lg"
+                                      className="font-medium hover:text-primary transition-colors text-lg"
                                     >
                                       {item.name}
                                     </Link>
@@ -192,6 +197,7 @@ export default function CartPage() {
                                     size="icon"
                                     onClick={() => removeItem(item.id)}
                                     className="flex-shrink-0"
+                                    aria-label={`Remove ${item.name} from cart`}
                                   >
                                     <TrashIcon className="h-4 w-4" />
                                   </Button>
@@ -204,15 +210,17 @@ export default function CartPage() {
                                       size="icon"
                                       className="h-8 w-8"
                                       onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                                      aria-label="Decrease quantity"
                                     >
                                       <MinusIcon className="h-3 w-3" />
                                     </Button>
-                                    <span className="w-10 text-center font-mono text-sm">{item.quantity}</span>
+                                    <span className="w-10 text-center font-mono text-sm" aria-live="polite">{item.quantity}</span>
                                     <Button
                                       variant="ghost"
                                       size="icon"
                                       className="h-8 w-8"
                                       onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                                      aria-label="Increase quantity"
                                     >
                                       <PlusIcon className="h-3 w-3" />
                                     </Button>
@@ -288,7 +296,7 @@ export default function CartPage() {
                             <div className="flex-1">
                               <Link
                                 href={`/product/${item.id}`}
-                                className="font-medium hover:text-[#586158] transition-colors text-lg"
+                                className="font-medium hover:text-primary transition-colors text-lg"
                               >
                                 {item.name}
                               </Link>
@@ -299,6 +307,7 @@ export default function CartPage() {
                               size="icon"
                               onClick={() => removeItem(item.id)}
                               className="flex-shrink-0"
+                              aria-label={`Remove ${item.name} from cart`}
                             >
                               <TrashIcon className="h-4 w-4" />
                             </Button>
@@ -311,15 +320,17 @@ export default function CartPage() {
                                 size="icon"
                                 className="h-8 w-8"
                                 onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                                aria-label="Decrease quantity"
                               >
                                 <MinusIcon className="h-3 w-3" />
                               </Button>
-                              <span className="w-10 text-center font-mono text-sm">{item.quantity}</span>
+                              <span className="w-10 text-center font-mono text-sm" aria-live="polite">{item.quantity}</span>
                               <Button
                                 variant="ghost"
                                 size="icon"
                                 className="h-8 w-8"
                                 onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                                aria-label="Increase quantity"
                               >
                                 <PlusIcon className="h-3 w-3" />
                               </Button>

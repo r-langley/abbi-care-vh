@@ -72,6 +72,7 @@ export function CartDrawer({ open, onOpenChange }: CartDrawerProps) {
                             size="icon"
                             onClick={() => removeItem(item.id)}
                             className="flex-shrink-0"
+                            aria-label={`Remove ${item.name} from cart`}
                           >
                             <TrashIcon className="h-4 w-4" />
                           </Button>
@@ -83,15 +84,17 @@ export function CartDrawer({ open, onOpenChange }: CartDrawerProps) {
                               size="icon"
                               className="h-8 w-8"
                               onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                              aria-label="Decrease quantity"
                             >
                               <MinusIcon className="h-3 w-3" />
                             </Button>
-                            <span className="w-10 text-center font-mono text-sm">{item.quantity}</span>
+                            <span className="w-10 text-center font-mono text-sm" aria-live="polite">{item.quantity}</span>
                             <Button
                               variant="ghost"
                               size="icon"
                               className="h-8 w-8"
                               onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                              aria-label="Increase quantity"
                             >
                               <PlusIcon className="h-3 w-3" />
                             </Button>

@@ -354,7 +354,13 @@ export default function CheckoutPage() {
                       <span className="font-mono">${finalTotal.toFixed(2)}</span>
                     </div>
 
-                    <Button type="submit" size="lg" className="w-full font-mono" disabled={isProcessing}>
+                    <Button
+                      type="submit"
+                      size="lg"
+                      className="w-full font-mono"
+                      disabled={isProcessing}
+                      aria-busy={isProcessing}
+                    >
                       {isProcessing ? "Processing..." : "Place Order"}
                     </Button>
 

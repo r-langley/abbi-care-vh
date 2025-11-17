@@ -158,7 +158,7 @@ function AmbassadorView() {
                   </div>
                   <span className="text-3xl font-semibold font-mono text-accent-purple">75%</span>
                 </div>
-                <Progress value={75} className="h-4 rounded-full [&>div]:bg-accent-purple" />
+                <Progress value={75} className="h-4 rounded-full [&>div]:bg-accent-purple" aria-label="Progress to Level 6: 75%" />
                 <p className="text-sm text-muted-foreground mt-2">TO LEVEL 6</p>
               </div>
 
@@ -228,7 +228,7 @@ function AmbassadorView() {
                     <span className="font-medium text-accent-purple">20%</span>
                     <span className="font-mono">$119 of $200</span>
                   </div>
-                  <Progress value={59.5} className="h-3 rounded-full [&>div]:bg-accent-purple" />
+                  <Progress value={59.5} className="h-3 rounded-full [&>div]:bg-accent-purple" aria-label="20% commission tier: $119 of $200" />
                 </div>
 
                 {/* 25% Tier - Next Target */}
@@ -237,7 +237,7 @@ function AmbassadorView() {
                     <span className="font-medium text-accent-purple">25%</span>
                     <span className="font-mono">$119 of $1,499.99</span>
                   </div>
-                  <Progress value={7.9} className="h-3 rounded-full [&>div]:bg-accent-purple" />
+                  <Progress value={7.9} className="h-3 rounded-full [&>div]:bg-accent-purple" aria-label="25% commission tier: $119 of $1,499.99" />
                 </div>
 
                 {/* 30% Tier */}
@@ -246,7 +246,7 @@ function AmbassadorView() {
                     <span className="font-medium text-muted-foreground">30%</span>
                     <span className="font-mono text-muted-foreground">$0 of $2,999.99</span>
                   </div>
-                  <Progress value={0} className="h-3 rounded-full [&>div]:bg-muted-foreground" />
+                  <Progress value={0} className="h-3 rounded-full [&>div]:bg-muted-foreground" aria-label="30% commission tier: $0 of $2,999.99" />
                 </div>
 
                 {/* 35% Tier */}
@@ -255,7 +255,7 @@ function AmbassadorView() {
                     <span className="font-medium text-muted-foreground">35%</span>
                     <span className="font-mono text-muted-foreground">$0 of $5,000.00</span>
                   </div>
-                  <Progress value={0} className="h-3 rounded-full [&>div]:bg-muted-foreground" />
+                  <Progress value={0} className="h-3 rounded-full [&>div]:bg-muted-foreground" aria-label="35% commission tier: $0 of $5,000.00" />
                 </div>
               </div>
 

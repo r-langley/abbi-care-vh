@@ -26,6 +26,9 @@
   - Tailwind: `bg-muted`, `text-muted`, `border-muted`
 - **Evergreen**: `#3e463e` - Darker accent
   - CSS Variable: `--evergreen`
+- **Accent Purple**: `#8A6EFA` - Positive indicators, savings, progress
+  - CSS Variable: `--accent-purple`
+  - Tailwind: `text-accent-purple`, `bg-accent-purple`
 
 #### Status Colors
 - **Red**: `#ff3b30` - Low scores, needs attention
@@ -232,18 +235,18 @@ import { COLORS, SPACING, CARD, CSS_VARS } from '@/lib/design-tokens'
 - Unassigned items grouped together
 
 ### Subscription & Auto-Ship
-- 15% discount on subscription items (industry standard)
+- 5% discount on subscription items
 - Checkbox toggle per cart item
 - Real-time savings calculation
-- Green (#34c759) for savings display
+- Accent Purple (#8A6EFA) for savings display
 - Inline savings shown next to item price
 
 ### Ambassador Program
 - Ambassador code input at top of cart
 - Uppercase text transformation
 - localStorage persistence
-- Sea Slate (#586158) color for code display
-- Green checkmark when code applied
+- Primary color for icon and accents
+- Accent Purple for confirmation text when code applied
 
 ### Cart Context Management
 - localStorage persistence with 300ms debounce
