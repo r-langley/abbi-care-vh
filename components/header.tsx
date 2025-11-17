@@ -200,23 +200,21 @@ function MobileNav({ closeMenu }: { closeMenu: () => void }) {
           <NavLink href="/shop?category=creams" variant="mobile" className="block mb-1">
             Creams
           </NavLink>
-          <p className="tracking-[-0.32px] text-sm font-normal text-secondary-foreground">
-            Choose between In-Lab and Mix-At-Home
-          </p>
+          
         </div>
 
         <div onClick={closeMenu}>
           <NavLink href="/shop?category=essentials" variant="mobile" className="block mb-1">
             Essentials
           </NavLink>
-          <p className="tracking-[-0.32px] text-sm font-normal text-secondary-foreground">Cleansers, Serums, Oils & Mists</p>
+          
         </div>
 
         <div onClick={closeMenu}>
           <NavLink href="/shop?category=simple-solutions" variant="mobile" className="block mb-1">
             Simple Solutions
           </NavLink>
-          <p className="tracking-[-0.32px] mb-3 text-sm font-normal text-secondary-foreground">Complete skincare packages</p>
+          
         </div>
 
         <div>
@@ -227,9 +225,7 @@ function MobileNav({ closeMenu }: { closeMenu: () => void }) {
             Shop by Trait
             <ChevronDownIcon className={`h-6 w-6 transition-transform ${isTraitExpanded ? "rotate-180" : ""}`} />
           </button>
-          <p className="tracking-[-0.32px] mb-3 text-sm font-normal text-secondary-foreground">
-            Shop based on your skin's top priorities
-          </p>
+          
           {isTraitExpanded && (
             <div className="flex flex-col gap-3 pl-4">
               <NavLink href="/shop?category=creams&traits=wrinkles" variant="footer" onClick={closeMenu}>
