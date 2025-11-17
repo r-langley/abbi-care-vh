@@ -166,26 +166,26 @@ function AmbassadorView() {
                 <TargetChecklistItem
                   title="Personal Sales Target"
                   subtitle="$5,000 reached"
-                  achieved={true}
+                  progress={100}
                 />
                 <TargetChecklistItem
                   title="Team Sales"
                   subtitle="$15,000 / $20,000"
-                  achieved={false}
+                  progress={75}
                 />
                 <TargetChecklistItem
                   title="Qualified Legs"
                   subtitle="8 / 6 required"
-                  achieved={true}
+                  progress={100}
                 />
                 <TargetChecklistItem
                   title="Active Team Members"
                   subtitle="12 / 15 required"
-                  achieved={false}
+                  progress={80}
                 />
               </div>
 
-              <div className="flex justify-end mt-4">
+              <div className="flex mt-4 justify-start">
                 <Button variant="outline" size="sm" asChild>
                   <Link href="/account/rank-progress">View Full Details</Link>
                 </Button>
@@ -194,23 +194,27 @@ function AmbassadorView() {
 
             {/* Enhanced Commission Tab Content */}
             <TabsContent value="commission" className="space-y-6">
-              {/* Commission Overview */}
-              <div className="flex items-center justify-between">
-                <div className="space-y-1">
-                  <div className="flex items-center gap-2">
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-baseline gap-2">
                     <span className="text-sm text-muted-foreground">Currently at</span>
                     <span className="text-3xl font-semibold font-mono text-accent-purple">20%</span>
                   </div>
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-baseline gap-2">
                     <span className="text-sm text-muted-foreground">Next target</span>
-                    <span className="text-2xl font-semibold font-mono text-accent-purple">25%</span>
+                    <span className="text-3xl font-semibold font-mono text-accent-purple">25%</span>
                   </div>
                 </div>
-                <div className="text-right">
-                  <p className="text-sm text-muted-foreground">Current Sales</p>
-                  <p className="text-xl font-semibold font-mono">$119</p>
-                  <p className="text-sm text-muted-foreground mt-2">Sales to Next Target</p>
-                  <p className="text-lg font-semibold font-mono text-accent-purple">$81</p>
+
+                <div className="flex items-center justify-between text-sm">
+                  <div>
+                    <span className="text-muted-foreground">Current Sales: </span>
+                    <span className="font-mono font-semibold">$119</span>
+                  </div>
+                  <div>
+                    <span className="text-muted-foreground">Needed: </span>
+                    <span className="font-mono font-semibold text-accent-purple">$81</span>
+                  </div>
                 </div>
               </div>
 
@@ -298,7 +302,7 @@ function AmbassadorView() {
             />
           </div>
         </CardContent>
-        <div className="flex justify-end mt-4">
+        <div className="flex mt-4 justify-start">
           <Button variant="outline" size="sm" asChild>
             <Link href="/account/news">View All Updates</Link>
           </Button>
@@ -333,7 +337,7 @@ function AmbassadorView() {
               />
             </div>
           </CardContent>
-          <div className="flex justify-end mt-4">
+          <div className="flex mt-4 justify-start">
             <Button variant="outline" size="sm" asChild>
               <Link href="/account/activity">View All Activity</Link>
             </Button>
@@ -367,7 +371,7 @@ function AmbassadorView() {
               />
             </div>
           </CardContent>
-          <div className="flex justify-end mt-4">
+          <div className="flex mt-4 justify-start">
             <Button variant="outline" size="sm" asChild>
               <Link href="/account/team">View All Team Members</Link>
             </Button>

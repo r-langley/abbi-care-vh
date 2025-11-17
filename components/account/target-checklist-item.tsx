@@ -1,23 +1,22 @@
-import { CheckCircleIcon, XCircleIcon } from "@heroicons/react/24/outline"
+import { Progress } from "@/components/ui/progress"
 
 interface TargetChecklistItemProps {
   title: string
   subtitle: string
-  achieved: boolean
+  progress: number
 }
 
-export function TargetChecklistItem({ title, subtitle, achieved }: TargetChecklistItemProps) {
+export function TargetChecklistItem({ title, subtitle, progress }: TargetChecklistItemProps) {
   return (
-    <div className="flex items-center gap-3 p-3 bg-muted rounded-md">
-      {achieved ? (
-        <CheckCircleIcon className="w-6 h-6 text-accent-purple flex-shrink-0" />
-      ) : (
-        <XCircleIcon className="w-6 h-6 text-muted-foreground flex-shrink-0" />
-      )}
-      <div>
-        <p className="text-sm font-medium">{title}</p>
-        <p className="text-xs text-muted-foreground">{subtitle}</p>
+    <div className="flex flex-col gap-2 p-3 bg-muted rounded-md">
+      <div className="flex items-center justify-between">
+        <div className="flex-1">
+          <p className="text-sm font-medium">{title}</p>
+          <p className="text-xs text-muted-foreground">{subtitle}</p>
+        </div>
+        <span className="text-sm font-mono font-semibold text-accent-purple ml-2">{progress}%</span>
       </div>
+      <Progress value={progress} className="h-1.5 rounded-full [&>div]:bg-accent-purple" />
     </div>
   )
 }

@@ -61,7 +61,7 @@ export default function CartPage() {
           <div className="container mx-auto px-4 py-20 text-center">
             <h1 className="text-3xl font-bold mb-4">Your Cart is Empty</h1>
             <p className="text-muted-foreground mb-8">Add some products to get started</p>
-            <Button asChild size="lg" className="font-mono">
+            <Button asChild size="lg">
               <Link href="/shop">Shop All Products</Link>
             </Button>
           </div>
@@ -94,14 +94,13 @@ export default function CartPage() {
                     />
                     <Button 
                       size="sm" 
-                      className="bg-[#586158] hover:bg-[#586158]/90"
                       disabled={!ambassadorCode || ambassadorCode.length < 6}
                     >
                       Apply
                     </Button>
                   </div>
                   {ambassadorName && (
-                    <p className="text-xs text-[#34c759] mt-1">
+                    <p className="text-xs text-accent-purple mt-1">
                       Shopping with {ambassadorName}
                     </p>
                   )}
@@ -120,7 +119,7 @@ export default function CartPage() {
                         onKeyDown={(e) => e.key === "Enter" && addCustomer()}
                         className="flex-1"
                       />
-                      <Button size="sm" onClick={addCustomer} className="bg-[#586158]">
+                      <Button size="sm" onClick={addCustomer}>
                         Add
                       </Button>
                       <Button size="sm" variant="outline" onClick={() => setShowAddCustomer(false)}>
@@ -134,7 +133,7 @@ export default function CartPage() {
                   variant="default"
                   size="default"
                   onClick={() => setShowAddCustomer(true)}
-                  className="w-full bg-[#586158] hover:bg-[#586158]/90"
+                  className="w-full"
                 >
                   <UserGroupIcon className="h-5 w-5 mr-2" />
                   Add Another Customer
@@ -221,7 +220,7 @@ export default function CartPage() {
                                   <div className="text-right">
                                     <p className="font-mono text-lg">${item.price * item.quantity}</p>
                                     {item.isSubscription && (
-                                      <p className="text-xs text-[#34c759] font-mono">
+                                      <p className="text-xs text-accent-purple font-mono">
                                         -${(item.price * item.quantity * 0.05).toFixed(2)} saved
                                       </p>
                                     )}
@@ -243,7 +242,6 @@ export default function CartPage() {
                                 </div>
 
                                 <div className="flex items-center gap-2">
-                                  
                                   <Select
                                     value={item.customerId || "none"}
                                     onValueChange={(value) => updateItemCustomer(item.id, value === "none" ? undefined : value)}
@@ -329,7 +327,7 @@ export default function CartPage() {
                             <div className="text-right">
                               <p className="font-mono text-lg">${item.price * item.quantity}</p>
                               {item.isSubscription && (
-                                <p className="text-xs text-[#34c759] font-mono">
+                                <p className="text-xs text-accent-purple font-mono">
                                   -${(item.price * item.quantity * 0.05).toFixed(2)} saved
                                 </p>
                               )}
@@ -391,12 +389,12 @@ export default function CartPage() {
                         onChange={(e) => setDiscountCode(e.target.value.toUpperCase())}
                         className="font-mono uppercase flex-1"
                       />
-                      <Button size="sm" variant="outline" className="bg-[#586158] text-white hover:bg-[#586158]/90">
+                      <Button size="sm" variant="default">
                         Apply
                       </Button>
                     </div>
                     {discountCode && (
-                      <p className="text-xs text-[#34c759] mt-1">Discount applied</p>
+                      <p className="text-xs text-accent-purple mt-1">Discount applied</p>
                     )}
                   </div>
 
@@ -432,8 +430,8 @@ export default function CartPage() {
                     </div>
                     {subscriptionSavings > 0 && (
                       <div className="flex justify-between text-sm">
-                        <span className="text-[#34c759]">Subscription Savings (5%)</span>
-                        <span className="font-mono text-[#34c759]">-${subscriptionSavings.toFixed(2)}</span>
+                        <span className="text-accent-purple">Subscription Savings (5%)</span>
+                        <span className="font-mono text-accent-purple">-${subscriptionSavings.toFixed(2)}</span>
                       </div>
                     )}
                     <div className="flex justify-between text-sm">
@@ -445,10 +443,10 @@ export default function CartPage() {
                     <span>Total</span>
                     <span className="font-mono">${finalTotal.toFixed(2)}</span>
                   </div>
-                  <Button asChild size="lg" className="w-full font-mono bg-[#586158] hover:bg-[#586158]/90">
+                  <Button asChild size="lg" className="w-full">
                     <Link href="/checkout">Proceed to Checkout</Link>
                   </Button>
-                  <Button asChild size="lg" variant="outline" className="w-full font-mono bg-transparent">
+                  <Button asChild size="lg" variant="outline" className="w-full bg-transparent">
                     <Link href="/shop">Continue Shopping</Link>
                   </Button>
                 </CardContent>

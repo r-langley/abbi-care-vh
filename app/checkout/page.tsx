@@ -289,7 +289,7 @@ export default function CheckoutPage() {
                                     <p className="text-xs text-muted-foreground">Qty: {item.quantity}</p>
                                     <p className="text-xs font-mono">${(item.price * item.quantity).toFixed(2)}</p>
                                     {item.isSubscription && (
-                                      <p className="text-xs text-[#34c759] font-mono">
+                                      <p className="text-xs text-accent-purple font-mono">
                                         -${(item.price * item.quantity * 0.05).toFixed(2)} saved
                                       </p>
                                     )}
@@ -317,7 +317,7 @@ export default function CheckoutPage() {
                               <p className="text-xs text-muted-foreground">Qty: {item.quantity}</p>
                               <p className="text-sm font-mono">${(item.price * item.quantity).toFixed(2)}</p>
                               {item.isSubscription && (
-                                <p className="text-xs text-[#34c759] font-mono">
+                                <p className="text-xs text-accent-purple font-mono">
                                   -${(item.price * item.quantity * 0.05).toFixed(2)} saved
                                 </p>
                               )}
@@ -335,8 +335,8 @@ export default function CheckoutPage() {
                       </div>
                       {subscriptionSavings > 0 && (
                         <div className="flex justify-between text-sm">
-                          <span className="text-[#34c759]">Subscription Savings (5%)</span>
-                          <span className="font-mono text-[#34c759]">-${subscriptionSavings.toFixed(2)}</span>
+                          <span className="text-accent-purple">Subscription Savings (5%)</span>
+                          <span className="font-mono text-accent-purple">-${subscriptionSavings.toFixed(2)}</span>
                         </div>
                       )}
                       <div className="flex justify-between text-sm">

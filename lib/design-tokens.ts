@@ -17,7 +17,7 @@ export const COLORS = {
 export const STATUS_COLORS = {
   RED: '#ff3b30',
   ORANGE: '#ff9500',
-  GREEN: '#34c759',
+  GREEN: '#8A6EFA',
 } as const
 
 // Typography

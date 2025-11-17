@@ -18,14 +18,14 @@ interface SkinResultsSheetProps {
 }
 
 const traits = [
-  { id: "wrinkles", name: "Wrinkles", score: 25, color: "#34C759" },
-  { id: "radiance", name: "Radiance", score: 67, color: "#34C759" },
+  { id: "wrinkles", name: "Wrinkles", score: 25, color: "#8A6EFA" },
+  { id: "radiance", name: "Radiance", score: 67, color: "#8A6EFA" },
   { id: "imperfections", name: "Imperfections", score: 55, color: "#FF9500" },
   { id: "spots", name: "Spots", score: 45, color: "#FF9500" },
-  { id: "hydration", name: "Hydration", score: 72, color: "#34C759" },
+  { id: "hydration", name: "Hydration", score: 72, color: "#8A6EFA" },
   { id: "sensitivity", name: "Sensitivity", score: 38, color: "#FF9500" },
   { id: "shine", name: "Shine", score: 52, color: "#FF9500" },
-  { id: "texture", name: "Texture", score: 68, color: "#34C759" },
+  { id: "texture", name: "Texture", score: 68, color: "#8A6EFA" },
 ]
 
 export function SkinResultsSheet({ userName = "Alya", currentTrait = "wrinkles" }: SkinResultsSheetProps) {
@@ -102,7 +102,7 @@ export function SkinResultsSheet({ userName = "Alya", currentTrait = "wrinkles" 
                         t.score >= 40 && t.score < 70 ? "bg-[#ff9500]" : "opacity-25 bg-[#ff9500]"
                       }`}
                     />
-                    <div className={`h-[3px] w-[28px] ${t.score >= 70 ? "bg-[#34c759]" : "opacity-25 bg-[#34c759]"}`} />
+                    <div className={`h-[3px] w-[28px] ${t.score >= 70 ? "bg-accent-purple" : "opacity-25 bg-accent-purple"}`} />
                   </div>
                 </div>
               </button>

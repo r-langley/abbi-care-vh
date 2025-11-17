@@ -99,7 +99,7 @@ export default function AmbassadorHomePage() {
                 </div>
                 <div className="space-y-1">
                   <p className="text-2xl font-semibold font-mono">$2,450</p>
-                  <p className="text-sm text-[#34c759]">+12.5% from last month</p>
+                  <p className="text-sm text-accent-purple">+12.5% from last month</p>
                 </div>
               </Card>
 
@@ -110,7 +110,7 @@ export default function AmbassadorHomePage() {
                 </div>
                 <div className="space-y-1">
                   <p className="text-2xl font-semibold font-mono">$18,320</p>
-                  <p className="text-sm text-[#34c759]">+8.3% from last month</p>
+                  <p className="text-sm text-accent-purple">+8.3% from last month</p>
                 </div>
               </Card>
 
@@ -121,7 +121,7 @@ export default function AmbassadorHomePage() {
                 </div>
                 <div className="space-y-1">
                   <p className="text-2xl font-semibold font-mono">24</p>
-                  <p className="text-sm text-[#34c759]">+3 new members</p>
+                  <p className="text-sm text-accent-purple">+3 new members</p>
                 </div>
               </Card>
 
@@ -132,7 +132,7 @@ export default function AmbassadorHomePage() {
                 </div>
                 <div className="space-y-1">
                   <p className="text-2xl font-semibold font-mono">$3,664</p>
-                  <p className="text-sm text-[#34c759]">+15.2% from last month</p>
+                  <p className="text-sm text-accent-purple">+15.2% from last month</p>
                 </div>
               </Card>
             </div>
