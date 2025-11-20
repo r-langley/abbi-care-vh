@@ -25,6 +25,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { RegionLanguageSelector } from "@/components/region-language-selector"
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
 
 export function Header() {
   const { totalItems } = useCart()
@@ -167,6 +168,7 @@ export function Header() {
 
 function MobileNav({ closeMenu }: { closeMenu: () => void }) {
   const [isTraitExpanded, setIsTraitExpanded] = React.useState(false)
+  const [isLanguageExpanded, setIsLanguageExpanded] = React.useState(false)
 
   return (
     <nav className="flex flex-col h-full">
@@ -209,21 +211,18 @@ function MobileNav({ closeMenu }: { closeMenu: () => void }) {
           <NavLink href="/shop?category=creams" variant="mobile" className="block mb-1">
             Creams
           </NavLink>
-          
         </div>
 
         <div onClick={closeMenu}>
           <NavLink href="/shop?category=essentials" variant="mobile" className="block mb-1">
             Essentials
           </NavLink>
-          
         </div>
 
         <div onClick={closeMenu}>
           <NavLink href="/shop?category=simple-solutions" variant="mobile" className="block mb-1">
             Simple Solutions
           </NavLink>
-          
         </div>
 
         <div>
@@ -280,14 +279,31 @@ function MobileNav({ closeMenu }: { closeMenu: () => void }) {
 
       <div className="flex items-center justify-between pt-6 border-t border-border mt-auto">
         <button className="flex items-center gap-2 font-sans font-medium text-muted-foreground hover:text-primary transition-colors text-base">
-          <span className="text-2xl">🇺🇸</span>
+          <Avatar className="size-6">
+            <AvatarImage src="/placeholder.svg?height=24&width=24" alt="US Flag" />
+            <AvatarFallback>🇺🇸</AvatarFallback>
+          </Avatar>
           United States
         </button>
-        <button className="flex items-center gap-2 font-sans font-medium text-muted-foreground hover:text-primary transition-colors text-base">
-          Contact Us
-          <ChatBubbleLeftRightIcon className="w-6 h-6" />
+        <button
+          onClick={() => setIsLanguageExpanded(!isLanguageExpanded)}
+          className="flex items-center gap-1 font-sans font-medium text-muted-foreground hover:text-primary transition-colors text-base"
+        >
+          <span className="text-xs font-mono uppercase font-medium">EN</span>
+          <ChevronDownIcon className={`w-4 h-4 transition-transform ${isLanguageExpanded ? "rotate-180" : ""}`} />
         </button>
       </div>
+
+      {isLanguageExpanded && (
+        <div className="flex flex-col gap-2 pt-3 pb-2 border-t border-border">
+          <button className="px-3 py-2 text-sm font-medium text-left rounded-md hover:bg-muted transition-colors">
+            English
+          </button>
+          <button className="px-3 py-2 text-sm font-medium text-left rounded-md hover:bg-muted transition-colors">
+            Español
+          </button>
+        </div>
+      )}
     </nav>
   )
 }

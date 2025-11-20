@@ -2,6 +2,7 @@
 
 import type React from "react"
 import { createContext, useContext, useState, useEffect } from "react"
+import { useRouter } from 'next/navigation'
 
 interface UserInfo {
   firstName: string
@@ -24,6 +25,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [userRole, setUserRole] = useState<"member" | "ambassador">("member")
   const [userInfo, setUserInfo] = useState<UserInfo | null>(null)
+  const router = useRouter()
 
   // Load login state from localStorage on mount
   useEffect(() => {
@@ -49,11 +51,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const login = () => {
     setIsLoggedIn(true)
     localStorage.setItem("isLoggedIn", "true")
+    setUserRole("ambassador")
+    localStorage.setItem("userRole", "ambassador")
     setUserInfo({
       firstName: "Sarah",
       lastName: "Miller",
       email: "sarah.miller@example.com",
     })
+    router.push("/account")
   }
 
   const logout = () => {

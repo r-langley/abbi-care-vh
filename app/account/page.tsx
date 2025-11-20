@@ -41,7 +41,22 @@ export default function AccountPage() {
       <Header />
       <div className="min-h-screen bg-muted">
         <div className="max-w-[900px] mx-auto px-4 py-8">
-          {userRole === "ambassador" ? <AmbassadorView /> : <MemberView />}
+          {userRole === "ambassador" ? (
+            <Tabs defaultValue="ambassador" className="w-full">
+              <TabsList className="grid w-full grid-cols-2 mb-8">
+                <TabsTrigger value="ambassador">Ambassador Dashboard</TabsTrigger>
+                <TabsTrigger value="personal">Personal Profile</TabsTrigger>
+              </TabsList>
+              <TabsContent value="ambassador">
+                <AmbassadorView />
+              </TabsContent>
+              <TabsContent value="personal">
+                <MemberView />
+              </TabsContent>
+            </Tabs>
+          ) : (
+            <MemberView />
+          )}
         </div>
       </div>
     </>

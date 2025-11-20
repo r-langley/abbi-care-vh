@@ -1,17 +1,23 @@
 "use client"
 
 import React from "react"
-import { GlobeAltIcon, ChevronDownIcon } from "@heroicons/react/24/outline"
+import { ChevronDownIcon } from "@heroicons/react/24/outline"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog"
-import { Button } from "@/components/ui/button"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 import { cn } from "@/lib/utils"
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
 
 // Define regions with their flags and available languages
 const REGIONS = {
   US: {
     name: "United States",
     flag: "🇺🇸",
+    img: "/images/us-flag.png",
     languages: [
       { code: "en", name: "English" },
       { code: "es", name: "Español" },
@@ -57,17 +63,15 @@ type RegionCode = keyof typeof REGIONS
 export function RegionLanguageSelector() {
   const [selectedRegion, setSelectedRegion] = React.useState<RegionCode>("US")
   const [selectedLanguage, setSelectedLanguage] = React.useState("en")
-  const [isRegionModalOpen, setIsRegionModalOpen] = React.useState(false)
   const [isLanguagePopoverOpen, setIsLanguagePopoverOpen] = React.useState(false)
 
   const region = REGIONS[selectedRegion]
+  const regionImg = "img" in region ? region.img : undefined
   const availableLanguages = region.languages
 
   const handleRegionChange = (regionCode: RegionCode) => {
     setSelectedRegion(regionCode)
-    // Set default language for the region
     setSelectedLanguage(REGIONS[regionCode].languages[0].code)
-    setIsRegionModalOpen(false)
   }
 
   const handleLanguageChange = (languageCode: string) => {
@@ -79,13 +83,42 @@ export function RegionLanguageSelector() {
     <>
       {/* Region/Language Selector Button */}
       <div className="flex items-center gap-0">
-        {/* Region Button - Opens full modal */}
-        <button
-          onClick={() => setIsRegionModalOpen(true)}
-          className="p-2 hover:bg-[#f5f6f5] rounded-[8px] transition-colors flex items-center gap-1"
-        >
-          <span className="text-xl leading-none">{region.flag}</span>
-        </button>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <button className="p-2 hover:bg-[#f5f6f5] rounded-[8px] transition-colors flex items-center gap-1 px-2.5 py-2.5">
+              <Avatar className="size-5">
+                <AvatarImage
+                  src={regionImg || `/placeholder.svg?height=20&width=20&query=${region.name}+flag`}
+                  alt={`${region.name} Flag`}
+                  className="object-cover"
+                />
+                <AvatarFallback className="text-xs">{region.flag}</AvatarFallback>
+              </Avatar>
+            </button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end" className="w-56 max-h-[400px] overflow-y-auto">
+            {(Object.entries(REGIONS) as [RegionCode, (typeof REGIONS)[RegionCode]][]).map(([code, regionData]) => (
+              <DropdownMenuItem
+                key={code}
+                onClick={() => handleRegionChange(code)}
+                className={cn(
+                  "flex items-center gap-3 cursor-pointer",
+                  selectedRegion === code && "bg-accent-purple/10 text-accent-purple font-medium"
+                )}
+              >
+                <Avatar className="size-6">
+                  <AvatarImage
+                    src={regionData.img || `/placeholder.svg?height=24&width=24&query=${regionData.name}+flag`}
+                    alt={`${regionData.name} Flag`}
+                    className="object-cover"
+                  />
+                  <AvatarFallback className="text-sm">{regionData.flag}</AvatarFallback>
+                </Avatar>
+                <span className="text-sm">{regionData.name}</span>
+              </DropdownMenuItem>
+            ))}
+          </DropdownMenuContent>
+        </DropdownMenu>
 
         {/* Language Popover */}
         <Popover open={isLanguagePopoverOpen} onOpenChange={setIsLanguagePopoverOpen}>
@@ -115,39 +148,6 @@ export function RegionLanguageSelector() {
           </PopoverContent>
         </Popover>
       </div>
-
-      {/* Region Selection Modal */}
-      <Dialog open={isRegionModalOpen} onOpenChange={setIsRegionModalOpen}>
-        <DialogContent className="max-w-3xl">
-          <DialogHeader>
-            <DialogTitle className="text-2xl">Select Your Region</DialogTitle>
-            <DialogDescription>Choose your location to see products and pricing in your region</DialogDescription>
-          </DialogHeader>
-
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-6">
-            {(Object.entries(REGIONS) as [RegionCode, (typeof REGIONS)[RegionCode]][]).map(([code, regionData]) => (
-              <button
-                key={code}
-                onClick={() => handleRegionChange(code)}
-                className={cn(
-                  "flex flex-col items-center justify-center gap-3 p-6 rounded-lg border-2 transition-all hover:border-accent-purple hover:bg-accent-purple/5",
-                  selectedRegion === code ? "border-accent-purple bg-accent-purple/5" : "border-border"
-                )}
-              >
-                <span className="text-5xl">{regionData.flag}</span>
-                <span className="text-sm font-medium text-center">{regionData.name}</span>
-              </button>
-            ))}
-          </div>
-
-          <div className="flex justify-end gap-2 mt-6">
-            <Button variant="outline" onClick={() => setIsRegionModalOpen(false)}>
-              Cancel
-            </Button>
-            <Button onClick={() => setIsRegionModalOpen(false)}>Confirm</Button>
-          </div>
-        </DialogContent>
-      </Dialog>
     </>
   )
 }

@@ -15,17 +15,7 @@ interface TabsListProps extends React.ComponentProps<typeof TabsPrimitive.List> 
 
 function TabsList({ className, variant = "default", ...props }: TabsListProps) {
   return (
-    <TabsPrimitive.List
-      data-slot="tabs-list"
-      data-variant={variant}
-      className={cn(
-        "inline-flex items-center justify-center w-full h-max",
-        variant === "default" && "gap-1",
-        variant === "underline" && "gap-0 border-b border-border",
-        className,
-      )}
-      {...props}
-    />
+    null
   )
 }
 

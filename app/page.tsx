@@ -18,7 +18,7 @@ import {
   BeakerIcon,
   SunIcon,
   Squares2X2Icon,
-} from "@heroicons/react/24/solid"
+} from "@heroicons/react/24/outline"
 import type React from "react"
 
 export default function HomePage() {
