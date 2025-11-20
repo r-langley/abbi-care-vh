@@ -65,7 +65,6 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   }, [ambassadorCode])
 
   const addItem = useCallback((product: Product, quantity = 1) => {
-    console.log("[v0] addItem called with:", product.name, "quantity:", quantity)
     setItems((currentItems) => {
       const existingItem = currentItems.find((item) => item.id === product.id)
       if (existingItem) {
@@ -76,10 +75,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       return [...currentItems, { ...product, quantity, isSubscription: false }]
     })
     if (onItemAddedRef.current) {
-      console.log("[v0] Calling onItemAdded callback")
       onItemAddedRef.current(product)
-    } else {
-      console.log("[v0] No onItemAdded callback registered")
     }
   }, [])
 
@@ -103,14 +99,11 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   }, [])
 
   const setOnItemAdded = useCallback((callback: (product: Product) => void) => {
-    console.log("[v0] setOnItemAdded called")
     onItemAddedRef.current = callback
   }, [])
 
   const updateItemCustomer = useCallback((productId: string, customerId: string | undefined) => {
-    setItems((currentItems) =>
-      currentItems.map((item) => (item.id === productId ? { ...item, customerId } : item)),
-    )
+    setItems((currentItems) => currentItems.map((item) => (item.id === productId ? { ...item, customerId } : item)))
   }, [])
 
   const toggleSubscription = useCallback((productId: string) => {
