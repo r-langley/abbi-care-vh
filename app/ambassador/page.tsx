@@ -47,7 +47,7 @@ export default function AmbassadorHomePage() {
                   <CarouselItem>
                     <div className="relative w-full h-48">
                       <Image
-                        src="/diverse-group-of-women-of-all-ages-smiling-with-gl.jpg"
+                        src="/diverse-group-of-women-of-all-ages-smiling-with-gl.jpg?height=400&width=1200&query=panoramic+banner+cosmetics+lifestyle+shoot+diverse+group+of+women+all+ages+smiling+glowing+skin+natural+makeup+skincare+bright+lighting+wide+angle"
                         alt="ABBI Skincare Products"
                         fill
                         className="object-cover"
