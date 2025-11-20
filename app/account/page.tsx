@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel"
-import { StatCard } from "@/components/account/stat-card"
 import { TargetChecklistItem } from "@/components/account/target-checklist-item"
 import { NewsItem } from "@/components/account/news-item"
 import { ActivityItem } from "@/components/account/activity-item"
@@ -15,7 +14,7 @@ import { OrderCard } from "@/components/account/order-card"
 import { ScanScoreCard } from "@/components/account/scan-score-card"
 import Link from "next/link"
 import Image from "next/image"
-import { ArrowUpIcon, ArrowDownIcon, ArrowTrendingUpIcon, UsersIcon, ShoppingBagIcon, CurrencyDollarIcon, CheckCircleIcon } from "@heroicons/react/24/outline"
+import { ArrowTrendingUpIcon, UsersIcon, ShoppingBagIcon, CurrencyDollarIcon } from "@heroicons/react/24/outline"
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
 import { Progress } from "@/components/ui/progress"
 
@@ -112,177 +111,224 @@ function AmbassadorView() {
         </Carousel>
       </Card>
 
-      {/* Business Overview */}
-      <div className="space-y-4">
-        <h2 className="text-xl font-semibold">Business Overview</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          <StatCard
-            label="Personal Sales"
-            value="$2,000.00"
-            icon={<CurrencyDollarIcon className="w-5 h-5" />}
-            href="/account/personal-sales"
-          />
-          <StatCard
-            label="Team Sales"
-            value="$15,000.00"
-            icon={<UsersIcon className="w-5 h-5" />}
-            href="/account/team-sales"
-          />
-          <StatCard
-            label="Capped Volume"
-            value="$15,000.00"
-            icon={<ShoppingBagIcon className="w-5 h-5" />}
-            href="/account/capped-volume"
-          />
-          <StatCard
-            label="Qualified Legs"
-            value="8"
-            icon={<ArrowTrendingUpIcon className="w-5 h-5" />}
-            href="/account/qualified-legs"
-          />
-          <StatCard
-            label="New Scans"
-            value="10"
-            icon={<UsersIcon className="w-5 h-5" />}
-            href="/account/new-scans"
-          />
-        </div>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Targets */}
+        <Card className="p-4 sm:p-6">
+          <CardHeader className="px-0 pt-0">
+            <CardTitle className="text-lg mb-4">Targets</CardTitle>
+          </CardHeader>
+          <CardContent className="px-0 pb-0">
+            <Tabs defaultValue="rank" className="w-full">
+              <TabsList variant="underline" className="mb-6">
+                <TabsTrigger value="rank" variant="underline">
+                  Rank
+                </TabsTrigger>
+                <TabsTrigger value="commission" variant="underline">
+                  Enhanced Commission
+                </TabsTrigger>
+              </TabsList>
+
+              {/* Rank Tab Content */}
+              <TabsContent value="rank" className="space-y-6">
+                {/* Progress to Next Level */}
+                <div>
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center gap-2">
+                      <Badge variant="outline">Current: Gold</Badge>
+                      <span className="text-lg text-foreground font-medium">Level 5 Progress</span>
+                      <Badge>Next: Level 6</Badge>
+                    </div>
+                    <span className="text-3xl font-semibold font-mono text-accent-purple">75%</span>
+                  </div>
+                  <Progress
+                    value={75}
+                    className="h-4 rounded-full [&>div]:bg-accent-purple"
+                    aria-label="Progress to Level 6: 75%"
+                  />
+                  <p className="text-sm text-muted-foreground mt-2">TO LEVEL 6</p>
+                </div>
+
+                <div className="grid grid-cols-1 gap-4">
+                  <TargetChecklistItem title="Personal Sales Target" subtitle="$5,000 reached" progress={100} />
+                  <TargetChecklistItem title="Team Sales" subtitle="$15,000 / $20,000" progress={75} />
+                  <TargetChecklistItem title="Qualified Legs" subtitle="8 / 6 required" progress={100} />
+                  <TargetChecklistItem title="Active Team Members" subtitle="12 / 15 required" progress={80} />
+                </div>
+
+                <div className="flex mt-4 justify-start">
+                  <Button variant="outline" size="sm" asChild>
+                    <Link href="/account/rank-progress">View Full Details</Link>
+                  </Button>
+                </div>
+              </TabsContent>
+
+              {/* Enhanced Commission Tab Content */}
+              <TabsContent value="commission" className="space-y-6">
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-baseline gap-2">
+                      <span className="text-sm text-muted-foreground">Currently at</span>
+                      <span className="text-3xl font-semibold font-mono text-accent-purple">20%</span>
+                    </div>
+                    <div className="flex items-baseline gap-2">
+                      <span className="text-sm text-muted-foreground">Next target</span>
+                      <span className="text-3xl font-semibold font-mono text-accent-purple">25%</span>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between text-sm">
+                    <div>
+                      <span className="text-muted-foreground">Current Sales: </span>
+                      <span className="font-mono font-semibold">$119</span>
+                    </div>
+                    <div>
+                      <span className="text-muted-foreground">Needed: </span>
+                      <span className="font-mono font-semibold text-accent-purple">$81</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Commission Tiers with Progress Bars */}
+                <div className="space-y-4">
+                  <p className="text-sm font-medium text-muted-foreground">Commission Tiers</p>
+
+                  {/* 20% Tier - Current */}
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="font-medium text-accent-purple">20%</span>
+                      <span className="font-mono">$119 of $200</span>
+                    </div>
+                    <Progress
+                      value={59.5}
+                      className="h-3 rounded-full [&>div]:bg-accent-purple"
+                      aria-label="20% commission tier: $119 of $200"
+                    />
+                  </div>
+
+                  {/* 25% Tier - Next Target */}
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="font-medium text-accent-purple">25%</span>
+                      <span className="font-mono">$119 of $1,499.99</span>
+                    </div>
+                    <Progress
+                      value={7.9}
+                      className="h-3 rounded-full [&>div]:bg-accent-purple"
+                      aria-label="25% commission tier: $119 of $1,499.99"
+                    />
+                  </div>
+
+                  {/* 30% Tier */}
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="font-medium text-muted-foreground">30%</span>
+                      <span className="font-mono text-muted-foreground">$0 of $2,999.99</span>
+                    </div>
+                    <Progress
+                      value={0}
+                      className="h-3 rounded-full [&>div]:bg-muted-foreground"
+                      aria-label="30% commission tier: $0 of $2,999.99"
+                    />
+                  </div>
+
+                  {/* 35% Tier */}
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="font-medium text-muted-foreground">35%</span>
+                      <span className="font-mono text-muted-foreground">$0 of $5,000.00</span>
+                    </div>
+                    <Progress
+                      value={0}
+                      className="h-3 rounded-full [&>div]:bg-muted-foreground"
+                      aria-label="35% commission tier: $0 of $5,000.00"
+                    />
+                  </div>
+                </div>
+
+                <div className="flex justify-end mt-4">
+                  <Button variant="outline" size="sm" asChild>
+                    <Link href="/account/commission-details">View Full Details</Link>
+                  </Button>
+                </div>
+              </TabsContent>
+            </Tabs>
+          </CardContent>
+        </Card>
+
+        <Card className="p-4 sm:p-6">
+          <CardHeader className="px-0 pt-0">
+            <CardTitle className="text-lg mb-4">Business Overview</CardTitle>
+          </CardHeader>
+          <CardContent className="px-0 pb-0">
+            <div className="space-y-3">
+              <Link
+                href="/account/personal-sales"
+                className="flex items-center justify-between p-3 hover:bg-muted rounded-lg transition-colors group"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                    <CurrencyDollarIcon className="w-5 h-5 text-primary" />
+                  </div>
+                  <span className="font-medium">Personal Sales</span>
+                </div>
+                <span className="text-lg font-semibold font-mono">$2,000.00</span>
+              </Link>
+
+              <Link
+                href="/account/team-sales"
+                className="flex items-center justify-between p-3 hover:bg-muted rounded-lg transition-colors group"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                    <UsersIcon className="w-5 h-5 text-primary" />
+                  </div>
+                  <span className="font-medium">Team Sales</span>
+                </div>
+                <span className="text-lg font-semibold font-mono">$15,000.00</span>
+              </Link>
+
+              <Link
+                href="/account/capped-volume"
+                className="flex items-center justify-between p-3 hover:bg-muted rounded-lg transition-colors group"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                    <ShoppingBagIcon className="w-5 h-5 text-primary" />
+                  </div>
+                  <span className="font-medium">Capped Volume</span>
+                </div>
+                <span className="text-lg font-semibold font-mono">$15,000.00</span>
+              </Link>
+
+              <Link
+                href="/account/qualified-legs"
+                className="flex items-center justify-between p-3 hover:bg-muted rounded-lg transition-colors group"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                    <ArrowTrendingUpIcon className="w-5 h-5 text-primary" />
+                  </div>
+                  <span className="font-medium">Qualified Legs</span>
+                </div>
+                <span className="text-lg font-semibold font-mono">8</span>
+              </Link>
+
+              <Link
+                href="/account/new-scans"
+                className="flex items-center justify-between p-3 hover:bg-muted rounded-lg transition-colors group"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                    <UsersIcon className="w-5 h-5 text-primary" />
+                  </div>
+                  <span className="font-medium">New Scans</span>
+                </div>
+                <span className="text-lg font-semibold font-mono">10</span>
+              </Link>
+            </div>
+          </CardContent>
+        </Card>
       </div>
-
-      {/* Targets */}
-      <Card className="p-4 sm:p-6">
-        <CardHeader className="px-0 pt-0">
-          <CardTitle className="text-lg mb-4">Targets</CardTitle>
-        </CardHeader>
-        <CardContent className="px-0 pb-0">
-          <Tabs defaultValue="rank" className="w-full">
-            <TabsList variant="underline" className="mb-6">
-              <TabsTrigger value="rank" variant="underline">Rank</TabsTrigger>
-              <TabsTrigger value="commission" variant="underline">Enhanced Commission</TabsTrigger>
-            </TabsList>
-
-            {/* Rank Tab Content */}
-            <TabsContent value="rank" className="space-y-6">
-              {/* Progress to Next Level */}
-              <div>
-                <div className="flex items-center justify-between mb-2">
-                  <div className="flex items-center gap-2">
-                    <Badge variant="outline">Current: Gold</Badge>
-                    <span className="text-lg text-foreground font-medium">Level 5 Progress</span>
-                    <Badge>Next: Level 6</Badge>
-                  </div>
-                  <span className="text-3xl font-semibold font-mono text-accent-purple">75%</span>
-                </div>
-                <Progress value={75} className="h-4 rounded-full [&>div]:bg-accent-purple" aria-label="Progress to Level 6: 75%" />
-                <p className="text-sm text-muted-foreground mt-2">TO LEVEL 6</p>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <TargetChecklistItem
-                  title="Personal Sales Target"
-                  subtitle="$5,000 reached"
-                  progress={100}
-                />
-                <TargetChecklistItem
-                  title="Team Sales"
-                  subtitle="$15,000 / $20,000"
-                  progress={75}
-                />
-                <TargetChecklistItem
-                  title="Qualified Legs"
-                  subtitle="8 / 6 required"
-                  progress={100}
-                />
-                <TargetChecklistItem
-                  title="Active Team Members"
-                  subtitle="12 / 15 required"
-                  progress={80}
-                />
-              </div>
-
-              <div className="flex mt-4 justify-start">
-                <Button variant="outline" size="sm" asChild>
-                  <Link href="/account/rank-progress">View Full Details</Link>
-                </Button>
-              </div>
-            </TabsContent>
-
-            {/* Enhanced Commission Tab Content */}
-            <TabsContent value="commission" className="space-y-6">
-              <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-baseline gap-2">
-                    <span className="text-sm text-muted-foreground">Currently at</span>
-                    <span className="text-3xl font-semibold font-mono text-accent-purple">20%</span>
-                  </div>
-                  <div className="flex items-baseline gap-2">
-                    <span className="text-sm text-muted-foreground">Next target</span>
-                    <span className="text-3xl font-semibold font-mono text-accent-purple">25%</span>
-                  </div>
-                </div>
-
-                <div className="flex items-center justify-between text-sm">
-                  <div>
-                    <span className="text-muted-foreground">Current Sales: </span>
-                    <span className="font-mono font-semibold">$119</span>
-                  </div>
-                  <div>
-                    <span className="text-muted-foreground">Needed: </span>
-                    <span className="font-mono font-semibold text-accent-purple">$81</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Commission Tiers with Progress Bars */}
-              <div className="space-y-4">
-                <p className="text-sm font-medium text-muted-foreground">Commission Tiers</p>
-                
-                {/* 20% Tier - Current */}
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="font-medium text-accent-purple">20%</span>
-                    <span className="font-mono">$119 of $200</span>
-                  </div>
-                  <Progress value={59.5} className="h-3 rounded-full [&>div]:bg-accent-purple" aria-label="20% commission tier: $119 of $200" />
-                </div>
-
-                {/* 25% Tier - Next Target */}
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="font-medium text-accent-purple">25%</span>
-                    <span className="font-mono">$119 of $1,499.99</span>
-                  </div>
-                  <Progress value={7.9} className="h-3 rounded-full [&>div]:bg-accent-purple" aria-label="25% commission tier: $119 of $1,499.99" />
-                </div>
-
-                {/* 30% Tier */}
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="font-medium text-muted-foreground">30%</span>
-                    <span className="font-mono text-muted-foreground">$0 of $2,999.99</span>
-                  </div>
-                  <Progress value={0} className="h-3 rounded-full [&>div]:bg-muted-foreground" aria-label="30% commission tier: $0 of $2,999.99" />
-                </div>
-
-                {/* 35% Tier */}
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="font-medium text-muted-foreground">35%</span>
-                    <span className="font-mono text-muted-foreground">$0 of $5,000.00</span>
-                  </div>
-                  <Progress value={0} className="h-3 rounded-full [&>div]:bg-muted-foreground" aria-label="35% commission tier: $0 of $5,000.00" />
-                </div>
-              </div>
-
-              <div className="flex justify-end mt-4">
-                <Button variant="outline" size="sm" asChild>
-                  <Link href="/account/commission-details">View Full Details</Link>
-                </Button>
-              </div>
-            </TabsContent>
-          </Tabs>
-        </CardContent>
-      </Card>
 
       {/* Company News & Resources */}
       <Card className="p-4 sm:p-6">
@@ -297,12 +343,7 @@ function AmbassadorView() {
               date="Dec 18, 2023"
               unread={true}
             />
-            <NewsItem
-              type="email"
-              title="New Product Training Materials Available"
-              date="Dec 15, 2023"
-              unread={true}
-            />
+            <NewsItem type="email" title="New Product Training Materials Available" date="Dec 15, 2023" unread={true} />
             <NewsItem
               type="zoom"
               title="Leadership Training - Recording Available"
@@ -332,24 +373,9 @@ function AmbassadorView() {
           </CardHeader>
           <CardContent className="px-0 pb-0">
             <div className="space-y-4">
-              <ActivityItem
-                customer="Jessica Taylor"
-                action="New order"
-                amount="$124.50"
-                time="2 hours ago"
-              />
-              <ActivityItem
-                customer="Mike Johnson"
-                action="Joined your team"
-                amount={null}
-                time="1 day ago"
-              />
-              <ActivityItem
-                customer="Amanda Rodriguez"
-                action="Reorder"
-                amount="$89.00"
-                time="2 days ago"
-              />
+              <ActivityItem customer="Jessica Taylor" action="New order" amount="$124.50" time="2 hours ago" />
+              <ActivityItem customer="Mike Johnson" action="Joined your team" amount={null} time="1 day ago" />
+              <ActivityItem customer="Amanda Rodriguez" action="Reorder" amount="$89.00" time="2 days ago" />
             </div>
           </CardContent>
           <div className="flex mt-4 justify-start">
@@ -366,24 +392,9 @@ function AmbassadorView() {
           </CardHeader>
           <CardContent className="px-0 pb-0">
             <div className="space-y-4">
-              <TeamMemberCard
-                name="David Wilson"
-                level="Silver"
-                sales="$4,200"
-                trend="up"
-              />
-              <TeamMemberCard
-                name="Lisa Anderson"
-                level="Bronze"
-                sales="$2,800"
-                trend="up"
-              />
-              <TeamMemberCard
-                name="Mike Johnson"
-                level="Bronze"
-                sales="$1,450"
-                trend="down"
-              />
+              <TeamMemberCard name="David Wilson" level="Silver" sales="$4,200" trend="up" />
+              <TeamMemberCard name="Lisa Anderson" level="Bronze" sales="$2,800" trend="up" />
+              <TeamMemberCard name="Mike Johnson" level="Bronze" sales="$1,450" trend="down" />
             </div>
           </CardContent>
           <div className="flex mt-4 justify-start">
@@ -417,16 +428,8 @@ function MemberView() {
       <div>
         <h2 className="text-lg sm:text-xl font-semibold mb-4">Skin Scan History</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <ScanScoreCard
-            label="Latest Scan"
-            date="December 15, 2023"
-            score={8.2}
-          />
-          <ScanScoreCard
-            label="Previous Scan"
-            date="September 10, 2023"
-            score={7.8}
-          />
+          <ScanScoreCard label="Latest Scan" date="December 15, 2023" score={8.2} />
+          <ScanScoreCard label="Previous Scan" date="September 10, 2023" score={7.8} />
         </div>
       </div>
 
@@ -497,21 +500,9 @@ function MemberView() {
       <div>
         <h2 className="text-lg sm:text-xl font-semibold mb-4">Purchase History</h2>
         <div className="space-y-3">
-          <OrderCard
-            name="Custom Cream - Aloe Vera Base"
-            date="Dec 18, 2023"
-            price="$89.00"
-          />
-          <OrderCard
-            name="Radiance Ritual Bundle"
-            date="Nov 5, 2023"
-            price="$59.95"
-          />
-          <OrderCard
-            name="Hyaluronic Acid Serum"
-            date="Oct 22, 2023"
-            price="$34.00"
-          />
+          <OrderCard name="Custom Cream - Aloe Vera Base" date="Dec 18, 2023" price="$89.00" />
+          <OrderCard name="Radiance Ritual Bundle" date="Nov 5, 2023" price="$59.95" />
+          <OrderCard name="Hyaluronic Acid Serum" date="Oct 22, 2023" price="$34.00" />
         </div>
       </div>
     </div>
