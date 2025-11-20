@@ -47,7 +47,7 @@ export default function AmbassadorHomePage() {
                   <CarouselItem>
                     <div className="relative w-full h-48">
                       <Image
-                        src="/placeholder.svg?height=400&width=1200"
+                        src="/diverse-group-of-women-of-all-ages-smiling-with-gl.jpg"
                         alt="ABBI Skincare Products"
                         fill
                         className="object-cover"
@@ -114,7 +114,6 @@ export default function AmbassadorHomePage() {
                           className="h-4 rounded-full [&>div]:bg-accent-purple"
                           aria-label="Progress to Level 6: 75%"
                         />
-                        
                       </div>
 
                       <div className="grid grid-cols-1 gap-4">
