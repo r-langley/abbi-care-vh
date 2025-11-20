@@ -114,7 +114,7 @@ export default function AmbassadorHomePage() {
                           className="h-4 rounded-full [&>div]:bg-accent-purple"
                           aria-label="Progress to Level 6: 75%"
                         />
-                        <p className="text-sm text-muted-foreground mt-2">TO LEVEL 6</p>
+                        
                       </div>
 
                       <div className="grid grid-cols-1 gap-4">
@@ -232,7 +232,7 @@ export default function AmbassadorHomePage() {
                   <div className="space-y-3">
                     <Link
                       href="/account/personal-sales"
-                      className="flex items-center justify-between p-3 hover:bg-muted rounded-lg transition-colors group"
+                      className="flex items-center justify-between p-3 hover:bg-muted rounded-lg transition-colors group px-0"
                     >
                       <div className="flex items-center gap-3">
                         <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
@@ -245,7 +245,7 @@ export default function AmbassadorHomePage() {
 
                     <Link
                       href="/account/team-sales"
-                      className="flex items-center justify-between p-3 hover:bg-muted rounded-lg transition-colors group"
+                      className="flex items-center justify-between p-3 hover:bg-muted rounded-lg transition-colors group px-0 py-0"
                     >
                       <div className="flex items-center gap-3">
                         <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
@@ -258,7 +258,7 @@ export default function AmbassadorHomePage() {
 
                     <Link
                       href="/account/capped-volume"
-                      className="flex items-center justify-between p-3 hover:bg-muted rounded-lg transition-colors group"
+                      className="flex items-center justify-between p-3 hover:bg-muted rounded-lg transition-colors group px-0 py-0"
                     >
                       <div className="flex items-center gap-3">
                         <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
@@ -271,7 +271,7 @@ export default function AmbassadorHomePage() {
 
                     <Link
                       href="/account/qualified-legs"
-                      className="flex items-center justify-between p-3 hover:bg-muted rounded-lg transition-colors group"
+                      className="flex items-center justify-between p-3 hover:bg-muted rounded-lg transition-colors group px-0 py-0"
                     >
                       <div className="flex items-center gap-3">
                         <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
@@ -284,7 +284,7 @@ export default function AmbassadorHomePage() {
 
                     <Link
                       href="/account/new-scans"
-                      className="flex items-center justify-between p-3 hover:bg-muted rounded-lg transition-colors group"
+                      className="flex items-center justify-between p-3 hover:bg-muted rounded-lg transition-colors group px-0 py-0"
                     >
                       <div className="flex items-center gap-3">
                         <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
