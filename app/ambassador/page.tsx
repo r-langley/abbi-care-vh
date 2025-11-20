@@ -1,11 +1,9 @@
 "use client"
-
-import Link from "next/link"
-import { TrendingUp, Users, DollarSign, ArrowUpRight } from 'lucide-react'
+import { TrendingUp, Users, DollarSign, ArrowUpRight } from "lucide-react"
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Header } from "@/components/header"
+import { AmbassadorHeader } from "@/components/ambassador-header"
 
 const rankAdvancements = [
   {
@@ -78,7 +76,7 @@ const teamMembers = [
 export default function AmbassadorHomePage() {
   return (
     <>
-      <Header />
+      <AmbassadorHeader />
       <div className="min-h-screen bg-muted">
         <div className="max-w-[1200px] mx-auto px-4 py-8">
           <div className="space-y-8">

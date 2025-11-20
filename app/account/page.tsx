@@ -1,6 +1,8 @@
 "use client"
 
 import { useAuth } from "@/lib/auth-context"
+import { useRouter } from "next/navigation"
+import { useEffect } from "react"
 import { Header } from "@/components/header"
 import { Button } from "@/components/ui/button"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
@@ -20,6 +22,13 @@ import { Progress } from "@/components/ui/progress"
 
 export default function AccountPage() {
   const { isLoggedIn, userRole } = useAuth()
+  const router = useRouter()
+
+  useEffect(() => {
+    if (isLoggedIn && userRole === "ambassador") {
+      router.push("/ambassador")
+    }
+  }, [isLoggedIn, userRole, router])
 
   if (!isLoggedIn) {
     return (
@@ -40,22 +49,7 @@ export default function AccountPage() {
       <Header />
       <div className="min-h-screen bg-muted">
         <div className="max-w-[900px] mx-auto px-4 py-8">
-          {userRole === "ambassador" ? (
-            <Tabs defaultValue="ambassador" className="w-full">
-              <TabsList className="grid w-full grid-cols-2 mb-8">
-                <TabsTrigger value="ambassador">Ambassador Dashboard</TabsTrigger>
-                <TabsTrigger value="personal">Personal Profile</TabsTrigger>
-              </TabsList>
-              <TabsContent value="ambassador">
-                <AmbassadorView />
-              </TabsContent>
-              <TabsContent value="personal">
-                <MemberView />
-              </TabsContent>
-            </Tabs>
-          ) : (
-            <MemberView />
-          )}
+          <MemberView />
         </div>
       </div>
     </>

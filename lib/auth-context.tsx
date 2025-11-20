@@ -2,7 +2,7 @@
 
 import type React from "react"
 import { createContext, useContext, useState, useEffect } from "react"
-import { useRouter } from 'next/navigation'
+import { useRouter } from "next/navigation"
 
 interface UserInfo {
   firstName: string
@@ -51,8 +51,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const login = () => {
     setIsLoggedIn(true)
     localStorage.setItem("isLoggedIn", "true")
-    setUserRole("ambassador")
-    localStorage.setItem("userRole", "ambassador")
+    setUserRole("member")
+    localStorage.setItem("userRole", "member")
     setUserInfo({
       firstName: "Sarah",
       lastName: "Miller",
@@ -66,11 +66,19 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setUserInfo(null)
     localStorage.removeItem("isLoggedIn")
     localStorage.removeItem("skinScanResults")
+    localStorage.removeItem("userRole")
+    setUserRole("member")
+    router.push("/")
   }
 
   const handleSetUserRole = (role: "member" | "ambassador") => {
     setUserRole(role)
     localStorage.setItem("userRole", role)
+    if (role === "ambassador") {
+      router.push("/ambassador")
+    } else {
+      router.push("/account")
+    }
   }
 
   return (

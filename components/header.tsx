@@ -2,17 +2,11 @@
 
 import Link from "next/link"
 import Image from "next/image"
-import {
-  Bars3Icon,
-  ShoppingBagIcon,
-  UserCircleIcon,
-  ChatBubbleLeftRightIcon,
-  ChevronDownIcon,
-} from "@heroicons/react/24/solid"
+import { Bars3Icon, ShoppingBagIcon, UserCircleIcon, ChevronDownIcon } from "@heroicons/react/24/solid"
 import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetDescription } from "@/components/ui/sheet"
 import { useCart } from "@/lib/cart-context"
 import { useAuth } from "@/lib/auth-context"
-import { usePathname } from 'next/navigation'
+import { usePathname } from "next/navigation"
 import React from "react"
 import { NavLink } from "@/components/ui/nav-link"
 import { TabsNav } from "@/components/ui/tabs-nav"
@@ -29,16 +23,11 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
 
 export function Header() {
   const { totalItems } = useCart()
-  const { isLoggedIn, userRole, setUserRole, login, logout } = useAuth()
+  const { isLoggedIn, userRole, setUserRole, logout } = useAuth()
   const pathname = usePathname()
   const isHomepage = pathname === "/"
   const isShopPage = pathname === "/shop"
   const [open, setOpen] = React.useState(false)
-
-  const handleRoleSwitch = () => {
-    const newRole = userRole === "member" ? "ambassador" : "member"
-    setUserRole(newRole)
-  }
 
   return (
     <>
@@ -90,7 +79,7 @@ export function Header() {
               <div className="hidden md:block">
                 <RegionLanguageSelector />
               </div>
-              
+
               <Link href="/cart" className="relative p-2 hover:bg-[#f5f6f5] rounded-[8px] transition-colors">
                 <ShoppingBagIcon className="w-6 h-6" />
                 {totalItems > 0 && (
@@ -115,14 +104,18 @@ export function Header() {
                       <DropdownMenuItem asChild>
                         <Link href="/account">My Account</Link>
                       </DropdownMenuItem>
-                      <DropdownMenuItem onClick={handleRoleSwitch}>
-                        {userRole === "member" ? "Switch to Ambassador" : "Switch to Member"}
-                      </DropdownMenuItem>
+                      {userRole === "member" && (
+                        <DropdownMenuItem onClick={() => setUserRole("ambassador")}>
+                          Switch to Ambassador
+                        </DropdownMenuItem>
+                      )}
                       <DropdownMenuSeparator />
                       <DropdownMenuItem onClick={logout}>Log Out</DropdownMenuItem>
                     </>
                   ) : (
-                    <DropdownMenuItem onClick={login}>Log In</DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                      <Link href="/login">Log In</Link>
+                    </DropdownMenuItem>
                   )}
                 </DropdownMenuContent>
               </DropdownMenu>
@@ -233,7 +226,7 @@ function MobileNav({ closeMenu }: { closeMenu: () => void }) {
             Shop by Trait
             <ChevronDownIcon className={`h-6 w-6 transition-transform ${isTraitExpanded ? "rotate-180" : ""}`} />
           </button>
-          
+
           {isTraitExpanded && (
             <div className="flex flex-col gap-3 pl-4">
               <NavLink href="/shop?category=creams&traits=wrinkles" variant="footer" onClick={closeMenu}>
