@@ -1,5 +1,5 @@
 @import "tailwindcss";
-@import "tw-animate-css";
+/* Removed tw-animate-css import to avoid conflicts with Tailwind v4 */
 
 @custom-variant dark (&:is(.dark *));
 
@@ -11,7 +11,7 @@
   --dark-slate: #373737;
   --off-white: #ffffff;
   --light-gray: #dfdfdf;
-  --accent-purple: #8A6EFA; /* Updated accent-purple from #4b4262 to #8A6EFA */
+  --accent-purple: #8a6efa; /* Updated accent-purple from #4b4262 to #8A6EFA */
 
   /* ABBI Status Colors */
   --status-red: #ff3b30;
@@ -44,13 +44,13 @@
   --border: rgb(224, 228, 224);
   --input: var(--sage);
   --ring: var(--sea-slate);
-  --chart-1: hsl(33 54% 38%);
-  --chart-2: hsl(28 40% 52%);
-  --chart-3: hsl(35 35% 68%);
-  --chart-4: hsl(42 28% 75%);
-  --chart-5: hsl(25 45% 28%);
+  --chart-1: hsl(33, 54%, 38%);
+  --chart-2: hsl(28, 40%, 52%);
+  --chart-3: hsl(35, 35%, 68%);
+  --chart-4: hsl(42, 28%, 75%);
+  --chart-5: hsl(25, 45%, 28%);
   --radius: 0.625rem;
-  --sidebar: hsl(30 8% 97%);
+  --sidebar: hsl(30, 8%, 97%);
   --sidebar-foreground: oklch(0.145 0 0);
   --sidebar-primary: oklch(0.205 0 0);
   --sidebar-primary-foreground: oklch(0.985 0 0);
@@ -62,8 +62,8 @@
   /* Added text link button design tokens for centralized styling */
   --text-link-color: var(--foreground);
   --text-link-hover-color: var(--foreground);
-  --text-link-decoration-color: hsl(33 54% 38% / 0.4);
-  --text-link-decoration-hover-color: hsl(33 54% 38%);
+  --text-link-decoration-color: hsl(33, 54%, 38%, 0.4);
+  --text-link-decoration-hover-color: hsl(33, 54%, 38%);
   --text-link-decoration-thickness: 2px;
   --text-link-underline-offset: 4px;
 
@@ -209,8 +209,8 @@
 @theme inline {
   /* Updated to properly reference Poppins variable from layout.tsx */
   --font-sans: var(--font-poppins);
-  /* Updated to use Instrument Serif for design system serif family */
-  --font-serif: "Instrument Serif", serif;
+  /* Added fallback fonts to ensure valid font-family syntax even if variable is missing */
+  --font-serif: var(--font-instrument-serif), ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
   /* Simplified to directly reference the Geist Mono variable set by GeistMono.variable */
   --font-mono: var(--font-geist-mono);
   --color-background: var(--background);
@@ -283,18 +283,12 @@
   --color-button-destructive-bg: var(--button-destructive-bg);
   --color-button-destructive-text: var(--button-destructive-text);
 
-  /* Expose skin score card design tokens to Tailwind theme */
+  /* Removed non-color skin-score variables from @theme to prevent "Invalid custom property" errors. 
+     These variables (sizes, padding, etc.) are not colors and shouldn't be prefixed with --color- in the theme.
+     They are still available as CSS variables in :root for use in components. */
   --color-skin-score-bg: var(--skin-score-bg);
   --color-skin-score-number-color: var(--skin-score-number-color);
   --color-skin-score-label-color: var(--skin-score-label-color);
-  --color-skin-score-number-size: var(--skin-score-number-size);
-  --color-skin-score-label-size: var(--skin-score-label-size);
-  --color-skin-score-padding-x: var(--skin-score-padding-x);
-  --color-skin-score-padding-y: var(--skin-score-padding-y);
-  --color-skin-score-gap: var(--skin-score-gap);
-  --color-skin-score-radius: var(--skin-score-radius);
-  --color-skin-score-bar-height: var(--skin-score-bar-height);
-  --color-skin-score-bar-bg: var(--skin-score-bar-bg);
   --color-skin-score-low: var(--skin-score-low);
   --color-skin-score-medium: var(--skin-score-medium);
   --color-skin-score-high: var(--skin-score-high);
