@@ -2,7 +2,6 @@
 
 import { useAuth } from "@/lib/auth-context"
 import { useRouter } from "next/navigation"
-import { useEffect } from "react"
 import { Header } from "@/components/header"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
@@ -14,11 +13,12 @@ export default function AccountPage() {
   const { isLoggedIn, userRole } = useAuth()
   const router = useRouter()
 
-  useEffect(() => {
-    if (isLoggedIn && userRole === "ambassador") {
-      router.push("/ambassador")
-    }
-  }, [isLoggedIn, userRole, router])
+  // Removing the redirect to ambassador page
+  // useEffect(() => {
+  //   if (isLoggedIn && userRole === "ambassador") {
+  //     router.push("/ambassador")
+  //   }
+  // }, [isLoggedIn, userRole, router])
 
   if (!isLoggedIn) {
     return (

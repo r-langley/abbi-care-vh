@@ -23,7 +23,7 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
 
 export function Header() {
   const { totalItems } = useCart()
-  const { isLoggedIn, userRole, setUserRole, logout } = useAuth()
+  const { isLoggedIn, userRole, logout } = useAuth()
   const pathname = usePathname()
   const isHomepage = pathname === "/"
   const isShopPage = pathname === "/shop"
@@ -104,11 +104,6 @@ export function Header() {
                       <DropdownMenuItem asChild>
                         <Link href="/account">My Account</Link>
                       </DropdownMenuItem>
-                      {userRole === "member" && (
-                        <DropdownMenuItem onClick={() => setUserRole("ambassador")}>
-                          Switch to Ambassador
-                        </DropdownMenuItem>
-                      )}
                       <DropdownMenuSeparator />
                       <DropdownMenuItem onClick={logout}>Log Out</DropdownMenuItem>
                     </>
