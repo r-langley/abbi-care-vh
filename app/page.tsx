@@ -53,7 +53,7 @@ export default function HomePage() {
                   <SparklesIcon className="w-4 h-4" />
                   <span>ABBI AI IS HERE</span>
                 </div>
-                <h2 className="text-3xl md:text-5xl font-sans font-medium text-[#373737] leading-tight mb-6">
+                <h2 className="text-3xl font-sans font-medium text-[#373737] leading-tight mb-6 tracking-tighter leading-5 md:text-4xl">
                   Personalized cosmetics based on your skin's unique needs
                 </h2>
                 <p className="text-lg text-[#586158] mb-8">97% accurate when compared to a dermatological exam.</p>
