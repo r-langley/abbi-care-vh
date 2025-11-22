@@ -39,7 +39,7 @@ export function Header() {
       {/* Main Header */}
       <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-md">
         <div className="mx-auto px-0">
-          <div className="flex items-center justify-between px-5 h-14">
+          <div className="flex items-center justify-between h-14 px-3">
             {/* Left: Hamburger + Desktop Nav Links */}
             <div className="flex items-center gap-0">
               <Sheet open={open} onOpenChange={setOpen}>
