@@ -162,7 +162,7 @@ export default function HomePage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
               {[1, 2, 3, 4].map((i) => (
                 <div key={i} className="group cursor-pointer">
-                  <div className="relative aspect-square bg-[#F9F9F9] rounded-lg mb-4 flex items-center justify-center p-6">
+                  <div className="relative aspect-square bg-[#F9F9F9] rounded-lg mb-4 flex items-center justify-center p-6 px-0 py-0">
                     <Image
                       src="/minimalist-white-skincare-bottle-with-green-leaf-a.jpg"
                       alt="Cream"
