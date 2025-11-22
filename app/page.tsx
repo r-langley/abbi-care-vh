@@ -1,25 +1,14 @@
+"use client"
+
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
-import { traits, products } from "@/lib/products"
-import { PageTitle, SectionHeading, SectionOverline, BodyText, SmallText, Section } from "@/components/ui/typography"
 import { SectionContainer } from "@/components/ui/section-container"
-import { ParallaxImage } from "@/components/parallax-image"
-import { CategoryCarousel } from "@/components/category-carousel"
-import { FaqSection } from "@/components/faq-section"
-import {
-  ClockIcon,
-  SparklesIcon,
-  ArrowsPointingInIcon,
-  MagnifyingGlassIcon,
-  BeakerIcon,
-  SunIcon,
-  Squares2X2Icon,
-} from "@heroicons/react/24/outline"
-import type React from "react"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
+import { PlusIcon } from "@heroicons/react/24/solid"
+import { SparklesIcon } from "@heroicons/react/24/outline"
 
 export default function HomePage() {
   return (
@@ -27,23 +16,27 @@ export default function HomePage() {
       <Header />
       <main>
         {/* Hero Section */}
-        <section className="relative bg-background">
-          <div className="grid grid-cols-2 items-center gap-0 bg-muted">
+        <section className="relative bg-[#FBF9F5]">
+          <div className="grid grid-cols-1 md:grid-cols-2 min-h-[600px]">
             {/* Left: Hero Image */}
-            <div className="relative aspect-[2/3] md:aspect-[4/3]">
-              <Image src="/images/design-mode/image.png" alt="ABBI Skincare" fill className="object-cover" priority />
+            <div className="relative h-[400px] md:h-auto w-full">
+              <Image
+                src="/diverse-group-of-women-of-all-ages-smiling-with-gl.jpg"
+                alt="Diverse group of women representing ABBI community"
+                fill
+                className="object-cover"
+                priority
+              />
             </div>
 
             {/* Right: Hero Content */}
-            <div className="flex flex-col justify-center items-start px-5 py-5 md:py-8">
-              <PageTitle variant="hero">
-                <span className="font-serif italic font-medium">Your</span> Skin, Our{" "}
-                <span className="font-serif italic font-medium">Formula</span>
-              </PageTitle>
-              <p className="text-[16px] font-medium tracking-[-0.32px] text-muted-foreground leading-[1.35] mb-4">
-                Personalized skincare, perfected
-              </p>
-              <Button asChild className="font-mono">
+            <div className="flex flex-col justify-center items-start px-6 py-12 md:px-16 md:py-0 max-w-xl">
+              <h1 className="text-5xl md:text-7xl font-sans font-medium tracking-tight leading-[1.1] mb-6 text-[#373737]">
+                Your <span className="font-serif italic">Skin</span>,<br />
+                <span className="font-serif italic">Our</span> Formula
+              </h1>
+              <p className="text-lg text-[#586158] mb-8">Discover the future of personalized care.</p>
+              <Button asChild size="lg" className="bg-[#6B4C9A] hover:bg-[#5a3f85] text-white rounded-md px-8 h-12">
                 <Link href="/skin-analysis">Start My Journey</Link>
               </Button>
             </div>
@@ -51,143 +44,185 @@ export default function HomePage() {
         </section>
 
         {/* AI Skin Analysis Section */}
-        <SectionContainer spacing="tight" className="md:py-12">
+        <SectionContainer className="py-16 md:py-24 bg-white">
           <div className="container mx-auto px-5">
-            <div className="flex flex-col md:flex-row md:items-center md:gap-12 md:max-w-6xl md:mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
               {/* Left: Content */}
-              <div className="text-center md:text-left md:flex-1">
-                <SectionOverline>AI SKIN ANALYSIS</SectionOverline>
-                <SectionHeading spacing="tight">Personalized care for your unique skin</SectionHeading>
-                <BodyText className="md:block mt-4 mb-6 text-muted-foreground max-w-xl">
-                  Our advanced AI technology analyzes your skin in seconds, identifying your unique concerns and
-                  recommending personalized formulas tailored specifically to your needs. Get professional-grade
-                  insights without leaving home.
-                </BodyText>
-                <div className="flex justify-center md:justify-start">
-                  <Button asChild size="lg" className="font-mono">
-                    <Link href="/skin-analysis">Analyze My Skin</Link>
-                  </Button>
+              <div className="max-w-lg">
+                <div className="flex items-center gap-2 mb-4 text-[#373737] font-mono text-xs uppercase tracking-widest">
+                  <SparklesIcon className="w-4 h-4" />
+                  <span>ABBI AI IS HERE</span>
                 </div>
-                <SmallText className="mt-4 md:mt-6">97% accurate when compared to a dermatological exam.</SmallText>
+                <h2 className="text-3xl md:text-5xl font-sans font-medium text-[#373737] leading-tight mb-6">
+                  Personalized cosmetics based on your skin's unique needs
+                </h2>
+                <p className="text-lg text-[#586158] mb-8">97% accurate when compared to a dermatological exam.</p>
+                <Button asChild size="lg" className="bg-[#6B4C9A] hover:bg-[#5a3f85] text-white rounded-md px-8 h-12">
+                  <Link href="/skin-analysis">Analyze My Skin</Link>
+                </Button>
               </div>
 
-              {/* Right: Phone Image */}
-              <div className="mt-8 md:mt-0 md:flex-shrink-0 flex justify-center">
-                <div className="relative rounded-2xl overflow-hidden">
-                  <ParallaxImage
-                    src="/images/skin-analysis.png"
-                    alt="AI Skin Analysis"
-                    width={828}
-                    height={1792}
-                    className="h-auto w-60 md:w-48 rounded-3xl border-2"
-                    parallaxSpeed={0.3}
-                    loading="lazy"
-                  />
-                </div>
+              {/* Right: Image */}
+              <div className="relative aspect-[4/5] rounded-2xl overflow-hidden">
+                <Image
+                  src="/portrait-of-beautiful-woman-with-freckles-and-glow.jpg"
+                  alt="Personalized skin analysis result"
+                  fill
+                  className="object-cover"
+                />
               </div>
             </div>
           </div>
         </SectionContainer>
 
-        {/* What Our Scan Evaluates */}
-        <SectionContainer variant="muted">
-          <div className="container mx-auto px-5">
-            <Section
-              heading="What Our Scan Evaluates"
-              body="97% accurate when compared to a dermatological exam."
-              align="left"
-              spacing="tight"
-              className="mb-8 md:mb-12"
-            />
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5">
-              {traits.map((trait) => (
-                <Link key={trait.id} href={`/shop?category=creams&traits=${trait.id}`}>
-                  <Card className="group hover:shadow-lg transition-all duration-300 hover:border-primary h-full">
-                    <CardContent className="p-4 md:p-6 text-center flex flex-col items-center justify-center h-full">
-                      <div className="w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center group-hover:bg-primary/20 transition-colors mb-3 bg-background">
-                        {getTraitIcon(trait.id)}
-                      </div>
-                      <h3 className="text-sm md:text-base font-sans font-medium">{trait.name}</h3>
-                      <p className="text-xs text-muted-foreground mt-2 hidden md:block">
-                        {getTraitDescription(trait.id)}
-                      </p>
-                    </CardContent>
-                  </Card>
-                </Link>
-              ))}
-            </div>
-            <div className="mt-8 md:mt-12 text-left">
-              <Button asChild size="lg" className="font-mono">
-                <Link href="/skin-analysis">Get Your Skin Analysis</Link>
-              </Button>
-            </div>
-          </div>
-        </SectionContainer>
+        {/* Texture Banner */}
+        <section className="relative w-full h-[300px] md:h-[400px]">
+          <Image src="/close-up-texture-of-white-face-cream-being-applied.jpg" alt="Cream texture close up" fill className="object-cover" />
+        </section>
 
         {/* Product Categories */}
-        <SectionContainer>
+        <SectionContainer className="py-16 md:py-24 bg-[#FBF9F5]">
           <div className="container mx-auto px-5">
-            <div className="space-y-10">
-              {/* Personalized Creams Carousel */}
-              <CategoryCarousel
-                title="Personalized Creams"
-                description="Custom formulas for your unique skin"
-                products={products.filter((p) => p.category === "In-Lab Cream").slice(0, 5)}
-                shopLink="/shop?category=creams"
-              />
+            <div className="mb-12 max-w-2xl">
+              <h2 className="text-3xl md:text-4xl font-sans font-medium text-[#373737] mb-4">
+                Discover ABBI's full range of personalized skincare products
+              </h2>
+              <p className="text-[#586158]">
+                Choose from products mixed in our French lab, or combine a Base with Active Concentrates to create your
+                own daily regime at home.
+              </p>
+            </div>
 
-              {/* Simple Solutions Carousel */}
-              <CategoryCarousel
-                title="Simple Solutions"
-                description="Complete regimens for targeted concerns"
-                products={products.filter((p) => p.category === "Simple Solution").slice(0, 5)}
-                shopLink="/shop?category=simple-solutions"
-              />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* Card 1: Image Left, Text Right */}
+              <Link href="/shop?category=creams" className="group block">
+                <div className="bg-white flex h-[280px] overflow-hidden rounded-lg hover:shadow-md transition-shadow">
+                  <div className="w-1/2 relative bg-[#f5f5f5]">
+                    <Image
+                      src="/amber-glass-dropper-bottle-with-white-cream-textur.jpg"
+                      alt="Custom Creams"
+                      fill
+                      className="object-cover mix-blend-multiply"
+                    />
+                  </div>
+                  <div className="w-1/2 flex items-center justify-center p-6">
+                    <h3 className="text-2xl font-sans text-[#373737]">Custom Creams</h3>
+                  </div>
+                </div>
+              </Link>
 
-              {/* Essentials Carousel */}
-              <CategoryCarousel
-                title="Essentials"
-                description="Core products for every routine"
-                products={products.filter((p) => p.category === "Essential").slice(0, 5)}
-                shopLink="/shop?category=essentials"
-              />
+              {/* Card 2: Image Left, Text Right */}
+              <Link href="/shop?category=mix-at-home" className="group block">
+                <div className="bg-white flex h-[280px] overflow-hidden rounded-lg hover:shadow-md transition-shadow">
+                  <div className="w-1/2 relative bg-[#E8D4D4]">
+                    <Image
+                      src="/skincare-laboratory-tools-glass-beakers-pink-backg.jpg"
+                      alt="Mix-at-Home"
+                      fill
+                      className="object-cover mix-blend-multiply"
+                    />
+                  </div>
+                  <div className="w-1/2 flex items-center justify-center p-6">
+                    <h3 className="text-2xl font-sans text-[#373737]">Mix-at-Home</h3>
+                  </div>
+                </div>
+              </Link>
+
+              {/* Card 3: Text Left, Image Right */}
+              <Link href="/shop?category=essentials" className="group block">
+                <div className="bg-white flex h-[280px] overflow-hidden rounded-lg hover:shadow-md transition-shadow">
+                  <div className="w-1/2 flex items-center justify-center p-6">
+                    <h3 className="text-2xl font-sans text-[#373737]">Essentials</h3>
+                  </div>
+                  <div className="w-1/2 relative bg-[#FFB380]">
+                    <Image src="/woman-applying-face-serum-orange-background-close-.jpg" alt="Essentials" fill className="object-cover" />
+                  </div>
+                </div>
+              </Link>
+
+              {/* Card 4: Text Left, Image Right */}
+              <Link href="/ingredients" className="group block">
+                <div className="bg-white flex h-[280px] overflow-hidden rounded-lg hover:shadow-md transition-shadow">
+                  <div className="w-1/2 flex items-center justify-center p-6">
+                    <h3 className="text-2xl font-sans text-[#373737]">Ingredients</h3>
+                  </div>
+                  <div className="w-1/2 relative bg-[#2D5A45]">
+                    <Image src="/white-elderflower-blossoms-close-up-nature-green-b.jpg" alt="Ingredients" fill className="object-cover" />
+                  </div>
+                </div>
+              </Link>
             </div>
           </div>
         </SectionContainer>
 
+        {/* Featured Products */}
+        <SectionContainer className="py-16 md:py-24 bg-white">
+          <div className="container mx-auto px-5">
+            <h2 className="text-3xl md:text-4xl font-sans font-medium text-[#373737] mb-12">Featured Products</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+              {[1, 2, 3, 4].map((i) => (
+                <div key={i} className="group cursor-pointer">
+                  <div className="relative aspect-square bg-[#F9F9F9] rounded-lg mb-4 flex items-center justify-center p-6">
+                    <Image
+                      src="/minimalist-white-skincare-bottle-with-green-leaf-a.jpg"
+                      alt="Cream"
+                      width={200}
+                      height={200}
+                      className="object-contain"
+                    />
+                  </div>
+                  <div className="space-y-1">
+                    <h3 className="font-medium text-[#373737]">Cream</h3>
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-[#586158]">$24.00</span>
+                      <button className="w-8 h-8 rounded-full bg-[#6B4C9A] text-white flex items-center justify-center hover:bg-[#5a3f85] transition-colors">
+                        <PlusIcon className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </SectionContainer>
+
+        {/* Lifestyle Banner */}
+        <section className="relative w-full h-[500px] md:h-[600px]">
+          <Image src="/young-woman-in-pink-top-dancing-or-posing-joyfully.jpg" alt="Feel good in your skin" fill className="object-cover" />
+        </section>
+
         {/* FAQ Section */}
-        <FaqSection />
+        <SectionContainer className="py-16 md:py-24 bg-white">
+          <div className="container mx-auto px-5 max-w-4xl">
+            <h2 className="text-3xl md:text-4xl font-sans font-medium text-[#373737] mb-12">FAQ</h2>
+            <Accordion type="single" collapsible className="w-full">
+              {[
+                "How to use ABBI products?",
+                "What is the difference between INLAB and ABBI FreshActive care?",
+                "What is the shelf life of ABBI products?",
+                "Are ABBI skincare products suitable for all skin types?",
+                "What is ABBI Fresh Active cosmetic?",
+                "What is the reliability rate of the ABBI online skin analysis?",
+                "How many drops should I use for my ABBI treatments?",
+                "Can I mix all ABBI FreshActiv actives together?",
+                "How many active ingredients can I mix?",
+              ].map((question, index) => (
+                <AccordionItem key={index} value={`item-${index}`} className="border-b border-gray-100">
+                  <AccordionTrigger className="text-[#586158] hover:text-[#6B4C9A] py-6 text-left">
+                    {question}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground pb-6">
+                    Our products are designed to be used daily. For specific application instructions, please refer to
+                    the individual product packaging or our detailed usage guide on the product page. We recommend
+                    starting with clean skin and applying products from thinnest to thickest consistency.
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </div>
+        </SectionContainer>
       </main>
       <Footer />
     </>
   )
-}
-
-function getTraitIcon(traitId: string): React.JSX.Element {
-  const iconClass = "w-6 h-6 md:w-7 md:h-7 text-primary"
-  const icons: Record<string, React.JSX.Element> = {
-    wrinkles: <ClockIcon className={iconClass} />,
-    radiance: <SparklesIcon className={iconClass} />,
-    imperfections: <ArrowsPointingInIcon className={iconClass} />,
-    spots: <MagnifyingGlassIcon className={iconClass} />,
-    hydration: <BeakerIcon className={iconClass} />,
-    sensitivity: <SparklesIcon className={iconClass} />,
-    shine: <SunIcon className={iconClass} />,
-    texture: <Squares2X2Icon className={iconClass} />,
-  }
-  return icons[traitId] || <span>•</span>
-}
-
-function getTraitDescription(traitId: string): string {
-  const descriptions: Record<string, string> = {
-    wrinkles: "Fine lines and aging signs",
-    radiance: "Skin brightness and glow",
-    imperfections: "Blemishes and clarity",
-    spots: "Dark spots and pigmentation",
-    hydration: "Moisture levels and plumpness",
-    sensitivity: "Redness and reactivity",
-    shine: "Oil production and matteness",
-    texture: "Smoothness and refinement",
-  }
-  return descriptions[traitId] || ""
 }
