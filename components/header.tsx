@@ -2,17 +2,11 @@
 
 import Link from "next/link"
 import Image from "next/image"
-import {
-  Bars3Icon,
-  ShoppingBagIcon,
-  UserCircleIcon,
-  ChatBubbleLeftRightIcon,
-  ChevronDownIcon,
-} from "@heroicons/react/24/solid"
+import { Bars3Icon, ShoppingBagIcon, UserCircleIcon, ChevronDownIcon } from "@heroicons/react/24/solid"
 import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetDescription } from "@/components/ui/sheet"
 import { useCart } from "@/lib/cart-context"
 import { useAuth } from "@/lib/auth-context"
-import { usePathname } from 'next/navigation'
+import { usePathname } from "next/navigation"
 import React from "react"
 import { NavLink } from "@/components/ui/nav-link"
 import { TabsNav } from "@/components/ui/tabs-nav"
@@ -25,19 +19,15 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { RegionLanguageSelector } from "@/components/region-language-selector"
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
 
 export function Header() {
   const { totalItems } = useCart()
-  const { isLoggedIn, userRole, setUserRole, login, logout } = useAuth()
+  const { isLoggedIn, userRole, logout } = useAuth()
   const pathname = usePathname()
   const isHomepage = pathname === "/"
   const isShopPage = pathname === "/shop"
   const [open, setOpen] = React.useState(false)
-
-  const handleRoleSwitch = () => {
-    const newRole = userRole === "member" ? "ambassador" : "member"
-    setUserRole(newRole)
-  }
 
   return (
     <>
@@ -49,7 +39,7 @@ export function Header() {
       {/* Main Header */}
       <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-md">
         <div className="mx-auto px-0">
-          <div className="flex items-center justify-between px-5 h-14">
+          <div className="flex items-center justify-between h-14 px-3">
             {/* Left: Hamburger + Desktop Nav Links */}
             <div className="flex items-center gap-0">
               <Sheet open={open} onOpenChange={setOpen}>
@@ -89,7 +79,7 @@ export function Header() {
               <div className="hidden md:block">
                 <RegionLanguageSelector />
               </div>
-              
+
               <Link href="/cart" className="relative p-2 hover:bg-[#f5f6f5] rounded-[8px] transition-colors">
                 <ShoppingBagIcon className="w-6 h-6" />
                 {totalItems > 0 && (
@@ -114,14 +104,13 @@ export function Header() {
                       <DropdownMenuItem asChild>
                         <Link href="/account">My Account</Link>
                       </DropdownMenuItem>
-                      <DropdownMenuItem onClick={handleRoleSwitch}>
-                        {userRole === "member" ? "Switch to Ambassador" : "Switch to Member"}
-                      </DropdownMenuItem>
                       <DropdownMenuSeparator />
                       <DropdownMenuItem onClick={logout}>Log Out</DropdownMenuItem>
                     </>
                   ) : (
-                    <DropdownMenuItem onClick={login}>Log In</DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                      <Link href="/login">Log In</Link>
+                    </DropdownMenuItem>
                   )}
                 </DropdownMenuContent>
               </DropdownMenu>
@@ -167,6 +156,7 @@ export function Header() {
 
 function MobileNav({ closeMenu }: { closeMenu: () => void }) {
   const [isTraitExpanded, setIsTraitExpanded] = React.useState(false)
+  const [isLanguageExpanded, setIsLanguageExpanded] = React.useState(false)
 
   return (
     <nav className="flex flex-col h-full">
@@ -209,21 +199,18 @@ function MobileNav({ closeMenu }: { closeMenu: () => void }) {
           <NavLink href="/shop?category=creams" variant="mobile" className="block mb-1">
             Creams
           </NavLink>
-          
         </div>
 
         <div onClick={closeMenu}>
           <NavLink href="/shop?category=essentials" variant="mobile" className="block mb-1">
             Essentials
           </NavLink>
-          
         </div>
 
         <div onClick={closeMenu}>
           <NavLink href="/shop?category=simple-solutions" variant="mobile" className="block mb-1">
             Simple Solutions
           </NavLink>
-          
         </div>
 
         <div>
@@ -234,7 +221,7 @@ function MobileNav({ closeMenu }: { closeMenu: () => void }) {
             Shop by Trait
             <ChevronDownIcon className={`h-6 w-6 transition-transform ${isTraitExpanded ? "rotate-180" : ""}`} />
           </button>
-          
+
           {isTraitExpanded && (
             <div className="flex flex-col gap-3 pl-4">
               <NavLink href="/shop?category=creams&traits=wrinkles" variant="footer" onClick={closeMenu}>
@@ -280,14 +267,31 @@ function MobileNav({ closeMenu }: { closeMenu: () => void }) {
 
       <div className="flex items-center justify-between pt-6 border-t border-border mt-auto">
         <button className="flex items-center gap-2 font-sans font-medium text-muted-foreground hover:text-primary transition-colors text-base">
-          <span className="text-2xl">🇺🇸</span>
+          <Avatar className="size-6">
+            <AvatarImage src="/placeholder.svg?height=24&width=24" alt="US Flag" />
+            <AvatarFallback>🇺🇸</AvatarFallback>
+          </Avatar>
           United States
         </button>
-        <button className="flex items-center gap-2 font-sans font-medium text-muted-foreground hover:text-primary transition-colors text-base">
-          Contact Us
-          <ChatBubbleLeftRightIcon className="w-6 h-6" />
+        <button
+          onClick={() => setIsLanguageExpanded(!isLanguageExpanded)}
+          className="flex items-center gap-1 font-sans font-medium text-muted-foreground hover:text-primary transition-colors text-base"
+        >
+          <span className="text-xs font-mono uppercase font-medium">EN</span>
+          <ChevronDownIcon className={`w-4 h-4 transition-transform ${isLanguageExpanded ? "rotate-180" : ""}`} />
         </button>
       </div>
+
+      {isLanguageExpanded && (
+        <div className="flex flex-col gap-2 pt-3 pb-2 border-t border-border">
+          <button className="px-3 py-2 text-sm font-medium text-left rounded-md hover:bg-muted transition-colors">
+            English
+          </button>
+          <button className="px-3 py-2 text-sm font-medium text-left rounded-md hover:bg-muted transition-colors">
+            Español
+          </button>
+        </div>
+      )}
     </nav>
   )
 }
