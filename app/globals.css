@@ -294,6 +294,28 @@
   --color-skin-score-high: var(--skin-score-high);
 }
 
+/* Scan animation keyframes */
+@keyframes scan {
+  0% {
+    top: 0%;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+}
+
+.animate-scan {
+  animation: scan 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

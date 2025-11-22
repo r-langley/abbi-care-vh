@@ -7,10 +7,14 @@ import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { SectionContainer } from "@/components/ui/section-container"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import { PlusIcon } from "@heroicons/react/24/solid"
 import { SparklesIcon } from "@heroicons/react/24/outline"
+import { ProductCard } from "@/components/product-card"
+import { products } from "@/lib/products"
 
 export default function HomePage() {
+  // Select featured products (e.g., Essentials)
+  const featuredProducts = products.filter((p) => p.category === "Essential").slice(0, 4)
+
   return (
     <>
       <Header />
@@ -70,6 +74,11 @@ export default function HomePage() {
                   fill
                   className="object-cover"
                 />
+                {/* Scanning Animation Overlay */}
+                <div className="absolute inset-0 pointer-events-none">
+                  <div className="absolute left-0 w-full h-1 bg-white/80 shadow-[0_0_15px_rgba(255,255,255,0.8)] animate-scan" />
+                  <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent animate-scan" />
+                </div>
               </div>
             </div>
           </div>
@@ -77,7 +86,12 @@ export default function HomePage() {
 
         {/* Texture Banner */}
         <section className="relative w-full h-[300px] md:h-[400px]">
-          <Image src="/close-up-texture-of-white-face-cream-being-applied.jpg" alt="Cream texture close up" fill className="object-cover" />
+          <Image
+            src="/close-up-texture-of-white-face-cream-being-applied.jpg"
+            alt="Cream texture close up"
+            fill
+            className="object-cover"
+          />
         </section>
 
         {/* Product Categories */}
@@ -135,7 +149,12 @@ export default function HomePage() {
                     <h3 className="text-2xl font-sans text-[#373737]">Essentials</h3>
                   </div>
                   <div className="w-1/2 relative bg-[#FFB380]">
-                    <Image src="/woman-applying-face-serum-orange-background-close-.jpg" alt="Essentials" fill className="object-cover" />
+                    <Image
+                      src="/woman-applying-face-serum-orange-background-close-.jpg"
+                      alt="Essentials"
+                      fill
+                      className="object-cover"
+                    />
                   </div>
                 </div>
               </Link>
@@ -147,7 +166,12 @@ export default function HomePage() {
                     <h3 className="text-2xl font-sans text-[#373737]">Ingredients</h3>
                   </div>
                   <div className="w-1/2 relative bg-[#2D5A45]">
-                    <Image src="/white-elderflower-blossoms-close-up-nature-green-b.jpg" alt="Ingredients" fill className="object-cover" />
+                    <Image
+                      src="/white-elderflower-blossoms-close-up-nature-green-b.jpg"
+                      alt="Ingredients"
+                      fill
+                      className="object-cover"
+                    />
                   </div>
                 </div>
               </Link>
@@ -160,26 +184,9 @@ export default function HomePage() {
           <div className="container mx-auto px-5">
             <h2 className="text-3xl md:text-4xl font-sans font-medium text-[#373737] mb-12">Featured Products</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-              {[1, 2, 3, 4].map((i) => (
-                <div key={i} className="group cursor-pointer">
-                  <div className="relative aspect-square bg-[#F9F9F9] rounded-lg mb-4 flex items-center justify-center p-6 px-0 py-0">
-                    <Image
-                      src="/minimalist-white-skincare-bottle-with-green-leaf-a.jpg"
-                      alt="Cream"
-                      width={200}
-                      height={200}
-                      className="object-contain"
-                    />
-                  </div>
-                  <div className="space-y-1">
-                    <h3 className="font-medium text-[#373737]">Cream</h3>
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm text-[#586158]">$24.00</span>
-                      <button className="w-8 h-8 rounded-full bg-[#6B4C9A] text-white flex items-center justify-center hover:bg-[#5a3f85] transition-colors">
-                        <PlusIcon className="w-4 h-4" />
-                      </button>
-                    </div>
-                  </div>
+              {featuredProducts.map((product) => (
+                <div key={product.id} className="h-full">
+                  <ProductCard product={product} />
                 </div>
               ))}
             </div>
@@ -188,7 +195,12 @@ export default function HomePage() {
 
         {/* Lifestyle Banner */}
         <section className="relative w-full h-[500px] md:h-[600px]">
-          <Image src="/young-woman-in-pink-top-dancing-or-posing-joyfully.jpg" alt="Feel good in your skin" fill className="object-cover" />
+          <Image
+            src="/young-woman-in-pink-top-dancing-or-posing-joyfully.jpg"
+            alt="Feel good in your skin"
+            fill
+            className="object-cover"
+          />
         </section>
 
         {/* FAQ Section */}
