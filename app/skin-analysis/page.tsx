@@ -63,7 +63,8 @@ export default function SkinAnalysisPage() {
       }
       localStorage.setItem("skinScanResults", JSON.stringify(mockResults))
 
-      login()
+      // todo: integrate with login if needed
+      // login()
 
       // Redirect to shop after processing
       setTimeout(() => {

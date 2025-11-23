@@ -23,11 +23,14 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
 
 export function Header() {
   const { totalItems } = useCart()
-  const { isLoggedIn, userRole, logout } = useAuth()
+  const { isLoggedIn, userRole, logout, userInfo } = useAuth()
   const pathname = usePathname()
   const isHomepage = pathname === "/"
   const isShopPage = pathname === "/shop"
   const [open, setOpen] = React.useState(false)
+  const displayName = userInfo
+      ? `${(userInfo.firstname || "").trim()} ${(userInfo.lastname || "").trim()}`.trim() || userInfo.email
+      : null
 
   return (
     <>
@@ -101,6 +104,9 @@ export function Header() {
                 <DropdownMenuContent align="end" className="w-48">
                   {isLoggedIn ? (
                     <>
+                      <DropdownMenuItem asChild>
+                        <Link href="/account">{displayName}</Link>
+                      </DropdownMenuItem>
                       <DropdownMenuItem asChild>
                         <Link href="/account">My Account</Link>
                       </DropdownMenuItem>

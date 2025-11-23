@@ -3,11 +3,16 @@
 import type React from "react"
 import { createContext, useContext, useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
+import { apiFetch } from "@/lib/api"
 
 interface UserInfo {
   firstName: string
   lastName: string
+  id: string
+  firstname: string
+  lastname: string
   email: string
+  created_at?: string
 }
 
 interface AuthContextType {
@@ -15,7 +20,7 @@ interface AuthContextType {
   userRole: "member" | "ambassador"
   userInfo: UserInfo | null
   setUserRole: (role: "member" | "ambassador") => void
-  login: () => void
+  login: (email: string, password: string) => Promise<boolean>
   logout: () => void
 }
 
@@ -29,56 +34,105 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   // Load login state from localStorage on mount
   useEffect(() => {
-    const loginState = localStorage.getItem("isLoggedIn")
-    const scanResults = localStorage.getItem("skinScanResults")
-    const savedRole = localStorage.getItem("userRole") as "member" | "ambassador" | null
+    const token = localStorage.getItem("authToken")
 
-    // User is logged in if either the login flag is set OR scan results exist
-    if (loginState === "true" || scanResults) {
+    if (token) {
       setIsLoggedIn(true)
-      setUserInfo({
-        firstName: "Sarah",
-        lastName: "Miller",
-        email: "sarah.miller@example.com",
+      apiFetch("/user/me", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        }
       })
-    }
-
-    if (savedRole) {
-      setUserRole(savedRole)
+          .then((res) => {
+            if (!res.ok) throw new Error("Failed to fetch profile")
+            return res.json()
+          })
+          .then((user) => {
+            if (user?.email) {
+              setUserInfo(user)
+              setIsLoggedIn(true)
+              const role = user.is_affiliate ? "ambassador" : "member"
+              handleSetUserRole(role)
+            }
+          })
+          .catch(() => {
+            localStorage.removeItem("authToken")
+            setIsLoggedIn(false)
+            setUserInfo(null)
+          })
     }
   }, [])
 
-  const login = () => {
-    setIsLoggedIn(true)
-    localStorage.setItem("isLoggedIn", "true")
-    setUserRole("member")
-    localStorage.setItem("userRole", "member")
-    setUserInfo({
-      firstName: "Sarah",
-      lastName: "Miller",
-      email: "sarah.miller@example.com",
-    })
-    router.push("/account")
+  const login = async (email: string, password: string) => {
+    try {
+      const res = await apiFetch("/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, pwd: password }),
+      })
+
+      if (!res.ok) {
+        return false
+      }
+
+      const data = await res.json()
+      const token: string | undefined = data.token
+      let role: "member" | "ambassador" | undefined = data?.is_affiliate ? "ambassador" : "member"
+
+      if (!token) {
+        return false
+      }
+      localStorage.setItem("authToken", token)
+      setIsLoggedIn(true)
+
+      const userData = await apiFetch("/user/me", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        }
+      })
+
+      const user: any = await userData.json();
+
+      if (user) {
+        setUserInfo(user);
+        role = user.is_affiliate ? "ambassador" : "member";
+      } else {
+        setUserInfo(null)
+      }
+
+      if (role) {
+        handleSetUserRole(role)
+      }
+
+      return true
+    } catch (err) {
+      console.error("Login error:", err)
+      return false
+    }
   }
 
   const logout = () => {
     setIsLoggedIn(false)
     setUserInfo(null)
-    localStorage.removeItem("isLoggedIn")
+    localStorage.removeItem("authToken")
     localStorage.removeItem("skinScanResults")
     localStorage.removeItem("userRole")
-    setUserRole("member")
     router.push("/")
   }
 
   const handleSetUserRole = (role: "member" | "ambassador") => {
     setUserRole(role)
     localStorage.setItem("userRole", role)
-    if (role === "ambassador") {
-      router.push("/ambassador")
-    } else {
+    //todo redirect to ambassador page when ready
+    // if (role === "ambassador") {
+    //   router.push("/ambassador")
+    // } else {
       router.push("/account")
-    }
+    // }
   }
 
   return (

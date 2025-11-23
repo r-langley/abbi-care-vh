@@ -10,7 +10,7 @@ import { OrderCard } from "@/components/account/order-card"
 import { ScanScoreCard } from "@/components/account/scan-score-card"
 
 export default function AccountPage() {
-  const { isLoggedIn, userRole } = useAuth()
+  const { isLoggedIn, userRole, userInfo } = useAuth()
   const router = useRouter()
 
   // Removing the redirect to ambassador page
@@ -47,17 +47,39 @@ export default function AccountPage() {
 }
 
 function MemberView() {
+  const { userInfo } = useAuth();
+  const displayName = userInfo
+      ? `${(userInfo.firstname || "").trim()} ${(userInfo.lastname || "").trim()}`.trim() || userInfo.email
+      : "Guest"
+
+  const initials = (() => {
+    if (userInfo?.firstname || userInfo?.lastname) {
+      return `${(userInfo.firstname || "")[0] ?? ""}${(userInfo.lastname || "")[0] ?? ""}`.toUpperCase()
+    }
+    if (userInfo?.email) {
+      return userInfo.email.slice(0, 2).toUpperCase()
+    }
+    return "GM"
+  })()
+
+  // from 2020-11-16T16:04:57.000Z to "March 2023"
+  const memberSince = userInfo?.created_at
+      ? new Date(userInfo.created_at).toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+      })
+      : "March 2023"
   return (
     <div className="space-y-8">
       {/* Profile Header */}
       <Card className="p-4 sm:p-6">
         <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4">
           <div className="w-20 h-20 rounded-full overflow-hidden bg-primary/10 flex items-center justify-center text-2xl font-semibold">
-            SM
+            {initials}
           </div>
           <div className="flex-1 text-center sm:text-left">
-            <h1 className="text-lg sm:text-xl font-semibold">Sarah Miller</h1>
-            <p className="text-sm text-muted-foreground">Member since March 2023</p>
+            <h1 className="text-lg sm:text-xl font-semibold">{displayName}</h1>
+            <p className="text-sm text-muted-foreground">Member since {memberSince}</p>
           </div>
         </div>
       </Card>
