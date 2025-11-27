@@ -31,9 +31,10 @@ export default function ProductPage() {
     try {
       getProductById(params.id as string)
           .then(p => {
+            p.id = p._id;
             p.image = getImage(p)
             const myStock = marketId && p.stocks && p.stocks.length && p.stocks.find((s: StockProduct) => s.pharmaId === marketId);
-            p.price = myStock ? myStock.price : p.price;
+            p.price = ((myStock ? myStock.price : product.price) || 0) / 100;
             p.currency = myStock ? (myStock.currency || 'EUR') : 'EUR';
             setProduct(p)
           })
