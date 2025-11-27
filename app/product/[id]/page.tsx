@@ -1,6 +1,6 @@
 "use client"
 
-import type React from "react"
+import React, {useEffect} from "react"
 import { RecommendedBadge } from "@/components/recommended-badge"
 import { useState } from "react"
 import { useParams } from "next/navigation"
@@ -12,18 +12,36 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { MinusIcon, PlusIcon, ChevronRightIcon } from "@heroicons/react/24/solid"
-import { getProductById, products } from "@/lib/products"
 import { useCart } from "@/lib/cart-context"
 import { ActiveIngredientCard } from "@/components/active-ingredient-card"
 import { PRODUCT_CATEGORIES } from "@/lib/constants"
 import { getIngredientsByTraits } from "@/lib/ingredients-data"
 import { IngredientCard } from "@/components/ingredient-card"
+import {getImage, getProductById} from "@/api/marketplace";
+import {Product, type StockProduct} from "@/lib/products";
 
 export default function ProductPage() {
   const params = useParams()
-  const product = getProductById(params.id as string)
+  const [marketId, setMarketId] = useState<number | null>(2501305);
+  const [product, setProduct] = useState<any>(null)
   const [quantity, setQuantity] = useState(1)
   const { addItem } = useCart()
+
+  useEffect(() => {
+    try {
+      getProductById(params.id as string)
+          .then(p => {
+            p.image = getImage(p)
+            const myStock = marketId && p.stocks && p.stocks.length && p.stocks.find((s: StockProduct) => s.pharmaId === marketId);
+            p.price = myStock ? myStock.price : p.price;
+            p.currency = myStock ? (myStock.currency || 'EUR') : 'EUR';
+            setProduct(p)
+          })
+    }
+    catch (error) {
+      console.error("Failed to load product data:", error)
+    }
+  }, []);
 
   if (!product) {
     return (
@@ -48,10 +66,10 @@ export default function ProductPage() {
   const isMixAtHomeCream = product.category === "Mix at Home Cream"
 
   // Active Ingredients for Custom Creams (In-Lab) - based on product traits
-  const activeIngredients = getIngredientsByTraits(product.traits).slice(0, 3)
+  // const activeIngredients = getIngredientsByTraits(product.traits).slice(0, 3)
 
   // Active Concentrates for Mix at Home Creams
-  const activeConcentrates = products.filter((p) => p.category === "Active Concentrate").slice(0, 3)
+  // const activeConcentrates = products.filter((p: Product) => p.category === "Active Concentrate").slice(0, 3)
 
   return (
     <>
@@ -77,7 +95,7 @@ export default function ProductPage() {
             <div className="space-y-4 lg:sticky lg:top-24 lg:self-start">
               <div className="relative aspect-square rounded-lg overflow-hidden bg-muted">
                 <Image
-                  src="/minimalist-cosmetic-pump-bottle-product-photograph.jpg"
+                  src={product?.image || "/minimalist-cosmetic-pump-bottle-product-photograph.jpg"}
                   alt={product.name}
                   fill
                   className="object-cover"
@@ -99,7 +117,7 @@ export default function ProductPage() {
                 {product.subtitle && <p className="text-muted-foreground">{product.subtitle}</p>}
               </div>
 
-              <p className="text-3xl font-mono">${product.price}</p>
+              <p className="text-3xl font-mono">${(product.price || 0)?.toFixed(2)}</p>
 
               <p className="text-muted-foreground leading-relaxed tracking-tight font-medium leading-6 text-sm">
                 {product.description}
@@ -109,7 +127,7 @@ export default function ProductPage() {
               <div>
                 <h3 className="font-mono text-sm mb-3">Best for:</h3>
                 <div className="flex flex-wrap gap-2">
-                  {product.traits.map((trait) => (
+                  {product?.traits?.map((trait: any) => (
                     <Link
                       key={trait}
                       href={`/shop?category=creams&traits=${trait.toLowerCase()}`}
@@ -159,16 +177,16 @@ export default function ProductPage() {
                     </p>
                   </div>
                   <div className="flex flex-col gap-[10px]">
-                    {activeIngredients.map((ingredient) => (
-                      <IngredientCard
-                        key={ingredient.id}
-                        id={ingredient.id}
-                        number={ingredient.number}
-                        name={ingredient.name}
-                        description={ingredient.description}
-                        purity={ingredient.purity}
-                      />
-                    ))}
+                    {/*{activeIngredients.map((ingredient) => (*/}
+                    {/*  <IngredientCard*/}
+                    {/*    key={ingredient.id}*/}
+                    {/*    id={ingredient.id}*/}
+                    {/*    number={ingredient.number}*/}
+                    {/*    name={ingredient.name}*/}
+                    {/*    description={ingredient.description}*/}
+                    {/*    purity={ingredient.purity}*/}
+                    {/*  />*/}
+                    {/*))}*/}
                   </div>
                 </div>
               )}
@@ -183,15 +201,14 @@ export default function ProductPage() {
                     </p>
                   </div>
                   <div className="grid grid-cols-3 gap-[10px]">
-                    {activeConcentrates.map((concentrate) => (
-                      <ActiveIngredientCard
-                        key={concentrate.id}
-                        id={concentrate.id}
-                        number={Number.parseInt(concentrate.name.match(/\d+/)?.[0] || "0")}
-                        name={concentrate.name.replace(/^No\.\s*\d+\s*/, "")}
-                        image="/minimalist-cosmetic-pump-bottle-product-photograph.jpg"
-                      />
-                    ))}
+                    {/*{activeConcentrates.map((concentrate) => (*/}
+                    {/*  <ActiveIngredientCard*/}
+                    {/*    key={concentrate.id}*/}
+                    {/*    id={concentrate.id}*/}
+                    {/*    number={Number.parseInt(concentrate.name.match(/\d+/)?.[0] || "0")}*/}
+                    {/*    image="/minimalist-cosmetic-pump-bottle-product-photograph.jpg"*/}
+                    {/*  />*/}
+                    {/*))}*/}
                   </div>
                 </div>
               )}

@@ -46,10 +46,10 @@ export function ProductCard({ product, showRecommended = false, onMixAtHomeAdd }
         <div className="bg-white rounded-[10px] border-2 border-muted overflow-hidden relative flex flex-col h-full w-full hover:border-primary transition-colors">
           <div className="relative h-[160px] overflow-hidden">
             <Image
-              src="/minimalist-cosmetic-pump-bottle-product-photograph.jpg"
+              src={product?.image || '/minimalist-cosmetic-pump-bottle-product-photograph.jpg'}
               alt={product.name}
               fill
-              className="object-cover"
+              style={{ objectFit: 'contain' }}
               loading="lazy"
               sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
             />
@@ -64,7 +64,7 @@ export function ProductCard({ product, showRecommended = false, onMixAtHomeAdd }
                 className="text-[13px] tracking-[-0.26px] leading-[1.15] font-semibold text-primary font-mono"
                 style={{ fontVariationSettings: "'wdth' 100" }}
               >
-                ${product.price.toFixed(2)}
+                ${(product.price || 0)?.toFixed(2)}
               </p>
             </div>
             <button

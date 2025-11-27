@@ -5,9 +5,8 @@ import { useSearchParams } from "next/navigation"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { ProductCard } from "@/components/product-card"
-import { products } from "@/lib/products"
 import { HeroSection } from "@/components/ui/hero-section"
-import { PRODUCT_CATEGORIES, SHOP_CATEGORIES } from "@/lib/constants"
+import {PRODUCT_CATEGORIES, PRODUCT_RANGES, SHOP_CATEGORIES} from "@/lib/constants"
 import { TraitFilter } from "@/components/trait-filter"
 import { ProductCombos } from "@/components/product-combos"
 import { ScanCTA } from "@/components/scan-cta"
@@ -22,17 +21,18 @@ import { RecommendedBadge } from "@/components/recommended-badge"
 import { RecommendedCarousel } from "@/components/recommended-carousel"
 import { PersonalizeCreamCTA } from "@/components/personalize-cream-cta"
 import { PersonalizeModal } from "@/components/personalize-modal"
-import type { Product } from "@/lib/products"
+import type {Product, StockProduct} from "@/lib/products"
+import {getAllProducts, getImage} from "@/api/marketplace";
 
 export default function ShopPage() {
-  console.log("[v0] ShopPage component rendering")
+  // console.log("[v0] ShopPage component rendering")
 
   const searchParams = useSearchParams()
   const category = searchParams.get("category") || "creams"
   const selectedTraits = searchParams.get("traits")?.split(",").filter(Boolean) || []
   const { isLoggedIn, userInfo } = useAuth()
 
-  console.log("[v0] Category:", category, "Selected traits:", selectedTraits, "Is logged in:", isLoggedIn)
+  // console.log("[v0] Category:", category, "Selected traits:", selectedTraits, "Is logged in:", isLoggedIn)
 
   const [scanResults, setScanResults] = useState<{
     userName: string
@@ -47,11 +47,55 @@ export default function ShopPage() {
   } | null>(null)
   const [showPersonalizeModal, setShowPersonalizeModal] = useState(false)
 
+    const [products, setProducts] = useState<Product[]>([])
+  const [marketId, setMarketId] = useState<number | null>(2501305);
+
+  useEffect(() => {
+    let cancelled = false;
+    let productsData: Product[] = [];
+
+    const loadProducts = async () => {
+      try {
+        await getAllProducts(userInfo?.is_affiliate === 1, true, true, true, false, chunk => {
+          if (cancelled) return;
+          productsData = productsData.concat(chunk);
+          // console.log(productsData);
+        });
+
+        if (cancelled) return;
+
+        const mapped = productsData.map(p => {
+          const product = { ...p };
+          product.id = p._id;
+          product.image = getImage(product);
+          const myStock =
+            marketId &&
+            product.stocks &&
+            product.stocks.length &&
+            product.stocks.find((s: StockProduct) => s.pharmaId === marketId);
+          product.price = ((myStock ? myStock.price : product.price) || 0) / 100;
+          product.currency = myStock ? (myStock.currency || "EUR") : "EUR";
+          return product;
+        });
+
+        setProducts(mapped);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    loadProducts();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [marketId]);
+
   useEffect(() => {
     if (!isLoggedIn) {
       localStorage.removeItem("personalizeData")
       setPersonalizeData(null)
-      console.log("[v0] Cleared personalizeData for logged-out user")
+      // console.log("[v0] Cleared personalizeData for logged-out user")
     }
   }, [isLoggedIn])
 
@@ -69,7 +113,7 @@ export default function ShopPage() {
     }
   }, [isLoggedIn])
 
-  console.log("[v0] personalizeData:", personalizeData)
+  // console.log("[v0] personalizeData:", personalizeData)
 
   const handlePersonalizeComplete = (data: { traits: string[]; age: number }) => {
     localStorage.setItem("personalizeData", JSON.stringify(data))
@@ -84,7 +128,7 @@ export default function ShopPage() {
   }
 
   const handleMixAtHomeAdd = (product: Product) => {
-    console.log("[v0] Mix-at-home cream added, opening personalize modal")
+    // console.log("[v0] Mix-at-home cream added, opening personalize modal")
     setShowPersonalizeModal(true)
   }
 
@@ -92,12 +136,12 @@ export default function ShopPage() {
     let filtered: typeof products
 
     if (category === SHOP_CATEGORIES.CREAMS) {
-      const creamCategories = [
-        PRODUCT_CATEGORIES.IN_LAB_CREAM,
-        PRODUCT_CATEGORIES.MIX_AT_HOME_CREAM,
-        PRODUCT_CATEGORIES.ACTIVE_CONCENTRATE,
+      const productRange = [
+        PRODUCT_RANGES.SUR_MESURE,
+        PRODUCT_RANGES.BASE,
+        PRODUCT_RANGES.BOOSTER,
       ] as const
-      filtered = products.filter((p) => (creamCategories as readonly string[]).includes(p.category))
+      filtered = products.filter((p) => p.range === productRange[0] || p.range === productRange[1] || p.range === productRange[2])
 
       if (selectedTraits.length > 0) {
         filtered = filtered.filter((p) =>
@@ -108,15 +152,15 @@ export default function ShopPage() {
       return {
         filteredProducts: filtered,
         groupedCreams: {
-          inLab: filtered.filter((p) => p.category === PRODUCT_CATEGORIES.IN_LAB_CREAM),
-          mixAtHome: filtered.filter((p) => p.category === PRODUCT_CATEGORIES.MIX_AT_HOME_CREAM),
-          activeConcentrate: filtered.filter((p) => p.category === PRODUCT_CATEGORIES.ACTIVE_CONCENTRATE),
+          inLab: filtered.filter((p) => p.range === PRODUCT_RANGES.SUR_MESURE),
+          mixAtHome: filtered.filter((p) => p.range === PRODUCT_RANGES.BASE),
+          activeConcentrate: filtered.filter((p) => p.range === PRODUCT_RANGES.BOOSTER),
         },
       }
     } else if (category === SHOP_CATEGORIES.SIMPLE_SOLUTIONS) {
-      filtered = products.filter((p) => p.category === PRODUCT_CATEGORIES.SIMPLE_SOLUTION)
+      filtered = products.filter((p) => p.range === PRODUCT_RANGES.coffrets)
     } else if (category === SHOP_CATEGORIES.ESSENTIALS) {
-      filtered = products.filter((p) => p.category === PRODUCT_CATEGORIES.ESSENTIAL)
+      filtered = products.filter((p) => p.range === PRODUCT_RANGES.PRET_VENTE || p.range === PRODUCT_RANGES.MOUSSE || p.range === PRODUCT_RANGES.PRODUIT_OFFERT)
     } else {
       filtered = products
     }
@@ -135,7 +179,7 @@ export default function ShopPage() {
 
     const traits = personalizeData?.traits || ["Wrinkles", "Radiance", "Imperfections"]
     const ingredients = getIngredientsByTraits(traits).slice(0, 3)
-    console.log("[v0] Recommended active ingredients:", ingredients)
+    // console.log("[v0] Recommended active ingredients:", ingredients)
     return ingredients
   }, [scanResults, isLoggedIn, personalizeData])
 
@@ -143,7 +187,7 @@ export default function ShopPage() {
     if (!groupedCreams) return null
 
     if (!scanResults && !isLoggedIn && !personalizeData) {
-      console.log("[v0] No cream recommendation - user needs to personalize first")
+      // console.log("[v0] No cream recommendation - user needs to personalize first")
       return null
     }
 
@@ -156,11 +200,11 @@ export default function ShopPage() {
       }))
 
       const bestMatch = creamWithScores.sort((a, b) => b.score - a.score)[0]
-      console.log("[v0] Personalized cream recommendation:", bestMatch?.cream)
+      // console.log("[v0] Personalized cream recommendation:", bestMatch?.cream)
       return bestMatch?.cream || groupedCreams.inLab[0]
     }
 
-    console.log("[v0] Default cream recommendation for logged-in user")
+    // console.log("[v0] Default cream recommendation for logged-in user")
     return groupedCreams.inLab.find((p) => p.id === "inlab-aloe-vera") || groupedCreams.inLab[0]
   }, [scanResults, isLoggedIn, personalizeData, groupedCreams])
 
@@ -205,7 +249,7 @@ export default function ShopPage() {
   const showScanResults = (scanResults || isLoggedIn) && category === "creams"
   const showPersonalizedCream = (scanResults || isLoggedIn || personalizeData) && category === "creams"
 
-  console.log("[v0] Show scan results:", showScanResults, "Recommended cream base:", recommendedCreamBase)
+  // console.log("[v0] Show scan results:", showScanResults, "Recommended cream base:", recommendedCreamBase)
 
   const heroContent = {
     creams: {
@@ -252,7 +296,7 @@ export default function ShopPage() {
       <main className="min-h-screen pb-0">
         {showScanResults ? (
           <MySkinResults
-            userName={userInfo?.firstName || scanResults?.userName || "User"}
+            userName={userInfo?.firstname || scanResults?.userName || "User"}
             wrinkles={scanResults?.wrinkles || 25}
             radiance={scanResults?.radiance || 67}
             imperfections={scanResults?.imperfections || 55}

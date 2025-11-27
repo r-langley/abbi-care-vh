@@ -7,6 +7,18 @@ export const PRODUCT_CATEGORIES = {
   ESSENTIAL: "Essential",
 } as const
 
+export const PRODUCT_RANGES = {
+  SUR_MESURE: "SUR_MESURE",
+  BASE: "BASE",
+  BOOSTER: "BOOSTER",
+  PRODUIT_OFFERT: "PRODUIT_OFFERT",
+  MOUSSE: "MOUSSE",
+  PRET_VENTE: "PRET_VENTE",
+  coffrets: "coffrets"
+} as const
+
+export type ProductRange = (typeof PRODUCT_RANGES)[keyof typeof PRODUCT_RANGES]
+
 export type ProductCategory = (typeof PRODUCT_CATEGORIES)[keyof typeof PRODUCT_CATEGORIES]
 
 // Skin Traits

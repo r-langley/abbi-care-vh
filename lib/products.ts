@@ -1,16 +1,33 @@
-import type { ProductCategory } from "./constants"
+import {ProductCategory, ProductRange} from "./constants"
+
+export interface StockProduct {
+  pharmaId: number, // galien_user_id
+  grp: string, // abbi
+  name: string,
+  price: number, // * 100
+  quantity: number,
+  updateDate: string,
+  currency: string
+}
 
 export interface Product {
   id: string
+  _id?: any
   name: string
+  brand?: string
   category: ProductCategory
   price: number
+  currency?: string
   description: string
   traits: string[]
   image: string
+  image2?: string
   inStock: boolean
   recommended: boolean
   subtitle?: string
+  stocks?: StockProduct[]
+  range?: ProductRange
+  thumb?: string
 }
 
 export const traits = [

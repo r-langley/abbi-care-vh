@@ -7,7 +7,7 @@ import { useCart } from "@/lib/cart-context"
 export function CartDrawerProvider() {
   const [isOpen, setIsOpen] = useState(false)
   const { setOnItemAdded } = useCart()
-  const timeoutRef = useRef<NodeJS.Timeout>()
+  const timeoutRef = useRef<NodeJS.Timeout>(undefined)
 
   useEffect(() => {
     // Set up the callback for when items are added

@@ -219,11 +219,11 @@ export const ingredients: Ingredient[] = [
 ]
 
 export function getIngredientsByTraits(traits: string[]): Ingredient[] {
-  return ingredients.filter((ingredient) =>
+  return ingredients?.filter((ingredient) =>
     traits.some((trait) => ingredient.traits.some((t) => t.toLowerCase() === trait.toLowerCase())),
   )
 }
 
 export function getIngredientById(id: string): Ingredient | undefined {
-  return ingredients.find((ingredient) => ingredient.id === id)
+  return ingredients?.find((ingredient) => ingredient.id === id)
 }

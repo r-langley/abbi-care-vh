@@ -34,7 +34,7 @@ const CartContext = createContext<CartContextType | undefined>(undefined)
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([])
   const [ambassadorCode, setAmbassadorCode] = useState("")
-  const onItemAddedRef = useRef<((product: Product) => void) | undefined>()
+  const onItemAddedRef = useRef<((product: Product) => void) | undefined>(undefined)
 
   useEffect(() => {
     const savedCart = localStorage.getItem(STORAGE_KEYS.CART)

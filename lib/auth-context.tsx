@@ -3,20 +3,12 @@
 import type React from "react"
 import { createContext, useContext, useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
-import { apiFetch } from "@/lib/api"
-
-interface UserInfo {
-  firstName: string
-  lastName: string
-  id: string
-  firstname: string
-  lastname: string
-  email: string
-  created_at?: string
-}
+import {authenticateToken, LogIn} from '@/api';
+import {UserInfo} from '@/api/auth';
 
 interface AuthContextType {
   isLoggedIn: boolean
+  loading: boolean
   userRole: "member" | "ambassador"
   userInfo: UserInfo | null
   setUserRole: (role: "member" | "ambassador") => void
@@ -29,26 +21,16 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined)
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [userRole, setUserRole] = useState<"member" | "ambassador">("member")
+  const [loading, setLoading] = useState(true)
   const [userInfo, setUserInfo] = useState<UserInfo | null>(null)
   const router = useRouter()
 
   // Load login state from localStorage on mount
   useEffect(() => {
+    setLoading(true)
     const token = localStorage.getItem("authToken")
-
     if (token) {
-      setIsLoggedIn(true)
-      apiFetch("/user/me", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        }
-      })
-          .then((res) => {
-            if (!res.ok) throw new Error("Failed to fetch profile")
-            return res.json()
-          })
+      authenticateToken( token )
           .then((user) => {
             if (user?.email) {
               setUserInfo(user)
@@ -61,25 +43,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             localStorage.removeItem("authToken")
             setIsLoggedIn(false)
             setUserInfo(null)
-          })
+          }).finally(() => setLoading(false))
+    } else {
+      setLoading(false)
     }
   }, [])
 
   const login = async (email: string, password: string) => {
     try {
-      const res = await apiFetch("/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, pwd: password }),
-      })
-
-      if (!res.ok) {
-        return false
-      }
-
-      const data = await res.json()
+      const data = await LogIn( email, password )
       const token: string | undefined = data.token
-      let role: "member" | "ambassador" | undefined = data?.is_affiliate ? "ambassador" : "member"
 
       if (!token) {
         return false
@@ -87,22 +60,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       localStorage.setItem("authToken", token)
       setIsLoggedIn(true)
 
-      const userData = await apiFetch("/user/me", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        }
-      })
+      const user: any = data.user ?? null
 
-      const user: any = await userData.json();
+      let role: "member" | "ambassador" | undefined = user?.is_affiliate ? "ambassador" : "member"
 
-      if (user) {
-        setUserInfo(user);
-        role = user.is_affiliate ? "ambassador" : "member";
-      } else {
-        setUserInfo(null)
-      }
+      setUserInfo(user || null);
 
       if (role) {
         handleSetUserRole(role)
@@ -127,18 +89,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const handleSetUserRole = (role: "member" | "ambassador") => {
     setUserRole(role)
     localStorage.setItem("userRole", role)
-    //todo redirect to ambassador page when ready
-    // if (role === "ambassador") {
-    //   router.push("/ambassador")
-    // } else {
-      router.push("/account")
-    // }
   }
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, userRole, userInfo, setUserRole: handleSetUserRole, login, logout }}>
-      {children}
-    </AuthContext.Provider>
+      <AuthContext.Provider value={{ isLoggedIn, loading, userRole, userInfo, setUserRole: handleSetUserRole, login, logout }}>
+        {children}
+      </AuthContext.Provider>
   )
 }
 

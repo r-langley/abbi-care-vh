@@ -99,7 +99,7 @@ export function CartDrawer({ open, onOpenChange }: CartDrawerProps) {
                               <PlusIcon className="h-3 w-3" />
                             </Button>
                           </div>
-                          <p className="font-mono text-lg">${item.price * item.quantity}</p>
+                          <p className="font-mono text-lg">${(item.price * item.quantity).toFixed(2)}</p>
                         </div>
                       </div>
                     </div>

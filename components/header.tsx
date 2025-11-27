@@ -32,6 +32,16 @@ export function Header() {
       ? `${(userInfo.firstname || "").trim()} ${(userInfo.lastname || "").trim()}`.trim() || userInfo.email
       : null
 
+  const initials = (() => {
+    if (userInfo?.firstname || userInfo?.lastname) {
+      return `${(userInfo.firstname || "")[0] ?? ""}${(userInfo.lastname || "")[0] ?? ""}`.toUpperCase()
+    }
+    if (userInfo?.email) {
+      return userInfo.email.slice(0, 2).toUpperCase()
+    }
+    return "GM"
+  })()
+
   return (
     <>
       {/* Top Banner */}
@@ -95,7 +105,10 @@ export function Header() {
                 <DropdownMenuTrigger asChild>
                   <button className="p-2 hover:bg-[#f5f6f5] rounded-[8px] transition-colors">
                     {isLoggedIn ? (
-                      <UserAvatar size="sm" className="w-6 h-6" />
+                       userInfo?.avatar ? <UserAvatar size="sm" className="w-6 h-6" /> :
+                        <div className="w-8 h-8 rounded-full overflow-hidden bg-primary/10 flex items-center justify-center text-1xl font-semibold">
+                          {initials}
+                        </div>
                     ) : (
                       <UserCircleIcon className="w-6 h-6 text-muted-foreground" />
                     )}
